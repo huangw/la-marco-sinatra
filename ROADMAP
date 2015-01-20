@@ -1,0 +1,17 @@
+la_marco_sinatra: Sinatra Based Web Framework
+==============================================
+Version: 0.0.1
+
+% ----
+title: la_marco_sinatra
+description: Sinatra Based Web Framework
+supervisor: huangw
+leader: huangw
+moderator: songcy
+team: [huangw, songcy, gaoyh]
+year: 2015
+% ----
+
+[+] concept: create packing list for development 01/21 @huangw
+[+] alpha: implement all features 01/21-01/22 @huangw
+[+] release_v0_0_1: release the first alpha version 01/23 @huangw
