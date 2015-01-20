@@ -34,3 +34,5 @@ Confu.finalize!
 
 # Try to load database and application
 # ----------------------------------------
+try_require root_join('config/database')
+try_require root_join('config/application')
