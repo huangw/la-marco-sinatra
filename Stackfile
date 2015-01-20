@@ -1,0 +1,12 @@
+# vi: ft=ruby
+
+attrs application_code: 'la_marco_sinatra',
+      application_name: 'Sinatra Based Web Framework',
+      application_version: '0.0.1'
+
+pull :'la-marco', git: 'git@gitlab.7lime.com:vikkr/la-marco.git',
+                  branch: :develop
+
+from :'la-marco' do
+  import :full
+end
