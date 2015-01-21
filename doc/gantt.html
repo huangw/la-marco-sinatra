@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="./css/jsgantt.css" />
+    <script language="javascript" src="./js/jsgantt.js"></script>
+    <title>Gantt Chart | la_marco_sinatra</title>
+</head>
+<body>
+  <h2>la_marco_sinatra
+      
+  </h2>
+
+<div style="position:relative" class="gantt" id="GanttChartDIV"></div>
+<script>
+    var g = new JSGantt.GanttChart('g',document.getElementById('GanttChartDIV'), 'day');
+    g.setShowRes(1); // Show/Hide Responsible (0/1)
+    g.setShowDur(1); // Show/Hide Duration (0/1)
+    g.setShowComp(0); //
+    g.setCaptionType('Caption');  // Set to Show Caption
+    g.setShowStartDate(0); // Show/Hide Start Date(0/1)
+    g.setShowEndDate(0); // Show/Hide End Date(0/1)
+    //g.setDateDisplayFormat('yyyy-mm-dd') // Set format to display dates ('mm/dd/yyyy', 'dd/mm/yyyy', 'yyyy-mm-dd')
+    g.setFormatArr("day","week","month") // Set format options (up to 4 : "minute","hour","day","week","month","quarter")
+
+    if( g ) {
+          g.AddTaskItem(new JSGantt.TaskItem(15,'create packing list for development','01/21/2015','01/21/2015','008000','',0,'黄巍',100,0,0,1,'','黄巍2015-01-21'));
+
+          g.AddTaskItem(new JSGantt.TaskItem(16,'implement all features','01/21/2015','01/23/2015','FFD700','',0,'黄巍',0,1,0,1,'',''));
+
+          g.AddTaskItem(new JSGantt.TaskItem(17,'sinatra with debug, map and route','01/21/2015','01/21/2015','FFA500','',0,'黄巍',0,0,16,1,'','黄巍'));
+
+          g.AddTaskItem(new JSGantt.TaskItem(18,'i18n initialization and setup','01/21/2015','01/22/2015','FFD700','',0,'黄巍',0,0,16,1,'','黄巍'));
+
+          g.AddTaskItem(new JSGantt.TaskItem(19,'slim, form and table helpers','01/22/2015','01/22/2015','B0C4DE','',0,'黄巍',0,0,16,1,'','黄巍'));
+
+          g.AddTaskItem(new JSGantt.TaskItem(20,'assets pipeline and helpers based on stackupper','01/22/2015','01/22/2015','B0C4DE','',0,'黄巍',0,0,16,1,'','黄巍'));
+
+          g.AddTaskItem(new JSGantt.TaskItem(21,'api controller and test helpers','01/22/2015','01/23/2015','B0C4DE','',0,'黄巍',0,0,16,1,'','黄巍'));
+
+          g.AddTaskItem(new JSGantt.TaskItem(22,'release the first alpha version','01/23/2015','01/23/2015','B0C4DE','',1,'黄巍',0,0,0,1,'','黄巍'));
+
+        g.Draw();
+        g.DrawDependencies();
+    }
+    else
+    {
+        alert("not defined");
+    }
+</script>
+
+
+<h3>Recent Git Log</h3> 
+<pre><code>
+* <em style='color:grey'>9e81b858a10f4c327c96a625b27157fce769f59b</em>
+| <strong>2015-01-21 11:28</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | <strong style='color:green'>add monkey patch on readme</strong>
+| 
+|  
+* <em style='color:grey'>2171669465e2e90f70eb6dddb8fdaf7cedbac495</em>
+| <strong>2015-01-21 10:06</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | <strong style='color:green'>update progress of task concept to 100</strong>
+| 
+|    
+*   <em style='color:grey'>c617450634c67295e6873a350e68576ce29f7d32</em>
+|\  <strong>2015-01-21 10:06</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>Merge branch 'concept' into develop</strong>
+| | 
+| |   
+| * <em style='color:grey'>4dca09c2e6fcf1a879c7c885153a22a3b548e2c7</em>
+| | <strong>2015-01-21 10:05</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>[close] close the branch by set progress to 100.</strong>
+| | 
+| |   
+| * <em style='color:grey'>d6bb57f785a8f5272fa263ca65d332a00250c0a6</em>
+| | <strong>2015-01-21 09:17</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>[progress] update progress to 25</strong>
+| | 
+| |   
+| * <em style='color:grey'>51da5d81acaad92882443777e15422efc2cb7a21</em>
+| | <strong>2015-01-20 23:49</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>[progress] update progress to 25</strong>
+| | 
+| |     
+| *   <em style='color:grey'>0b5cf7e7d0be0946d57fd4718d77d71bc08dd5c6</em>
+| |\  <strong>2015-01-20 23:45</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| |/  |/|   <strong style='color:green'>Merge branch 'develop' into concept</strong>
+| |   
+| |   
+* | <em style='color:grey'>9e0158eb16d97c40a54e1f521b2dc699b4647a77</em>
+| | <strong>2015-01-20 23:45</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>update progress of task concept to 25</strong>
+| | 
+| |   
+| * <em style='color:grey'>ef71cd89d9d868f5888e02f8c50c04f3cddcc307</em>
+| | <strong>2015-01-20 23:45</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>[progress] update progress to 25</strong>
+| | 
+| |   
+| * <em style='color:grey'>fb0df2630f230e0c2d5679601dfa82f7e176129a</em>
+| | <strong>2015-01-20 23:25</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>update boot</strong>
+| | 
+| |     
+| *   <em style='color:grey'>85cf508260ca1d2f5fb2e936aa887678c588d08e</em>
+| |\  <strong>2015-01-20 22:49</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| |/  |/|   <strong style='color:green'>Merge branch 'develop' into concept</strong>
+| |   
+| |   
+* | <em style='color:grey'>a34085e2f6930bdfc7414e1debab04dec3bd9dd1</em>
+| | <strong>2015-01-20 22:49</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>update progress of task concept to 15</strong>
+| | 
+| |   
+| * <em style='color:grey'>5d9c212ae58f8a680ad1f68f8bcc2347ff9a4eb0</em>
+|/  <strong>2015-01-20 22:49</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+|   |   <strong style='color:green'>[progress] update progress to 15</strong>
+|   
+|  
+* <em style='color:grey'>a5c9c7cde30873604df378e8e23dd24345848914</em>
+| <strong>2015-01-20 22:45</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | <strong style='color:green'>update progress of task concept to 10</strong>
+| 
+|  
+* <em style='color:grey'>ed598fba0b642f42554d0bc05efc79e913d7adfc</em>
+| <strong>2015-01-20 22:44</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | <strong style='color:green'>add gantt</strong>
+| 
+|  
+* <em style='color:grey'>52366055af9c68959ae3af1adfa6ecbfdca69b5d</em>
+  <strong>2015-01-20 22:21</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+    <strong style='color:green'>import from la-marco</strong>
+  
+
+</code></pre>
+
+</body>
+</html>
