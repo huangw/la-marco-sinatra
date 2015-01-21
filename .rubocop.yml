@@ -1,0 +1,6 @@
+Metrics/PerceivedComplexity:
+  Enabled: false
+Metrics/AbcSize:
+  Enabled: false
+ClassLength:
+  Max: 150

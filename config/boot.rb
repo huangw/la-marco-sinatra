@@ -28,11 +28,12 @@ end
 
 # RACK_ENV based configuration
 # ------------------------------
+require 'confu'
 Confu[RACK_ENV].root, Confu[RACK_ENV].env = APP_ROOT, RACK_ENV
 Dir[root_join('config/environments/*_env.rb')].each { |f| require f }
 Confu.finalize!
 
 # Try to load database and application
 # ----------------------------------------
-try_require root_join('config/database.rb')
-try_require root_join('config/application.rb')
+try_require root_join('config/database')
+try_require root_join('config/application')

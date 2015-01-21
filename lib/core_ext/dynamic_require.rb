@@ -3,7 +3,7 @@
 # require a file if it exists, return true if the file exists
 def try_require(file, rel_path = nil)
   file = File.expand_path(file, rel_path) if rel_path
-  return false unless File.exist?(file)
+  return false unless File.exist?(file.sub(/\.rb\Z/, '.rb'))
   require file || true # return true if file
 end
 
