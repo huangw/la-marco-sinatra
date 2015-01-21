@@ -14,7 +14,7 @@ year: 2015
 
 [+] concept: create packing list for development 01/21 @huangw:01/21
 [+] alpha: implement all features 01/21-01/23 @huangw
-  [++] rack_route: sinatra with debug, map and route 01/21 @huangw:35
+  [++] rack_route: sinatra with debug, map and route 01/21 @huangw:30
   [++] i18n: i18n initialization and setup 01/21-01/22 @huangw
   [++] helpers: slim, form and table helpers 01/22 @huangw
   [++] assets: assets pipeline and helpers based on stackupper 01/22 @huangw
