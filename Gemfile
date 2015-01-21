@@ -14,6 +14,6 @@ group :development do
   gem "simplecov"
   gem "guard-rspec"
   gem "guard-rubocop"
-  gem "foreman"
   gem "rack-test"
+  gem "guard-shell"
 end

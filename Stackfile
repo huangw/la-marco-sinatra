@@ -15,13 +15,20 @@ export :route do
   add_gem 'sinatra', '~> 1.4'
   add_gem 'pry-byebug'
   add_gem 'puma'
-  add_gem 'foreman', group: :development
   add_gem 'rack-test', group: :development
+  add_gem 'guard-shell', group: :development
+  # add_gem 'guard-puma', group: :development
 
   copy 'config.ru'
   copy 'config/application.rb'
+  copy 'config/environments/*.rb'
   # copy 'config/puma.rb'
-  copy 'Procfile', sync: false
+  copy 'Guardfile', sync: false
+  copy 'lib/tasks/puma.rake'
+
+  execute(after: true) do
+    FileUtils.mkdir 'tmp' unless File.exist?('tmp')
+  end
 end
 
 from('.') do
