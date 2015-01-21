@@ -10,6 +10,11 @@ task :console do
     files.each { |file| load file, true }
   end
 
+  # ap with raw: false (default ap behavior)
+  def fap(*arg)
+    ap *arg, raw: false
+  end
+
   binding.pry
 end
 
