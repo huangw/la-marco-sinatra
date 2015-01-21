@@ -1,0 +1,29 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Class	lib/core_ext/attr_with_default.rb	/^class Class$/;"	c
+Confu	lib/confu.rb	/^class Confu$/;"	c
+ConfuMissing	lib/confu.rb	/^class ConfuMissing < NoMethodError; end$/;"	c
+Data	lib/confu.rb	/^  class Data < Hash$/;"	c	class:Confu
+Hash	lib/core_ext/hash_argument.rb	/^class Hash$/;"	c
+attr_with_default	lib/core_ext/attr_with_default.rb	/^  def attr_with_default(hsh)$/;"	f	class:Class
+deep_require	lib/core_ext/dynamic_require.rb	/^def deep_require(dir, rel_path = nil, deepth = 3)$/;"	f
+extract_args	lib/core_ext/hash_argument.rb	/^  def extract_args(expects)$/;"	f	class:Hash
+extract_args!	lib/core_ext/hash_argument.rb	/^  def extract_args!(expects)$/;"	f	class:Hash
+finalize!	lib/confu.rb	/^    def finalize!$/;"	f	class:Confu.Data
+finalize!	lib/confu.rb	/^    def finalize!(ev = ENV['RACK_ENV'])$/;"	f	class:Confu
+finalized?	lib/confu.rb	/^    def finalized?$/;"	f	class:Confu
+finalized?	lib/confu.rb	/^    def finalized?$/;"	f	class:Confu.Data
+finalized_accessor	lib/confu.rb	/^    def finalized_accessor(met)$/;"	f	class:Confu.Data
+for_environment	lib/confu.rb	/^    def for_environment(environment, &prc)$/;"	f	class:Confu
+handle_block	lib/confu.rb	/^    def handle_block(met, prc)$/;"	f	class:Confu.Data
+initialize	lib/confu.rb	/^    def initialize(hsh = {})$/;"	f	class:Confu.Data
+merge_default	lib/confu.rb	/^    def merge_default(dat)$/;"	f	class:Confu.Data
+method_missing	lib/confu.rb	/^    def method_missing(met, val = nil, &prc)$/;"	f	class:Confu.Data
+root_join	config/boot.rb	/^def root_join(path)$/;"	f
+to_hash	lib/confu.rb	/^    def to_hash$/;"	f	class:Confu
+to_hash	lib/confu.rb	/^    def to_hash$/;"	f	class:Confu.Data
+try_require	lib/core_ext/dynamic_require.rb	/^def try_require(file, rel_path = nil)$/;"	f
