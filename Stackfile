@@ -12,7 +12,7 @@ from :'la-marco' do
 end
 
 export :route do
-  add_gem 'sinatra'
+  add_gem 'sinatra', '~> 1.4'
   add_gem 'pry-byebug'
   add_gem 'puma'
   add_gem 'foreman', group: :development

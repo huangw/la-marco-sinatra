@@ -2,7 +2,7 @@ source "https://rubygems.org"
 # source 'http://ruby.taobao.org/'
 
 gem "activesupport"
-gem "sinatra"
+gem "sinatra", "~> 1.4"
 gem "pry-byebug"
 gem "puma"
 
@@ -12,7 +12,6 @@ group :development do
   gem "awesome_print"
   gem "rspec"
   gem "simplecov"
-  gem "mdoc"
   gem "guard-rspec"
   gem "guard-rubocop"
   gem "foreman"
