@@ -1,8 +1,8 @@
 # La-Marco-Sinatra: Sinatra Based Web Framework
 
-注意：`sinatra`如果出现“undefined method `join` for #<String> ...”错误，参照[]这里(doc/monkey_patch.html)。
+注意：`sinatra`如果出现“undefined method `join` for #<String> ...”错误，参照[这里](doc/monkey_patch.html)。
 
-## Concept
+## 概述
 
 - `config.ru`实现rack标准，通过`foreman/puma`测试
 - `application.rb`加载sinatra application和主要插件, 非生产环境加载byebug和color dumper
@@ -16,5 +16,6 @@
 
 Center Logger和Email需要数据库支持，放到单独的程序中实现。
 
-## Usage
+## 详细
 
+### 使用pry-byebug测试

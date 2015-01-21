@@ -5,8 +5,25 @@ attrs application_code: 'la_marco_sinatra',
       application_version: '0.0.1'
 
 pull :'la-marco', git: 'git@gitlab.7lime.com:vikkr/la-marco.git',
-                  branch: :develop
+                  branch: :develop, update: false
 
 from :'la-marco' do
   import :full
+end
+
+export :route do
+  add_gem 'sinatra'
+  add_gem 'pry-byebug'
+  add_gem 'puma'
+  add_gem 'foreman', group: :development
+  add_gem 'rack-test', group: :development
+
+  copy 'config.ru'
+  copy 'config/application.rb'
+  # copy 'config/puma.rb'
+  copy 'Procfile', sync: false
+end
+
+from('.') do
+  import :route
 end
