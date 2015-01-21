@@ -21,15 +21,17 @@
 
 <p>寻找报错的<code>show_exceptions.rb</code>文件（一般在<code>~/.rvm/.../gems/.../</code>下面），在报错的34行左右上方加上<code>body = [body] if body.is_a?(String)</code>一行，看上去像这样：</p>
 
-<p>```ruby
-env[“rack.errors”] = errors
-body = [body] if body.is_a?(String)</p>
-
-<p>[500,
- {“Content-Type” =&gt; content_type,
-  “Content-Length” =&gt; Rack::Utils.bytesize(body.join).to_s},
- body]
-```</p>
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>env[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">rack.errors</span><span style="color:#710">&quot;</span></span>] = errors
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>body = [body] <span style="color:#080;font-weight:bold">if</span> body.is_a?(<span style="color:#036;font-weight:bold">String</span>)
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span>
+<span class="line-numbers"><a href="#n4" name="n4">4</a></span>[<span style="color:#00D">500</span>,
+<span class="line-numbers"><a href="#n5" name="n5">5</a></span> {<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Content-Type</span><span style="color:#710">&quot;</span></span> =&gt; content_type,
+<span class="line-numbers"><a href="#n6" name="n6">6</a></span>  <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Content-Length</span><span style="color:#710">&quot;</span></span> =&gt; <span style="color:#036;font-weight:bold">Rack</span>::<span style="color:#036;font-weight:bold">Utils</span>.bytesize(body.join).to_s},
+<span class="line-numbers"><a href="#n7" name="n7">7</a></span> body]
+</pre></div>
+</div>
+</div>
 
   </div>
 

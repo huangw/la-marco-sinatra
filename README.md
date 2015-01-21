@@ -1,6 +1,6 @@
 # La-Marco-Sinatra: Sinatra Based Web Framework
 
-注意：`sinatra`如果出现“undefined method `join` for #<String> ...”错误，参照[这里](doc/monkey_patch.html)。
+注意：`sinatra`如果出现“undefined method `join` for #<String> ...”错误，参照`doc/monkey_patch.html`文件。
 
 ## 概述
 
@@ -19,3 +19,5 @@ Center Logger和Email需要数据库支持，放到单独的程序中实现。
 ## 详细
 
 ### 使用pry-byebug测试
+
+### Route机制
