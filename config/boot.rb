@@ -33,7 +33,7 @@ Confu[RACK_ENV].root, Confu[RACK_ENV].env = APP_ROOT, RACK_ENV
 Dir[root_join('config/settings/*_settings.rb')].each { |f| require f }
 Confu.finalize!
 
-# Try to load database and application
+# Try to load database and web routing
 # ----------------------------------------
 try_require root_join('config/database')
-try_require root_join('config/application')
+try_require root_join('config/routes')

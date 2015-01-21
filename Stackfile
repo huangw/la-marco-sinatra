@@ -13,16 +13,14 @@ end
 
 export :route do
   add_gem 'sinatra', '~> 1.4'
-  add_gem 'pry-byebug'
   add_gem 'puma'
   add_gem 'rack-test', group: :development
   add_gem 'guard-shell', group: :development
-  # add_gem 'guard-puma', group: :development
 
-  copy 'config.ru'
-  copy 'config/application.rb'
   copy 'config/environments/*.rb'
+  copy 'config/routes.rb'
   # copy 'config/puma.rb'
+  copy 'config.ru', sync: false
   copy 'Guardfile', sync: false
   copy 'lib/tasks/puma.rake'
 

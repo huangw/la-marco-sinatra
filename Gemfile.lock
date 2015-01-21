@@ -128,7 +128,6 @@ DEPENDENCIES
   guard-rspec
   guard-rubocop
   guard-shell
-  pry
   pry-byebug
   puma
   rack-test

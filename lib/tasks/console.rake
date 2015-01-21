@@ -1,6 +1,6 @@
 desc 'invoke an interactive console'
 task :console do
-  require 'pry'
+  require 'pry-byebug'
   require 'awesome_print'
   AwesomePrint.pry!
   AwesomePrint.defaults = { indent: 2, raw: true }
