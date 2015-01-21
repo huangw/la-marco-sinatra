@@ -30,7 +30,7 @@ end
 # ------------------------------
 require 'confu'
 Confu[RACK_ENV].root, Confu[RACK_ENV].env = APP_ROOT, RACK_ENV
-Dir[root_join('config/environments/*_env.rb')].each { |f| require f }
+Dir[root_join('config/settings/*_settings.rb')].each { |f| require f }
 Confu.finalize!
 
 # Try to load database and application

@@ -5,7 +5,7 @@ attrs application_code: 'la_marco_sinatra',
       application_version: '0.0.1'
 
 pull :'la-marco', git: 'git@gitlab.7lime.com:vikkr/la-marco.git',
-                  branch: :develop, update: false
+                  branch: :develop
 
 from :'la-marco' do
   import :full

@@ -14,10 +14,12 @@
   <div id="content">
     
 <ul id="markdown-toc">
-  <li><a href="#sinatratemple-gem">修正Sinatra（其实是Temple gem）报错页面的错误</a></li>
+  <li><a href="#sinatra">修正Sinatra报错页面的错误</a></li>
 </ul>
 
-<h1 id="sinatratemple-gem">修正Sinatra（其实是Temple gem）报错页面的错误</h1>
+<h1 id="sinatra">修正Sinatra报错页面的错误</h1>
+
+<p>这个其实是Temple gem的错误，以前版本有过修正，最近又回来了。再官方修改之前可先用下面的办法自己修正：</p>
 
 <p>寻找报错的<code>show_exceptions.rb</code>文件（一般在<code>~/.rvm/.../gems/.../</code>下面），在报错的34行左右上方加上<code>body = [body] if body.is_a?(String)</code>一行，看上去像这样：</p>
 
@@ -29,6 +31,23 @@
 <span class="line-numbers"><a href="#n5" name="n5">5</a></span> {<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Content-Type</span><span style="color:#710">&quot;</span></span> =&gt; content_type,
 <span class="line-numbers"><a href="#n6" name="n6">6</a></span>  <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Content-Length</span><span style="color:#710">&quot;</span></span> =&gt; <span style="color:#036;font-weight:bold">Rack</span>::<span style="color:#036;font-weight:bold">Utils</span>.bytesize(body.join).to_s},
 <span class="line-numbers"><a href="#n7" name="n7">7</a></span> body]
+</pre></div>
+</div>
+</div>
+
+<p>可以顺便改一下下面ERB代码的部分，修改显示的错误信息backtrace中<code>filename</code>的部分，把不是来自<code>gems</code>的也就是本地代码高亮一下（218行左右）：</p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>&lt;li <span style="color:#080;font-weight:bold">class</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">frame-info &lt;%= frame_class(frame) %&gt;</span><span style="color:#710">&quot;</span></span>&gt;
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>  &lt;code&gt;
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    &lt;<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">% </span><span style="color:#D20">if</span><span style="color:#710"> </span></span>frame.filename.match(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">gems</span><span style="color:#404">/</span></span>) %&gt;
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>      &lt;<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%=</span><span style="color:#D20">h frame.filename %&gt;</span></span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">    &lt;% else %&gt;</span></span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">      &lt;b style</span><span style="color:#710">=</span></span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">color: red</span><span style="color:#710">&quot;</span></span>&gt;&lt;<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%=</span><span style="color:#D20">h frame.filename %&gt;&lt;/b&gt;</span></span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">    &lt;% end %&gt;</span></span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">  &lt;/code&gt; in</span></span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">    &lt;code&gt;&lt;strong&gt;&lt;%</span><span style="color:#710">=</span></span>h frame.function <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%&gt;</span><span style="color:#D20">&lt;/strong</span><span style="color:#710">&gt;</span></span>&lt;<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">code&gt;</span></span>
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#808">&lt;</span><span style="color:#404">/</span></span>li&gt;
 </pre></div>
 </div>
 </div>
