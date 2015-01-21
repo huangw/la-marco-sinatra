@@ -7,5 +7,5 @@ def try_require(file)
 end
 
 def deep_require(dir, deepth = 3)
-  (i..deepth).each { |i| Dir["#{dir}#{'/*' * i}.rb"].each { |f| require f } }
+  (1..deepth).each { |i| Dir["#{dir}#{'/*' * i}.rb"].each { |f| require f } }
 end

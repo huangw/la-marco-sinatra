@@ -14,8 +14,17 @@ end
 export :route do
   add_gem 'sinatra', '~> 1.4'
   add_gem 'puma'
+  add_gem 'sinatra-contrib'
+  add_gem 'sinatra-flash'
+  add_gem 'sinatra-redirect-with-flash'
+  add_gem 'slim'
+
   add_gem 'rack-test', group: :development
   add_gem 'guard-shell', group: :development
+  add_gem 'cucumber', group: :development
+  add_gem 'capybara', group: :development
+  add_gem 'poltergeist', group: :development
+  add_gem 'selenium-webdriver', group: :development
 
   copy 'config/environments/*.rb'
   copy 'config/routes.rb'

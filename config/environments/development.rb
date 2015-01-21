@@ -1,3 +1,4 @@
+# Settings for Development Environment
 require 'pry-byebug'
 require 'awesome_print'
 AwesomePrint.pry!

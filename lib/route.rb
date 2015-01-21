@@ -18,6 +18,13 @@ class Route
       table[app_class] = route.to_s
     end
 
+    # if key is a string, return class, otherwise return the path
+    def [](key)
+      return table[key] if key.is_a?(Class)
+      return all[key].class if key.is_a?(String)
+      nil
+    end
+
     # add class to default route
     def mount(app_class, route = nil)
       route ||= class_to_route(app_class)

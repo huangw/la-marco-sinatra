@@ -66,4 +66,16 @@ describe Route do
       end
     end
   end
+
+  describe '[]' do
+    it 'return application class for a string key' do
+      expect(Route[Route.to(Admin::PersonPage)]).to eq(Admin::PersonPage)
+      expect(Route[Route.to(Admin::AccountPage)]).to eq(Admin::AccountPage)
+    end
+
+    it 'return the string path for a class key' do
+      expect(Route[Admin::PersonPage]).to eq(Route.to(Admin::PersonPage))
+      expect(Route[Admin::AccountPage]).to eq(Route.to(Admin::AccountPage))
+    end
+  end
 end
