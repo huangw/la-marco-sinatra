@@ -2,16 +2,10 @@
 require 'rspec/expectations'
 require 'capybara/cucumber'
 
-# setup environment
-ENV['APP_ROOT'] = File.expand_path('../../..', __FILE__)
-ENV['RACK_ENV'] ||= 'development'
-
-# local settings, database sessions
-require ENV['APP_ROOT'] + '/config/boot'
-
-# require 'factory_girl'
-# Dir[ENV['APP_ROOT'] +
-#   '/spec/support/factories/*_factory.rb'].each { |f| require f }
+# boot the application environment
+ENV['RACK_ENV'] ||= 'development' # for easy checking database
+ENV['HOST'] ||= 'http://localhost:8080'
+require_relative '../../config/boot'
 
 case ENV['DRIVER']
 when 'rack'
@@ -23,8 +17,8 @@ when 'chrome'
 
   Capybara.default_driver = :chrome
   Capybara.javascript_driver = :chrome
-  Capybara.app_host = ENV['HOST'] || 'http://localhost:8080'
-else
+  Capybara.app_host = ENV['HOST']
+else # default driver
   require 'capybara/poltergeist'
   Capybara.register_driver :poltergeist do |app|
     Capybara::Poltergeist::Driver.new(app, debug: false)
@@ -32,11 +26,11 @@ else
 
   Capybara.default_driver = :poltergeist
   Capybara.javascript_driver = :poltergeist
-  Capybara.app_host = ENV['HOST'] || 'http://localhost:8080'
+  Capybara.app_host = ENV['HOST']
 end
 
 # mixin helper modules
-class TestingWorld
+class FeatureWorld
   include Capybara::DSL
   include RSpec::Expectations
   include RSpec::Matchers
@@ -55,29 +49,22 @@ class TestingWorld
 
   def cookie(name)
     case ENV['DRIVER']
-        when 'rack'
-          Capybara.current_session.driver.request.cookies[name]
-        when 'chrome'
-          Capybara.current_session.driver.browser.manage.cookie_named(name)
-        else
-          c = Capybara.current_session.driver.cookies[name]
-          return nil unless c
-          [:name, :path, :expires, :domain, :value].reduce ({}) do |a, e|
-            a[e] = c.send(e); a
-          end
-        end
+    when 'rack'
+      Capybara.current_session.driver.request.cookies[name]
+    when 'chrome'
+      Capybara.current_session.driver.browser.manage.cookie_named(name)
+    else
+      c = Capybara.current_session.driver.cookies[name]
+      return nil unless c
+      [:name, :path, :expires, :domain, :value].reduce ({}) do |a, e|
+        a[e] = c.send(e); a
+      end
+    end
   end
-
-  I18n.locale = 'en'
 end
 
-World { TestingWorld.new }
+World { FeatureWorld.new }
 
-# drop and seeds after test
+# cleanup after cucumber
 at_exit do
-  # puts 'Delete all image files'
-  # Image.all.each(&:delete_files)
-  #
-  # puts 'Drop database'
-  # Mongoid.default_session.drop
 end

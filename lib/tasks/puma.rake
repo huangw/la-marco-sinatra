@@ -7,7 +7,7 @@ namespace :puma do
     warn 'Puma may already running, '\
          'fire start anyway ...' if File.exist?(ENV['PIDFILE'])
     File.mkdir 'tmp' unless File.exist?('tmp')
-    exec("puma --port #{ENV['PORT']} --pidfile #{ENV['PIDFILE']}")
+    exec("bundle exec puma --port #{ENV['PORT']} --pidfile #{ENV['PIDFILE']}")
   end
 
   desc 'restart puma server'

@@ -29,7 +29,7 @@ When(/^I select "([^\"]*)" from "([^\"]*)"$/) do |value, dropdown|
 end
 
 Then(/^I should see the text "([^"]*)"$/) do |text|
-  page.should have_content(text)
+  expect(page).to have_content(text)
 end
 
 Then(/^I should see all of the texts:?$/) do |table|
@@ -39,11 +39,11 @@ Then(/^I should see all of the texts:?$/) do |table|
 end
 
 Then(/^I should not see the text "([^"]*)"$/) do |text|
-  page.should_not have_content(text)
+  expect(page).to_not have_content(text)
 end
 
 Then(/^I should see the image "([^"]*)"$/) do |image_name|
-  page.should have_xpath("//img[contains(@src, \"#{image_name}\")]")
+  expect(page).to have_xpath("//img[contains(@src, \"#{image_name}\")]")
 end
 
 Then(/^I should see all of the images:?$/) do |table|
@@ -57,7 +57,7 @@ Then(/^I attach the file "([^"]*)" to form field "([^"]*)"$/) do |filename, fiel
 end
 
 Then(/^I should see the HTML5 audio source "([^"]*)"$/) do |audio_name|
-  page.should have_xpath("//audio[contains(@src, \"#{audio_name}\")] | //audio/source[contains(@src, \"#{audio_name}\")]")
+  expect(page).to have_xpath("//audio[contains(@src, \"#{audio_name}\")] | //audio/source[contains(@src, \"#{audio_name}\")]")
 end
 
 Then(/^I should see all of the HTML5 audio sources:?$/) do |table|
