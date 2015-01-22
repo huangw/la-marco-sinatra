@@ -17,13 +17,13 @@ Class	lib/core_ext/attr_with_default.rb	/^class Class$/;"	c
 Confu	lib/confu.rb	/^class Confu$/;"	c
 ConfuMissing	lib/confu.rb	/^class ConfuMissing < NoMethodError; end$/;"	c
 Data	lib/confu.rb	/^  class Data < Hash$/;"	c	class:Confu
+FeatureWorld	features/support/env.rb	/^class FeatureWorld$/;"	c
 Hash	lib/core_ext/hash_argument.rb	/^class Hash$/;"	c
 PersonPage	spec/lib/route_spec.rb	/^  class PersonPage; Route << self end$/;"	c	class:Admin
 RootPage	app/pages/admin_pages.rb	/^  class RootPage < WebApplication$/;"	c	class:Admin
 Route	lib/route.rb	/^class Route$/;"	c
 SlimHelper	lib/helpers/slim_helper.rb	/^module SlimHelper$/;"	m
 Specs	doc/coverage/index.html	/^  <a name="Specs"><\/a>$/;"	a
-TestingWorld	features/support/env.rb	/^class TestingWorld$/;"	c
 Ungrouped	doc/coverage/index.html	/^  <a name="Ungrouped"><\/a>$/;"	a
 UserPage	app/pages/admins/user_page.rb	/^  class UserPage < WebApplication$/;"	c	class:Admin
 UserPage	app/pages/users/root_page.rb	/^class UserPage < WebApplication$/;"	c
@@ -31,11 +31,11 @@ WebApplication	app/pages/web_application.rb	/^class WebApplication < Sinatra::Ba
 []	lib/route.rb	/^    def [](key)$/;"	f	class:Route
 []=	lib/route.rb	/^    def []=(app_class, route)$/;"	f	class:Route
 all	lib/route.rb	/^    def all$/;"	f	class:Route
-all_cookies	features/support/env.rb	/^  def all_cookies$/;"	f	class:TestingWorld
+all_cookies	features/support/env.rb	/^  def all_cookies$/;"	f	class:FeatureWorld
 attr_with_default	lib/core_ext/attr_with_default.rb	/^  def attr_with_default(hsh)$/;"	f	class:Class
 class_to_route	lib/route.rb	/^    def class_to_route(app_class)$/;"	f	class:Route
 common_rsp	lib/helpers/slim_helper.rb	/^  def common_rsp$/;"	f	class:SlimHelper
-cookie	features/support/env.rb	/^  def cookie(name)$/;"	f	class:TestingWorld
+cookie	features/support/env.rb	/^  def cookie(name)$/;"	f	class:FeatureWorld
 deep_require	lib/core_ext/dynamic_require.rb	/^def deep_require(dir, deepth = 3)$/;"	f
 extract_args	lib/core_ext/hash_argument.rb	/^  def extract_args(expects)$/;"	f	class:Hash
 extract_args!	lib/core_ext/hash_argument.rb	/^  def extract_args!(expects)$/;"	f	class:Hash
@@ -50,9 +50,12 @@ hsp	lib/helpers/slim_helper.rb	/^  def hsp(tpl, opts = {})$/;"	f	class:SlimHelpe
 initialize	lib/confu.rb	/^    def initialize(hsh = {})$/;"	f	class:Confu.Data
 initialize	spec/lib/route_spec.rb	/^  def initialize(tid)$/;"	f	class:Account
 logic_path	lib/helpers/slim_helper.rb	/^  def logic_path(class_ = nil, met = nil)$/;"	f	class:SlimHelper
+makeRed	doc/cucumber.html	/^  function makeRed(element_id) {$/;"	f
+makeYellow	doc/cucumber.html	/^  function makeYellow(element_id) {$/;"	f
 merge_default	lib/confu.rb	/^    def merge_default(dat)$/;"	f	class:Confu.Data
 method_missing	lib/confu.rb	/^    def method_missing(met, val = nil, &prc)$/;"	f	class:Confu.Data
 mount	lib/route.rb	/^    def mount(app_class, route = nil)$/;"	f	class:Route
+moveProgressBar	doc/cucumber.html	/^  function moveProgressBar(percentDone) {$/;"	f
 n1	doc/monkey_patch.html	/^  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1<\/a><\/span>&lt;li <span style="color:#080;font-weight:bold">class<\/span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;<\/span><span style="color:#D20">frame-info &lt;%= frame_class(frame) %&gt;<\/span><span style="color:#710">&quot;<\/span><\/span>&gt;$/;"	a
 n1	doc/monkey_patch.html	/^  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1<\/a><\/span>env[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;<\/span><span style="color:#D20">rack.errors<\/span><span style="color:#710">&quot;<\/span><\/span>] = errors$/;"	a
 n1	doc/route.html	/^  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1<\/a><\/span><span style="color:#036;font-weight:bold">Route<\/span>.mount(<span style="color:#036;font-weight:bold">LogViewApp<\/span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'<\/span><span style="color:#D20">\/logs<\/span><span style="color:#710">'<\/span><\/span>) <span style="color:#080;font-weight:bold">if<\/span> <span style="color:#036;font-weight:bold">RACK_ENV<\/span> == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'<\/span><span style="color:#D20">development<\/span><span style="color:#710">'<\/span><\/span>$/;"	a
@@ -79,7 +82,8 @@ n8	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n8" name="n8">8
 n9	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n9" name="n9">9<\/a><\/span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">    &lt;code&gt;&lt;strong&gt;&lt;%<\/span><span style="color:#710">=<\/span><\/span>h frame.function <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%&gt;<\/span><span style="color:#D20">&lt;\/strong<\/span><span style="color:#710">&gt;<\/span><\/span>&lt;<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">\/<\/span><span style="color:#808">code&gt;<\/span><\/span>$/;"	a
 partial	lib/helpers/slim_helper.rb	/^  def partial(pname, locals_ = {})$/;"	f	class:SlimHelper
 partial_block	lib/helpers/slim_helper.rb	/^  def partial_block(bname, locals_ = {})$/;"	f	class:SlimHelper
-root_join	config/boot.rb	/^def root_join(path)$/;"	f
+require_all	lib/core_ext/dynamic_require.rb	/^def require_all(pattern)$/;"	f
+root_join	config/boot.rb	/^def root_join(*path)$/;"	f
 rsp	lib/helpers/slim_helper.rb	/^  def rsp(tpl, opts = {})$/;"	f	class:SlimHelper
 table	lib/route.rb	/^    def table$/;"	f	class:Route
 to	lib/route.rb	/^    def to(app_class, *parts)$/;"	f	class:Route

@@ -8,6 +8,8 @@ gem "sinatra-contrib"
 gem "sinatra-flash"
 gem "sinatra-redirect-with-flash"
 gem "slim"
+gem "i18n"
+gem "http_accept_language"
 
 group :development do
   gem "rake"
