@@ -10,3 +10,51 @@ pull :'la-marco', git: 'git@gitlab.7lime.com:vikkr/la-marco.git',
 from :'la-marco' do
   import :full
 end
+
+export :route do
+  add_gem 'sinatra', '~> 1.4'
+  add_gem 'puma'
+
+  add_gem 'rack-test', group: :development
+  add_gem 'guard-shell', group: :development
+  add_gem 'guard-cucumber', group: :development
+
+  copy 'lib/route.rb'
+  copy 'config/environments/*.rb'
+  copy 'config/routes.rb'
+  copy 'lib/tasks/puma.rake'
+
+  # copy 'config/puma.rb'
+  copy 'config.ru', sync: false
+  copy 'Guardfile', sync: false
+
+  execute(after: true) do
+    FileUtils.mkdir 'tmp' unless File.exist?('tmp')
+  end
+end
+
+export :web do
+  add_gem 'sinatra-contrib'
+  add_gem 'sinatra-flash'
+  add_gem 'sinatra-redirect-with-flash'
+  add_gem 'slim'
+
+  copy 'lib/helpers/slim_helper.rb'
+  copy 'app/pages/web_application.rb'
+end
+
+export :cucumber do
+  add_gem 'cucumber', group: :development
+  add_gem 'capybara', group: :development
+  add_gem 'poltergeist', group: :development
+  add_gem 'selenium-webdriver', group: :development
+
+  copy 'features/step_definitions/*_steps.rb'
+  copy 'features/support/env.rb'
+end
+
+from('.') do
+  import :route
+  import :web
+  import :cucumber
+end

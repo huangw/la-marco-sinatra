@@ -4,13 +4,38 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
+API	spec/lib/route_spec.rb	/^module API$/;"	m
+Account	spec/lib/route_spec.rb	/^class Account$/;"	c
+AccountPage	spec/lib/route_spec.rb	/^  class AccountPage; Route << self end$/;"	c	class:API
+AccountPage	spec/lib/route_spec.rb	/^  class AccountPage; Route << self end$/;"	c	class:Admin
+AccountPage	spec/lib/route_spec.rb	/^class AccountPage; Route << self end$/;"	c
+Admin	app/pages/admin_pages.rb	/^module Admin$/;"	m
+Admin	app/pages/admins/user_page.rb	/^class Admin::UserPage < WebApplication$/;"	c
+Admin	spec/lib/route_spec.rb	/^module Admin$/;"	m
+AllFiles	doc/coverage/index.html	/^  <a name="AllFiles"><\/a>$/;"	a
 Class	lib/core_ext/attr_with_default.rb	/^class Class$/;"	c
 Confu	lib/confu.rb	/^class Confu$/;"	c
 ConfuMissing	lib/confu.rb	/^class ConfuMissing < NoMethodError; end$/;"	c
 Data	lib/confu.rb	/^  class Data < Hash$/;"	c	class:Confu
 Hash	lib/core_ext/hash_argument.rb	/^class Hash$/;"	c
+PersonPage	spec/lib/route_spec.rb	/^  class PersonPage; Route << self end$/;"	c	class:Admin
+RootPage	app/pages/admin_pages.rb	/^  class RootPage < WebApplication$/;"	c	class:Admin
+Route	lib/route.rb	/^class Route$/;"	c
+SlimHelper	lib/helpers/slim_helper.rb	/^module SlimHelper$/;"	m
+Specs	doc/coverage/index.html	/^  <a name="Specs"><\/a>$/;"	a
+TestingWorld	features/support/env.rb	/^class TestingWorld$/;"	c
+Ungrouped	doc/coverage/index.html	/^  <a name="Ungrouped"><\/a>$/;"	a
+UserPage	app/pages/users/root_page.rb	/^class UserPage < WebApplication$/;"	c
+WebApplication	app/pages/web_application.rb	/^class WebApplication < Sinatra::Base$/;"	c
+[]	lib/route.rb	/^    def [](key)$/;"	f	class:Route
+[]=	lib/route.rb	/^    def []=(app_class, route)$/;"	f	class:Route
+all	lib/route.rb	/^    def all$/;"	f	class:Route
+all_cookies	features/support/env.rb	/^  def all_cookies$/;"	f	class:TestingWorld
 attr_with_default	lib/core_ext/attr_with_default.rb	/^  def attr_with_default(hsh)$/;"	f	class:Class
-deep_require	lib/core_ext/dynamic_require.rb	/^def deep_require(dir, rel_path = nil, deepth = 3)$/;"	f
+class_to_route	lib/route.rb	/^    def class_to_route(app_class)$/;"	f	class:Route
+common_rsp	lib/helpers/slim_helper.rb	/^  def common_rsp$/;"	f	class:SlimHelper
+cookie	features/support/env.rb	/^  def cookie(name)$/;"	f	class:TestingWorld
+deep_require	lib/core_ext/dynamic_require.rb	/^def deep_require(dir, deepth = 3)$/;"	f
 extract_args	lib/core_ext/hash_argument.rb	/^  def extract_args(expects)$/;"	f	class:Hash
 extract_args!	lib/core_ext/hash_argument.rb	/^  def extract_args!(expects)$/;"	f	class:Hash
 finalize!	lib/confu.rb	/^    def finalize!$/;"	f	class:Confu.Data
@@ -20,10 +45,37 @@ finalized?	lib/confu.rb	/^    def finalized?$/;"	f	class:Confu.Data
 finalized_accessor	lib/confu.rb	/^    def finalized_accessor(met)$/;"	f	class:Confu.Data
 for_environment	lib/confu.rb	/^    def for_environment(environment, &prc)$/;"	f	class:Confu
 handle_block	lib/confu.rb	/^    def handle_block(met, prc)$/;"	f	class:Confu.Data
+hsp	lib/helpers/slim_helper.rb	/^  def hsp(tpl, opts = {})$/;"	f	class:SlimHelper
 initialize	lib/confu.rb	/^    def initialize(hsh = {})$/;"	f	class:Confu.Data
+initialize	spec/lib/route_spec.rb	/^  def initialize(tid)$/;"	f	class:Account
+logic_path	lib/helpers/slim_helper.rb	/^  def logic_path(class_ = nil, met = nil)$/;"	f	class:SlimHelper
 merge_default	lib/confu.rb	/^    def merge_default(dat)$/;"	f	class:Confu.Data
 method_missing	lib/confu.rb	/^    def method_missing(met, val = nil, &prc)$/;"	f	class:Confu.Data
+mount	lib/route.rb	/^    def mount(app_class, route = nil)$/;"	f	class:Route
+n1	doc/monkey_patch.html	/^  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1<\/a><\/span>&lt;li <span style="color:#080;font-weight:bold">class<\/span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;<\/span><span style="color:#D20">frame-info &lt;%= frame_class(frame) %&gt;<\/span><span style="color:#710">&quot;<\/span><\/span>&gt;$/;"	a
+n1	doc/monkey_patch.html	/^  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1<\/a><\/span>env[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;<\/span><span style="color:#D20">rack.errors<\/span><span style="color:#710">&quot;<\/span><\/span>] = errors$/;"	a
+n10	doc/monkey_patch.html	/^<span class="line-numbers"><strong><a href="#n10" name="n10">10<\/a><\/strong><\/span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#808">&lt;<\/span><span style="color:#404">\/<\/span><\/span>li&gt;$/;"	a
+n2	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n2" name="n2">2<\/a><\/span>  &lt;code&gt;$/;"	a
+n2	doc/monkey_patch.html	/^<span class="line-numbers"><a href="#n2" name="n2">2<\/a><\/span>body = [body] <span style="color:#080;font-weight:bold">if<\/span> body.is_a?(<span style="color:#036;font-weight:bold">String<\/span>)$/;"	a
+n3	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n3" name="n3">3<\/a><\/span>    &lt;<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">% <\/span><span style="color:#D20">if<\/span><span style="color:#710"> <\/span><\/span>frame.filename.match(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">\/<\/span><span style="color:#808">gems<\/span><span style="color:#404">\/<\/span><\/span>) %&gt;$/;"	a
+n3	doc/monkey_patch.html	/^<span class="line-numbers"><a href="#n3" name="n3">3<\/a><\/span>$/;"	a
+n4	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n4" name="n4">4<\/a><\/span>      &lt;<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%=<\/span><span style="color:#D20">h frame.filename %&gt;<\/span><\/span>$/;"	a
+n4	doc/monkey_patch.html	/^<span class="line-numbers"><a href="#n4" name="n4">4<\/a><\/span>[<span style="color:#00D">500<\/span>,$/;"	a
+n5	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n5" name="n5">5<\/a><\/span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">    &lt;% else %&gt;<\/span><\/span>$/;"	a
+n5	doc/monkey_patch.html	/^<span class="line-numbers"><a href="#n5" name="n5">5<\/a><\/span> {<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;<\/span><span style="color:#D20">Content-Type<\/span><span style="color:#710">&quot;<\/span><\/span> =&gt; content_type,$/;"	a
+n6	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n6" name="n6">6<\/a><\/span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">      &lt;b style<\/span><span style="color:#710">=<\/span><\/span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;<\/span><span style="color:#D20">color: red<\/span><span style="color:#710">&quot;<\/span><\/span>&gt;&lt;<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%=<\/span><span style="color:#D20">h frame.filename %&gt;&lt;\/b&gt;<\/span><\/span>$/;"	a
+n6	doc/monkey_patch.html	/^<span class="line-numbers"><a href="#n6" name="n6">6<\/a><\/span>  <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;<\/span><span style="color:#D20">Content-Length<\/span><span style="color:#710">&quot;<\/span><\/span> =&gt; <span style="color:#036;font-weight:bold">Rack<\/span>::<span style="color:#036;font-weight:bold">Utils<\/span>.bytesize(body.join).to_s},$/;"	a
+n7	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n7" name="n7">7<\/a><\/span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">    &lt;% end %&gt;<\/span><\/span>$/;"	a
+n7	doc/monkey_patch.html	/^<span class="line-numbers"><a href="#n7" name="n7">7<\/a><\/span> body]$/;"	a
+n8	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n8" name="n8">8<\/a><\/span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">  &lt;\/code&gt; in<\/span><\/span>$/;"	a
+n9	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n9" name="n9">9<\/a><\/span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">    &lt;code&gt;&lt;strong&gt;&lt;%<\/span><span style="color:#710">=<\/span><\/span>h frame.function <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%&gt;<\/span><span style="color:#D20">&lt;\/strong<\/span><span style="color:#710">&gt;<\/span><\/span>&lt;<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">\/<\/span><span style="color:#808">code&gt;<\/span><\/span>$/;"	a
+partial	lib/helpers/slim_helper.rb	/^  def partial(pname, locals_ = {})$/;"	f	class:SlimHelper
+partial_block	lib/helpers/slim_helper.rb	/^  def partial_block(bname, locals_ = {})$/;"	f	class:SlimHelper
 root_join	config/boot.rb	/^def root_join(path)$/;"	f
+rsp	lib/helpers/slim_helper.rb	/^  def rsp(tpl, opts = {})$/;"	f	class:SlimHelper
+table	lib/route.rb	/^    def table$/;"	f	class:Route
+to	lib/route.rb	/^    def to(app_class, *parts)$/;"	f	class:Route
 to_hash	lib/confu.rb	/^    def to_hash$/;"	f	class:Confu
 to_hash	lib/confu.rb	/^    def to_hash$/;"	f	class:Confu.Data
-try_require	lib/core_ext/dynamic_require.rb	/^def try_require(file, rel_path = nil)$/;"	f
+try_require	lib/core_ext/dynamic_require.rb	/^def try_require(file)$/;"	f
+use_layout	lib/helpers/slim_helper.rb	/^  def use_layout(layout)$/;"	f	class:SlimHelper
