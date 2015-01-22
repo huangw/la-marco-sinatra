@@ -16,7 +16,7 @@ year: 2015
 [+] alpha: implement all features 01/21-01/23 @huangw
   [++] rack_route: sinatra with debug, map and route 01/21 @huangw:01/22
   [++] cucumber: cucumber test environment with server control 01/22 @huangw:01/22
-  [++] i18n: i18n initialization and setup 01/22 @huangw:30
+  [++] i18n: i18n initialization and setup 01/22 @huangw:40
   [++] helpers: slim, form and table helpers 01/22-01/23 @huangw
   [++] assets: assets pipeline and helpers based on stackupper 01/23-01/24 @huangw
   [++] api: api controller and test helpers 01/24-01/25 @huangw
