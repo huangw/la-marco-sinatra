@@ -10,7 +10,7 @@ AccountPage	spec/lib/route_spec.rb	/^  class AccountPage; Route << self end$/;"	
 AccountPage	spec/lib/route_spec.rb	/^  class AccountPage; Route << self end$/;"	c	class:Admin
 AccountPage	spec/lib/route_spec.rb	/^class AccountPage; Route << self end$/;"	c
 Admin	app/pages/admin_pages.rb	/^module Admin$/;"	m
-Admin	app/pages/admins/user_page.rb	/^class Admin::UserPage < WebApplication$/;"	c
+Admin	app/pages/admins/user_page.rb	/^module Admin$/;"	m
 Admin	spec/lib/route_spec.rb	/^module Admin$/;"	m
 AllFiles	doc/coverage/index.html	/^  <a name="AllFiles"><\/a>$/;"	a
 Class	lib/core_ext/attr_with_default.rb	/^class Class$/;"	c
@@ -25,6 +25,7 @@ SlimHelper	lib/helpers/slim_helper.rb	/^module SlimHelper$/;"	m
 Specs	doc/coverage/index.html	/^  <a name="Specs"><\/a>$/;"	a
 TestingWorld	features/support/env.rb	/^class TestingWorld$/;"	c
 Ungrouped	doc/coverage/index.html	/^  <a name="Ungrouped"><\/a>$/;"	a
+UserPage	app/pages/admins/user_page.rb	/^  class UserPage < WebApplication$/;"	c	class:Admin
 UserPage	app/pages/users/root_page.rb	/^class UserPage < WebApplication$/;"	c
 WebApplication	app/pages/web_application.rb	/^class WebApplication < Sinatra::Base$/;"	c
 []	lib/route.rb	/^    def [](key)$/;"	f	class:Route
@@ -54,15 +55,22 @@ method_missing	lib/confu.rb	/^    def method_missing(met, val = nil, &prc)$/;"	f
 mount	lib/route.rb	/^    def mount(app_class, route = nil)$/;"	f	class:Route
 n1	doc/monkey_patch.html	/^  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1<\/a><\/span>&lt;li <span style="color:#080;font-weight:bold">class<\/span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;<\/span><span style="color:#D20">frame-info &lt;%= frame_class(frame) %&gt;<\/span><span style="color:#710">&quot;<\/span><\/span>&gt;$/;"	a
 n1	doc/monkey_patch.html	/^  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1<\/a><\/span>env[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;<\/span><span style="color:#D20">rack.errors<\/span><span style="color:#710">&quot;<\/span><\/span>] = errors$/;"	a
+n1	doc/route.html	/^  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1<\/a><\/span><span style="color:#036;font-weight:bold">Route<\/span>.mount(<span style="color:#036;font-weight:bold">LogViewApp<\/span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'<\/span><span style="color:#D20">\/logs<\/span><span style="color:#710">'<\/span><\/span>) <span style="color:#080;font-weight:bold">if<\/span> <span style="color:#036;font-weight:bold">RACK_ENV<\/span> == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'<\/span><span style="color:#D20">development<\/span><span style="color:#710">'<\/span><\/span>$/;"	a
+n1	doc/route.html	/^  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1<\/a><\/span><span style="color:#080;font-weight:bold">class<\/span> <span style="color:#B06;font-weight:bold">UserPage<\/span> &lt; <span style="color:#036;font-weight:bold">WebApplication<\/span>$/;"	a
 n10	doc/monkey_patch.html	/^<span class="line-numbers"><strong><a href="#n10" name="n10">10<\/a><\/strong><\/span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#808">&lt;<\/span><span style="color:#404">\/<\/span><\/span>li&gt;$/;"	a
 n2	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n2" name="n2">2<\/a><\/span>  &lt;code&gt;$/;"	a
 n2	doc/monkey_patch.html	/^<span class="line-numbers"><a href="#n2" name="n2">2<\/a><\/span>body = [body] <span style="color:#080;font-weight:bold">if<\/span> body.is_a?(<span style="color:#036;font-weight:bold">String<\/span>)$/;"	a
+n2	doc/route.html	/^<span class="line-numbers"><a href="#n2" name="n2">2<\/a><\/span>  get(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'<\/span><span style="color:#D20">\/<\/span><span style="color:#710">'<\/span><\/span>) { ... }$/;"	a
 n3	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n3" name="n3">3<\/a><\/span>    &lt;<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">% <\/span><span style="color:#D20">if<\/span><span style="color:#710"> <\/span><\/span>frame.filename.match(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">\/<\/span><span style="color:#808">gems<\/span><span style="color:#404">\/<\/span><\/span>) %&gt;$/;"	a
 n3	doc/monkey_patch.html	/^<span class="line-numbers"><a href="#n3" name="n3">3<\/a><\/span>$/;"	a
+n3	doc/route.html	/^<span class="line-numbers"><a href="#n3" name="n3">3<\/a><\/span>$/;"	a
 n4	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n4" name="n4">4<\/a><\/span>      &lt;<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%=<\/span><span style="color:#D20">h frame.filename %&gt;<\/span><\/span>$/;"	a
 n4	doc/monkey_patch.html	/^<span class="line-numbers"><a href="#n4" name="n4">4<\/a><\/span>[<span style="color:#00D">500<\/span>,$/;"	a
+n4	doc/route.html	/^<span class="line-numbers"><a href="#n4" name="n4">4<\/a><\/span>  <span style="color:#036;font-weight:bold">Route<\/span> &lt;&lt; <span style="color:#069">self<\/span>$/;"	a
+n4	doc/route.html	/^<span class="line-numbers"><a href="#n4" name="n4">4<\/a><\/span>  <span style="color:#036;font-weight:bold">Route<\/span>.mount(<span style="color:#069">self<\/span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'<\/span><span style="color:#D20">\/user<\/span><span style="color:#710">'<\/span><\/span>)$/;"	a
 n5	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n5" name="n5">5<\/a><\/span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">    &lt;% else %&gt;<\/span><\/span>$/;"	a
 n5	doc/monkey_patch.html	/^<span class="line-numbers"><a href="#n5" name="n5">5<\/a><\/span> {<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;<\/span><span style="color:#D20">Content-Type<\/span><span style="color:#710">&quot;<\/span><\/span> =&gt; content_type,$/;"	a
+n5	doc/route.html	/^<span class="line-numbers"><a href="#n5" name="n5">5<\/a><\/span><span style="color:#080;font-weight:bold">end<\/span>$/;"	a
 n6	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n6" name="n6">6<\/a><\/span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">      &lt;b style<\/span><span style="color:#710">=<\/span><\/span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;<\/span><span style="color:#D20">color: red<\/span><span style="color:#710">&quot;<\/span><\/span>&gt;&lt;<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%=<\/span><span style="color:#D20">h frame.filename %&gt;&lt;\/b&gt;<\/span><\/span>$/;"	a
 n6	doc/monkey_patch.html	/^<span class="line-numbers"><a href="#n6" name="n6">6<\/a><\/span>  <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;<\/span><span style="color:#D20">Content-Length<\/span><span style="color:#710">&quot;<\/span><\/span> =&gt; <span style="color:#036;font-weight:bold">Rack<\/span>::<span style="color:#036;font-weight:bold">Utils<\/span>.bytesize(body.join).to_s},$/;"	a
 n7	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n7" name="n7">7<\/a><\/span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">    &lt;% end %&gt;<\/span><\/span>$/;"	a

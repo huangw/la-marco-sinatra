@@ -20,17 +20,11 @@ export :route do
   add_gem 'guard-cucumber', group: :development
 
   copy 'lib/route.rb'
-  copy 'config/environments/*.rb'
   copy 'config/routes.rb'
+  copy 'config.ru'
+
   copy 'lib/tasks/puma.rake'
-
-  # copy 'config/puma.rb'
-  copy 'config.ru', sync: false
   copy 'Guardfile', sync: false
-
-  execute(after: true) do
-    FileUtils.mkdir 'tmp' unless File.exist?('tmp')
-  end
 end
 
 export :web do

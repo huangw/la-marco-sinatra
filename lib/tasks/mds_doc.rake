@@ -51,8 +51,8 @@ class SpecDocument
   end
 
   def test_file(target)
-    rspec_file = target.gsub(/\A(app\/)?(lib)?/, 'spec') + '_spec.rb'
-    rspec_file = target.gsub(/\A(app\/)?/, 'spec') + '_spec.rb' unless File.exist?(rspec_file)
+    rspec_file = target.gsub(/\Aapp\/?/, '')
+    rspec_file = File.join("spec", "#{target}_spec.rb")
     return false unless File.exist?(rspec_file)
     output_file = File.join(@dir, target.gsub(/\Aapp/, '') + '_spec.html')
     if !@mdoconly && newer?(rspec_file, output_file)
