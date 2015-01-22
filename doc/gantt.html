@@ -26,19 +26,21 @@
     if( g ) {
           g.AddTaskItem(new JSGantt.TaskItem(15,'create packing list for development','01/21/2015','01/21/2015','008000','',0,'黄巍',100,0,0,1,'','黄巍2015-01-21'));
 
-          g.AddTaskItem(new JSGantt.TaskItem(16,'implement all features','01/21/2015','01/23/2015','FFD700','',0,'黄巍',0,1,0,1,'',''));
+          g.AddTaskItem(new JSGantt.TaskItem(16,'implement all features','01/21/2015','01/23/2015','FF0000','',0,'黄巍',0,1,0,1,'',''));
 
-          g.AddTaskItem(new JSGantt.TaskItem(17,'sinatra with debug, map and route','01/21/2015','01/21/2015','FFA500','',0,'黄巍',0,0,16,1,'','黄巍'));
+          g.AddTaskItem(new JSGantt.TaskItem(17,'sinatra with debug, map and route','01/21/2015','01/21/2015','008000','',0,'黄巍',100,0,16,1,'','黄巍2015-01-22'));
 
-          g.AddTaskItem(new JSGantt.TaskItem(18,'i18n initialization and setup','01/21/2015','01/22/2015','FFD700','',0,'黄巍',0,0,16,1,'','黄巍'));
+          g.AddTaskItem(new JSGantt.TaskItem(18,'cucumber test environment with server control','01/22/2015','01/22/2015','FFA500','',0,'黄巍',0,0,16,1,'','黄巍'));
 
-          g.AddTaskItem(new JSGantt.TaskItem(19,'slim, form and table helpers','01/22/2015','01/22/2015','B0C4DE','',0,'黄巍',0,0,16,1,'','黄巍'));
+          g.AddTaskItem(new JSGantt.TaskItem(19,'i18n initialization and setup','01/22/2015','01/22/2015','FFA500','',0,'黄巍',0,0,16,1,'','黄巍'));
 
-          g.AddTaskItem(new JSGantt.TaskItem(20,'assets pipeline and helpers based on stackupper','01/22/2015','01/22/2015','B0C4DE','',0,'黄巍',0,0,16,1,'','黄巍'));
+          g.AddTaskItem(new JSGantt.TaskItem(20,'slim, form and table helpers','01/22/2015','01/23/2015','FFD700','',0,'黄巍',0,0,16,1,'','黄巍'));
 
-          g.AddTaskItem(new JSGantt.TaskItem(21,'api controller and test helpers','01/22/2015','01/23/2015','B0C4DE','',0,'黄巍',0,0,16,1,'','黄巍'));
+          g.AddTaskItem(new JSGantt.TaskItem(21,'assets pipeline and helpers based on stackupper','01/23/2015','01/24/2015','B0C4DE','',0,'黄巍',0,0,16,1,'','黄巍'));
 
-          g.AddTaskItem(new JSGantt.TaskItem(22,'release the first alpha version','01/23/2015','01/23/2015','B0C4DE','',1,'黄巍',0,0,0,1,'','黄巍'));
+          g.AddTaskItem(new JSGantt.TaskItem(22,'api controller and test helpers','01/24/2015','01/25/2015','B0C4DE','',0,'黄巍',0,0,16,1,'','黄巍'));
+
+          g.AddTaskItem(new JSGantt.TaskItem(23,'release the first alpha version','01/25/2015','01/25/2015','B0C4DE','',1,'黄巍',0,0,0,1,'','黄巍'));
 
         g.Draw();
         g.DrawDependencies();
@@ -52,6 +54,186 @@
 
 <h3>Recent Git Log</h3> 
 <pre><code>
+* <em style='color:grey'>aa7d8390d72f0afcb65945d38ec83a4f136f3689</em>
+| <strong>2015-01-22 09:54</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | <strong style='color:green'>update progress of task rack_route to 100</strong>
+| 
+|    
+*   <em style='color:grey'>d84219c6beac7a5abd98f1f8e5d16f58c0dadb1e</em>
+|\  <strong>2015-01-22 09:54</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>Merge branch 'rack_route' into develop</strong>
+| | 
+| |   
+| * <em style='color:grey'>59ceed04bc39840691aa934d786fa2cc55cc7536</em>
+| | <strong>2015-01-22 09:54</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>[close] close the branch by set progress to 100.</strong>
+| | 
+| |   
+| * <em style='color:grey'>701ab4d57cb815fefe78038b32a6f2b52f4dea9f</em>
+| | <strong>2015-01-22 00:21</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>[progress] update progress to 80</strong>
+| | 
+| |     
+| *   <em style='color:grey'>58a82be17fcc125ba52c8e4137067391a56ddc7b</em>
+| |\  <strong>2015-01-22 00:08</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| |/  |/|   <strong style='color:green'>Merge branch 'develop' into rack_route</strong>
+| |   
+| |   
+* | <em style='color:grey'>513a4e2d181cc3eab02d47d4e572f91df86423e5</em>
+| | <strong>2015-01-22 00:08</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>update progress of task rack_route to 80</strong>
+| | 
+| |   
+| * <em style='color:grey'>b48bb437610b9e6a7ca7298eb3696ebb7889ee1c</em>
+| | <strong>2015-01-22 00:08</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>[progress] update progress to 80</strong>
+| | 
+| |     
+| *   <em style='color:grey'>48d8d00e1a82aa094f28a573a2dbb405506060fa</em>
+| |\  <strong>2015-01-21 23:09</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| |/  |/|   <strong style='color:green'>Merge branch 'develop' into rack_route</strong>
+| |   
+| |   
+* | <em style='color:grey'>fe54380621f74089e0e7a87875d06812011f70e3</em>
+| | <strong>2015-01-21 23:09</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>update progress of task rack_route to 35</strong>
+| | 
+| |   
+| * <em style='color:grey'>0f2466f903c3dd1b27241544ecb66418e09ae3ac</em>
+| | <strong>2015-01-21 23:09</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>[progress] update progress to 35</strong>
+| | 
+| |     
+| *   <em style='color:grey'>65e851a94302008d3e2dc55fc597b902601182df</em>
+| |\  <strong>2015-01-21 21:21</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| |/  |/|   <strong style='color:green'>Merge branch 'develop' into rack_route</strong>
+| |   
+| |   
+* | <em style='color:grey'>c8896ffb5cca455a914fca40da2a1dec4f701176</em>
+| | <strong>2015-01-21 21:21</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>update progress of task rack_route to 60</strong>
+| | 
+| |   
+| * <em style='color:grey'>35a6b4f646d43d083b86acffd0531df820957bed</em>
+| | <strong>2015-01-21 21:20</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>[progress] update progress to 60</strong>
+| | 
+| |     
+| *   <em style='color:grey'>457f447f0eca802b8fe3a0aeef5c9afd702687d7</em>
+| |\  <strong>2015-01-21 17:00</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| |/  |/|   <strong style='color:green'>Merge branch 'develop' into rack_route</strong>
+| |   
+| |   
+* | <em style='color:grey'>8ebf5c9712695ae60b36f74b60e823b838f33b1d</em>
+| | <strong>2015-01-21 16:59</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>update progress of task rack_route to 40</strong>
+| | 
+| |   
+| * <em style='color:grey'>1296a4b9daa8135d3bd58e3ff842d8b58e95017a</em>
+| | <strong>2015-01-21 16:59</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>[progress] update progress to 40</strong>
+| | 
+| |     
+| *   <em style='color:grey'>2f77d5578d1d2fb14b2ad610e93536e52e991650</em>
+| |\  <strong>2015-01-21 15:29</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| |/  |/|   <strong style='color:green'>Merge branch 'develop' into rack_route</strong>
+| |   
+| |   
+* | <em style='color:grey'>3da5a0715b0b81a037959b1a72b34c3bff455378</em>
+| | <strong>2015-01-21 15:29</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>update progress of task rack_route to 35</strong>
+| | 
+| |   
+| * <em style='color:grey'>9118145cc269ae20826d773e6bc493c24163a42c</em>
+| | <strong>2015-01-21 15:29</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>[progress] update progress to 35</strong>
+| | 
+| |     
+| *   <em style='color:grey'>c778e56c399388a5dbaeac84833172aaa33d6a47</em>
+| |\  <strong>2015-01-21 14:25</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| |/  |/|   <strong style='color:green'>Merge branch 'develop' into rack_route</strong>
+| |   
+| |   
+* | <em style='color:grey'>ec122f3d29e2152bfbf702913e87cd5a46b02050</em>
+| | <strong>2015-01-21 14:24</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>update progress of task rack_route to 30</strong>
+| | 
+| |   
+| * <em style='color:grey'>8b9c56cdea79b763a4f9de01547ed3417b844173</em>
+| | <strong>2015-01-21 14:24</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>[progress] update progress to 30</strong>
+| | 
+| |     
+| *   <em style='color:grey'>4f9d29a5d60b45a5480664aa335d017762566b82</em>
+| |\  <strong>2015-01-21 13:28</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| |/  |/|   <strong style='color:green'>Merge branch 'develop' into rack_route</strong>
+| |   
+| |   
+* | <em style='color:grey'>23152318b60727b37590188533dc2eb76f736b94</em>
+| | <strong>2015-01-21 13:27</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>update progress of task rack_route to 35</strong>
+| | 
+| |   
+| * <em style='color:grey'>b62fee0276295b639582e6728a4795dd9367c7dd</em>
+| | <strong>2015-01-21 13:27</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>[progress] update progress to 35</strong>
+| | 
+| |     
+| *   <em style='color:grey'>f6a6656c0473930d53453982b19feabfb01b0979</em>
+| |\  <strong>2015-01-21 13:08</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| |/  |/|   <strong style='color:green'>Merge branch 'develop' into rack_route</strong>
+| |   
+| |   
+* | <em style='color:grey'>968e1adaa36ad9be5c1d4915a69f86502ae8f5c8</em>
+| | <strong>2015-01-21 13:08</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>update progress of task rack_route to 30</strong>
+| | 
+| |   
+| * <em style='color:grey'>2a9f45e088227a7208fee4eae1f2eb67def51ba9</em>
+| | <strong>2015-01-21 13:08</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>[progress] update progress to 30</strong>
+| | 
+| |     
+| *   <em style='color:grey'>f6f388a4a76ffbc01b9aea1544c73a8056db0d04</em>
+| |\  <strong>2015-01-21 12:16</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| |/  |/|   <strong style='color:green'>Merge branch 'develop' into rack_route</strong>
+| |   
+| |   
+* | <em style='color:grey'>440cc68b5370301081d04202fad65fc15d0b2a70</em>
+| | <strong>2015-01-21 12:16</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>update progress of task rack_route to 20</strong>
+| | 
+| |   
+| * <em style='color:grey'>933ec2565998602424313f7602cbc25d5ed2ff17</em>
+| | <strong>2015-01-21 12:16</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>[progress] update progress to 20</strong>
+| | 
+| |     
+| *   <em style='color:grey'>27b3cab12181b759e7462b69fd043ef3d19ad750</em>
+| |\  <strong>2015-01-21 11:56</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| |/  |/|   <strong style='color:green'>Merge branch 'develop' into rack_route</strong>
+| |   
+| |   
+* | <em style='color:grey'>141f674336f178b25a4cd9987bd3684d407466d8</em>
+| | <strong>2015-01-21 11:56</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>update progress of task rack_route to 30</strong>
+| | 
+| |   
+| * <em style='color:grey'>a854fb913cc2115f938b7907c3b834922800f17a</em>
+|/  <strong>2015-01-21 11:56</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+|   |   <strong style='color:green'>[progress] update progress to 30</strong>
+|   
+|  
+* <em style='color:grey'>af7ec06800ebb69f6c89123fbbba4b76bc5ab65b</em>
+| <strong>2015-01-21 11:50</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | <strong style='color:green'>update progress of task rack_route to 10</strong>
+| 
+|  
+* <em style='color:grey'>5b9bdc7fffb255002e66ffcaf56a5a795bea3d07</em>
+| <strong>2015-01-21 11:50</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | <strong style='color:green'>update Gantt chart</strong>
+| 
+|  
 * <em style='color:grey'>9e81b858a10f4c327c96a625b27157fce769f59b</em>
 | <strong>2015-01-21 11:28</strong> By Huang Wei &lt;huangw@7lime.com&gt;
 | | <strong style='color:green'>add monkey patch on readme</strong>
@@ -121,16 +303,6 @@
 | <strong>2015-01-20 22:45</strong> By Huang Wei &lt;huangw@7lime.com&gt;
 | | <strong style='color:green'>update progress of task concept to 10</strong>
 | 
-|  
-* <em style='color:grey'>ed598fba0b642f42554d0bc05efc79e913d7adfc</em>
-| <strong>2015-01-20 22:44</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | <strong style='color:green'>add gantt</strong>
-| 
-|  
-* <em style='color:grey'>52366055af9c68959ae3af1adfa6ecbfdca69b5d</em>
-  <strong>2015-01-20 22:21</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-    <strong style='color:green'>import from la-marco</strong>
-  
 
 </code></pre>
 
