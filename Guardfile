@@ -16,25 +16,15 @@ guard :rspec, cmd: 'bundle exec rspec --color -f d' do
   watch(%r{^config/(.+)\.rb$}) { |m| "spec/config/#{m[1]}_spec.rb" }
 end
 
-guard :shell do
-  watch(%r{^app/.+\.(rb|feature)$}) do |m|
-    if File.exist?('tmp/puma.pid')
-      puts "puma running, restart"
-      pid = File.read('tmp/puma.pid').chomp.to_i
-      begin
-        Process.getpgid( pid )
-        sh "kill -USR2 #{pid}"
-      rescue Errno::ESRCH
-        "[PUMA] Pid file exists, but server not running, abort."
-      end
-      "[PUMA] `#{m[0]}` changed, restarting."
-    else
-      "[PUMA] `#{m[0]}` changed, but server not running, abort."
-    end
-  end
+guard :rake, task: 'server' do
+  watch(%r{^app/.+\.(rb)$})
+  watch(%r{^lib/.+\.(rb)$})
+  watch(%r{^config/.+\.(rb)$})
+  watch('config.ru')
 end
 
-guard :cucumber do
+guard :cucumber, run_on_start: false do
   watch(%r{^features/.+\.feature$})
-  watch(%r{^features/support/.+$})                      { 'features' }
+  watch(%r{^app/pages/.+\.feature$}) { 'features' }
+  watch(%r{^features/support/.+$}) { 'features' }
 end

@@ -15,19 +15,17 @@ export :route do
   add_gem 'sinatra', '~> 1.4'
   add_gem 'puma'
 
-  add_gem 'rack-test', group: :development
-  add_gem 'guard-shell', group: :development
-  add_gem 'guard-cucumber', group: :development
-
   copy 'lib/route.rb'
   copy 'config/routes.rb'
   copy 'config.ru'
+  add_gem 'guard-rake', group: :development # for puma restart
 
   copy 'lib/tasks/puma.rake'
   copy 'Guardfile', sync: false
 end
 
 export :web do
+  import :route
   add_gem 'sinatra-contrib'
   add_gem 'sinatra-flash'
   add_gem 'sinatra-redirect-with-flash'
@@ -38,6 +36,9 @@ export :web do
 end
 
 export :cucumber do
+  add_gem 'rack-test', group: :development
+  add_gem 'guard-cucumber', group: :development
+
   add_gem 'cucumber', group: :development
   add_gem 'capybara', group: :development
   add_gem 'poltergeist', group: :development
@@ -48,7 +49,6 @@ export :cucumber do
 end
 
 from('.') do
-  import :route
   import :web
   import :cucumber
 end
