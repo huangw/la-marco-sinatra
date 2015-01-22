@@ -17,6 +17,7 @@ export :route do
 
   add_gem 'rack-test', group: :development
   add_gem 'guard-shell', group: :development
+  add_gem 'guard-cucumber', group: :development
 
   copy 'lib/route.rb'
   copy 'config/environments/*.rb'

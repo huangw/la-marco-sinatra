@@ -17,7 +17,7 @@ guard :rspec, cmd: 'bundle exec rspec --color -f d' do
 end
 
 guard :shell do
-  watch(%r{^app/.+\.rb$}) do |m|
+  watch(%r{^app/.+\.(rb|feature)$}) do |m|
     if File.exist?('tmp/puma.pid')
       puts "puma running, restart"
       pid = File.read('tmp/puma.pid').chomp.to_i
@@ -32,4 +32,9 @@ guard :shell do
       "[PUMA] `#{m[0]}` changed, but server not running, abort."
     end
   end
+end
+
+guard :cucumber do
+  watch(%r{^features/.+\.feature$})
+  watch(%r{^features/support/.+$})                      { 'features' }
 end

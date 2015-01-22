@@ -9,6 +9,8 @@ Account	spec/lib/route_spec.rb	/^class Account$/;"	c
 AccountPage	spec/lib/route_spec.rb	/^  class AccountPage; Route << self end$/;"	c	class:API
 AccountPage	spec/lib/route_spec.rb	/^  class AccountPage; Route << self end$/;"	c	class:Admin
 AccountPage	spec/lib/route_spec.rb	/^class AccountPage; Route << self end$/;"	c
+Admin	app/pages/admin_pages.rb	/^module Admin$/;"	m
+Admin	app/pages/admins/user_page.rb	/^class Admin::UserPage < WebApplication$/;"	c
 Admin	spec/lib/route_spec.rb	/^module Admin$/;"	m
 AllFiles	doc/coverage/index.html	/^  <a name="AllFiles"><\/a>$/;"	a
 Class	lib/core_ext/attr_with_default.rb	/^class Class$/;"	c
@@ -17,18 +19,22 @@ ConfuMissing	lib/confu.rb	/^class ConfuMissing < NoMethodError; end$/;"	c
 Data	lib/confu.rb	/^  class Data < Hash$/;"	c	class:Confu
 Hash	lib/core_ext/hash_argument.rb	/^class Hash$/;"	c
 PersonPage	spec/lib/route_spec.rb	/^  class PersonPage; Route << self end$/;"	c	class:Admin
+RootPage	app/pages/admin_pages.rb	/^  class RootPage < WebApplication$/;"	c	class:Admin
 Route	lib/route.rb	/^class Route$/;"	c
 SlimHelper	lib/helpers/slim_helper.rb	/^module SlimHelper$/;"	m
 Specs	doc/coverage/index.html	/^  <a name="Specs"><\/a>$/;"	a
+TestingWorld	features/support/env.rb	/^class TestingWorld$/;"	c
 Ungrouped	doc/coverage/index.html	/^  <a name="Ungrouped"><\/a>$/;"	a
 UserPage	app/pages/users/root_page.rb	/^class UserPage < WebApplication$/;"	c
 WebApplication	app/pages/web_application.rb	/^class WebApplication < Sinatra::Base$/;"	c
 []	lib/route.rb	/^    def [](key)$/;"	f	class:Route
 []=	lib/route.rb	/^    def []=(app_class, route)$/;"	f	class:Route
 all	lib/route.rb	/^    def all$/;"	f	class:Route
+all_cookies	features/support/env.rb	/^  def all_cookies$/;"	f	class:TestingWorld
 attr_with_default	lib/core_ext/attr_with_default.rb	/^  def attr_with_default(hsh)$/;"	f	class:Class
 class_to_route	lib/route.rb	/^    def class_to_route(app_class)$/;"	f	class:Route
 common_rsp	lib/helpers/slim_helper.rb	/^  def common_rsp$/;"	f	class:SlimHelper
+cookie	features/support/env.rb	/^  def cookie(name)$/;"	f	class:TestingWorld
 deep_require	lib/core_ext/dynamic_require.rb	/^def deep_require(dir, deepth = 3)$/;"	f
 extract_args	lib/core_ext/hash_argument.rb	/^  def extract_args(expects)$/;"	f	class:Hash
 extract_args!	lib/core_ext/hash_argument.rb	/^  def extract_args!(expects)$/;"	f	class:Hash

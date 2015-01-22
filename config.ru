@@ -5,5 +5,5 @@ require_relative 'config/boot'
 app =Rack::Builder.app do
   Route.all.each { |path, klass| map(path) { run klass } }
 end
-binding.pry
+
 run app

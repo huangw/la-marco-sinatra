@@ -1,7 +1,11 @@
-class Admin::UserPage < WebApplication
-  get('/') { 'This is where the administrator manages users' }
+# Routing for controllers nested in name space
+module Admin
+  # user management in administrate pages
+  class UserPage < WebApplication
+    get('/') { 'This is where the administrator manages users' }
 
-  get('/someid') { 'This page for user with some id' }
+    get('/someid') { 'This page for user with some id' }
 
-  Route << self
+    Route << self
+  end
 end
