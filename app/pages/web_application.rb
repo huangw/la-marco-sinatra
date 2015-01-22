@@ -1,8 +1,9 @@
 require 'sinatra/flash'
 require 'sinatra/redirect_with_flash'
-
 require 'sinatra/content_for'
+
 require 'helpers/slim_helper'
+require 'helpers/i18n_helper'
 
 # Web application without database related settings
 class WebApplication < Sinatra::Base
@@ -14,8 +15,6 @@ class WebApplication < Sinatra::Base
   end
 
   helpers Sinatra::ContentFor
-  helpers SlimHelper
-
   register Sinatra::Flash
   helpers Sinatra::RedirectWithFlash
   # helpers FlashesHelper
@@ -23,9 +22,8 @@ class WebApplication < Sinatra::Base
   # TODO: common rsp
   # helpers AssetsHelper
   # helpers FormHelper
+  # helpers SlimHelper
 
-  # helpers I18nHelper
-  # before do
-  #   init_locale
-  # end
+  helpers I18nHelper
+  before { I18n.locale = preferred_locale }
 end

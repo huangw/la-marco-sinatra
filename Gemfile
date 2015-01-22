@@ -21,6 +21,7 @@ group :development do
   gem "guard-rubocop"
   gem "mdoc"
   gem "guard-rake"
+  gem "iye"
   gem "rack-test"
   gem "guard-cucumber"
   gem "cucumber"

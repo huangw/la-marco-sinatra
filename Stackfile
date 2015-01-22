@@ -32,6 +32,7 @@ export :web do
   add_gem 'slim'
   add_gem 'i18n'
   add_gem 'http_accept_language'
+  add_gem 'iye', group: :development
 
   copy 'lib/helpers/slim_helper.rb'
   copy 'app/pages/web_application.rb'
