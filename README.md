@@ -1,6 +1,6 @@
 # La-Marco-Sinatra: Sinatra Based Web Framework
 
-注意：`sinatra`如果出现“undefined method `join` for #<String> ...”错误，参照`doc/monkey_patch.html`文件。
+> 注意：`sinatra`如果出现“undefined method `join` for #<String> ...”错误，参照`doc/monkey_patch.html`文件。
 
 ## 概述
 
@@ -42,7 +42,11 @@ end
 
 ### Route机制
 
-`config/boot.rb`会在`config/routes.rb`文件存在时调用它，后者会加载所有`app/helpers`和`app/pages`下面的ruby文件。`app/lib/helper`和`app/lib`rack移动到`lib`目录下，需要使用时手动加载（一般来说已经被base controller加载了）。`app/base`目录取消，base controllers应该直接放在`app/pages`文件夹下，`config/routes.rb`会“从浅到深”的加载`app/pages`下的所有文件。
+参照`doc/route.html`
+
+`config/boot.rb`会在`config/routes.rb`文件存在时调用它，后者会顺序加载所有`app/helpers`和`app/pages`下面的ruby文件。旧版的`app/lib/*`文件移动到`lib`目录下，需要使用时手动加载（一般来说应该已经被base controller加载了）。
+
+`app/base`目录取消，base controllers应该直接放在`app/pages`文件夹下，`config/routes.rb`会“从浅到深”的加载`app/pages`下的所有文件。
 
 ### Cucumber测试
 
