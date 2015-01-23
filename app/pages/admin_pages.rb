@@ -4,7 +4,13 @@ require_relative 'web_application'
 module Admin
   # root for administrator pages
   class RootPage < WebApplication
-    get('/') { 'This is the root of administration portal' }
+    get('/') do
+      'This is the root of administration portal'
+    end
+
+    get('/settings') do
+      rsp
+    end
 
     Route.mount(self, '/admin')
   end

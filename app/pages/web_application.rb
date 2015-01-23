@@ -17,13 +17,16 @@ class WebApplication < Sinatra::Base
   helpers Sinatra::ContentFor
   register Sinatra::Flash
   helpers Sinatra::RedirectWithFlash
-  # helpers FlashesHelper
+  # helpers FlashesHelper # TODO: need?
 
   # TODO: common rsp
   # helpers AssetsHelper
   # helpers FormHelper
-  # helpers SlimHelper
+  helpers SlimHelper
 
   helpers I18nHelper
-  before { I18n.locale = preferred_locale }
+  before {
+    @common_name = 'The Name'
+    I18n.locale = preferred_locale
+  }
 end
