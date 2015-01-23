@@ -37,7 +37,8 @@ export :web do
   add_gem 'vine', group: :development              # nested hash
   add_gem 'google-translate', group: :development  # find translate from google
 
-  copy 'lib/helpers/slim_helper.rb'
+  copy 'lib/helpers/*_helper.rb'
+  copy 'lib/tasks/i18n_view.rake'
   copy 'app/pages/web_application.rb'
 end
 

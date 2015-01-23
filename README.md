@@ -131,6 +131,16 @@ Guard设置为检测本地文件变化并重启服务器，同时监听`features
 
 ### 面包屑
 
-`user/accounts/message_center`页面，假设在`User::AccountPage`里的`get '/message_center'`里定义，则它的面包屑路径的未翻译的key应该为`[:user.index.title, :accounts.index.title, :message_center.title]`。需要加入到面包屑的所有的目录，必须在`i18n`中有一个对应`index.title`的key才能自动翻译。
+因为`Route`加载时可以指定任意的mount point，比如`User::RootPage => '/'`，系统无法从任意位置完全自动的生成面包屑（包括所有上级目录的连接和i18n的页面title）。但是主要遵循几个简单原则，则手动生成面包屑也非常轻松。
 
-理论上`rake i18n:uv`也应该生成了这些key，在render面包屑时可以使用。注意：千万不要用`/title/some.slim`或是`/some/title.slim`命名模板文件。
+首先，所有直接链接到目录的页面，均应命名为`index`。比如`/user/`对应`user/index`。它的i18n标题的翻译键则应该为：`user.index.title`。
+
+比如`User::AccountPage`里的`get '/message_center'`，如果加载在了默认路径（`user/accounts/message_center`），则它的面包屑的各段的翻译key应该为`[:user.index.title, :user.accounts.index.title, :user.accounts.message_center.title]`。
+
+理论上只要上述`index`页面对应的slim模板存在，则`rake i18n:uv`也应该生成了这些key，在render面包屑时可以使用。注意：千万不要用`/title/some.slim`或是`/some/title.slim`命名模板文件。（TODO：未测试）
+
+### Form和Table Helper
+
+Form Helper延续原版。与flashes helper一样，`lib/helpers`下面的helper不应该有特定app相关的内容，比如html里的class或者id。这些特定内容需要写在`app/helpers`下另建的helper文件里（可以重载`lib/helpers`下的方法，具体参照active record的method chain的介绍）。
+
+TODO: TableHelper暂未实现。需要时可以启动开发。
