@@ -113,4 +113,24 @@ Guard设置为检测本地文件变化并重启服务器，同时监听`features
 
 `partial`功能应该用于template内部，比如：`partial :form`会调用同一文件夹下的`_form.slim`。
 
-### I18n和面包屑
+### 模板I18n
+
+有两种方式在slim模块中实现i18n，两种可以并用。第一种方式是，针对不同locale分别做一个模板，比如`index.en.yml`和`index.ja.yaml`。模板的locale必须包含在`supported_locales`中，默认是`en, ja, zh`（统一使用缩略写法，不再用'zh-CN'的方式了）。然后render时，指定：
+
+    rsp :index, locales: [:en, :ja]
+
+注意这里的`locales`表示的是“所有我提供了模板的locales”。即使这个例子里没有`zh`模板存在，对指定locale为`zh`的用户，SlimHelper会使用默认的模板（:en）render。因此，`:en`模板是必须存在的（这一点未来可能有所改善）。
+
+另一种方法是使用同一个模板，但是用`tt(:some_key)`将`:some_key`翻译为不同语言。`tt`由`I18nHelper`提供，会自动的按照当前页面寻找正确的scope。比如，`app/views/some/template.slim`文件里的`:some_key`，应该在`i18n/views/some/en.yml`（或`ja.yml`, `zh.yml`）里定义为`some.template.some_key`。
+
+在slim文件内增加新的key到`tt`之后（注意必须用`:xxx`，也就是symbol形式），然后执行`rake i18n:uv`，后者会自动在yaml文件里添加新的key，并通过google translate预设一个翻译。以后则可以通过
+
+    $ rake i18n:iye
+
+启动翻译服务，通过浏览器人力对照翻译。
+
+### 面包屑
+
+`user/accounts/message_center`页面，假设在`User::AccountPage`里的`get '/message_center'`里定义，则它的面包屑路径的未翻译的key应该为`[:user.index.title, :accounts.index.title, :message_center.title]`。需要加入到面包屑的所有的目录，必须在`i18n`中有一个对应`index.title`的key才能自动翻译。
+
+理论上`rake i18n:uv`也应该生成了这些key，在render面包屑时可以使用。注意：千万不要用`/title/some.slim`或是`/some/title.slim`命名模板文件。

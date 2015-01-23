@@ -28,7 +28,9 @@ RootPage	app/pages/admin_pages.rb	/^  class RootPage < WebApplication$/;"	c	clas
 Route	lib/route.rb	/^class Route$/;"	c
 SlimHelper	lib/helpers/slim_helper.rb	/^module SlimHelper$/;"	m
 Slimmer	app/pages/slimmer/check_path.rb	/^module Slimmer$/;"	m
+Slimmer	app/pages/slimmer/translator.rb	/^module Slimmer$/;"	m
 Specs	doc/coverage/index.html	/^  <a name="Specs"><\/a>$/;"	a
+TranslatorPage	app/pages/slimmer/translator.rb	/^  class TranslatorPage < WebApplication$/;"	c	class:Slimmer
 Ungrouped	doc/coverage/index.html	/^  <a name="Ungrouped"><\/a>$/;"	a
 UserPage	app/pages/admins/user_page.rb	/^  class UserPage < WebApplication$/;"	c	class:Admin
 UserPage	app/pages/users/root_page.rb	/^class UserPage < WebApplication$/;"	c

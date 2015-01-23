@@ -15,7 +15,8 @@ namespace :i18n do
     Dir["#{view_dir}/**/*.slim"].each do |vfile|
       idir = File.dirname(vfile.sub(/\A#{view_dir}/, i18n_dir))
       scope = idir.sub(/#{i18n_dir}\/?/, '').split('/').join('.')
-      scope += ".#{File.basename(vfile, '.slim')}"
+      page_name = File.basename(vfile, '.slim')
+      scope += ".#{page_name}"
 
       FileUtils.mkdir_p(idir) unless File.exist?(idir)
 
@@ -32,10 +33,12 @@ namespace :i18n do
         cur_trans = hash_join(YAML.load_file(yml_file)) if File.exist?(yml_file)
         cur_trans_files[yml_file] ||= cur_trans # flattered
 
-        keys.map(&:to_sym).each do |k|
+        keys.unshift(:title).map(&:to_sym).each do |k|
           key = "#{locale}." + scope + ".#{k}"
           next if cur_trans_files[yml_file][key]
 
+          k = page_name if k == :title
+          k = File.basename(idir) if k.to_s == 'index'
           default_trans = I18nUpdator.to_human(k)
           unless locale == :en
             puts "retrieve translation for #{k} (#{locale}): "

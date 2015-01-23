@@ -2,7 +2,9 @@
 :ja:
   :slimmer:
     :translators:
-      :index:
-        :too_slow: 遅すぎる
       :hello:
+        :title: こんにちは
         :hello_world: こんにちは世界
+      :index:
+        :title: 翻訳者
+        :too_slow: 遅すぎる

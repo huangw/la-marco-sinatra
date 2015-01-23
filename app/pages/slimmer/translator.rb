@@ -13,4 +13,3 @@ module Slimmer
     Route << self
   end
 end
-
