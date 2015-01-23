@@ -22,6 +22,8 @@ group :development do
   gem "mdoc"
   gem "guard-rake"
   gem "iye"
+  gem "vine"
+  gem "google-translate"
   gem "rack-test"
   gem "guard-cucumber"
   gem "cucumber"
