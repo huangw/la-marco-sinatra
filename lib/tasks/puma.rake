@@ -34,7 +34,7 @@ end
 desc 'start/restart server for development'
 task :server do
   if File.exist?(ENV['PIDFILE'])
-    puts "puma running, restart"
+    puts 'puma running, restart'
     Rake::Task[:'puma:restart'].invoke
   else
     Rake::Task[:'puma:start'].invoke

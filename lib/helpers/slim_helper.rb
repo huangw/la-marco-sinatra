@@ -1,62 +1,48 @@
 require 'slim'
 Slim::Engine.set_options pretty: (ENV['RACK_ENV'] == 'development')
 
-# response by render an liquid template
+# Response by render an liquid template
 module SlimHelper
-  # scope template sub-directory from class name:
-  #   UserPage => 'views/users', PersonController => 'views/peoples/'
-  # rubocop:disable LineLength, MethodLength, CyclomaticComplexity, Metrics/PerceivedComplexity
-  def rsp(tpl, opts = {})
-    fail 'template filename must be a symbol' unless tpl.is_a?(Symbol)
-    env['template_id'] = tpl
-    tpl = "#{logic_path}/#{tpl}"
+  # slim output with mapping to default template files
+  def rsp(tpl = nil, opts = {})
+    fail 'template id must be a symbol' if tpl && !tpl.is_a?(Symbol)
+    env['template_id'] = template_id(tpl, opts.delete(:locales))
 
-    if opts[:locales]
-      locale = opts[:locales][0]
-      opts[:locales].each { |lc| locale = lc if lc.to_s == I18n.locale.to_s }
-      tpl << ".#{locale}"
-      opts.delete(:locales)
-    end
+    use_layout(opts[:layout]) if opts[:layout] # so user can pass false
+    opts[:layout] ||= env['response_layout'] if env['response_layout']
 
-    [:notice, :alert, :warning, :error, :info, :success].each do |fkey|
-      flash.now[fkey] = opts.delete(fkey) if opts[fkey]
-    end
-
-    use_layout(opts[:layout]) if opts[:layout]
-    opts[:layout] = env['response_layout'] if env['response_layout']
-
-    opts[:locals] = common_rsp.merge(opts[:locals] || {})
     content_type :html, 'charset' => 'utf-8'
-    slim tpl.to_sym, opts
-  end
-
-  def common_rsp
-    env['common_rsp'] ||= {}
+    slim File.join(template_dir, env['template_id']).to_sym, opts
   end
 
   # rsp with halt
-  def hsp(tpl, opts = {})
-    halt rsp(tpl, opts)
+  def rsp!(*args)
+    halt rsp(*args)
   end
 
-  def partial(pname, locals_ = {})
-    slim "#{logic_path}/_#{pname}".to_sym, locals: locals_, layout: false
-  end
-
-  def partial_block(bname, locals_ = {})
-    slim "partial_blocks/#{bname}".to_sym, locals: locals_, layout: false
+  # `partial page_name` uses
+  def partial(pname, lcls = {})
+    use_layout(false)
+    slim "#{template_dir}/_#{pname}".to_sym, locals: lcls
   end
 
   # set layout files to layout (path relative to views folder)
+  # use_layout(false) to disable layout
   def use_layout(layout)
     env['response_layout'] = layout
   end
 
-  # from the class name, calculate logic path for template files
-  def logic_path(class_ = nil, met = nil)
-    class_ ||= self.class
-    met = met ? '/' + met : ''
-    class_.to_s.underscore
-      .gsub(/_(page|controller)$/, '').gsub('_', '/').pluralize + met
+  def template_dir
+    env['template_dir'] ||= Route.default_path(self.class).gsub('-', '_')
+  end
+
+  def template_id(tpl = nil, locales = nil)
+    tpl ||= request.path_info.sub(/\A\//, '').gsub('-', '_').to_sym
+    tpl = :index if tpl.empty?
+    return tpl.to_s unless locales
+
+    lc, user_lc = I18n.default_locale.to_sym, I18n.locale.to_sym
+    lc = user_lc if locales.map(&:to_sym).include?(user_lc)
+    "#{tpl}.#{lc}".to_s
   end
 end

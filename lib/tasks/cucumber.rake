@@ -11,7 +11,7 @@ task f: :features
 
 desc 'run cucumber test with chrome driver'
 task :cc do
-  ENV['DRIVER']='chrome'
+  ENV['DRIVER'] = 'chrome'
   Rake::Task[:features].invoke
 end
 

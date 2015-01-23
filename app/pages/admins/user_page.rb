@@ -4,7 +4,12 @@ module Admin
   class UserPage < WebApplication
     get('/') { 'This is where the administrator manages users' }
 
-    get('/someid') { 'This page for user with some id' }
+    get('/someid') do
+      'This page for user with some id'
+    end
+
+    get('/match/me/*/to') do
+    end
 
     Route << self
   end

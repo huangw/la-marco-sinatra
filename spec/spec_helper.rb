@@ -11,7 +11,6 @@ require 'pry'
 require 'awesome_print'
 AwesomePrint.defaults = { indent: 2, raw: true }
 
-
 # Load the application contexts
 ENV['RACK_ENV'] = 'test'
 require_relative '../config/boot'

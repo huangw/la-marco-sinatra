@@ -65,3 +65,50 @@ Cucumber测试支持通过`rack`, `chrome`和`poltergeist`之一，默认直接�
 `rake accept`则会将测试结果以html报告的形式保存到`doc/cucumber.html`。
 
 在确保puma已经启动的情况下，可通过`rake puma:restart && rake f`来先重启服务器在执行cucumber。注意如果puma没有另外启动，则`rake s`会占据整个进程，`rake f`无法获得启动机会。因此**不要使用**`rake s && rake f`。
+
+### Path管理和Slim模板
+
+#### 获取特定path
+
+`to`（`url`的同名函数）是sinatra提供的获取同一controller内其它页面URL的方法，比如
+
+    class UserPage < WebApplication
+      get('/settings') { ... }
+      get('/') { rediret to('settings') } # redirect to the url of above
+
+      Route << self # => mount to '/users/'
+    end
+
+`Route.to`方法（可接受多个参数）则是一种“全局”跳转：
+
+    class BookPage < WebApplication
+      get('/') do
+        # redirect to /users/xxxuser_tidxxx/settings
+        redirect Route.to(UserPage, current_user.tid, 'settings')
+      end
+    end
+
+#### SlimHelper
+
+一个Controller类（如`Admin::Analytics::PageViewPage`）的template模板文件保存于`Route.default_path(Admin::Analytics::PageViewPage)`（上面的例子为admin/analytics/page-view）。
+
+注意，因为Controller类可能被mount到`default_path`之外的URL，所以保存模板文件的位置，与URL的结构并不一致。具体的，`Route[Admin::Analytics::PageViewPage]`会返回类实际mount的URL地址，而`Route.default_path(Admin::Analytics::PageViewPage)`的返回值则是模板文件的存储地址。
+
+`rsp :模板名`会将上述模板文件目录下的`模板名.slim`文件用于render。注意模板名必须以`symbol`格式指定（注意现在的rsp函数只有一个hash参数）。
+
+`SlimHelper`会尝试从`path_info`算出默认模板，如果是静态不含`:param`的路径，则可以直接调用`rsp`函数，不指定模板文件ID：
+
+    class UserPage
+      get('/message') # 模板为：app/views/users/message.slim
+      get('/settings/nickname')
+        # 模板为：app/views/users/settings/nickname.slim
+      get(/) { rsp } # app/views/users/index.slim，'/'会自动map到:index
+    end
+
+与`rsp`相对应，`rsp!`render后直接halt当前进程（即以前的`hsp`）。
+
+新的`SlimHelper`不再有`common_rsp`，应直接`@对象变量`传递信息。依然有`partial :form`（使用`_form.slim`文件作为template），但是不再有`partial_block`函数（后者应该使用`HtmlPresenter`机制）。
+
+`partial`功能应该用于template内部，比如：`partial :form`会调用同一文件夹下的`_form.slim`。
+
+### I18n和面包屑

@@ -5,4 +5,5 @@ RuboCop::RakeTask.new(:rubocop) do |task|
   task.fail_on_error = false
 end
 
+desc 'Run rubocop auto correct'
 task rac: :'rubocop:auto_correct'

@@ -19,6 +19,7 @@ ConfuMissing	lib/confu.rb	/^class ConfuMissing < NoMethodError; end$/;"	c
 Data	lib/confu.rb	/^  class Data < Hash$/;"	c	class:Confu
 FeatureWorld	features/support/env.rb	/^class FeatureWorld$/;"	c
 Hash	lib/core_ext/hash_argument.rb	/^class Hash$/;"	c
+I18nHelper	lib/helpers/i18n_helper.rb	/^module I18nHelper$/;"	m
 PersonPage	spec/lib/route_spec.rb	/^  class PersonPage; Route << self end$/;"	c	class:Admin
 RootPage	app/pages/admin_pages.rb	/^  class RootPage < WebApplication$/;"	c	class:Admin
 Route	lib/route.rb	/^class Route$/;"	c
@@ -33,10 +34,10 @@ WebApplication	app/pages/web_application.rb	/^class WebApplication < Sinatra::Ba
 all	lib/route.rb	/^    def all$/;"	f	class:Route
 all_cookies	features/support/env.rb	/^  def all_cookies$/;"	f	class:FeatureWorld
 attr_with_default	lib/core_ext/attr_with_default.rb	/^  def attr_with_default(hsh)$/;"	f	class:Class
-class_to_route	lib/route.rb	/^    def class_to_route(app_class)$/;"	f	class:Route
 common_rsp	lib/helpers/slim_helper.rb	/^  def common_rsp$/;"	f	class:SlimHelper
 cookie	features/support/env.rb	/^  def cookie(name)$/;"	f	class:FeatureWorld
 deep_require	lib/core_ext/dynamic_require.rb	/^def deep_require(dir, deepth = 3)$/;"	f
+default_path	lib/route.rb	/^    def default_path(app_class)$/;"	f	class:Route
 extract_args	lib/core_ext/hash_argument.rb	/^  def extract_args(expects)$/;"	f	class:Hash
 extract_args!	lib/core_ext/hash_argument.rb	/^  def extract_args!(expects)$/;"	f	class:Hash
 finalize!	lib/confu.rb	/^    def finalize!$/;"	f	class:Confu.Data
@@ -82,6 +83,7 @@ n8	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n8" name="n8">8
 n9	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n9" name="n9">9<\/a><\/span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">    &lt;code&gt;&lt;strong&gt;&lt;%<\/span><span style="color:#710">=<\/span><\/span>h frame.function <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%&gt;<\/span><span style="color:#D20">&lt;\/strong<\/span><span style="color:#710">&gt;<\/span><\/span>&lt;<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">\/<\/span><span style="color:#808">code&gt;<\/span><\/span>$/;"	a
 partial	lib/helpers/slim_helper.rb	/^  def partial(pname, locals_ = {})$/;"	f	class:SlimHelper
 partial_block	lib/helpers/slim_helper.rb	/^  def partial_block(bname, locals_ = {})$/;"	f	class:SlimHelper
+preferred_locale	lib/helpers/i18n_helper.rb	/^  def preferred_locale(avails = I18n.available_locales)$/;"	f	class:I18nHelper
 require_all	lib/core_ext/dynamic_require.rb	/^def require_all(pattern)$/;"	f
 root_join	config/boot.rb	/^def root_join(*path)$/;"	f
 rsp	lib/helpers/slim_helper.rb	/^  def rsp(tpl, opts = {})$/;"	f	class:SlimHelper
@@ -90,4 +92,5 @@ to	lib/route.rb	/^    def to(app_class, *parts)$/;"	f	class:Route
 to_hash	lib/confu.rb	/^    def to_hash$/;"	f	class:Confu
 to_hash	lib/confu.rb	/^    def to_hash$/;"	f	class:Confu.Data
 try_require	lib/core_ext/dynamic_require.rb	/^def try_require(file)$/;"	f
+tt	lib/helpers/i18n_helper.rb	/^  def tt(msg, opts = {})$/;"	f	class:I18nHelper
 use_layout	lib/helpers/slim_helper.rb	/^  def use_layout(layout)$/;"	f	class:SlimHelper

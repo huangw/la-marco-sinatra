@@ -20,6 +20,8 @@ class UserPage < WebApplication
 end
 ~~~~~~~~~~~~~~~~~~~~~~~
 
+默认路径由`default_route`函数根据类名（`UserPage`）计算出。
+
 也可同时定义特定path：
 
 ~~~~~~~~~~~~~~ruby
