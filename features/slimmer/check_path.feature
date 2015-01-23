@@ -16,7 +16,7 @@ Feature: Slim helper can find proper files to render
       And I should see the text "I am a partial form block for gogogo"
 
   Scenario: render template by locales
-    Given I visit to "/slim-test/multi-tone"
+    Given I visit to "/slim-test/multi-tone?locale=en"
      Then I should see the text "English"
      When I visit to "/slim-test/multi-tone?locale=zh"
      Then I should see the text "中文中文"

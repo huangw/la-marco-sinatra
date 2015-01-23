@@ -56,15 +56,17 @@ end
 
 ### Cucumber测试
 
-Cucumber测试支持通过`rack`, `chrome`和`poltergeist`之一，默认直接连接puma在本地监听的8080端口进行测试。因此必须在另外窗口启动puma后方可执行。`poltergeist`是默认driver。
+Cucumber支持通过`poltergeist`或`chrome`两种driver测试，默认是`poltergeist`。两者均直接连接puma在本地监听的8080端口进行测试。因此cucumber必须在puma启动后方可执行。
 
-`chrome`和`poltergeist`后两者需要分别单独安装`chrome-web-driver`和`phantomjs`之后才可以使用。`rack`不能解析js。
+`chrome`和`poltergeist`需要分别单独安装`chrome-web-driver`和`phantomjs`之后才可以使用。
 
 需使用`chrome`测试时，可指定`DRIVER=chrome rake features`，也可以使用短缩版的命令`rake cc`（Cucumber with Chrome）。
 
 `rake accept`则会将测试结果以html报告的形式保存到`doc/cucumber.html`。
 
 在确保puma已经启动的情况下，可通过`rake puma:restart && rake f`来先重启服务器在执行cucumber。注意如果puma没有另外启动，则`rake s`会占据整个进程，`rake f`无法获得启动机会。因此**不要使用**`rake s && rake f`。
+
+Guard设置为检测本地文件变化并重启服务器，同时监听`features/*.feature`或`app/pages/*.rb`文件变化并执行cucumber。当然同样需要puma在另外的窗口运行时才有意义。
 
 ### Path管理和Slim模板
 

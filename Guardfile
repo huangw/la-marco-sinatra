@@ -25,6 +25,6 @@ end
 
 guard :cucumber, all_on_start: false do
   watch(%r{^features/.+\.feature$})
-  watch(%r{^app/pages/.+\.feature$}) { 'features' }
+  watch(%r{^app/pages/(.+)\.rb$}) { |m| "features/#{m[1]}.feature" }
   watch(%r{^features/support/.+$}) { 'features' }
 end
