@@ -1,5 +1,9 @@
 # Test user page routing
 class UserPage < WebApplication
-  get('/') { 'user root page' }
+  get('/') do
+    # self.class.to_s
+    'user root page'
+  end
+
   Route.mount(self, '/')
 end

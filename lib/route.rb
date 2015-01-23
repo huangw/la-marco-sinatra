@@ -27,7 +27,7 @@ class Route
 
     # add class to default route
     def mount(app_class, route = nil)
-      route ||= class_to_route(app_class)
+      route ||= default_path(app_class)
       table[app_class] = route
     end
     alias_method :'<<', :mount
@@ -41,11 +41,9 @@ class Route
       File.join(@table[app_class], *pas)
     end
 
-    private
-
-    def class_to_route(app_class)
+    def default_path(app_class)
       app_class.to_s.underscore.sub(/_(api|page|controller)$/, '')
-        .gsub('_', '/').pluralize.sub(/^\/*/, '/')
+        .gsub('_', '-').sub(/^\/*/, '/').pluralize
     end
   end
 end

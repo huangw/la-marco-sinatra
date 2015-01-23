@@ -15,7 +15,6 @@ export :route do
   add_gem 'sinatra', '~> 1.4'
   add_gem 'puma'
 
-  copy 'lib/route.rb'
   copy 'config/routes.rb'
   copy 'config.ru'
   add_gem 'guard-rake', group: :development # for puma restart
@@ -30,6 +29,13 @@ export :web do
   add_gem 'sinatra-flash'
   add_gem 'sinatra-redirect-with-flash'
   add_gem 'slim'
+
+  # I18n support
+  add_gem 'i18n'
+  add_gem 'http_accept_language'
+  add_gem 'iye', group: :development               # translate console
+  add_gem 'vine', group: :development              # nested hash
+  add_gem 'google-translate', group: :development  # find translate from google
 
   copy 'lib/helpers/slim_helper.rb'
   copy 'app/pages/web_application.rb'

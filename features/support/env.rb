@@ -7,10 +7,7 @@ ENV['RACK_ENV'] ||= 'development' # for easy checking database
 ENV['HOST'] ||= 'http://localhost:8080'
 require_relative '../../config/boot'
 
-case ENV['DRIVER']
-when 'rack'
-  Capybara.app = Rack::Builder.parse_file(ENV['APP_ROOT'] + '/config.ru').first
-when 'chrome'
+if ENV['DRIVER'] == 'chrome'
   Capybara.register_driver :chrome do |app|
     Capybara::Selenium::Driver.new(app, browser: :chrome)
   end
@@ -37,10 +34,7 @@ class FeatureWorld
   # include FactoryGirl::Syntax::Methods
 
   def all_cookies
-    case ENV['DRIVER']
-    when 'rack'
-      Capybara.current_session.driver.request.cookies
-    when 'chrome'
+    if ENV['DRIVER'] == 'chrome'
       Capybara.current_session.driver.browser.manage.all_cookies
     else
       Capybara.current_session.driver.cookies
@@ -48,10 +42,7 @@ class FeatureWorld
   end
 
   def cookie(name)
-    case ENV['DRIVER']
-    when 'rack'
-      Capybara.current_session.driver.request.cookies[name]
-    when 'chrome'
+    if ENV['DRIVER'] == 'chrome'
       Capybara.current_session.driver.browser.manage.cookie_named(name)
     else
       c = Capybara.current_session.driver.cookies[name]

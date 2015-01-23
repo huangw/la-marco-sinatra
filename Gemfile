@@ -8,6 +8,8 @@ gem "sinatra-contrib"
 gem "sinatra-flash"
 gem "sinatra-redirect-with-flash"
 gem "slim"
+gem "i18n"
+gem "http_accept_language"
 
 group :development do
   gem "rake"
@@ -19,6 +21,9 @@ group :development do
   gem "guard-rubocop"
   gem "mdoc"
   gem "guard-rake"
+  gem "iye"
+  gem "vine"
+  gem "google-translate"
   gem "rack-test"
   gem "guard-cucumber"
   gem "cucumber"
