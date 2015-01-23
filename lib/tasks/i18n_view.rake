@@ -59,9 +59,4 @@ namespace :i18n do
       File.open(file, 'w') { |fh| fh.write YAML.dump(chash) }
     end
   end
-
-  desc 'start iye translation server'
-  task :iye do
-    exec 'bundle exec iye ./i18n'
-  end
 end
