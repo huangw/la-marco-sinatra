@@ -145,6 +145,6 @@ Form Helper延续原版。与flashes helper一样，`lib/helpers`下面的helper
 
 TODO: TableHelper暂未实现。需要时可以启动开发。
 
-### Asset Helper
+### Assets（js/css/logo等静态图片）管理
 
-参照`doc/asset_helper.html`
+参照`doc/assets_management.html`
