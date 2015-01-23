@@ -15,7 +15,6 @@ export :route do
   add_gem 'sinatra', '~> 1.4'
   add_gem 'puma'
 
-  copy 'lib/route.rb'
   copy 'config/routes.rb'
   copy 'config.ru'
   add_gem 'guard-rake', group: :development # for puma restart

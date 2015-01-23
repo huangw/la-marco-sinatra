@@ -1,3 +1,4 @@
+require 'fileutils'
 namespace :puma do
   ENV['PORT'] ||= '8080'
   ENV['PIDFILE'] ||= 'tmp/puma.pid'
@@ -6,7 +7,7 @@ namespace :puma do
   task :start do
     warn 'Puma may already running, '\
          'fire start anyway ...' if File.exist?(ENV['PIDFILE'])
-    File.mkdir 'tmp' unless File.exist?('tmp')
+    FileUtils.mkdir 'tmp' unless File.exist?('tmp')
     exec("bundle exec puma --port #{ENV['PORT']} --pidfile #{ENV['PIDFILE']}")
   end
 

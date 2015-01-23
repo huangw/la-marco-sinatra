@@ -14,6 +14,6 @@ module HashFlatter
 
   # hash_nest([:a, :b, :c], 18) => { a: { b: { c: 18 } } }
   def hash_nest(keys, value)
-    keys.reverse.inject(value) { |a, n| { n => a } }
+    keys.reverse.inject(value) { |a, e| { e => a } }
   end
 end

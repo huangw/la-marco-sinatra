@@ -2,6 +2,7 @@ require 'yaml'
 require 'fileutils'
 require 'development/i18n_updator'
 require 'utils/hash_flatter'
+include HashFlatter
 
 namespace :i18n do
   desc 'update i18n files for template files'
@@ -13,7 +14,8 @@ namespace :i18n do
     cur_trans_files = {} # keep a global yaml contents table
     Dir["#{view_dir}/**/*.slim"].each do |vfile|
       idir = File.dirname(vfile.sub(/\A#{view_dir}/, i18n_dir))
-      scope = idir.sub(/#{i18n_dir}\/?/, '').split('/')
+      scope = idir.sub(/#{i18n_dir}\/?/, '').split('/').join('.')
+      scope += ".#{File.basename(vfile, '.slim')}"
 
       FileUtils.mkdir_p(idir) unless File.exist?(idir)
 
@@ -26,23 +28,32 @@ namespace :i18n do
         puts "updating #{File.basename(yml_file)}"
 
         # load the current definition hash:
-
-        current_trans.merge!(YAML.load_file(yml_file)) if File.exist?(yml_file)
-        cur_trans_files[yml_file] = current_trans
-        ap current_trans
+        cur_trans = {}
+        cur_trans = hash_join(YAML.load_file(yml_file)) if File.exist?(yml_file)
+        cur_trans_files[yml_file] ||= cur_trans # flattered
 
         keys.map(&:to_sym).each do |k|
-          next if cur_trans_files[yml_file][locale].key?(k) # had this key
+          key = "#{locale}." + scope + ".#{k}"
+          next if cur_trans_files[yml_file][key]
+
           default_trans = I18nUpdator.to_human(k)
-          default_trans = I18nUpdator.gtrans(default_trans, locale) unless locale == :en
-          cur_trans_files[yml_file][locale][k] = default_trans
+          unless locale == :en
+            puts "retrieve translation for #{k} (#{locale}): "
+            default_trans = I18nUpdator.gtrans(default_trans, locale)
+            puts default_trans
+          end
+          cur_trans_files[yml_file][key] = default_trans
         end
       end
     end
-exit
+
     # write back to the yaml files
     cur_trans_files.each do |file, contents|
-      File.open(file, 'w') { |fh| fh.write YAML.dump(contents) }
+      chash = {}
+      contents.each do |key, value|
+        chash.deep_merge! hash_nest(key.split('.'), value).deep_symbolize_keys
+      end
+      File.open(file, 'w') { |fh| fh.write YAML.dump(chash) }
     end
   end
 

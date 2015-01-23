@@ -9,11 +9,11 @@ module I18nHelper
 
   # mapping i18n name space from the logical path
   def tt(msg, opts = {})
-    if env['template_id']
-      I18n.t [logic_path.gsub('/', '.'), env['template_id'], msg]
-        .join('.'), opts
-    else
-      I18n.t [logic_path.gsub('/', '.'), msg].join('.'), opts
+    unless opts[:scope]
+      opts[:scope] = template_dir.gsub('/', '.')
+      opts[:scope] += ".#{env['template_id']}" if env['template_id']
     end
+
+    I18n.t msg, opts
   end
 end
