@@ -5,20 +5,14 @@ Slim::Engine.set_options pretty: (ENV['RACK_ENV'] == 'development')
 module SlimHelper
   # slim output with mapping to default template files
   def rsp(tpl = nil, opts = {})
-    tpl ||= request.path_info.sub(/^A\//, '')
-    tpl = :index if tpl.empty?
-
-    if locales = opts.delete(:locales)
-      lc, user_lc = I18n.default_locale.to_sym, I18n.locale.to_sym
-      lc = user_lc if locales.map(&:to_sym).include?(user_lc)
-      tpl << ".#{lc}"
-    end
+    fail 'template id must be a symbol' if tpl && !tpl.is_a?(Symbol)
+    env['template_id'] = template_id(tpl, opts.delete(:locales))
 
     use_layout(opts[:layout]) if opts[:layout] # so user can pass false
     opts[:layout] ||= env['response_layout'] if env['response_layout']
 
     content_type :html, 'charset' => 'utf-8'
-    slim template_path(tpl), opts
+    slim File.join(template_dir, env['template_id']).to_sym, opts
   end
 
   # rsp with halt
@@ -29,7 +23,7 @@ module SlimHelper
   # `partial page_name` uses
   def partial(pname, lcls = {})
     use_layout(false)
-    slim "#{template_path}/_#{pname}".to_sym, locals: lcls
+    slim "#{template_dir}/_#{pname}".to_sym, locals: lcls
   end
 
   # set layout files to layout (path relative to views folder)
@@ -38,8 +32,17 @@ module SlimHelper
     env['response_layout'] = layout
   end
 
-  def template_path(t_id = nil)
-    template_dir = Route.default_path(self.class)
-    t_id ? File.join(template_dir, t_id).to_sym : template_dir.to_sym
+  def template_dir
+    env['template_dir'] ||= Route.default_path(self.class).gsub('-', '_')
+  end
+
+  def template_id(tpl = nil, locales = nil)
+    tpl ||= request.path_info.sub(/\A\//, '').gsub('-', '_').to_sym
+    tpl = :index if tpl.empty?
+    return tpl.to_s unless locales
+
+    lc, user_lc = I18n.default_locale.to_sym, I18n.locale.to_sym
+    lc = user_lc if locales.map(&:to_sym).include?(user_lc)
+    "#{tpl}.#{lc}".to_s
   end
 end

@@ -25,8 +25,5 @@ class WebApplication < Sinatra::Base
   helpers SlimHelper
 
   helpers I18nHelper
-  before {
-    @common_name = 'The Name'
-    I18n.locale = preferred_locale
-  }
+  before { I18n.locale = preferred_locale }
 end

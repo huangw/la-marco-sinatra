@@ -88,7 +88,7 @@ Cucumber测试支持通过`rack`, `chrome`和`poltergeist`之一，默认直接�
       end
     end
 
-#### template文件，i18n和面包屑
+#### SlimHelper
 
 一个Controller类（如`Admin::Analytics::PageViewPage`）的template模板文件保存于`Route.default_path(Admin::Analytics::PageViewPage)`（上面的例子为admin/analytics/page-view）。
 
@@ -96,7 +96,7 @@ Cucumber测试支持通过`rack`, `chrome`和`poltergeist`之一，默认直接�
 
 `rsp :模板名`会将上述模板文件目录下的`模板名.slim`文件用于render。注意模板名必须以`symbol`格式指定（注意现在的rsp函数只有一个hash参数）。
 
-如果`get/post`的Pattern仅包含字母数字和'/'，则可以直接调用`rsp`函数，不指定模板文件ID：
+`SlimHelper`会尝试从`path_info`算出默认模板，如果是静态不含`:param`的路径，则可以直接调用`rsp`函数，不指定模板文件ID：
 
     class UserPage
       get('/message') # 模板为：app/views/users/message.slim
@@ -108,3 +108,7 @@ Cucumber测试支持通过`rack`, `chrome`和`poltergeist`之一，默认直接�
 与`rsp`相对应，`rsp!`render后直接halt当前进程（即以前的`hsp`）。
 
 新的`SlimHelper`不再有`common_rsp`，应直接`@对象变量`传递信息。依然有`partial :form`（使用`_form.slim`文件作为template），但是不再有`partial_block`函数（后者应该使用`HtmlPresenter`机制）。
+
+`partial`功能应该用于template内部，比如：`partial :form`会调用同一文件夹下的`_form.slim`。
+
+### I18n和面包屑
