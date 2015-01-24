@@ -17,7 +17,7 @@
 将下列内容保存为`app/assets/mapper.rb`
 
 ~~~~~~~~~~~~~~~~~~~ ruby
-pull :jquery, git: 'https://github.com/jquery/jqueryj',
+pull :jquery, git: 'https://github.com/jquery/jqueryj', branch: :develop
 
 produce 'application.js' do
   vendor :jquery, 'min/jsquery.js' => 'public/assets/vendor/xxx.js'

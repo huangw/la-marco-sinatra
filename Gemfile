@@ -10,7 +10,6 @@ gem "sinatra-flash"
 gem "sinatra-redirect-with-flash"
 gem "slim"
 gem "http_accept_language"
-gem "git"
 
 group :development do
   gem "rake"
@@ -30,4 +29,6 @@ group :development do
   gem "capybara"
   gem "poltergeist"
   gem "selenium-webdriver"
+  gem "git"
+  gem "fastimage"
 end

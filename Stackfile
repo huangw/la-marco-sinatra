@@ -60,7 +60,8 @@ export :cucumber do
 end
 
 export :assets_mapper do
-  add_gem 'git'
+  add_gem 'git', group: :development
+  add_gem 'fastimage', group: :development
 
   copy 'lib/development/assets_mapper.rb'
   copy 'lib/development/assets_mapper/*.rb'
