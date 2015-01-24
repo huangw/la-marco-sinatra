@@ -20,6 +20,7 @@ group :development do
   gem "simplecov"
   gem "guard-rspec"
   gem "guard-rubocop"
+  gem "guard-ctags-bundler"
   gem "mdoc"
   gem "guard-rake"
   gem "iye"
