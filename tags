@@ -13,7 +13,7 @@ Admin	app/pages/admin_pages.rb	/^module Admin$/;"	m
 Admin	app/pages/admins/user_page.rb	/^module Admin$/;"	m
 Admin	spec/lib/route_spec.rb	/^module Admin$/;"	m
 AssetsMapper	lib/development/assets_mapper.rb	/^module AssetsMapper$/;"	m
-AssetsMapper	lib/development/assets_mapper/mapping_dsl.rb	/^module AssetsMapper$/;"	m
+AssetsMapper	lib/development/assets_mapper/loader.rb	/^module AssetsMapper$/;"	m
 AssetsMapper	lib/development/assets_mapper/pull.rb	/^module AssetsMapper$/;"	m
 CheckPathPage	app/pages/slimmer/check_path.rb	/^  class CheckPathPage < WebApplication$/;"	c	class:Slimmer
 Class	lib/core_ext/attr_with_default.rb	/^class Class$/;"	c
@@ -28,8 +28,7 @@ Hash	lib/core_ext/hash_argument.rb	/^class Hash$/;"	c
 HashFlatter	lib/utils/hash_flatter.rb	/^module HashFlatter$/;"	m
 I18nHelper	lib/helpers/i18n_helper.rb	/^module I18nHelper$/;"	m
 I18nUpdator	lib/development/i18n_updator.rb	/^module I18nUpdator$/;"	m
-MappingDSL	lib/development/assets_mapper/mapping_dsl.rb	/^  module MappingDSL$/;"	m	class:AssetsMapper
-Mappings	lib/development/assets_mapper.rb	/^  class Mappings$/;"	c	class:AssetsMapper
+Loader	lib/development/assets_mapper/loader.rb	/^  class Loader$/;"	c	class:AssetsMapper
 PersonPage	spec/lib/route_spec.rb	/^  class PersonPage; Route << self end$/;"	c	class:Admin
 Pull	lib/development/assets_mapper/pull.rb	/^  class Pull$/;"	c	class:AssetsMapper
 RequestMock	spec/lib/helpers/form_helper_spec.rb	/^class RequestMock$/;"	c
@@ -61,7 +60,7 @@ deep_require	lib/core_ext/dynamic_require.rb	/^def deep_require(dir, deepth = 3)
 default_bit_value	lib/helpers/form_helper.rb	/^    def default_bit_value(field, key, default)$/;"	f	class:FormHelper.FormBuilder
 default_path	lib/route.rb	/^    def default_path(app_class)$/;"	f	class:Route
 default_value	lib/helpers/form_helper.rb	/^    def default_value(field, default)$/;"	f	class:FormHelper.FormBuilder
-default_values	lib/development/assets_mapper.rb	/^    def default_values$/;"	f	class:AssetsMapper.Mappings
+default_values	lib/development/assets_mapper/loader.rb	/^    def default_values$/;"	f	class:AssetsMapper.Loader
 extract_args	lib/core_ext/hash_argument.rb	/^  def extract_args(expects)$/;"	f	class:Hash
 extract_args!	lib/core_ext/hash_argument.rb	/^  def extract_args!(expects)$/;"	f	class:Hash
 fast_escape_html	lib/helpers/form_helper.rb	/^  def fast_escape_html(text)$/;"	f	class:FormHelper.radio.checkbox.select
@@ -90,13 +89,13 @@ hash_to_html_attrs	lib/helpers/form_helper.rb	/^  def hash_to_html_attrs(options
 hex	lib/core_ext/time_short.rb	/^  def hex$/;"	f	class:Time
 hidden	lib/helpers/form_helper.rb	/^  def hidden(field, options = {})$/;"	f	class:FormHelper
 initialize	lib/confu.rb	/^    def initialize(hsh = {})$/;"	f	class:Confu.Data
-initialize	lib/development/assets_mapper.rb	/^    def initialize(root = ENV['APP_ROOT'])$/;"	f	class:AssetsMapper.Mappings
+initialize	lib/development/assets_mapper/loader.rb	/^    def initialize(root, file = nil)$/;"	f	class:AssetsMapper.Loader
 initialize	lib/development/assets_mapper/pull.rb	/^    def initialize(app_name, to, opts = {})$/;"	f	class:AssetsMapper.Pull
 initialize	lib/helpers/form_helper.rb	/^    def initialize(parent, object, name = nil)$/;"	f	class:FormHelper.FormBuilder
 initialize	spec/lib/route_spec.rb	/^  def initialize(tid)$/;"	f	class:Account
 label	lib/helpers/form_helper.rb	/^    def label(field, display = nil, options = {})$/;"	f	class:FormHelper.FormBuilder
 label	lib/helpers/form_helper.rb	/^  def label(field, display = '', options = {})$/;"	f	class:FormHelper
-load	lib/development/assets_mapper.rb	/^    def load(file = nil)$/;"	f	class:AssetsMapper.Mappings
+load	lib/development/assets_mapper/loader.rb	/^    def load(command = :update)$/;"	f	class:AssetsMapper.Loader
 merge_default	lib/confu.rb	/^    def merge_default(dat)$/;"	f	class:Confu.Data
 method_missing	lib/confu.rb	/^    def method_missing(met, val = nil, &prc)$/;"	f	class:Confu.Data
 method_missing	lib/helpers/form_helper.rb	/^    def method_missing(met, field = '', options = {})$/;"	f	class:FormHelper.FormBuilder
@@ -106,7 +105,7 @@ partial	lib/helpers/slim_helper.rb	/^  def partial(pname, lcls = {})$/;"	f	class
 password	lib/helpers/form_helper.rb	/^  def password(field, options = {})$/;"	f	class:FormHelper
 path	spec/lib/helpers/form_helper_spec.rb	/^  def path$/;"	f	class:RequestMock
 preferred_locale	lib/helpers/i18n_helper.rb	/^  def preferred_locale(avails = I18n.available_locales)$/;"	f	class:I18nHelper
-pull	lib/development/assets_mapper/mapping_dsl.rb	/^    def pull(app_name, opts)$/;"	f	class:AssetsMapper.MappingDSL
+pull	lib/development/assets_mapper/loader.rb	/^    def pull(app_name, opts)$/;"	f	class:AssetsMapper.Loader
 radio	lib/helpers/form_helper.rb	/^    def radio(field, values, options = {})$/;"	f	class:FormHelper.FormBuilder
 radio	lib/helpers/form_helper.rb	/^  def radio(field, values, options = {})$/;"	f	class:FormHelper
 request	spec/lib/helpers/form_helper_spec.rb	/^  def request$/;"	f	class:FormMock
@@ -134,6 +133,7 @@ to_hash	lib/confu.rb	/^    def to_hash$/;"	f	class:Confu.Data
 to_human	lib/development/i18n_updator.rb	/^  def self.to_human(key)$/;"	F	class:I18nUpdator
 try_require	lib/core_ext/dynamic_require.rb	/^def try_require(file)$/;"	f
 tt	lib/helpers/i18n_helper.rb	/^  def tt(msg, opts = {})$/;"	f	class:I18nHelper
+update!	lib/development/assets_mapper.rb	/^    def update!(root = ENV['APP_ROOT'], file = nil)$/;"	f	class:AssetsMapper
 update!	lib/development/assets_mapper/pull.rb	/^    def update!$/;"	f	class:AssetsMapper.Pull
 use_layout	lib/helpers/slim_helper.rb	/^  def use_layout(layout)$/;"	f	class:SlimHelper
 working_dir	lib/development/assets_mapper/pull.rb	/^    def working_dir$/;"	f	class:AssetsMapper.Pull

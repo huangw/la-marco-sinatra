@@ -3,7 +3,7 @@ require 'development/assets_mapper'
 namespace :assets do
   desc 'process assets update and assets configuration file'
   task :update do
-    AssetsMapper::Mappings.new.load
+    AssetsMapper.update!
   end
 
   desc 'update assets configuration file without downloading'
