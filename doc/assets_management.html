@@ -14,56 +14,86 @@
   <div id="content">
     
 <ul id="markdown-toc">
-  <li><a href="#route">Route机制</a></li>
+  <li><a href="#asset-jscss-pipeline-management">Asset (js/css) Pipeline Management</a>    <ul>
+      <li><a href="#section">概要</a></li>
+      <li><a href="#section-1">详细</a>        <ul>
+          <li><a href="#mapperdsl">Mapper定义DSL</a></li>
+          <li><a href="#assets">Assets文件结构</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
 </ul>
 
-<h1 id="route">Route机制</h1>
+<h1 id="asset-jscss-pipeline-management">Asset (js/css) Pipeline Management</h1>
 
-<p>Route定义一个全局（通过Route类的一个eigenclass变量）的路由表，记录controller类（<code>UserPage</code>等，遵循rack标准）到URL path（mounting point，如<code>/users</code>）的映射关系。</p>
+<h2 id="section">概要</h2>
 
-<p><code>Route.table</code>返回<code>类 =&gt; 路径</code>，<code>Route.all</code>则返回<code>路径 =&gt; 类</code>格式的Hash。注意1.9之后的Ruby Hash是有序的，all的顺序与table相反。</p>
+<ul>
+  <li><code>js/css</code>文件之外同时管理logo，icon等静态图片</li>
+  <li>Controller类在使用静态图片、js和css时，应使用AssetsHelper统一提供<code>js_tag</code>, <code>css_tag</code>和<code>img_tag</code></li>
+  <li>AssetsManpper和AssetsHelper支持三种不同环境：
+    <ol>
+      <li><code>:production</code>：等同于<code>RACK_ENV</code>的生产环境，使用单独Asset服务器（<code>img.vikkr.com, assets.vikkr.com</code>等）时的情况</li>
+      <li><code>:local_asset</code>：RACK_ENV还是<code>production</code>，但是使用本地的图片和<code>css/js</code>文件（缩小版）。启动服务器时需要制定参数<code>LOCAL_ASSET = true</code></li>
+      <li><code>:development</code>，只所有非production环境，使用本地未编译和最小化的css/js文件</li>
+    </ol>
+  </li>
+  <li>从git或http下载第三方<code>js/css</code>到本地</li>
+  <li>文件保存在<code>app/assets/</code>，通过<code>app/assets/mappings.rb</code>管理（取代<code>definition.yml</code>）</li>
+  <li>通过<code>rake assets:update</code>生成<code>config/assets.yml</code>文件。<code>AssetsHelper</code>提供<code>css_tag/js_tag/img_tag</code>，基于<code>config/assets.yml</code>，根据环境（production?, local_only?）指向本地或云端</li>
+  <li><code>AssetsMapperPage</code>负责send本地文件（包括所有production版用于本地测试）</li>
+  <li>oss管理和上传文件</li>
+  <li>不负责coffee和sass的编译（手动或通过guard由外部程序转换），但是负责通过<code>rake assets:compile</code>压缩（并做版本管理）</li>
+</ul>
 
-<p>一般来说，我们通过<code>Route.mount AppClass, '/path'</code>或<code>Route &lt;&lt; AppClass</code>将controller加载到<code>Route.table</code>，当path没有指定时，Route会自动转换<code>NameSpace::ClassNamePage</code>为<code>name/space/class/names</code>的形式（末尾的<code>Controller/Page/API</code>会被删除）。</p>
+<h2 id="section-1">详细</h2>
 
-<p><code>config.ru</code>（标准的rack程序入口）里，会顺序调用并map所有的<code>Route.all</code>到一个大的Rack::Builder application。</p>
+<h3 id="mapperdsl">Mapper定义DSL</h3>
 
-<p>如果所有的Controller Class都放在<code>app/pages</code>下，默认的<code>routes</code>文件会由浅至深调用其中全部的ruby文件。<code>Route.all</code>则会以相反的顺序将其map到<code>control.ru</code>。这样大致可以保证<code>/</code>之类更“一般”的route会出现在寻址表的最后。</p>
-
-<p>Controller类使用默认route路径时，可以在定义时直接加载：</p>
+<p>将下列内容保存为<code>app/assets/mapper.rb</code></p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">UserPage</span> &lt; <span style="color:#036;font-weight:bold">WebApplication</span>
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>  get(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">/</span><span style="color:#710">'</span></span>) { ... }
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>  <span style="color:#036;font-weight:bold">Route</span> &lt;&lt; <span style="color:#069">self</span>
-<span class="line-numbers"><a href="#n5" name="n5">5</a></span><span style="color:#080;font-weight:bold">end</span>
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>pull <span style="color:#A60">:jquery</span>, <span style="color:#606">git</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">https://github.com/jquery/jqueryj</span><span style="color:#710">'</span></span>, <span style="color:#606">branch</span>: <span style="color:#A60">:develop</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>produce <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">application.js</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>  vendor <span style="color:#A60">:jquery</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">min/jsquery.js</span><span style="color:#710">'</span></span> =&gt; <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">public/assets/vendor/xxx.js</span><span style="color:#710">'</span></span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>  vendor <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">http://....</span><span style="color:#710">'</span></span> =&gt; <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">public/assets/vendor/xxx.js</span><span style="color:#710">'</span></span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>  cloud <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">//...</span><span style="color:#710">'</span></span> =&gt; <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">public/assets/vendor/local.js</span><span style="color:#710">'</span></span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span style="color:#777"># download cloud js/css for development || local_only</span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    <span style="color:#777"># use directly for production &amp;&amp; !local_only</span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>  copy <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">my_handwritted.js</span><span style="color:#710">'</span></span>, <span style="color:#606">from</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">app/assets/...</span><span style="color:#710">'</span></span> <span style="color:#777"># or use xxx.coffee</span>
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>  upload_to <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">assets.vikkr.com</span><span style="color:#710">'</span></span>, ...
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span style="color:#080;font-weight:bold">end</span>
 </pre></div>
 </div>
 </div>
 
-<p>默认路径由<code>default_route</code>函数根据类名（<code>UserPage</code>）计算出。</p>
+<p><strong>vendor</strong>是copy过来用、并会被压缩到我们自己的js/css中的文件（比如application.versionid.js）。而<strong>cloud</strong>在生产环境中则是直接远程调用的，但是也会下载一个本地版用于<code>ENV[LOCAL_ONLY]=true</code>时的测试（这样即使不能联网，本地app依然可测试<code>production</code>环境下的运行情况）。</p>
 
-<p>也可同时定义特定path：</p>
+<p>实际生产环境下，assets应该保存于单独sub domain（如<code>assets.vikka.com</code>）。</p>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">UserPage</span> &lt; <span style="color:#036;font-weight:bold">WebApplication</span>
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>  get(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">/</span><span style="color:#710">'</span></span>) { ... }
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>  <span style="color:#036;font-weight:bold">Route</span>.mount(<span style="color:#069">self</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">/user</span><span style="color:#710">'</span></span>)
-<span class="line-numbers"><a href="#n5" name="n5">5</a></span><span style="color:#080;font-weight:bold">end</span>
-</pre></div>
-</div>
-</div>
+<h3 id="assets">Assets文件结构</h3>
 
-<p>或在任意地方、根据特定条件加载：</p>
+<p>以下是<code>app/assets/</code>的推荐结构：</p>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="color:#036;font-weight:bold">Route</span>.mount(<span style="color:#036;font-weight:bold">LogViewApp</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">/logs</span><span style="color:#710">'</span></span>) <span style="color:#080;font-weight:bold">if</span> <span style="color:#036;font-weight:bold">RACK_ENV</span> == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">development</span><span style="color:#710">'</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code>mappings.rb         # 定义文件
+coffee              # coffee script，但自己写的js同样可以放在这里
+sass                # sass和css
+img                 # 图片
+</code></pre>
 
-<p><a href="./spec/lib/route.html"><code>lib/route.rb</code></a> (<a href="./spec/lib/route_spec.html">RSpec</a>)</p>
+<p>public下文件，即使删除也可通过<code>rake assets:update</code>全部恢复：</p>
+
+<pre><code>public/assets/js    # 将assets/coffee/下的文件编译、拷贝到这里
+public/assets/css   # 将assets/sass/下的文件编译、拷贝到这里
+public/assets/img   # 将assets/img/下的文件拷贝到这里
+                    # 本地测试用production缩小版也在这里
+
+public/assets/vendor/js/
+public/assets/vendor/css/
+                    # venders 下是第三方cs/jss文件，包括cloud版
+</code></pre>
 
   </div>
 

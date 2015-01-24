@@ -3,54 +3,90 @@
 ## 概要
 
 - `js/css`文件之外同时管理logo，icon等静态图片
-- 从git或http下载第三方`js/css`到本地
-- 文件保存在`app/assets/`，通过`app/assets/mappings.rb`管理（取代`definition.yml`）
-- 通过`rake assets:update`生成`config/assets.yml`文件。`AssetsHelper`提供`css_tag/js_tag/img_tag`，基于`config/assets.yml`，根据环境（production?, local_only?）指向本地或云端
-- `AssetsMapperPage`负责send本地文件（包括所有production版用于本地测试）
-- oss管理和上传文件
-- 不负责coffee和sass的编译（手动或通过guard由外部程序转换），但是负责通过`rake assets:compile`压缩（并做版本管理）
+- 支持从git或http下载第三方`js/css`到本地；支持oss管理和上传文件
+- Controller类在使用静态图片、js和css时，应使用AssetsHelper统一提供`js_tag`, `css_tag`和`img_tag`，根据三种不同的环境提供不同的文件地址：
+    1. `:production`：等同于`RACK_ENV`的生产环境，使用单独Asset服务器（`img.vikkr.com, assets.vikkr.com`等）时的情况
+    2. `:local_assets`：RACK_ENV还是`production`，但是使用本地的图片和`css/js`文件（缩小版）。启动服务器时需要制定参数`LOCAL_ASSETS = true`
+    3. `:development`，等同所有非production环境，使用本地未编译的css/js文件，包括`:production`环境下使用第三方云端js的也会下载到本地
+- 取代以前的`definition.yml`，通过ruby文件写assets的设置（默认在`app/assets/mappings.rb`）。AssetsHelper使用的设置文件依然保存在`config/assets.yml`
 
-## 详细
+## 基本的工作流程
 
-### Mapper定义DSL
+### 图片管理
 
-将下列内容保存为`app/assets/mapper.rb`
+- 静态图片放在`app/assets/img`下，可以直接存放为`app/assets/img/logo.jpg`或，在再建一层文件夹如`app/assets/img/icon/group.jpg`(仅支持一层文件夹)。注意不要用`_`命名文件或文件夹。上述例子中的`logo.jpg`和`icon/group.jpg`就是图片ID
+- 如果需要保存在`app/assets/img`之外，可以在`app/assets/mapping.rb`中设置：
 
-~~~~~~~~~~~~~~~~~~~ ruby
-pull :jquery, git: 'https://github.com/jquery/jqueryj', branch: :develop
+~~~~~~~~~~~~~~~~~~~~~ruby
+img_dir 'other/directory/for/img'
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-produce 'application.js' do
-  vendor :jquery, 'min/jsquery.js' => 'public/assets/vendor/xxx.js'
-  vendor 'http://....' => 'public/assets/vendor/xxx.js'
-  cloud '//...' => 'public/assets/vendor/local.js'
-    # download cloud js/css for development || local_only
-    # use directly for production && !local_only
-  copy 'my_handwritted.js', from: 'app/assets/...' # or use xxx.coffee
-  upload_to 'assets.vikkr.com', ...
+- 指定服务器在不同的环境下如何从图片ID生成图片URL（最后的`/`可选）：
+
+~~~~~~~~~~~~~~~~~~~~~ruby
+img_prefix production: 'http://img.vikkr.com',
+           development: '/img',    # '/img'是默认值，可以不写，
+                                   # 图片不编译压缩，因此没有:local_assets设置，
+                                   # local_assets环境下使用:development的路径
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+上述设置下，生产环境调用`img_tag('icon/avatar.jpg')`获得`http://img.vikkr.com/icon/avatar.jpg`，而开发环境和local-assets下为`/img/icon/avatar.jpg`。
+
+- 执行`rake assets:map`，`rake assets:update`或者`rake assets:compile`会更新`config/assets.yml`，服务器（WebApplication）通过读取此文件，并在非production环境时，mount`AssetsMapper::ImageController`到`/img`。
+
+- WebApplication同时嵌入`assets_helper`，后者提供`css_tag/js_tag/img_tag`方法。
+
+- 非生产环境下可以通过`/img/index`获得所有静态图片的id和尺寸，便于开发和管理。
+
+### CSS和JS管理
+
+管理图片时，AssetsMapper并不关心具体图片名，只关心位置。但是对于CSS和JS，则会管理每一个具体文件。
+
+~~~~~~~~~~~~~~~~~~~ruby
+pull :bootstrap, github: 'awb/bootstrap' # 先下载到本地`~/.assets_cache/bootstrap`
+produce 'application.js' do # 创建一个需要编译压缩的js（或css）文件
+  cloud 'jquery.js', from: '//code.jquery.com/jquery-2.1.3.min.js'
+  vendor 'sometool.js', from: :bootstrap, file: 'lib/ming/sometool.min.js'
+                      # `~/.assets_cache/bootstrap`需已经存在
+
+  use 'js/subdir/myown.js' # 使用`app/assets/js/subdir/myown.js`，所有文件ID的指定
+                           # 都相对于`app/assets`
+  use 'js/myothertool.js', from: 'coffee/myothertool.coffee'
+                           # `app/assets/coffee/myothertool.coffee`会被用于编译
+                           # `app/assets/js/myothertool.js`
+                           # 如果不需要`rake assets:update`编译js文件，当然也可以
+                           # 忽略`from:`部分，直接将`myothertool.js`文件当做普通js文件
 end
-~~~~~~~~~~~~~~~~~~~~~~~~
 
-**vendor**是copy过来用、并会被压缩到我们自己的js/css中的文件（比如application.versionid.js）。而**cloud**在生产环境中则是直接远程调用的，但是也会下载一个本地版用于`ENV[LOCAL_ONLY]=true`时的测试（这样即使不能联网，本地app依然可测试`production`环境下的运行情况）。
+produce 'editor.css' do
+  ...
+end
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-实际生产环境下，assets应该保存于单独sub domain（如`assets.vikka.com`）。
+**vendor**是copy过来用、并会被压缩到我们自己的js/css中的文件（比如application.versionid.js）。而**cloud**在生产环境中则是直接远程调用的，但是也会下载一个本地版用于`:local_assets`时的测试（这样即使不能联网，本地app依然可通过指定`LOCAL_ASSETS=true RACK_ENV=production`启动服务器以测试`production`环境下的运行情况）。
 
-### Assets文件结构
+`rake assets:compile`会针对每一个produce对象在`app/assets/min/(js|css)`下生成最小化的js和css版本。
+文件夹可以通过`min_dir`变量修改。但是`cloud`指定的文件不会被压缩。
 
-以下是`app/assets/`的推荐结构：
+与图片一样，生产环境下压缩后的js/css文件应该保存于`//assets.vikkr.com`之类的子域名（可能在OSS上）。需要指定为：
 
-    mappings.rb         # 定义文件
-    coffee              # coffee script，但自己写的js同样可以放在这里
-    sass                # sass和css
-    img                 # 图片
+~~~~~~~~~~~~~~ruby
+assets_prefix production: 'http://assets.vikkr.com',  # http://assets.vikkr.com/js/...
+              development: '/assets'     # 本地URL则变为：/assets/js/...，或/assets/min/js/...
 
-public下文件，即使删除也可通过`rake assets:update`全部恢复：
+~~~~~~~~~~~~~~~~~~~~~
 
-    public/assets/js    # 将assets/coffee/下的文件编译、拷贝到这里
-    public/assets/css   # 将assets/sass/下的文件编译、拷贝到这里
-    public/assets/img   # 将assets/img/下的文件拷贝到这里
-                        # 本地测试用production缩小版也在这里
+另外几个可以修改但是不建议修改的变量为（全部为`app/assets`的子目录）：
 
-    public/assets/vendor/js/
-    public/assets/vendor/css/
-                        # venders 下是第三方cs/jss文件，包括cloud版
+~~~~~~~~~~~~~~~ruby
+min_dir 'min'       # 此为默认值，不需要修改
+vendor_dir 'vendor' # 从git等下载、拷贝来的内容存放的位置
+cloud_dir 'cloud'   # 从云端下载的用于纯本地测试的缓存文件的存放位置
+~~~~~~~~~~~~~~~~~~~~~~
 
+对任一个produce的文件ID（如`application.js`），`js_tag`和`css_tag`会按设置顺序输出一个或多个`<link>/<script>`。
+
+- `:production`环境下，为cloud指定的地址，和其他本地文件最小化之后的带版本号的文件
+- `:local_assets`环境下，cloud文件为本地cache文件，其它为本地压缩的文件`/assets/min/js/mytooo.xzxs.js`
+- `:development`环境下，单独使用每一个组成文件
