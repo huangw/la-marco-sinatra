@@ -51,7 +51,7 @@ class AssetsSettings
 
     def from_hash(hsh)
       global_keys.each { |k| send(k, hsh[k]) if hsh.key?(k) }
-      hsh[:files].each { |f_id, urls| self[f_id].urls = urls } if hsh[:files]
+      hsh[:files].each { |f_id, urls| self[f_id] << urls } if hsh[:files]
       self
     end
 
@@ -69,6 +69,18 @@ class AssetsSettings
     def assets_env
       return :development unless ENV['RACK_ENV'] == 'production'
       ENV['LOCAL_ASSETS'] ? :local_assets : :production
+    end
+
+    def production?
+      assets_env == :production
+    end
+
+    def local_assets?
+      assets_env == :local_assets
+    end
+
+    def development?
+      assets_env == :development
     end
 
     # list up all supported environment
@@ -92,6 +104,14 @@ class AssetsSettings
       fail 'file not exists' unless load_file(file)
     end
 
+    # load yaml unless loaded then return the settings corresponding current
+    # runtime environment (one of the three from environments)
+    def get
+      load_yaml unless @loaded
+      @loaded = true
+      self[assets_env]
+    end
+
     def from_hash(hsh)
       environments.each { |k| self[k].from_hash(hsh[k]) if hsh[k] }
       self
@@ -110,7 +130,9 @@ class AssetsSettings
 
     def default_values
       {
-        img_dir: 'app/assets/img'
+        img_dir: 'app/assets/img',
+        img_url_prefix: '/img', # local prefix is the default
+        assets_url_prefix: '/assets'
       }
     end
   end # class << self

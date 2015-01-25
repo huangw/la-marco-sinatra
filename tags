@@ -103,6 +103,7 @@ initialize	spec/lib/route_spec.rb	/^  def initialize(tid)$/;"	f	class:Account
 js_tag	lib/helpers/assets_helper.rb	/^  def js_tag$/;"	f	class:AssetsHelper
 label	lib/helpers/form_helper.rb	/^    def label(field, display = nil, options = {})$/;"	f	class:FormHelper.FormBuilder
 label	lib/helpers/form_helper.rb	/^  def label(field, display = '', options = {})$/;"	f	class:FormHelper
+load!	lib/assets_settings.rb	/^    def load!$/;"	f
 load_yaml	lib/assets_settings.rb	/^    def load_yaml(file = nil)$/;"	f
 load_yaml!	lib/assets_settings.rb	/^    def load_yaml!(file = nil)$/;"	f
 merge_default	lib/confu.rb	/^    def merge_default(dat)$/;"	f	class:Confu.Data
