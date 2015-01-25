@@ -4,8 +4,21 @@ require_relative 'assets_mapper/loader'
 module AssetsMapper
   # mappings as the entry point
   class << self
-    def update!(root = ENV['APP_ROOT'], file = nil)
-      Loader.new(root, file).load(:update)
+    attr_accessor :config
+
+    def map!(root = ENV['APP_ROOT'])
+      AssetsMapper.config = AssetsConfig.new(root)
+      Loader.new(root, file).load!(:map)
+    end
+
+    def update!(root = ENV['APP_ROOT'])
+      AssetsMapper.config = AssetsConfig.new(root)
+      Loader.new(root, file).load!(:update)
+    end
+
+    def compile!(root = ENV['APP_ROOT'])
+      AssetsMapper.config = AssetsConfig.new(root)
+      Loader.new(root, file).load!(:compile)
     end
   end
 end

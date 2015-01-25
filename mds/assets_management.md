@@ -46,17 +46,25 @@ img_prefix production: 'http://img.vikkr.com',
 ~~~~~~~~~~~~~~~~~~~ruby
 pull :bootstrap, github: 'awb/bootstrap' # 先下载到本地`~/.assets_cache/bootstrap`
 produce 'application.js' do # 创建一个需要编译压缩的js（或css）文件
-  cloud 'jquery.js', from: '//code.jquery.com/jquery-2.1.3.min.js'
-  vendor 'sometool.js', from: :bootstrap, file: 'lib/ming/sometool.min.js'
-                      # `~/.assets_cache/bootstrap`需已经存在
+  cloud '//code.jquery.com/jquery-2.1.3.min.js'
+    # 文件会被拷贝到`app/assets/cloud/js/code_jquery_com/jquery-2.1.3.min.js`
 
-  use 'js/subdir/myown.js' # 使用`app/assets/js/subdir/myown.js`，所有文件ID的指定
-                           # 都相对于`app/assets`
-  use 'js/myothertool.js', from: 'coffee/myothertool.coffee'
-                           # `app/assets/coffee/myothertool.coffee`会被用于编译
-                           # `app/assets/js/myothertool.js`
-                           # 如果不需要`rake assets:update`编译js文件，当然也可以
-                           # 忽略`from:`部分，直接将`myothertool.js`文件当做普通js文件
+  vendor from: :bootstrap, file: 'lib/ming/sometool.min.js'
+         # `~/.assets_cache/bootstrap`需已经存在
+         # 文件会被拷贝到`app/assets/vendor/js/bootstrap/sometool.min.js`
+
+  use 'article-editor.js' # 使用 `app/assets/js/article-editor.js`
+  use 'subdir/myown.js' # 使用`app/assets/js/subdir/myown.js`，所有文件ID的指定
+                        # 都相对于`app/assets`
+
+  use 'myothertool.js', from: 'coffee/myothertool.coffee'
+       # `app/assets/coffee/myothertool.coffee`会被用于编译
+       # `app/assets/js/myothertool.js`
+       # 如果不需要`rake assets:update`编译js文件，当然也可以
+       # 忽略`from:`部分，直接将`myothertool.js`文件当做普通js文件
+
+  use 'coffee/myothertool.coffee'
+       # 遇上一行效果一样，如果文件都在默认位置，可直接指定coffee文件
 end
 
 produce 'editor.css' do
@@ -90,3 +98,43 @@ cloud_dir 'cloud'   # 从云端下载的用于纯本地测试的缓存文件的�
 - `:production`环境下，为cloud指定的地址，和其他本地文件最小化之后的带版本号的文件
 - `:local_assets`环境下，cloud文件为本地cache文件，其它为本地压缩的文件`/assets/min/js/mytooo.xzxs.js`
 - `:development`环境下，单独使用每一个组成文件
+
+### 上传下载管理
+
+~~~~~~~~~~~~~~~~~~~~~~ruby
+pull :repoid, git: 'http://some.url.com/git/repository.git'
+pull :jquery2, github: 'jquery/jquery' # github可直接指定repository名称
+pull :la-marco, 7lime: 'vikkr/la-marco' # gitlab.7lime.com的库也可缩写
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+会将`https://github.com/jquery/jquery`下载到`~/.assets_cache/jquery2`。
+
+注意用symbol指定下载文件夹名称（否则会被当做实际目录名而非`~/.aasets_cache`下的目录名）。
+
+以后就可在vendor命令里拷贝文件了：
+
+~~~~~~~~~~~~~~~~~~~~~~ruby
+produce('some.js') { vendor :jquery2, 'lib/some/file/vieee.jp' }
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+这个文件会被拷贝到`app/assets/vendor/jquery2/vieee.jp`，除非另行指定。
+
+## 程序实现
+
+资产文件管理由下列几个组成部分实现：
+
+### Assets Configuration
+
+每次执行`rake assets::*`会根据`app/assets/mappings.rb`的设置更新`config/assets.yml`文件。设置内容主要为两部分：全局设置变量（各种文件的存储路径等）和需要produce的assets的列表。这个文件在启动时调入`config/initializers/assets_settings.rb`（加载到全局的`AssetsSettings`）。
+
+### Assets Helper
+
+提供`img_tag`, `css_tag`和`js_tag`，根据`config/assets.yml`（`AssetsSettings`）的设置，在不同的环境（`:production/:local_assets/:development`）输出不同的资源列表。
+
+### Assets Controller
+
+因为资产文件不再放置于`public`文件夹下，需要根据需要（一般由WebApplication）在Route里加载`ImageControler`和`AssetController`以提供这些文件（具体的mount地址也从`AssetsConfig`获取）。
+
+### Assets Mapper
+
+负责解析`app/assets/mappings.rb`，根据需要下载、复制、编译或最小化压缩文件，更新

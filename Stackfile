@@ -66,6 +66,7 @@ export :assets_mapper do
   copy 'lib/development/assets_mapper.rb'
   copy 'lib/development/assets_mapper/*.rb'
   copy 'lib/helpers/assets_helper.rb'
+  copy 'lib/assets_config.rb'
 	copy 'lib/tasks/assets.rake'
   # copy 'app/assets/mappings.rb.sample' => 'app/assets/mappings.rb'
 end

@@ -8,7 +8,9 @@ module AssetsMapper
     def initialize(app_name, to, opts = {})
       @app_name, @to = app_name, to
       @github = opts.extract_args(:github)
+      @vikkr = opts.extract_args(:vikkr)
       @remote = File.join('https://github.com', @github) if @github
+      @remote = 'git@gitlab.7lime.com:' + @vikkr if @vikkr
       @remote, @branch = (opts.extract_args git: @remote,
                                             branch: 'master').map(&:to_s)
       @update = opts.extract_args! update: true
