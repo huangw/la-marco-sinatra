@@ -131,7 +131,8 @@ class AssetsSettings
     def default_values
       {
         img_dir: 'app/assets/img',
-        img_url_prefix: '/img', # local prefix is the default
+        img_url_prefix: '/img',   # local prefix is the default
+        assets_dir: 'app/assets', # directory for both js/css
         assets_url_prefix: '/assets'
       }
     end
