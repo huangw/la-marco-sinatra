@@ -13,7 +13,7 @@ class AssetsSettings
 
     def <<(source_file)
       source_file = [source_file] unless source_file.is_a?(Array)
-      source_file.each { |f| urls << f }
+      source_file.each { |f| urls << f unless urls.include?(f) }
     end
   end
 
@@ -96,7 +96,7 @@ class AssetsSettings
 
     def load_yaml(file = nil)
       file ||= File.join(APP_ROOT, CONFIG_YAML)
-      return false unless File.exists?(file)
+      return false unless File.exist?(file)
       from_hash YAML.load_file(file)
     end
 

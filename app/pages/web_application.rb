@@ -12,8 +12,9 @@ require 'helpers/assets_helper'
 # load assets controllers
 unless AssetsSettings.production?
   require 'controllers/assets_controller'
-  # Route.mount(ImageController, AssetsSettings.get.img_url_prefix)
   Route.mount(AssetsController, AssetsSettings.get.assets_url_prefix)
+  require 'controllers/image_controller'
+  Route.mount(ImageController, AssetsSettings.get.img_url_prefix)
 end
 
 # Web application without database related settings

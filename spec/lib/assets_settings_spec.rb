@@ -6,7 +6,7 @@ describe AssetsSettings do
     it 'get an instance of EnvironmentSettings with default' do
       expect(AssetsSettings[:production]).to be_instance_of(AssetsSettings::EnvironmentSettings)
       expect(AssetsSettings[:production].img_dir).to eq('app/assets/img')
-      expect(AssetsSettings[:production]['application.js'].urls).to be_empty
+      expect(AssetsSettings[:production]['application.css'].urls).to be_empty
     end
   end
 

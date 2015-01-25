@@ -13,6 +13,9 @@ AccountPage	spec/lib/route_spec.rb	/^class AccountPage; Route << self end$/;"	c
 Admin	app/pages/admin_pages.rb	/^module Admin$/;"	m
 Admin	app/pages/admins/user_page.rb	/^module Admin$/;"	m
 Admin	spec/lib/route_spec.rb	/^module Admin$/;"	m
+AllFiles	doc/coverage/index.html	/^  <a name="AllFiles"><\/a>$/;"	a
+AssetTestPage	app/pages/asset_test_page.rb	/^class AssetTestPage < WebApplication$/;"	c
+AssetsController	lib/controllers/assets_controller.rb	/^class AssetsController < Sinatra::Base$/;"	c
 AssetsFile	lib/assets_settings.rb	/^  class AssetsFile$/;"	c	class:AssetsSettings
 AssetsHelper	lib/helpers/assets_helper.rb	/^module AssetsHelper$/;"	m
 AssetsSettings	lib/assets_settings.rb	/^class AssetsSettings$/;"	c
@@ -30,6 +33,7 @@ Hash	lib/core_ext/hash_argument.rb	/^class Hash$/;"	c
 HashFlatter	lib/utils/hash_flatter.rb	/^module HashFlatter$/;"	m
 I18nHelper	lib/helpers/i18n_helper.rb	/^module I18nHelper$/;"	m
 I18nUpdator	lib/development/i18n_updator.rb	/^module I18nUpdator$/;"	m
+ImageController	lib/controllers/image_controller.rb	/^class ImageController < Sinatra::Base$/;"	c
 PersonPage	spec/lib/route_spec.rb	/^  class PersonPage; Route << self end$/;"	c	class:Admin
 RequestMock	spec/lib/helpers/form_helper_spec.rb	/^class RequestMock$/;"	c
 RootPage	app/pages/admin_pages.rb	/^  class RootPage < WebApplication$/;"	c	class:Admin
@@ -37,8 +41,10 @@ Route	lib/route.rb	/^class Route$/;"	c
 SlimHelper	lib/helpers/slim_helper.rb	/^module SlimHelper$/;"	m
 Slimmer	app/pages/slimmer/check_path.rb	/^module Slimmer$/;"	m
 Slimmer	app/pages/slimmer/translator.rb	/^module Slimmer$/;"	m
+Specs	doc/coverage/index.html	/^  <a name="Specs"><\/a>$/;"	a
 Time	lib/core_ext/time_short.rb	/^class Time$/;"	c
 TranslatorPage	app/pages/slimmer/translator.rb	/^  class TranslatorPage < WebApplication$/;"	c	class:Slimmer
+Ungrouped	doc/coverage/index.html	/^  <a name="Ungrouped"><\/a>$/;"	a
 UserMock	spec/lib/helpers/form_helper_spec.rb	/^class UserMock$/;"	c
 UserPage	app/pages/admins/user_page.rb	/^  class UserPage < WebApplication$/;"	c	class:Admin
 UserPage	app/pages/users/root_page.rb	/^class UserPage < WebApplication$/;"	c
@@ -47,9 +53,13 @@ WebApplication	app/pages/web_application.rb	/^class WebApplication < Sinatra::Ba
 []	lib/assets_settings.rb	/^    def [](filename)$/;"	f	class:AssetsSettings.EnvironmentSettings
 []	lib/route.rb	/^    def [](key)$/;"	f	class:Route
 []=	lib/route.rb	/^    def []=(app_class, route)$/;"	f	class:Route
+addClass	doc/spec/lib/route_spec.html	/^function addClass(element_id, classname) {$/;"	f
 all	lib/route.rb	/^    def all$/;"	f	class:Route
 all_cookies	features/support/env.rb	/^  def all_cookies$/;"	f	class:FeatureWorld
+apply_filters	doc/spec/lib/route_spec.html	/^function apply_filters() {$/;"	f
 assets_env	lib/assets_settings.rb	/^    def assets_env$/;"	f
+assign_display_style	doc/spec/lib/route_spec.html	/^function assign_display_style(classname, display_flag) {$/;"	f
+assign_display_style_for_group	doc/spec/lib/route_spec.html	/^function assign_display_style_for_group(classname, display_flag, subgroup_flag) {$/;"	f
 attr_with_default	lib/core_ext/attr_with_default.rb	/^  def attr_with_default(hsh)$/;"	f	class:Class
 bit_checkbox	lib/helpers/form_helper.rb	/^    def bit_checkbox(field, key, options = {})$/;"	f	class:FormHelper.FormBuilder
 button	lib/helpers/form_helper.rb	/^  def button(value = nil, options = {})$/;"	f	class:FormHelper
@@ -65,6 +75,7 @@ default_bit_value	lib/helpers/form_helper.rb	/^    def default_bit_value(field, 
 default_path	lib/route.rb	/^    def default_path(app_class)$/;"	f	class:Route
 default_value	lib/helpers/form_helper.rb	/^    def default_value(field, default)$/;"	f	class:FormHelper.FormBuilder
 default_values	lib/assets_settings.rb	/^    def default_values$/;"	f
+development?	lib/assets_settings.rb	/^    def development?$/;"	f
 environments	lib/assets_settings.rb	/^    def environments$/;"	f
 extract_args	lib/core_ext/hash_argument.rb	/^  def extract_args(expects)$/;"	f	class:Hash
 extract_args!	lib/core_ext/hash_argument.rb	/^  def extract_args!(expects)$/;"	f	class:Hash
@@ -85,6 +96,8 @@ from_hash	lib/assets_settings.rb	/^    def from_hash(hsh)$/;"	f
 from_hash	lib/assets_settings.rb	/^    def from_hash(hsh)$/;"	f	class:AssetsSettings
 from_hex	lib/core_ext/time_short.rb	/^  def self.from_hex(hstr)$/;"	F	class:Time
 from_short	lib/core_ext/time_short.rb	/^  def self.from_short(sstr)$/;"	F	class:Time
+get	lib/assets_settings.rb	/^    def get$/;"	f
+get_display_style	doc/spec/lib/route_spec.html	/^function get_display_style(display_flag) {$/;"	f
 global_keys	lib/assets_settings.rb	/^    def global_keys$/;"	f	class:AssetsSettings
 gtrans	lib/development/i18n_updator.rb	/^  def self.gtrans(key, lang)$/;"	F	class:I18nUpdator
 handle_block	lib/confu.rb	/^    def handle_block(met, prc)$/;"	f	class:Confu.Data
@@ -94,7 +107,7 @@ hash_nest	lib/utils/hash_flatter.rb	/^  def hash_nest(keys, value)$/;"	f	class:H
 hash_to_html_attrs	lib/helpers/form_helper.rb	/^  def hash_to_html_attrs(options = {})$/;"	f	class:FormHelper.radio.checkbox.select
 hex	lib/core_ext/time_short.rb	/^  def hex$/;"	f	class:Time
 hidden	lib/helpers/form_helper.rb	/^  def hidden(field, options = {})$/;"	f	class:FormHelper
-img_tag	lib/helpers/assets_helper.rb	/^  def img_tag$/;"	f	class:AssetsHelper
+img_tag	lib/helpers/assets_helper.rb	/^  def img_tag(file_id, opts = {})$/;"	f	class:AssetsHelper
 initialize	lib/assets_settings.rb	/^    def initialize(env)$/;"	f	class:AssetsSettings.EnvironmentSettings
 initialize	lib/assets_settings.rb	/^    def initialize(name)$/;"	f	class:AssetsSettings.AssetsFile
 initialize	lib/confu.rb	/^    def initialize(hsh = {})$/;"	f	class:Confu.Data
@@ -103,20 +116,63 @@ initialize	spec/lib/route_spec.rb	/^  def initialize(tid)$/;"	f	class:Account
 js_tag	lib/helpers/assets_helper.rb	/^  def js_tag$/;"	f	class:AssetsHelper
 label	lib/helpers/form_helper.rb	/^    def label(field, display = nil, options = {})$/;"	f	class:FormHelper.FormBuilder
 label	lib/helpers/form_helper.rb	/^  def label(field, display = '', options = {})$/;"	f	class:FormHelper
-load!	lib/assets_settings.rb	/^    def load!$/;"	f
 load_yaml	lib/assets_settings.rb	/^    def load_yaml(file = nil)$/;"	f
 load_yaml!	lib/assets_settings.rb	/^    def load_yaml!(file = nil)$/;"	f
+local_assets?	lib/assets_settings.rb	/^    def local_assets?$/;"	f
+makeRed	doc/cucumber.html	/^  function makeRed(element_id) {$/;"	f
+makeRed	doc/spec/lib/route_spec.html	/^function makeRed(element_id) {$/;"	f
+makeYellow	doc/cucumber.html	/^  function makeYellow(element_id) {$/;"	f
+makeYellow	doc/spec/lib/route_spec.html	/^function makeYellow(element_id) {$/;"	f
 merge_default	lib/confu.rb	/^    def merge_default(dat)$/;"	f	class:Confu.Data
 method_missing	lib/confu.rb	/^    def method_missing(met, val = nil, &prc)$/;"	f	class:Confu.Data
 method_missing	lib/helpers/form_helper.rb	/^    def method_missing(met, field = '', options = {})$/;"	f	class:FormHelper.FormBuilder
 mount	lib/route.rb	/^    def mount(app_class, route = nil)$/;"	f	class:Route
+moveProgressBar	doc/cucumber.html	/^  function moveProgressBar(percentDone) {$/;"	f
+moveProgressBar	doc/spec/lib/route_spec.html	/^function moveProgressBar(percentDone) {$/;"	f
+n1	doc/assets_management.html	/^  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1<\/a><\/span>pull <span style="color:#A60">:jquery<\/span>, <span style="color:#606">git<\/span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'<\/span><span style="color:#D20">https:\/\/github.com\/jquery\/jqueryj<\/span><span style="color:#710">'<\/span><\/span>, <span style="color:#606">branch<\/span>: <span style="color:#A60">:develop<\/span>$/;"	a
+n1	doc/monkey_patch.html	/^  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1<\/a><\/span>&lt;li <span style="color:#080;font-weight:bold">class<\/span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;<\/span><span style="color:#D20">frame-info &lt;%= frame_class(frame) %&gt;<\/span><span style="color:#710">&quot;<\/span><\/span>&gt;$/;"	a
+n1	doc/monkey_patch.html	/^  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1<\/a><\/span>env[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;<\/span><span style="color:#D20">rack.errors<\/span><span style="color:#710">&quot;<\/span><\/span>] = errors$/;"	a
+n1	doc/route.html	/^  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1<\/a><\/span><span style="color:#036;font-weight:bold">Route<\/span>.mount(<span style="color:#036;font-weight:bold">LogViewApp<\/span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'<\/span><span style="color:#D20">\/logs<\/span><span style="color:#710">'<\/span><\/span>) <span style="color:#080;font-weight:bold">if<\/span> <span style="color:#036;font-weight:bold">RACK_ENV<\/span> == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'<\/span><span style="color:#D20">development<\/span><span style="color:#710">'<\/span><\/span>$/;"	a
+n1	doc/route.html	/^  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1<\/a><\/span><span style="color:#080;font-weight:bold">class<\/span> <span style="color:#B06;font-weight:bold">UserPage<\/span> &lt; <span style="color:#036;font-weight:bold">WebApplication<\/span>$/;"	a
+n10	doc/assets_management.html	/^<span class="line-numbers"><strong><a href="#n10" name="n10">10<\/a><\/strong><\/span>  upload_to <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'<\/span><span style="color:#D20">assets.vikkr.com<\/span><span style="color:#710">'<\/span><\/span>, ...$/;"	a
+n10	doc/monkey_patch.html	/^<span class="line-numbers"><strong><a href="#n10" name="n10">10<\/a><\/strong><\/span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#808">&lt;<\/span><span style="color:#404">\/<\/span><\/span>li&gt;$/;"	a
+n11	doc/assets_management.html	/^<span class="line-numbers"><a href="#n11" name="n11">11<\/a><\/span><span style="color:#080;font-weight:bold">end<\/span>$/;"	a
+n2	doc/assets_management.html	/^<span class="line-numbers"> <a href="#n2" name="n2">2<\/a><\/span>$/;"	a
+n2	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n2" name="n2">2<\/a><\/span>  &lt;code&gt;$/;"	a
+n2	doc/monkey_patch.html	/^<span class="line-numbers"><a href="#n2" name="n2">2<\/a><\/span>body = [body] <span style="color:#080;font-weight:bold">if<\/span> body.is_a?(<span style="color:#036;font-weight:bold">String<\/span>)$/;"	a
+n2	doc/route.html	/^<span class="line-numbers"><a href="#n2" name="n2">2<\/a><\/span>  get(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'<\/span><span style="color:#D20">\/<\/span><span style="color:#710">'<\/span><\/span>) { ... }$/;"	a
+n3	doc/assets_management.html	/^<span class="line-numbers"> <a href="#n3" name="n3">3<\/a><\/span>produce <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'<\/span><span style="color:#D20">application.js<\/span><span style="color:#710">'<\/span><\/span> <span style="color:#080;font-weight:bold">do<\/span>$/;"	a
+n3	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n3" name="n3">3<\/a><\/span>    &lt;<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">% <\/span><span style="color:#D20">if<\/span><span style="color:#710"> <\/span><\/span>frame.filename.match(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">\/<\/span><span style="color:#808">gems<\/span><span style="color:#404">\/<\/span><\/span>) %&gt;$/;"	a
+n3	doc/monkey_patch.html	/^<span class="line-numbers"><a href="#n3" name="n3">3<\/a><\/span>$/;"	a
+n3	doc/route.html	/^<span class="line-numbers"><a href="#n3" name="n3">3<\/a><\/span>$/;"	a
+n4	doc/assets_management.html	/^<span class="line-numbers"> <a href="#n4" name="n4">4<\/a><\/span>  vendor <span style="color:#A60">:jquery<\/span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'<\/span><span style="color:#D20">min\/jsquery.js<\/span><span style="color:#710">'<\/span><\/span> =&gt; <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'<\/span><span style="color:#D20">public\/assets\/vendor\/xxx.js<\/span><span style="color:#710">'<\/span><\/span>$/;"	a
+n4	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n4" name="n4">4<\/a><\/span>      &lt;<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%=<\/span><span style="color:#D20">h frame.filename %&gt;<\/span><\/span>$/;"	a
+n4	doc/monkey_patch.html	/^<span class="line-numbers"><a href="#n4" name="n4">4<\/a><\/span>[<span style="color:#00D">500<\/span>,$/;"	a
+n4	doc/route.html	/^<span class="line-numbers"><a href="#n4" name="n4">4<\/a><\/span>  <span style="color:#036;font-weight:bold">Route<\/span> &lt;&lt; <span style="color:#069">self<\/span>$/;"	a
+n4	doc/route.html	/^<span class="line-numbers"><a href="#n4" name="n4">4<\/a><\/span>  <span style="color:#036;font-weight:bold">Route<\/span>.mount(<span style="color:#069">self<\/span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'<\/span><span style="color:#D20">\/user<\/span><span style="color:#710">'<\/span><\/span>)$/;"	a
+n5	doc/assets_management.html	/^<span class="line-numbers"> <a href="#n5" name="n5">5<\/a><\/span>  vendor <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'<\/span><span style="color:#D20">http:\/\/....<\/span><span style="color:#710">'<\/span><\/span> =&gt; <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'<\/span><span style="color:#D20">public\/assets\/vendor\/xxx.js<\/span><span style="color:#710">'<\/span><\/span>$/;"	a
+n5	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n5" name="n5">5<\/a><\/span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">    &lt;% else %&gt;<\/span><\/span>$/;"	a
+n5	doc/monkey_patch.html	/^<span class="line-numbers"><a href="#n5" name="n5">5<\/a><\/span> {<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;<\/span><span style="color:#D20">Content-Type<\/span><span style="color:#710">&quot;<\/span><\/span> =&gt; content_type,$/;"	a
+n5	doc/route.html	/^<span class="line-numbers"><a href="#n5" name="n5">5<\/a><\/span><span style="color:#080;font-weight:bold">end<\/span>$/;"	a
+n6	doc/assets_management.html	/^<span class="line-numbers"> <a href="#n6" name="n6">6<\/a><\/span>  cloud <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'<\/span><span style="color:#D20">\/\/...<\/span><span style="color:#710">'<\/span><\/span> =&gt; <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'<\/span><span style="color:#D20">public\/assets\/vendor\/local.js<\/span><span style="color:#710">'<\/span><\/span>$/;"	a
+n6	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n6" name="n6">6<\/a><\/span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">      &lt;b style<\/span><span style="color:#710">=<\/span><\/span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;<\/span><span style="color:#D20">color: red<\/span><span style="color:#710">&quot;<\/span><\/span>&gt;&lt;<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%=<\/span><span style="color:#D20">h frame.filename %&gt;&lt;\/b&gt;<\/span><\/span>$/;"	a
+n6	doc/monkey_patch.html	/^<span class="line-numbers"><a href="#n6" name="n6">6<\/a><\/span>  <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;<\/span><span style="color:#D20">Content-Length<\/span><span style="color:#710">&quot;<\/span><\/span> =&gt; <span style="color:#036;font-weight:bold">Rack<\/span>::<span style="color:#036;font-weight:bold">Utils<\/span>.bytesize(body.join).to_s},$/;"	a
+n7	doc/assets_management.html	/^<span class="line-numbers"> <a href="#n7" name="n7">7<\/a><\/span>    <span style="color:#777"># download cloud js\/css for development || local_only<\/span>$/;"	a
+n7	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n7" name="n7">7<\/a><\/span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">    &lt;% end %&gt;<\/span><\/span>$/;"	a
+n7	doc/monkey_patch.html	/^<span class="line-numbers"><a href="#n7" name="n7">7<\/a><\/span> body]$/;"	a
+n8	doc/assets_management.html	/^<span class="line-numbers"> <a href="#n8" name="n8">8<\/a><\/span>    <span style="color:#777"># use directly for production &amp;&amp; !local_only<\/span>$/;"	a
+n8	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n8" name="n8">8<\/a><\/span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">  &lt;\/code&gt; in<\/span><\/span>$/;"	a
+n9	doc/assets_management.html	/^<span class="line-numbers"> <a href="#n9" name="n9">9<\/a><\/span>  copy <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'<\/span><span style="color:#D20">my_handwritted.js<\/span><span style="color:#710">'<\/span><\/span>, <span style="color:#606">from<\/span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'<\/span><span style="color:#D20">app\/assets\/...<\/span><span style="color:#710">'<\/span><\/span> <span style="color:#777"># or use xxx.coffee<\/span>$/;"	a
+n9	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n9" name="n9">9<\/a><\/span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">    &lt;code&gt;&lt;strong&gt;&lt;%<\/span><span style="color:#710">=<\/span><\/span>h frame.function <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%&gt;<\/span><span style="color:#D20">&lt;\/strong<\/span><span style="color:#710">&gt;<\/span><\/span>&lt;<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">\/<\/span><span style="color:#808">code&gt;<\/span><\/span>$/;"	a
 params	spec/lib/helpers/form_helper_spec.rb	/^  def params$/;"	f	class:FormMock
 partial	lib/helpers/slim_helper.rb	/^  def partial(pname, lcls = {})$/;"	f	class:SlimHelper
 password	lib/helpers/form_helper.rb	/^  def password(field, options = {})$/;"	f	class:FormHelper
 path	spec/lib/helpers/form_helper_spec.rb	/^  def path$/;"	f	class:RequestMock
 preferred_locale	lib/helpers/i18n_helper.rb	/^  def preferred_locale(avails = I18n.available_locales)$/;"	f	class:I18nHelper
+production?	lib/assets_settings.rb	/^    def production?$/;"	f
 radio	lib/helpers/form_helper.rb	/^    def radio(field, values, options = {})$/;"	f	class:FormHelper.FormBuilder
 radio	lib/helpers/form_helper.rb	/^  def radio(field, values, options = {})$/;"	f	class:FormHelper
+removeClass	doc/spec/lib/route_spec.html	/^function removeClass(element_id, classname) {$/;"	f
 request	spec/lib/helpers/form_helper_spec.rb	/^  def request$/;"	f	class:FormMock
 require_all	lib/core_ext/dynamic_require.rb	/^def require_all(pattern)$/;"	f
 reset	lib/helpers/form_helper.rb	/^  def reset(value = nil, options = {})$/;"	f	class:FormHelper

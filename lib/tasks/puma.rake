@@ -34,6 +34,9 @@ end
 
 desc 'start/restart server for development'
 task :server do
+  puts '---- | Route.table | ' + '-' * 40
+  ap Route.table
+  puts '-' * 60
   if File.exist?(ENV['PIDFILE'])
     puts 'puma running, restart'
     Rake::Task[:'puma:restart'].invoke
