@@ -1,0 +1,15 @@
+---
+:production:
+  :img_dir: app/assets/img
+  :files:
+    application.js:
+    - minimizingme.js
+:local_assets:
+  :img_dir: app/assets/img
+  :files: {}
+:development:
+  :img_dir: app/assets/img
+  :files:
+    application.js:
+    - build_part1.js
+    - build_part2.js

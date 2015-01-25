@@ -25,10 +25,9 @@ img_dir 'other/directory/for/img'
 
 ~~~~~~~~~~~~~~~~~~~~~ruby
 img_prefix production: 'http://img.vikkr.com',
-           development: '/img',    # '/img'是默认值，可以不写，
-                                   # 图片不编译压缩，因此没有:local_assets设置，
-                                   # local_assets环境下使用:development的路径
-
+           local: '/img' # '/img'是默认值，可以不写
+                         # 图片不编译压缩，因此:local_assets和
+                         # :development共享相同的URL路径
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 上述设置下，生产环境调用`img_tag('icon/avatar.jpg')`获得`http://img.vikkr.com/icon/avatar.jpg`，而开发环境和local-assets下为`/img/icon/avatar.jpg`。

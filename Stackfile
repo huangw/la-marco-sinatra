@@ -63,11 +63,15 @@ export :assets_mapper do
   add_gem 'git', group: :development
   add_gem 'fastimage', group: :development
 
-  copy 'lib/development/assets_mapper.rb'
-  copy 'lib/development/assets_mapper/*.rb'
+
+  copy 'lib/assets_settings.rb'
   copy 'lib/helpers/assets_helper.rb'
-  copy 'lib/assets_config.rb'
-	copy 'lib/tasks/assets.rake'
+  # copy 'lib/controllers/assets_controller.rb'
+  # copy 'lib/controllers/img_controller.rb'
+
+  copy 'lib/tasks/assets.rake'
+  # copy 'lib/development/assets_mapper.rb'
+  # copy 'lib/development/assets_mapper/*.rb'
   # copy 'app/assets/mappings.rb.sample' => 'app/assets/mappings.rb'
 end
 
