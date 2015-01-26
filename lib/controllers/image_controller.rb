@@ -4,7 +4,7 @@ require 'fastimage'
 # serve js/css files from local `app/assets` folder
 class ImageController < Sinatra::Base
   configure { enable :inline_templates }
-  before { @img_dir = AssetsSettings.get.img_dir }
+  before { @img_dir = AssetsSettings.img_dir }
 
   # List all images under the folder (use for development)
   get('/index') do

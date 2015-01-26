@@ -66,12 +66,12 @@ export :assets_mapper do
   add_gem 'sass', group: :development
   add_gem 'closure-compiler', group: :development
 
-  copy 'lib/assets_settings.rb'
-  copy 'lib/helpers/assets_helper.rb'
-  copy 'lib/controllers/assets_controller.rb'
-  copy 'lib/controllers/image_controller.rb'
-
-  copy 'lib/tasks/assets.rake'
+  copy 'lib/asset_settings.rb'
+  # copy 'lib/helpers/assets_helper.rb'
+  # copy 'lib/controllers/assets_controller.rb'
+  # copy 'lib/controllers/image_controller.rb'
+  #
+  # copy 'lib/tasks/assets.rake'
   # copy 'lib/development/assets_mapper.rb'
   # copy 'lib/development/assets_mapper/*.rb'
   # copy 'app/assets/mappings.rb.sample' => 'app/assets/mappings.rb'
