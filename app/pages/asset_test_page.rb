@@ -10,5 +10,9 @@ class AssetTestPage < WebApplication
     format '<html><body>%s</body></html>', img_tag('icon/orange.jpg')
   end
 
+  get '/bootstrap' do
+    css_tag('application.css')
+  end
+
   Route << self
 end

@@ -1,4 +1,5 @@
 require_relative 'vendor'
+require_relative 'cloud'
 # AssetsMapper namespace
 module AssetsMapper
   # produce a file
@@ -18,6 +19,7 @@ module AssetsMapper
 
       min_dir = AssetsSettings[:production].min_dir
       @minimize_to = opts.extract_args!(minimize_to: min_dir)
+      @compile_list = []
 
       # if compile?
       #   AssetsSettings[:local_assets][self.file_id].url = [] # reset urls
@@ -30,10 +32,19 @@ module AssetsMapper
       AssetsSettings[env][@file_id]
     end
 
-    def vendor(sfile, opts)
+    def vendor(sfile, opts = {})
       vendor_file = Vendor.new(sfile, @file_type, opts)
       vendor_file.copy! unless map?
+      @compile_list << vendor_file.to
       urls(:development) << vendor_file.to
+    end
+
+    def cloud(url, opts = {})
+      urls(:production) << url if compile?
+      cloud_file = Cloud.new(url, @file_type, opts)
+      cloud_file.download! unless map?
+      urls(:development) << cloud_file.to
+      urls(:local_assets) << cloud_file.to
     end
 
     private

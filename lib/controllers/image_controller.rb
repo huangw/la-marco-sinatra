@@ -19,11 +19,7 @@ class ImageController < Sinatra::Base
   end
 
   # Serve the single file with the file name
-  get('/:file') { send_file(File.join(@img_dir, params[:file])) }
-
-  get('/:dir/:file') do
-    send_file(File.join(@img_dir, params[:dir], params[:file]))
-  end
+  get(%r{\/([\w\/\-\.]+)}) { |f| send_file(File.join(@img_dir, f)) }
 end
 
 __END__

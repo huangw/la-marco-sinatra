@@ -17,7 +17,7 @@
 
 ### 图片管理
 
-- 静态图片放在`app/assets/img`下，可以直接存放为`app/assets/img/logo.jpg`，或再建一层文件夹如`app/assets/img/icon/group.jpg`(注意仅支持一层文件夹)。
+- 静态图片放在`app/assets/img`下，可以直接存放为`app/assets/img/logo.jpg`，或建子目录如`app/assets/img/icon/group.jpg`。
 
 - 为符合URL规范，注意不要用`_`命名文件或文件夹（可用`-`）。上述例子中的`logo.jpg`和`icon/group.jpg`就是图片ID
 

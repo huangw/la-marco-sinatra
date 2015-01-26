@@ -7,7 +7,9 @@
   :vendor_dir: app/assets/vendor
   :cloud_dir: app/assets/cloud
   :min_dir: app/assets/min
-  :files: {}
+  :files:
+    application.css:
+    - http://cdn.amazeui.org/amazeui/2.1.0/css/amazeui.min.css
 :local_assets:
   :img_dir: app/assets/img
   :img_url_prefix: "/img"
@@ -16,7 +18,9 @@
   :vendor_dir: app/assets/vendor
   :cloud_dir: app/assets/cloud
   :min_dir: app/assets/min
-  :files: {}
+  :files:
+    application.css:
+    - app/assets/cloud/cdn.amazeui.org/amazeui.min.css
 :development:
   :img_dir: app/assets/img
   :img_url_prefix: "/img"
@@ -28,3 +32,4 @@
   :files:
     application.css:
     - app/assets/vendor/bootstrap/bootstrap.css
+    - app/assets/cloud/cdn.amazeui.org/amazeui.min.css
