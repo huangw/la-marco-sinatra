@@ -58,7 +58,7 @@ img_prefix production: 'http://img.vikkr.com',
 
 AssetHelper并不管理具体文件的尺寸，因此需要时应手动指定尺寸。非生产环境下可以通过`localhost:8080/img/index`列出所有现有静态图片的id和尺寸。
 
-### 下载管理
+### 第三方Git库的下载管理
 
 ~~~~~~~~~~~~~~~~~~~~~~ruby
 pull :repoid, git: 'http://some.url.com/git/repository.git'
@@ -87,24 +87,16 @@ pull :bootstrap, github: 'awb/bootstrap' # 先下载到本地`~/.assets_cache/bo
 
 produce 'application.js' do # 创建一个需要编译压缩的js（或css）文件
   cloud '//code.jquery.com/jquery-2.1.3.min.js'
-    # 文件会被拷贝到`app/assets/cloud/js/code_jquery_com/jquery-2.1.3.min.js`
+    # 文件会被拷贝到`app/assets/cloud/code.jquery.com/jquery-2.1.3.min.js`
 
-  vendor from: :bootstrap, file: 'lib/min/sometool.min.js'
+  vendor 'lib/min/sometool.min.js', from: :bootstrap
          # `~/.assets_cache/bootstrap`需已经存在
-         # 文件会被拷贝到`app/assets/vendor/js/bootstrap/sometool.min.js`
+         # 文件会被拷贝到`app/assets/vendor/bootstrap/sometool.min.js`
 
-  use 'article-editor.js' # 使用 `app/assets/js/article-editor.js`
-  use 'subdir/myown.js' # 使用`app/assets/js/subdir/myown.js`，所有文件ID的指定
-                        # 都相对于`app/assets`
-
-  use 'myothertool.js', from: 'coffee/myothertool.coffee'
-       # `app/assets/coffee/myothertool.coffee`会被用于编译
-       # `app/assets/js/myothertool.js`
-       # 如果不需要`rake assets:update`编译js文件，当然也可以
-       # 忽略`from:`部分，直接将`myothertool.js`文件当做普通js文件
-
-  use 'coffee/myothertool.coffee'
-       # 遇上一行效果一样，如果文件都在默认位置，可直接指定coffee文件
+  file 'js/article-editor.js' # 使用 `app/assets/js/article-editor.js`
+  file 'js/subdir/myown.js' # 使用`app/assets/js/subdir/myown.js`，
+                            # 也就是说所有文件ID的指定
+                            # 都相对于`app/assets`
 end
 
 produce 'editor.css' do
@@ -112,33 +104,33 @@ produce 'editor.css' do
 end
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**vendor**是copy过来用、并会被压缩到我们自己的js/css中的文件（比如application.versionid.js）。而**cloud**在生产环境中则是直接远程调用的，但是也会下载一个本地版用于`:local_assets`时的测试（这样即使不能联网，本地app依然可通过指定`LOCAL_ASSETS=true RACK_ENV=production`启动服务器以测试`production`环境下的运行情况）。
+**vendor**是copy过来用、并会被压缩到我们自己的js/css中的文件（比如application.versionid.js）。而**cloud**在生产环境中则是直接远程调用的，但是也会下载一个本地版用于`:development`和`:local_assets`时的测试（这样即使不能联网，本地app依然可通过指定`LOCAL_ASSETS=true RACK_ENV=production`启动服务器以测试`production`环境下的运行情况）。
 
-`rake assets:compile`会针对每一个produce对象在`app/assets/min/(js|css)`下生成最小化的js和css版本。
-文件夹可以通过`min_dir`变量修改。但是`cloud`指定的文件不会被压缩。
+`rake assets:compile`会针对每一个produce对象在`app/assets/min/`（此为`min_dir`变量默认所指定的目录）下生成最小化的js和css版本。除非另行指定：
+
+~~~~~~~~~~~~~~~~~~~~~ruby
+produce 'editor.css', minimize_to: 'public/assets/' do
+  # ...
+end
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+`cloud`指定的文件不会被压缩，`vendor`的则会被压缩。
+
+在生产环境中调用`css_tag(file_id.css)`或`js_tag(file_id.js)`时，如果`file_id`（即被produce的文件）混合包含了cloud文件和被压缩的vendor/本地文件，则`cloud`文件永远会在缩小版文件前被调用。
 
 与图片一样，生产环境下压缩后的js/css文件应该保存于`//assets.vikkr.com`之类的子域名（可能在OSS上）。需要指定为：
 
 ~~~~~~~~~~~~~~ruby
-assets_prefix production: 'http://assets.vikkr.com',  # http://assets.vikkr.com/js/...
-              development: '/assets'     # 本地URL则变为：/assets/js/...，或/assets/min/js/...
-
+assets_prefix production: 'http://assets.vikkr.com'
 ~~~~~~~~~~~~~~~~~~~~~
 
-另外几个可以修改但是不建议修改的变量为（全部为`app/assets`的子目录）：
-
-~~~~~~~~~~~~~~~ruby
-min_dir 'min'       # 此为默认值，不需要修改
-vendor_dir 'vendor' # 从git等下载、拷贝来的内容存放的位置
-cloud_dir 'cloud'   # 从云端下载的用于纯本地测试的缓存文件的存放位置
-~~~~~~~~~~~~~~~~~~~~~~
+则生产环境下min版本文件URL会转换为：`http://assets.vikkr.com/application.xeeds.js`，xeeds是版本号。
 
 对任一个produce的文件ID（如`application.js`），`js_tag`和`css_tag`会按设置顺序输出一个或多个`<link>/<script>`。
 
 - `:production`环境下，为cloud指定的地址，和其他本地文件最小化之后的带版本号的文件
-- `:local_assets`环境下，cloud文件为本地cache文件，其它为本地压缩的文件`/assets/min/js/mytooo.xzxs.js`
-- `:development`环境下，单独使用每一个组成文件
-
+- `:local_assets`环境下，cloud文件为本地cache文件，其它为本地压缩的文件`/assets/min/application.xzsxs.js`，xzsxs是版本号
+- `:development`环境下，单独返回使用每一个组成文件，均为本地地址
 
 ## 程序实现
 
