@@ -1,15 +1,30 @@
 ---
 :production:
   :img_dir: app/assets/img
-  :files:
-    application.js:
-    - minimizingme.js
+  :img_url_prefix: "/img"
+  :assets_dir: app/assets/
+  :assets_url_prefix: "/assets"
+  :vendor_dir: app/assets/vendor
+  :cloud_dir: app/assets/cloud
+  :min_dir: app/assets/min
+  :files: {}
 :local_assets:
   :img_dir: app/assets/img
+  :img_url_prefix: "/img"
+  :assets_dir: app/assets/
+  :assets_url_prefix: "/assets"
+  :vendor_dir: app/assets/vendor
+  :cloud_dir: app/assets/cloud
+  :min_dir: app/assets/min
   :files: {}
 :development:
   :img_dir: app/assets/img
+  :img_url_prefix: "/img"
+  :assets_dir: app/assets/
+  :assets_url_prefix: "/assets"
+  :vendor_dir: app/assets/vendor
+  :cloud_dir: app/assets/cloud
+  :min_dir: app/assets/min
   :files:
-    application.js:
-    - build_part1.js
-    - build_part2.js
+    application.css:
+    - app/assets/vendor/bootstrap/bootstrap.css

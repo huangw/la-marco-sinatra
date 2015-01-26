@@ -61,6 +61,7 @@ end
 
 export :assets_mapper do
   add_gem 'git', group: :development
+  add_gem 'diffy', group: :development
   add_gem 'fastimage', group: :development
 
   copy 'lib/assets_settings.rb'

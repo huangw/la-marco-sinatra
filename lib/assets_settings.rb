@@ -98,10 +98,11 @@ class AssetsSettings
       file ||= File.join(APP_ROOT, CONFIG_YAML)
       return false unless File.exist?(file)
       from_hash YAML.load_file(file)
+      self
     end
 
     def load_yaml!(file = nil)
-      fail 'file not exists' unless load_file(file)
+      fail 'file not exists' unless load_yaml(file)
     end
 
     # load yaml unless loaded then return the settings corresponding current
