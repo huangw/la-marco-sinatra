@@ -134,8 +134,10 @@ class AssetsSettings
         img_url_prefix: '/img',   # local prefix is the default
         assets_dir: 'app/assets/', # directory for source js files
         assets_url_prefix: '/assets',
-        vendor_dir: 'app/assets/vendor', # js/css files copied from 3rd party repository
-        cloud_dir: 'app/assets/cloud', # local file cache for cloud js/css files
+        vendor_dir: 'app/assets/vendor',
+        # js/css files copied from 3rd party repository
+        cloud_dir: 'app/assets/cloud',
+        # local file cache for cloud js/css files
         min_dir: 'app/assets/min' # directory for minimized js/css files
       }
     end

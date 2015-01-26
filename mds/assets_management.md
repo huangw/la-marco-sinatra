@@ -58,6 +58,26 @@ img_prefix production: 'http://img.vikkr.com',
 
 AssetHelper并不管理具体文件的尺寸，因此需要时应手动指定尺寸。非生产环境下可以通过`localhost:8080/img/index`列出所有现有静态图片的id和尺寸。
 
+### 下载管理
+
+~~~~~~~~~~~~~~~~~~~~~~ruby
+pull :repoid, git: 'http://some.url.com/git/repository.git'
+pull :jquery2, github: 'jquery/jquery' # github可直接指定repository名称
+pull :la-marco, 7lime: 'vikkr/la-marco' # gitlab.7lime.com的库也可缩写
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+会将`https://github.com/jquery/jquery`下载到`~/.assets_cache/jquery2`。
+
+注意用symbol指定下载文件夹名称（否则会被当做实际目录名而非`~/.aasets_cache`下的目录名）。
+
+以后就可在vendor命令里拷贝文件了：
+
+~~~~~~~~~~~~~~~~~~~~~~ruby
+produce('some.js') { vendor :jquery2, 'lib/some/file/vieee.jp' }
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+这个文件默认会被拷贝到`app/assets/vendor/jquery2/vieee.jp`(`vendor_dir` + repository名 + 文件basename)，除非另行指定。
+
 ### CSS和JS管理
 
 CSS和JS管理的核心是虚拟的文件，如`application.js`, `editor.css`，每一个虚拟文件都是有一个或多个文件组成的。在`mappings.rb`文件里，通过`produce`命令设置：
@@ -119,25 +139,6 @@ cloud_dir 'cloud'   # 从云端下载的用于纯本地测试的缓存文件的�
 - `:local_assets`环境下，cloud文件为本地cache文件，其它为本地压缩的文件`/assets/min/js/mytooo.xzxs.js`
 - `:development`环境下，单独使用每一个组成文件
 
-### 上传下载管理
-
-~~~~~~~~~~~~~~~~~~~~~~ruby
-pull :repoid, git: 'http://some.url.com/git/repository.git'
-pull :jquery2, github: 'jquery/jquery' # github可直接指定repository名称
-pull :la-marco, 7lime: 'vikkr/la-marco' # gitlab.7lime.com的库也可缩写
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-会将`https://github.com/jquery/jquery`下载到`~/.assets_cache/jquery2`。
-
-注意用symbol指定下载文件夹名称（否则会被当做实际目录名而非`~/.aasets_cache`下的目录名）。
-
-以后就可在vendor命令里拷贝文件了：
-
-~~~~~~~~~~~~~~~~~~~~~~ruby
-produce('some.js') { vendor :jquery2, 'lib/some/file/vieee.jp' }
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-这个文件会被拷贝到`app/assets/vendor/jquery2/vieee.jp`，除非另行指定。
 
 ## 程序实现
 

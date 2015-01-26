@@ -1,9 +1,11 @@
+require_relative 'assets_mapper/pull'
 # Used by rake tasks, map `config.yml` file, update local js/css files, or
 # compile minimized version of assets for production use.
 # rubocop:disable MethodLength
 module AssetsMapper
   ROOT = ENV['APP_ROOT']
   MAPPING_FILE = 'app/assets/mappings.rb'
+  PULL_DIR = File.join(Dir.home, '.assets_mappings')
 
   # Parsing and load configurations from mappings.rb
   class Loader
@@ -31,15 +33,29 @@ module AssetsMapper
           end
         end
       end
+    end
 
+    def update?
+      @command == :update
+    end
+
+    def map?
+      @command == :map
+    end
+
+    def compile?
+      @command == :compile
+    end
+
+    def execute!(command)
+      @command = command
       instance_eval File.read(@mapping_file), @mapping_file
     end
 
     # DSL implementation
-    def setup_global_vars_dsl
-
+    def pull(app_name, opts)
+      to = opts.extract_args(to: PULL_DIR)
+      Pull.new(app_name, to, opts).update! unless map?
     end
-
-    #
   end
 end
