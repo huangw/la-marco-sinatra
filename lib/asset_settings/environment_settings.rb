@@ -8,7 +8,7 @@ class AssetSettings
       @environment = environment.to_sym
 
       # initialize with default values
-      @img_dir, @files = 'app/assets', {}
+      @img_dir, @files = 'app/assets/img', {}
       @img_url_prefix = production? ? 'http://img.vikkr.com' : '/img'
     end
 

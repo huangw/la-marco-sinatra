@@ -53,9 +53,7 @@ class AssetSettings
     end
 
     def to_hash
-      hsh = {}
-      environments.each { |k| hsh[k] = self[k].to_hash }
-      hsh
+      environments.reduce({}) { |a, e| a[e] = self[e].to_hash; a }
     end
 
     def load_yaml(file = nil)
