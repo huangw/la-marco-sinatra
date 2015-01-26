@@ -65,6 +65,7 @@ module AssetsMapper
       @files[file_id] ||= Producer.new(file_id, opts)
       @files[file_id].command = @command
       @files[file_id].instance_eval(&prc)
+      @files[file_id].compile! if compile?
     end
 
     private

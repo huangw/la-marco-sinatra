@@ -12,6 +12,7 @@
     2.和3.两种情况下，包括`:production`环境下使用的第三方云端js的也会下载到本地。因此即使没有网络也可以完成本地测试。
 
 - 取代以前的`definition.yml`，通过ruby DSL写assets的设置（默认在`app/assets/mappings.rb`），可以支持更灵活的语法。AssetsHelper使用的设置文件依然保存在`config/assets.yml`
+- 不再关心`coffee/sass`等的存在，直接另行编译后在`mappings.rb`里加载编译后的`js/css`文件地址
 
 ## 基本的工作流程
 
@@ -150,4 +151,4 @@ assets_prefix production: 'http://assets.vikkr.com'
 
 ### Assets Mapper
 
-负责解析`app/assets/mappings.rb`，根据需要下载、复制、编译或最小化压缩文件，更新
+负责解析`app/assets/mappings.rb`，根据需要下载、复制、编译或最小化压缩文件，更新YAML设置文件。

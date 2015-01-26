@@ -32,4 +32,6 @@ group :development do
   gem "git"
   gem "diffy"
   gem "fastimage"
+  gem "sass"
+  gem "closure-compiler"
 end
