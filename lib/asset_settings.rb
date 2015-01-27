@@ -2,6 +2,9 @@ require 'asset_settings/environment_settings'
 # Bind to `config/assets.yml`, singleton parse it's contents or
 # update based on configurations
 class AssetSettings
+  CONFIG_YAML = 'config/assets.yml'
+  APP_ROOT = ENV['APP_ROOT']
+
   class << self
     attr_reader :settings
     # load yaml unless loaded then return the settings corresponding current
@@ -15,7 +18,7 @@ class AssetSettings
     # access for specific environment settings
     def [](env)
       fail "Unsupported environment #{env}" unless environments.include?(env)
-      @settings = {}
+      @settings ||= {}
       @settings[env.to_sym] ||= EnvironmentSettings.new(env.to_sym)
     end
 

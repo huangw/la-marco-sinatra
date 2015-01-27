@@ -92,9 +92,9 @@ produce 'application.js' do
     # 文件默认会被拷贝到`app/assets/vendor/bootstrap/sometool.min.js`
 
   file 'js/article-editor.js' # 使用 `app/assets/js/article-editor.js`
+                              # `app/assets`可通过`assets_dir`命令修改，
+                              # 所有文件地址均相对于此地址指定
   file 'js/subdir/myown.js' # 使用`app/assets/js/subdir/myown.js`，
-                            # 也就是说所有文件ID的指定
-                            # 都相对于`app/assets`
 end
 
 produce 'editor.css', minimize_to: 'public/assets/css' do
@@ -111,7 +111,7 @@ end
 也可另行定义min文件的存储地址：
 
 ~~~~~~~~~~~~~~~~~~~~~ruby
-produce 'editor.css', minimize_to: 'public/assets/' do
+produce 'editor.css' do
   # ...
 end
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~

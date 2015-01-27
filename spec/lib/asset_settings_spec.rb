@@ -7,6 +7,9 @@ describe AssetSettings do
       expect(AssetSettings[:production]).to be_instance_of(AssetSettings::EnvironmentSettings)
       expect(AssetSettings[:production].img_dir).to eq('app/assets/img')
       expect(AssetSettings[:production]['application.css']).to be_empty
+      AssetSettings[:production]['application.css'] << 'file_one.css'
+      AssetSettings[:production]['application.css'] << 'file_two.css'
+      expect(AssetSettings[:production]['application.css'].size).to eq(2)
     end
   end
 
