@@ -4,3 +4,7 @@ Metrics/AbcSize:
   Enabled: false
 ClassLength:
   Max: 150
+Style/Semicolon:
+  Enabled: false
+Style/EachWithObject:
+  Enabled: false

@@ -11,10 +11,10 @@ module AssetMapper
 
     # DSL command
     # ---------------------------
-    def vendor(url, opts = {})
+    def vendor(_url, _opts = {})
     end
 
-    def cloud(url, opts = {})
+    def cloud(_url, _opts = {})
     end
 
     def file(filename)

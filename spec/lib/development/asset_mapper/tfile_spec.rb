@@ -25,10 +25,10 @@ describe AssetMapper::Tfile do
   end
 
   describe '#production_url' do
-    it 'initialized with nil' do
-      expect(tf.production_url).to be_nil
-    end
-
+    # it 'initialized with nil' do
+    #   expect(tf.production_url).to be_nil
+    # end
+    #
     it 'return with host name' do
       mimic_path = tf.file_path('vmimic')
       AssetSettings[:local_assets][tf.file_id] << mimic_path

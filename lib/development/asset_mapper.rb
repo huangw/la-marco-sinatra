@@ -7,14 +7,14 @@ end
 # compile minimized version of assets for production use.
 module AssetMapper
   DEFAULTS = {
-               pull_dir: File.join(Dir.home, '.assets_mapper'),
-               assets_dir: 'app/assets', # directory for source js files
-               vendor_dir: 'app/assets/vendor',
-               # js/css files copied from 3rd party repository
-               cloud_dir: 'app/assets/cloud',
-               # local file cache for cloud js/css files
-               min_dir: 'app/assets/min' # directory for minimized js/css files
-             }
+    pull_dir: File.join(Dir.home, '.assets_mapper'),
+    assets_dir: 'app/assets', # directory for source js files
+    vendor_dir: 'app/assets/vendor',
+    # js/css files copied from 3rd party repository
+    cloud_dir: 'app/assets/cloud',
+    # local file cache for cloud js/css files
+    min_dir: 'app/assets/min' # directory for minimized js/css files
+  }
 
   class << self
     attr_accessor :compile

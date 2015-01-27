@@ -75,7 +75,6 @@ module AssetMapper
       clurl.sub(/\A#{AssetMapper.assets_url_prefix[:local]}/, '') if clurl
     end
 
-
     def current_abs_path
       File.join(AssetMapper.root, current_file_path) if current_file_path
     end

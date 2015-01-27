@@ -4,4 +4,3 @@ module AssetMapper
   class VendorFile < Sfile
   end
 end
-
