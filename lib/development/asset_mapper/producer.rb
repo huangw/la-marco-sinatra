@@ -5,8 +5,8 @@ module AssetMapper
   class Producer
     attr_reader :tfile, :sfiles
     def initialize(file_id)
-      @tfile = Tfile.new
-      @sfile = []
+      @file_id, @tfile = file_id, Tfile.new(file_id)
+      @sfiles, @cloud_files = [], []
     end
 
     # DSL command
@@ -18,6 +18,25 @@ module AssetMapper
     end
 
     def file(filename)
+      sfile = Sfile.new(filename)
+      fail "file #{sfile.file_path} "\
+           'does not exists' unless File.exist?(sfile.abs_path)
+      @sfiles << sfile
+      @tfile.compile_files << sfile.abs_path
+    end
+
+    # Update AssetSettings
+    # ---------------------
+    # rubocop:disable LineLength
+    def update_asset_settings!
+      AssetSettings[:development].files[@file_id] = @sfiles.map(&:local_url)
+      return unless AssetMapper.compile?
+
+      AssetSettings[:production].files[@file_id] = @cloud_files.map(&:production_url)
+      AssetSettings[:production].files[@file_id] << @tfile.production_url if @tfile.production_url
+
+      AssetSettings[:local_assets].files[@file_id] = @cloud_files.map(&:local_url)
+      AssetSettings[:local_assets][@file_id] << @tfile.local_url if @tfile.local_url
     end
   end
 end

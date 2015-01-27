@@ -2,7 +2,7 @@
 class AssetSettings
   # Settings for each specific environment, singleton get one at runtime
   class EnvironmentSettings
-    attr_accessor :img_dir, :img_url_prefix
+    attr_accessor :img_dir, :img_url_prefix, :files
 
     def initialize(environment)
       @environment = environment.to_sym

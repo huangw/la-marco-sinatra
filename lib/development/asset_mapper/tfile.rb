@@ -1,16 +1,17 @@
 require 'fileutils'
 require 'sass'
-require 'closure-compiler'
+require 'uglifier'
+# require 'closure-compiler'
 
 # An  asset mapper class
 module AssetMapper
   # Target file to produce
   class Tfile
     # filename without version number, like `application.js`
-    attr_reader :file_id, :compiled_path
+    attr_reader :file_id, :compiled_path, :compile_files
 
     def initialize(file_id)
-      @file_id = file_id
+      @file_id, @min_dir = file_id, AssetMapper.min_dir
       warn "[WARN] file type unkown: #{file_id}, "\
            'need to be js or css' unless file_id.match(/\.(js|css)\Z/)
       @compile_files = [] # as absolute paths
@@ -43,17 +44,26 @@ module AssetMapper
       File.join(AssetMapper.root, file_path(version))
     end
 
+    # Paths and URLs based on compile results
+    # -----------------------------------------
+    def min_file_path
+      compiled_path || current_file_path
+    end
+
+    def min_abs_path
+      File.join(AssetMapper.root, min_file_path)
+    end
+
     # url for the minimized version, @compiled_path only available after
     # compile (even the current version is used)
     def production_url
-      path = compiled_path || current_file_path
       File.join(AssetMapper.assets_url_prefix[:production],
-                File.basename(path)) if path
+                File.basename(min_file_path)) if min_file_path
     end
 
     def local_url
-      path = compiled_path || current_file_path
-      File.join(AssetMapper.assets_url_prefix[:local], path) if path
+      File.join(AssetMapper.assets_url_prefix[:local],
+                min_file_path) if min_file_path
     end
 
     # Last version existing
@@ -61,11 +71,13 @@ module AssetMapper
     # filename for the minimized file, relative to root
     # Find from the current :local_assets setting
     def current_file_path
-      AssetSettings[:local_assets][@file_id].last
+      clurl = AssetSettings[:local_assets][@file_id].last
+      clurl.sub(/\A#{AssetMapper.assets_url_prefix[:local]}/, '') if clurl
     end
 
+
     def current_abs_path
-      File.join(AssetSettings.root, current_file_path) if current_file_path
+      File.join(AssetMapper.root, current_file_path) if current_file_path
     end
 
     def current_file_version
@@ -81,12 +93,18 @@ module AssetMapper
     # return current_file_path if the compiled version has the
     # same contents with the current minimized file,
     # otherwise return the newly minimiazed file path
+    # rubocop:disable MethodLength
     def compile!
       new_version = generate_version
       new_abs_path = abs_path(new_version)
+      return @compiled_path = current_file_path if @compile_files.empty?
+
+      FileUtils.mkdir_p @min_dir unless File.exist?(@min_dir)
       js? ? compile_js!(new_abs_path) : compile_css!(new_abs_path)
-      if FileUtils.identical?(new_abs_path, current_abs_path)
+
+      if not_changed?(new_abs_path, current_abs_path)
         puts "file not changed, use current file (#{current_file_path})"
+        FileUtils.rm_rf new_abs_path
         @compiled_path = current_file_path
       else
         puts "new file version (#{file_path(new_version)}) created"
@@ -94,9 +112,16 @@ module AssetMapper
       end
     end
 
+    def not_changed?(nfile, ofile)
+      return false unless ofile
+      return warn "[WARN] #{ofile} not exists!" unless File.exist?(ofile)
+      File.read(nfile) == File.read(ofile)
+    end
+
     def compile_js!(new_path)
       File.open(new_path, 'w') do |fh|
-        fh.write Closure::Compiler.new.compile_files(@compile_files)
+        # fh.write Closure::Compiler.new.compile_files(@compile_files)
+        fh.write Uglifier.compile(@compile_files.map { |f| File.read(f) }.join)
       end
     end
 

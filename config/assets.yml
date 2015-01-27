@@ -2,34 +2,26 @@
 :production:
   :img_dir: app/assets/img
   :img_url_prefix: "/img"
-  :assets_dir: app/assets/
-  :assets_url_prefix: "/assets"
-  :vendor_dir: app/assets/vendor
-  :cloud_dir: app/assets/cloud
-  :min_dir: app/assets/min
   :files:
     application.css:
-    - http://cdn.amazeui.org/amazeui/2.1.0/css/amazeui.min.css
+    - http://assets.vikkr.com/application.dav88.css
+    application.js:
+    - http://assets.vikkr.com/application.davay.js
 :local_assets:
   :img_dir: app/assets/img
   :img_url_prefix: "/img"
-  :assets_dir: app/assets/
-  :assets_url_prefix: "/assets"
-  :vendor_dir: app/assets/vendor
-  :cloud_dir: app/assets/cloud
-  :min_dir: app/assets/min
   :files:
     application.css:
-    - app/assets/cloud/cdn.amazeui.org/amazeui.min.css
+    - "/assets/app/assets/min/application.dav88.css"
+    application.js:
+    - "/assets/app/assets/min/application.davay.js"
 :development:
   :img_dir: app/assets/img
   :img_url_prefix: "/img"
-  :assets_dir: app/assets/
-  :assets_url_prefix: "/assets"
-  :vendor_dir: app/assets/vendor
-  :cloud_dir: app/assets/cloud
-  :min_dir: app/assets/min
   :files:
     application.css:
-    - app/assets/vendor/bootstrap/bootstrap.css
-    - app/assets/cloud/cdn.amazeui.org/amazeui.min.css
+    - "/assets/app/assets/css/standard.css"
+    - "/assets/app/assets/css/edit.css"
+    application.js:
+    - "/assets/app/assets/js/base.js"
+    - "/assets/app/assets/js/extra.js"

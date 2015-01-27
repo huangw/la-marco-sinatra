@@ -18,8 +18,9 @@ module AssetMapper
       end
     end
 
-    def execute!(command)
-      @command = command
+    def execute!(compile = false)
+      AssetMapper.compile = compile
+
       fail 'assets mapping file '\
            "#{@mapping_file} not exist" unless File.exist?(@mapping_file)
 
@@ -31,13 +32,15 @@ module AssetMapper
     # ---------------------
     def pull(app_name, opts = {})
       to = opts.extract_args(to: AssetMapper.pull_dir)
-      Pull.new(app_name, to, opts).update! unless map?
+      Pull.new(app_name, to, opts).update!
     end
 
-    def produce(file_id, opts = {}, &prc)
+    def produce(file_id, &prc)
       puts "Produce ---- | #{file_id} | --------------------"
-      @target_files[file_id] ||= Tfile.new(file_id, @command, opts)
+      @target_files[file_id] ||= Producer.new(file_id)
       @target_files[file_id].instance_eval(&prc)
+      @target_files[file_id].tfile.compile! if AssetMapper.compile?
+      @target_files[file_id].update_asset_settings!
     end
 
     # update img dir settings for each environments in global settings
@@ -52,20 +55,6 @@ module AssetMapper
                                       local: AssetSettings[:local].img_url_prefix)
       AssetSettings[:production].img_url_prefix = prod
       AssetSettings[:development].img_url_prefix = AssetSettings[:local_assets].img_url_prefix = local
-    end
-
-    private
-
-    def update?
-      @command == :update
-    end
-
-    def map?
-      @command == :map
-    end
-
-    def compile?
-      @command == :compile
     end
   end
 end

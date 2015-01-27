@@ -17,6 +17,8 @@ module AssetMapper
              }
 
   class << self
+    attr_accessor :compile
+
     DEFAULTS.each do |met, default_value|
       define_method met do |val = nil|
         instance_variable_set("@#{met}", val) unless val.nil?
@@ -26,6 +28,10 @@ module AssetMapper
 
     def root
       ENV['APP_ROOT']
+    end
+
+    def compile?
+      @compile ? true : false
     end
 
     def assets_url_prefix(val = nil)
