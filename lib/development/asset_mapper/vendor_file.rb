@@ -15,6 +15,10 @@ module AssetMapper
       @upd ? true : false
     end
 
+    def file_path
+      File.join(@to, filename)
+    end
+
     # rubocop:disable CyclomaticComplexity, MethodLength
     def copy!
       sfile = File.join(repo_path(@from), @file_id)

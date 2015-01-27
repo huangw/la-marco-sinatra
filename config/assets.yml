@@ -5,18 +5,18 @@
   :files:
     application.css:
     - http://cdn.amazeui.org/amazeui/2.1.0/css/amazeui.min.css
-    - http://assets.vikkr.com/application.db0hm.css
+    - http://assets.vikkr.com/application.db185.css
     application.js:
-    - http://assets.vikkr.com/application.davay.js
+    - http://assets.vikkr.com/application.db185.js
 :local_assets:
   :img_dir: app/assets/img
   :img_url_prefix: "/img"
   :files:
     application.css:
     - "/assets/app/assets/cloud/cdn.amazeui.org/amazeui.min.css"
-    - "/assets/app/assets/min/application.db0hm.css"
+    - "/assets/app/assets/min/application.db185.css"
     application.js:
-    - "/assets/app/assets/min/application.davay.js"
+    - "/assets/app/assets/min/application.db185.js"
 :development:
   :img_dir: app/assets/img
   :img_url_prefix: "/img"
@@ -25,7 +25,7 @@
     - "/assets/app/assets/cloud/cdn.amazeui.org/amazeui.min.css"
     - "/assets/app/assets/css/standard.css"
     - "/assets/app/assets/css/edit.css"
-    - "/assets/app/assets/typo.css"
+    - "/assets/app/assets/vendor/typo/typo.css"
     application.js:
     - "/assets/app/assets/js/base.js"
     - "/assets/app/assets/js/extra.js"
