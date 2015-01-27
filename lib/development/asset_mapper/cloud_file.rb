@@ -14,7 +14,7 @@ module AssetMapper
     end
 
     def production_url
-      @url
+      @url if @url
     end
 
     def update?
@@ -23,9 +23,8 @@ module AssetMapper
 
     def download!
       return dl_file!(@url, abs_path) unless File.exist?(abs_path)
-      return puts("Skip #{@url}, marked with update == false") unless update?
+      return puts("Skip #{@url}, as update == false") unless update?
       dl_file!(@url, abs_path)
-      self
     end
 
     private

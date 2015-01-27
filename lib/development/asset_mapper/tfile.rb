@@ -57,12 +57,12 @@ module AssetMapper
     # url for the minimized version, @compiled_path only available after
     # compile (even the current version is used)
     def production_url
-      File.join(AssetMapper.assets_url_prefix[:production],
+      File.join(AssetSettings[:production].assets_url_prefix,
                 File.basename(min_file_path)) if min_file_path
     end
 
     def local_url
-      File.join(AssetMapper.assets_url_prefix[:local],
+      File.join(AssetSettings[:local_assets].assets_url_prefix,
                 min_file_path) if min_file_path
     end
 
@@ -72,7 +72,8 @@ module AssetMapper
     # Find from the current :local_assets setting
     def current_file_path
       clurl = AssetSettings[:local_assets][@file_id].last
-      clurl.sub(/\A#{AssetMapper.assets_url_prefix[:local]}/, '') if clurl
+      clurl.sub(/\A#{AssetSettings[:local_assets].assets_url_prefix}/,
+                '') if clurl
     end
 
     def current_abs_path

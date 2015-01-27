@@ -74,7 +74,6 @@ all	lib/route.rb	/^    def all$/;"	f	class:Route
 all_cookies	features/support/env.rb	/^  def all_cookies$/;"	f	class:FeatureWorld
 apply_filters	doc/spec/lib/route_spec.html	/^function apply_filters() {$/;"	f
 assets_env	lib/asset_settings.rb	/^    def assets_env$/;"	f	class:AssetSettings
-assets_url_prefix	lib/development/asset_mapper.rb	/^    def assets_url_prefix(val = nil)$/;"	f	class:AssetMapper
 assign_display_style	doc/spec/lib/route_spec.html	/^function assign_display_style(classname, display_flag) {$/;"	f
 assign_display_style_for_group	doc/spec/lib/route_spec.html	/^function assign_display_style_for_group(classname, display_flag, subgroup_flag) {$/;"	f
 attr_with_default	lib/core_ext/attr_with_default.rb	/^  def attr_with_default(hsh)$/;"	f	class:Class
@@ -84,12 +83,14 @@ checkbox	lib/helpers/form_helper.rb	/^    def checkbox(field, values, options = 
 checkbox	lib/helpers/form_helper.rb	/^  def checkbox(field, values, options = {})$/;"	f	class:FormHelper.radio
 close_fieldset	lib/helpers/form_helper.rb	/^  def close_fieldset$/;"	f	class:FormHelper
 close_tag	lib/helpers/form_helper.rb	/^  def close_tag(name = 'form')$/;"	f	class:FormHelper.radio.checkbox.select
-cloud	lib/development/asset_mapper/producer.rb	/^    def cloud(_url, _opts = {})$/;"	f	class:AssetMapper.Producer
+cloud	lib/development/asset_mapper/producer.rb	/^    def cloud(url, opts = {})$/;"	f	class:AssetMapper.Producer
 compile!	lib/development/asset_mapper/tfile.rb	/^    def compile!$/;"	f	class:AssetMapper.Tfile
 compile?	lib/development/asset_mapper.rb	/^    def compile?$/;"	f	class:AssetMapper
 compile_css!	lib/development/asset_mapper/tfile.rb	/^    def compile_css!(new_path)$/;"	f	class:AssetMapper.Tfile
 compile_js!	lib/development/asset_mapper/tfile.rb	/^    def compile_js!(new_path)$/;"	f	class:AssetMapper.Tfile
 cookie	features/support/env.rb	/^  def cookie(name)$/;"	f	class:FeatureWorld
+copy!	lib/development/asset_mapper/vendor_file.rb	/^    def copy!$/;"	f	class:AssetMapper.VendorFile
+copy_file!	lib/development/asset_mapper/vendor_file.rb	/^    def copy_file!(sfile, tfile, diff = nil)$/;"	f	class:AssetMapper.VendorFile
 css?	lib/development/asset_mapper/sfile.rb	/^    def css?$/;"	f	class:AssetMapper.Sfile
 css?	lib/development/asset_mapper/tfile.rb	/^    def css?$/;"	f	class:AssetMapper.Tfile
 css_id	lib/helpers/form_helper.rb	/^  def css_id(*things)$/;"	f	class:FormHelper.radio.checkbox.select
@@ -103,6 +104,9 @@ default_bit_value	lib/helpers/form_helper.rb	/^    def default_bit_value(field, 
 default_path	lib/route.rb	/^    def default_path(app_class)$/;"	f	class:Route
 default_value	lib/helpers/form_helper.rb	/^    def default_value(field, default)$/;"	f	class:FormHelper.FormBuilder
 development?	lib/asset_settings.rb	/^    def development?$/;"	f	class:AssetSettings
+diff_file	lib/development/asset_mapper/vendor_file.rb	/^    def diff_file(sfile, tfile)$/;"	f	class:AssetMapper.VendorFile
+dl_file!	lib/development/asset_mapper/cloud_file.rb	/^    def dl_file!(url, tfile)$/;"	f	class:AssetMapper.CloudFile
+download!	lib/development/asset_mapper/cloud_file.rb	/^    def download!$/;"	f	class:AssetMapper.CloudFile
 environments	lib/asset_settings.rb	/^    def environments$/;"	f	class:AssetSettings
 execute!	lib/development/asset_mapper/loader.rb	/^    def execute!(compile = false)$/;"	f	class:AssetMapper.Loader
 extract_args	lib/core_ext/hash_argument.rb	/^  def extract_args(expects)$/;"	f	class:Hash
@@ -113,6 +117,7 @@ field_group	lib/helpers/form_helper.rb	/^    def field_group(field, options = {}
 fieldset	lib/helpers/form_helper.rb	/^  def fieldset(legend = nil)$/;"	f	class:FormHelper
 fieldset_for	lib/helpers/form_helper.rb	/^  def fieldset_for(object, name = nil, legend = nil)$/;"	f	class:FormHelper
 file	lib/development/asset_mapper/producer.rb	/^    def file(filename)$/;"	f	class:AssetMapper.Producer
+file_path	lib/development/asset_mapper/cloud_file.rb	/^    def file_path$/;"	f	class:AssetMapper.CloudFile
 file_path	lib/development/asset_mapper/sfile.rb	/^    def file_path$/;"	f	class:AssetMapper.Sfile
 file_path	lib/development/asset_mapper/tfile.rb	/^    def file_path(version)$/;"	f	class:AssetMapper.Tfile
 file_timestamp	lib/development/asset_mapper/tfile.rb	/^    def file_timestamp(fname)$/;"	f	class:AssetMapper.Tfile
@@ -151,11 +156,13 @@ img_tag	lib/helpers/assets_helper.rb	/^  def img_tag(file_id, opts = {})$/;"	f	c
 img_url_prefix	lib/development/asset_mapper/loader.rb	/^    def img_url_prefix(hsh)$/;"	f	class:AssetMapper.Loader
 initialize	lib/asset_settings/environment_settings.rb	/^    def initialize(environment)$/;"	f	class:AssetSettings.EnvironmentSettings
 initialize	lib/confu.rb	/^    def initialize(hsh = {})$/;"	f	class:Confu.Data
+initialize	lib/development/asset_mapper/cloud_file.rb	/^    def initialize(url, opts = {})$/;"	f	class:AssetMapper.CloudFile
 initialize	lib/development/asset_mapper/loader.rb	/^    def initialize(file = nil)$/;"	f	class:AssetMapper.Loader
 initialize	lib/development/asset_mapper/producer.rb	/^    def initialize(file_id)$/;"	f	class:AssetMapper.Producer
 initialize	lib/development/asset_mapper/pull.rb	/^    def initialize(app_name, to, opts = {})$/;"	f	class:AssetMapper.Pull
 initialize	lib/development/asset_mapper/sfile.rb	/^    def initialize(filename)$/;"	f	class:AssetMapper.Sfile
 initialize	lib/development/asset_mapper/tfile.rb	/^    def initialize(file_id)$/;"	f	class:AssetMapper.Tfile
+initialize	lib/development/asset_mapper/vendor_file.rb	/^    def initialize(file_id, opts = {})$/;"	f	class:AssetMapper.VendorFile
 initialize	lib/helpers/form_helper.rb	/^    def initialize(parent, object, name = nil)$/;"	f	class:FormHelper.FormBuilder
 initialize	spec/lib/route_spec.rb	/^  def initialize(tid)$/;"	f	class:Account
 js?	lib/development/asset_mapper/sfile.rb	/^    def js?$/;"	f	class:AssetMapper.Sfile
@@ -225,12 +232,14 @@ preferred_locale	lib/helpers/i18n_helper.rb	/^  def preferred_locale(avails = I1
 produce	lib/development/asset_mapper/loader.rb	/^    def produce(file_id, &prc)$/;"	f	class:AssetMapper.Loader
 production?	lib/asset_settings.rb	/^    def production?$/;"	f	class:AssetSettings
 production?	lib/asset_settings/environment_settings.rb	/^    def production?$/;"	f	class:AssetSettings.EnvironmentSettings
+production_url	lib/development/asset_mapper/cloud_file.rb	/^    def production_url$/;"	f	class:AssetMapper.CloudFile
 production_url	lib/development/asset_mapper/sfile.rb	/^    def production_url$/;"	f	class:AssetMapper.Sfile
 production_url	lib/development/asset_mapper/tfile.rb	/^    def production_url$/;"	f	class:AssetMapper.Tfile
 pull	lib/development/asset_mapper/loader.rb	/^    def pull(app_name, opts = {})$/;"	f	class:AssetMapper.Loader
 radio	lib/helpers/form_helper.rb	/^    def radio(field, values, options = {})$/;"	f	class:FormHelper.FormBuilder
 radio	lib/helpers/form_helper.rb	/^  def radio(field, values, options = {})$/;"	f	class:FormHelper
 removeClass	doc/spec/lib/route_spec.html	/^function removeClass(element_id, classname) {$/;"	f
+repo_path	lib/development/asset_mapper/vendor_file.rb	/^    def repo_path(from)$/;"	f	class:AssetMapper.VendorFile
 request	spec/lib/helpers/form_helper_spec.rb	/^  def request$/;"	f	class:FormMock
 require_all	lib/core_ext/dynamic_require.rb	/^def require_all(pattern)$/;"	f
 reset	lib/helpers/form_helper.rb	/^  def reset(value = nil, options = {})$/;"	f	class:FormHelper
@@ -260,10 +269,12 @@ to_human	lib/development/i18n_updator.rb	/^  def self.to_human(key)$/;"	F	class:
 try_require	lib/core_ext/dynamic_require.rb	/^def try_require(file)$/;"	f
 tt	lib/helpers/i18n_helper.rb	/^  def tt(msg, opts = {})$/;"	f	class:I18nHelper
 update!	lib/development/asset_mapper/pull.rb	/^    def update!$/;"	f	class:AssetMapper.Pull
+update?	lib/development/asset_mapper/cloud_file.rb	/^    def update?$/;"	f	class:AssetMapper.CloudFile
 update?	lib/development/asset_mapper/pull.rb	/^    def update?$/;"	f	class:AssetMapper.Pull
+update?	lib/development/asset_mapper/vendor_file.rb	/^    def update?$/;"	f	class:AssetMapper.VendorFile
 update_asset_settings!	lib/development/asset_mapper/producer.rb	/^    def update_asset_settings!$/;"	f	class:AssetMapper.Producer
 update_yaml!	lib/asset_settings.rb	/^    def update_yaml!(file = nil)$/;"	f	class:AssetSettings
 use_layout	lib/helpers/slim_helper.rb	/^  def use_layout(layout)$/;"	f	class:SlimHelper
-vendor	lib/development/asset_mapper/producer.rb	/^    def vendor(_url, _opts = {})$/;"	f	class:AssetMapper.Producer
+vendor	lib/development/asset_mapper/producer.rb	/^    def vendor(filename, opts = {})$/;"	f	class:AssetMapper.Producer
 version_to_time	lib/development/asset_mapper/tfile.rb	/^    def version_to_time(version)$/;"	f	class:AssetMapper.Tfile
 working_dir	lib/development/asset_mapper/pull.rb	/^    def working_dir$/;"	f	class:AssetMapper.Pull

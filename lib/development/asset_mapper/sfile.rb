@@ -41,7 +41,7 @@ module AssetMapper
 
     # Only available for :development
     def local_url
-      File.join(AssetMapper.assets_url_prefix[:local], file_path)
+      File.join(AssetSettings[:local_assets].assets_url_prefix, file_path)
     end
 
     def production_url

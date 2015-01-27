@@ -11,11 +11,16 @@ module AssetMapper
 
     # DSL command
     # ---------------------------
-    def vendor(_url, _opts = {})
+    def vendor(filename, opts = {})
+      vendor_file = VendorFile.new(filename, opts)
+      vendor_file.copy!
+      @sfiles << vendor_file
+      @tfile.compile_files << vendor_file.abs_path
     end
 
     def cloud(url, opts = {})
-      cloud_file = CloudFile.new(url, opts).download!
+      cloud_file = CloudFile.new(url, opts)
+      cloud_file.download!
       @sfiles << cloud_file
       @cloud_files << cloud_file
     end
