@@ -7,10 +7,10 @@ class AssetTestPage < WebApplication
   end
 
   get '/image/icon/orange.jpg' do
-    format '<html><body>%s</body></html>', img_tag('icon/orange.jpg')
+    format '<html><body>%s</body></html>', img_tag('icon/groups/rat.jpg')
   end
 
-  get '/bootstrap' do
+  get '/application' do
     css_tag('application.css')
   end
 

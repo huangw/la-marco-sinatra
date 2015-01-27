@@ -2,7 +2,7 @@
 class AssetSettings
   # Settings for each specific environment, singleton get one at runtime
   class EnvironmentSettings
-    attr_accessor :img_dir, :img_url_prefix, :files
+    attr_accessor :img_dir, :img_url_prefix, :assets_url_prefix, :files
 
     def initialize(environment)
       @environment = environment.to_sym
@@ -10,6 +10,7 @@ class AssetSettings
       # initialize with default values
       @img_dir, @files = 'app/assets/img', {}
       @img_url_prefix = production? ? 'http://img.vikkr.com' : '/img'
+      @assets_url_prefix = production? ? 'http://assets.vikkr.com' : '/assets'
     end
 
     def production?

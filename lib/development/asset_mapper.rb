@@ -33,16 +33,5 @@ module AssetMapper
     def compile?
       @compile ? true : false
     end
-
-    def assets_url_prefix(val = nil)
-      @assets_url_prefix ||= { production: 'http://assets.vikkr.com',
-                               local: '/assets' }
-      return @assets_url_prefix if val.nil?
-
-      fail "invalid value #{val.inspect}" unless val.is_a?(Hash)
-
-      # rubocop:disable LineLength
-      @assets_url_prefix[:production], @assets_url_prefix[:local] = extract_arg!(@assets_url_prefix)
-    end
   end
 end

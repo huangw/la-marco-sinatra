@@ -7,13 +7,13 @@ module AssetsHelper
   end
 
   def css_tag(file_id)
-    settings.assets[file_id].urls.map do |url|
+    settings.assets[file_id].map do |url|
       format('<link rel="stylesheet" type="text/css" href="%s" />', url)
     end
   end
 
   def js_tag
-    settings.assets[file_id].urls.map do |url|
+    settings.assets[file_id].map do |url|
       format('<script type="text/javascript" src="%s"></script>', url)
     end
   end

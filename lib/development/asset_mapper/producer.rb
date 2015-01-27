@@ -14,7 +14,10 @@ module AssetMapper
     def vendor(_url, _opts = {})
     end
 
-    def cloud(_url, _opts = {})
+    def cloud(url, opts = {})
+      cloud_file = CloudFile.new(url, opts).download!
+      @sfiles << cloud_file
+      @cloud_files << cloud_file
     end
 
     def file(filename)
