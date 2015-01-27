@@ -119,7 +119,7 @@
             </div>
             
             <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">def</span> </span>mount(app_class, route = <span class="hljs-keyword">nil</span>)
-      route ||= class_to_route(app_class)
+      route ||= default_path(app_class)
       table[app_class] = route
     <span class="hljs-keyword">end</span>
     alias_method <span class="hljs-symbol">:<span class="hljs-string">'&lt;&lt;'</span></span>, <span class="hljs-symbol">:mount</span></pre></div></div>
@@ -145,11 +145,9 @@
       <span class="hljs-constant">File</span>.join(<span class="hljs-variable">@table</span>[app_class], *pas)
     <span class="hljs-keyword">end</span>
 
-    private
-
-    <span class="hljs-function"><span class="hljs-keyword">def</span> </span>class_to_route(app_class)
+    <span class="hljs-function"><span class="hljs-keyword">def</span> </span>default_path(app_class)
       app_class.to_s.underscore.sub(<span class="hljs-regexp">/_(api|page|controller)$/</span>, <span class="hljs-string">''</span>)
-        .gsub(<span class="hljs-string">'_'</span>, <span class="hljs-string">'/'</span>).pluralize.sub(<span class="hljs-regexp">/^\/*/</span>, <span class="hljs-string">'/'</span>)
+        .gsub(<span class="hljs-string">'_'</span>, <span class="hljs-string">'-'</span>).sub(<span class="hljs-regexp">/^\/*/</span>, <span class="hljs-string">'/'</span>).pluralize
     <span class="hljs-keyword">end</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span></pre></div></div>

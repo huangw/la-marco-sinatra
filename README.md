@@ -144,3 +144,7 @@ Guard设置为检测本地文件变化并重启服务器，同时监听`features
 Form Helper延续原版。与flashes helper一样，`lib/helpers`下面的helper不应该有特定app相关的内容，比如html里的class或者id。这些特定内容需要写在`app/helpers`下另建的helper文件里（可以重载`lib/helpers`下的方法，具体参照active record的method chain的介绍）。
 
 TODO: TableHelper暂未实现。需要时可以启动开发。
+
+### Assets（js/css/logo等静态图片）管理
+
+参照`doc/assets_management.html`

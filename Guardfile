@@ -16,6 +16,11 @@ guard :rspec, cmd: 'bundle exec rspec --color -f d' do
   watch(%r{^config/(.+)\.rb$}) { |m| "spec/config/#{m[1]}_spec.rb" }
 end
 
+guard 'ctags-bundler' do
+  watch(/^(app|lib|spec\/support)\/.*\.rb$/)
+  watch('Gemfile.lock')
+end
+
 guard :rake, task: 'puma:restart', all_on_start: false do
   watch(%r{^app/.+\.(rb)$})
   watch(%r{^lib/.+\.(rb)$})

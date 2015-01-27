@@ -1,12 +1,13 @@
-require 'development/assets_mapper'
+require 'development/asset_mapper'
 
 namespace :assets do
-  desc 'process assets update and assets configuration file'
+  desc 'update assets and assets configuration file'
   task :update do
-    AssetsMapper::Mappings.new.load
+    AssetMapper::Loader.new.execute!(false)
   end
 
-  desc 'update assets configuration file without downloading'
-  task :map do
+  desc 'update and minimizing assets and assets configuration file'
+  task :compile do
+    AssetMapper::Loader.new.execute!(true)
   end
 end
