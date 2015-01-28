@@ -1,10 +1,11 @@
 ---
-:en:
-  :slimmer:
-    :translators:
-      :hello:
-        :title: Hello
-        :hello_world: Hello World
-      :index:
-        :title: Translators
-        :too_slow: Too Slow
+en:
+  views:
+    slimmer:
+      translators:
+        index:
+          title: Translators
+          too_slow: Too Slow
+        hello:
+          title: Hello
+          hello_world: Hello World

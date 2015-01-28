@@ -6,6 +6,6 @@ class Exception
   def i18n_message
     # Find translated messages from scope of exception class name
     # like `image_save_error` for `ImageSaveError` class.
-    I18n.t message, scope: self.class.to_s.underscore
+    I18n.t message, scope: "exceptions.#{self.class.to_s.underscore}"
   end
 end

@@ -10,7 +10,7 @@ module I18nHelper
   # mapping i18n name space from the logical path
   def tt(msg, opts = {})
     unless opts[:scope]
-      opts[:scope] = template_dir.gsub('/', '.')
+      opts[:scope] = template_dir.gsub('/', '.').unshift('views')
       opts[:scope] += ".#{env['template_id']}" if env['template_id']
     end
 

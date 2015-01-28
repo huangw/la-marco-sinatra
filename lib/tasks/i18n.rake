@@ -16,10 +16,9 @@ namespace :i18n do
       end
 
       fkeys = keys.uniq.dup
-      I18n.available_locales.each do |lc|
-        puts "updating 'i18n/exceptions/#{lc}.yml'"
+      [:en, :ja, :zh].each do |lc|
         flc = I18nUtils::YamlFile.new("i18n/exceptions/#{lc}.yml")
-        fkeys.each { |k| flc.add_with_gt(k) }
+        fkeys.each { |k| flc.add_with_gt("#{lc}.exceptions.#{k}") }
         flc.rewrite!
       end
     end

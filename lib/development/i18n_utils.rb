@@ -1,6 +1,7 @@
 require 'yaml'
 require 'google_translate'
 require 'utils/hash_flatter'
+require 'development/file_generator'
 
 # For i18n yaml files management
 module I18nUtils
@@ -45,26 +46,18 @@ module I18nUtils
   # rubocop:disable LineLength
   class YamlFile
     include HashFlatter
-    attr_reader :filename, :locale, :flat_hash
+    attr_reader :filename, :locale, :flat_hash, :added_keys
 
     def initialize(file_name)
       @filename = file_name # relative to root
-      create_file(file_name) unless File.exist?(file_name)
-      @as_hash = YAML.load_file(filename)
+      @as_hash = {}
+      @as_hash = YAML.load_file(filename) if File.exist?(file_name)
       @locale = @as_hash.keys.first || File.basename(file_name).sub(/\.yml\Z/, '')
 
-      @flat_hash = {}
+      @flat_hash, @added_keys = {}, {}
       hash_flat(@as_hash).each { |k, v| add_key(scope_join(*k), v) }
-
+      @added_keys = {} # workaround: cleanup added keys
       @common_scope = find_common_scope(@flat_hash.keys)
-    end
-
-    def create_file(file)
-      lc = File.basename(file).sub(/\.yml\Z/, '')
-      fail "#{lc} not supported in #{I18n.available_locales.join(', ')}" unless I18n.available_locales.include?(lc.to_sym)
-      dir = File.dirname(file)
-      FileUtils.mkdir_p(dir) unless File.exist?(dir)
-      File.open(file, 'w') { |fh| fh.write YAML.dump({}) }
     end
 
     def flat_keys
@@ -72,8 +65,9 @@ module I18nUtils
     end
 
     def add_key(key, value = nil)
-      warn "[WARN] key #{key} exists" if key?(key)
-      @flat_hash[scope_join(key)] ||= value
+      skey = scope_join(key)
+      return warn("[WARN] key #{skey} exists") if key?(skey)
+      @added_keys[skey] = @flat_hash[skey] = value
     end
 
     def add_with_gt(key, trans_key = -1)
@@ -84,7 +78,7 @@ module I18nUtils
     end
 
     def key?(key)
-      @flat_hash[scope_join(key)] ? true : false
+      @flat_hash[key] ? true : false
     end
 
     def renest
@@ -96,7 +90,10 @@ module I18nUtils
     end
 
     def rewrite!(file = @filename)
-      File.open(file, 'w') { |wfh| wfh.write YAML.dump(renest) }
+      return 0 if @added_keys.keys.empty?
+      puts "Update '#{file}' with:"
+      ap @added_keys
+      FileGenerator.wopen(file) { |wfh| wfh.write YAML.dump(renest) }
     end
 
     def find_common_scope(keys)
@@ -107,7 +104,11 @@ module I18nUtils
     end
 
     def scope_join(*args)
-      args.map { |k| k.to_s.sub(/\A\./, '').sub(/\.\Z/, '') }.join('.')
+      if @common_scope
+        args.unshift @common_scope unless args[0].match(/\A#{@common_scope}/)
+      end
+
+      args.map { |k| k.sub(/\A\./, '').sub(/\.\Z/, '') }.join('.')
     end
   end
 end
