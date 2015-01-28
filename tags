@@ -101,7 +101,6 @@ compile_js!	lib/development/asset_mapper/tfile.rb	/^    def compile_js!(new_path
 cookie	features/support/env.rb	/^  def cookie(name)$/;"	f	class:FeatureWorld
 copy!	lib/development/asset_mapper/vendor_file.rb	/^    def copy!$/;"	f	class:AssetMapper.VendorFile
 copy_file!	lib/development/asset_mapper/vendor_file.rb	/^    def copy_file!(sfile, tfile, diff = nil)$/;"	f	class:AssetMapper.VendorFile
-create_file	lib/development/i18n_utils.rb	/^    def create_file(file)$/;"	f	class:YamlFile
 css?	lib/development/asset_mapper/sfile.rb	/^    def css?$/;"	f	class:AssetMapper.Sfile
 css?	lib/development/asset_mapper/tfile.rb	/^    def css?$/;"	f	class:AssetMapper.Tfile
 css_id	lib/helpers/form_helper.rb	/^  def css_id(*things)$/;"	f	class:FormHelper.radio.checkbox.select
