@@ -7,6 +7,8 @@
 
 # Use bundler for gems
 require 'bundler/setup'
+require 'dotenv'
+Dotenv.load
 
 ENV['RACK_ENV'] ||= 'development'
 ENV['APP_ROOT'] = File.expand_path('../..', __FILE__)

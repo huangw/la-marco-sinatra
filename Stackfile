@@ -9,7 +9,6 @@ pull :'la-marco', git: 'git@gitlab.7lime.com:vikkr/la-marco.git',
 
 from :'la-marco' do
   import :full
-  import :i18n
 end
 
 export :route do

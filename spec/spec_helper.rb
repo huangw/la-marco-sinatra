@@ -17,3 +17,9 @@ require_relative '../config/boot'
 
 require 'rspec'
 Dir[ENV['APP_ROOT'] + '/spec/support/**/*.rb'].each { |f| require f }
+
+RSpec.configure do |config|
+  config.filter_run_excluding slow: true
+  config.run_all_when_everything_filtered = true
+  config.backtrace_exclusion_patterns << /\.rvm\/gems\//
+end
