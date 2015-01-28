@@ -1,0 +1,11 @@
+---
+ja:
+  views:
+    slimmer:
+      translators:
+        index:
+          title: 翻訳者
+          too_slow: 遅すぎる
+        hello:
+          title: こんにちは
+          hello_world: こんにちは世界

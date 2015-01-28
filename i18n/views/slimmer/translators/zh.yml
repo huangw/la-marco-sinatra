@@ -1,0 +1,11 @@
+---
+zh:
+  views:
+    slimmer:
+      translators:
+        index:
+          title: 译者
+          too_slow: 太慢
+        hello:
+          title: 您好
+          hello_world: 你好世界

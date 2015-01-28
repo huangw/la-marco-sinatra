@@ -5,32 +5,42 @@
 # Author: Huang Wei <huangw@pe-po.com>
 # Version: 0.1.1; Created at: 2015/01/19;
 
-RACK_ENV = ENV['RACK_ENV'] ||= 'development'
-APP_ROOT = ENV['APP_ROOT'] = File.expand_path('../..', __FILE__)
-
-def root_join(path)
-  File.join(APP_ROOT, path)
-end
-
-# Load gem system and local core extensions
-# -------------------------------------------
-require 'rubygems'
+# Use bundler for gems
 require 'bundler/setup'
+require 'dotenv'
+Dotenv.load
 
-# Load libraries all core extensions
-require 'active_support/all'
-Dir[root_join('lib/core_ext/*.rb')].each { |f| require f }
+ENV['RACK_ENV'] ||= 'development'
+ENV['APP_ROOT'] = File.expand_path('../..', __FILE__)
 
-# Extend load path with `app/lib` and `lib`
-%w(lib app/lib).map do |d|
-  $LOAD_PATH.unshift root_join(d) unless $LOAD_PATH.include?(root_join(d))
+# A shortcut to find local file's absolute path
+def root_join(*path)
+  File.join(ENV['APP_ROOT'], *path)
 end
 
-# RACK_ENV based configuration
-# ------------------------------
-Confu[RACK_ENV].root, Confu[RACK_ENV].env = APP_ROOT, RACK_ENV
-Dir[root_join('config/environments/*_env.rb')].each { |f| require f }
+# Load active-support and home made core extensions
+require 'active_support/all'
+Dir[root_join('lib', 'core_ext', '*.rb')].each { |f| require f }
+
+# Extend load path, add `app/lib` and `lib`
+%w(lib app/lib).map { |d| $LOAD_PATH.unshift root_join(d) }
+
+# Load settings
+require 'confu'
+Confu.for_environment(ENV['RACK_ENV']) do
+  root ENV['APP_ROOT']
+  environment ENV['RACK_ENV']
+end
+require_all root_join('config', 'settings', '*.rb')
+Confu.descendants.map(&:'finalize!')
 Confu.finalize!
 
-# Try to load database and application
-# ----------------------------------------
+# Try to load database
+try_require root_join('config', 'database')
+
+# After boot: load initializers and environment specific initializers
+require_all root_join('config', 'initializers', '*.rb')
+require_all root_join('config', 'initializers', ENV['RACK_ENV'], '*.rb')
+
+# Try to load web application
+try_require root_join('config', 'routes')

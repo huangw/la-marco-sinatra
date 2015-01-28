@@ -1,0 +1,11 @@
+---
+ja:
+  views:
+    slimmer:
+      check_paths:
+        index:
+          title: パスをチェック
+        _form:
+          title: フォーム
+        spec:
+          title: スペック
