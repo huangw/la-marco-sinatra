@@ -19,5 +19,5 @@ year: 2015
   [++] i18n: i18n initialization and setup 01/22 @huangw:01/23
   [++] helpers: slim, form and table helpers 01/22-01/23 @huangw:01/23
   [++] assets: assets pipeline and helpers based on stackupper 01/23-01/24 @huangw:01/27
-  [++] api: api controller and test helpers 01/28-01/30 @huangw:10
+  [++] api: api controller and test helpers 01/28-01/30 @huangw:P
 [+] release_v0_0_1: release the first alpha version 01/30 @huangw
