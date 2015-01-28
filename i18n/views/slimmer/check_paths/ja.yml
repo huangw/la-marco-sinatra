@@ -1,13 +1,11 @@
 ---
-:ja:
-  :slimmer:
-    :check_paths:
-      :_form:
-        :title: フォーム
-      :i18n:
-        :en:
-          :title: I18n.En
-        :zh:
-          :title: I18n.Zh
-      :spec:
-        :title: スペック
+ja:
+  views:
+    slimmer:
+      check_paths:
+        index:
+          title: パスをチェック
+        _form:
+          title: フォーム
+        spec:
+          title: スペック
