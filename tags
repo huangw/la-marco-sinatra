@@ -119,9 +119,11 @@ diff_file	lib/development/asset_mapper/vendor_file.rb	/^    def diff_file(sfile,
 dl_file!	lib/development/asset_mapper/cloud_file.rb	/^    def dl_file!(url, tfile)$/;"	f	class:AssetMapper.CloudFile
 download!	lib/development/asset_mapper/cloud_file.rb	/^    def download!$/;"	f	class:AssetMapper.CloudFile
 environments	lib/asset_settings.rb	/^    def environments$/;"	f	class:AssetSettings
+example_file	spec/support/helpers/example_helper.rb	/^def example_file(arg)$/;"	f
 execute!	lib/development/asset_mapper/loader.rb	/^    def execute!(compile = false)$/;"	f	class:AssetMapper.Loader
 extract_args	lib/core_ext/hash_argument.rb	/^  def extract_args(expects)$/;"	f	class:Hash
 extract_args!	lib/core_ext/hash_argument.rb	/^  def extract_args!(expects)$/;"	f	class:Hash
+fap	config/initializers/development/awesome_print.rb	/^def fap(*arg)$/;"	f
 fast_escape_html	lib/helpers/form_helper.rb	/^  def fast_escape_html(text)$/;"	f	class:FormHelper.radio.checkbox.select
 field_group	lib/helpers/form_helper.rb	/^    def field_group(field, options = {})$/;"	f	class:FormHelper.FormBuilder
 fieldset	lib/helpers/form_helper.rb	/^  def fieldset(legend = nil)$/;"	f	class:FormHelper
@@ -186,7 +188,7 @@ initialize	lib/helpers/form_helper.rb	/^    def initialize(parent, object, name 
 initialize	spec/lib/route_spec.rb	/^  def initialize(tid)$/;"	f	class:Account
 js?	lib/development/asset_mapper/sfile.rb	/^    def js?$/;"	f	class:AssetMapper.Sfile
 js?	lib/development/asset_mapper/tfile.rb	/^    def js?$/;"	f	class:AssetMapper.Tfile
-js_tag	lib/helpers/assets_helper.rb	/^  def js_tag$/;"	f	class:AssetsHelper
+js_tag	lib/helpers/assets_helper.rb	/^  def js_tag(file_id)$/;"	f	class:AssetsHelper.css_tag
 key?	lib/development/i18n_utils.rb	/^    def key?(key)$/;"	f	class:YamlFile
 label	lib/helpers/form_helper.rb	/^    def label(field, display = nil, options = {})$/;"	f	class:FormHelper.FormBuilder
 label	lib/helpers/form_helper.rb	/^  def label(field, display = '', options = {})$/;"	f	class:FormHelper
@@ -278,6 +280,7 @@ production_url	lib/development/asset_mapper/tfile.rb	/^    def production_url$/;
 pull	lib/development/asset_mapper/loader.rb	/^    def pull(app_name, opts = {})$/;"	f	class:AssetMapper.Loader
 radio	lib/helpers/form_helper.rb	/^    def radio(field, values, options = {})$/;"	f	class:FormHelper.FormBuilder
 radio	lib/helpers/form_helper.rb	/^  def radio(field, values, options = {})$/;"	f	class:FormHelper
+reload!	config/initializers/development/awesome_print.rb	/^def reload!$/;"	f
 removeClass	doc/spec/lib/route_spec.html	/^function removeClass(element_id, classname) {$/;"	f
 render!	lib/development/file_generator.rb	/^    def render!(hsh)$/;"	f	class:FileGenerator.RubyFile
 renest	lib/development/i18n_utils.rb	/^    def renest$/;"	f	class:YamlFile
