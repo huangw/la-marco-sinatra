@@ -108,7 +108,7 @@ module I18nUtils
         args.unshift @common_scope unless args[0].match(/\A#{@common_scope}/)
       end
 
-      args.map { |k| k.sub(/\A\./, '').sub(/\.\Z/, '') }.join('.')
+      args.map { |k| k.to_s.sub(/\A\./, '').sub(/\.\Z/, '') }.join('.')
     end
   end
 end
