@@ -4,7 +4,7 @@ require 'asset_settings/environment_settings'
 describe AssetSettings::EnvironmentSettings do
   describe '#img_url_prefix' do
     it 'use different value for production and other environment' do
-      expect(AssetSettings::EnvironmentSettings.new(:production).img_url_prefix).to eq('http://img.vikkr.com')
+      expect(AssetSettings::EnvironmentSettings.new(:production).img_url_prefix).to eq('http://assets.vikkr.com')
       expect(AssetSettings::EnvironmentSettings.new(:local_assets).img_url_prefix).to eq('/img')
       expect(AssetSettings::EnvironmentSettings.new(:development).img_url_prefix).to eq('/img')
     end
