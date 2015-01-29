@@ -35,12 +35,6 @@ require_all root_join('config', 'settings', '*.rb')
 Confu.descendants.map(&:'finalize!')
 Confu.finalize!
 
-# Try to load database
-try_require root_join('config', 'database')
-
 # After boot: load initializers and environment specific initializers
 require_all root_join('config', 'initializers', '*.rb')
 require_all root_join('config', 'initializers', ENV['RACK_ENV'], '*.rb')
-
-# Try to load web application
-try_require root_join('config', 'routes')
