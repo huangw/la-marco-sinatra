@@ -21,8 +21,9 @@ class SpecDocument
         $stderr.puts "  - (line #{ln}): #{target}"
         fail "target file for #{target}.rb not found" unless File.exist?(target + '.rb')
         sstr = "[`#{target}.rb`](./spec/#{src_file(target)}) "
-        spec_html = test_file(target)
-        sstr += "([RSpec](./spec/#{spec_html}))" if spec_html
+        spec_rslt = test_file(target)
+        spec_html = test_src(target)
+        sstr += "(RSpec [src](./spec/#{spec_html}) [rslt](./spec/#{spec_rslt}))" if spec_html
         line = line.sub(/spec:\s*[\w\/]+/, sstr)
       end
 
@@ -50,11 +51,25 @@ class SpecDocument
     output_file.gsub(/\A#{@dir}\//, '')
   end
 
+  def test_src(target)
+    rspec_file = target.gsub(/\Aapp\/?/, '')
+    rspec_file = File.join('spec', "#{target}_spec.rb")
+    return false unless File.exist?(rspec_file)
+
+    output_file = File.join(@dir, target.gsub(/\Aapp/, '') + '_spec.html')
+    if newer?(rspec_file, output_file)
+      dir = File.dirname(output_file)
+      FileUtils.mkdir_p dir unless File.directory?(dir)
+      `docco #{rspec_file} --output #{File.dirname(output_file)}`
+    end
+    output_file.gsub(/\A#{@dir}\//, '')
+  end
+
   def test_file(target)
     rspec_file = target.gsub(/\Aapp\/?/, '')
     rspec_file = File.join('spec', "#{target}_spec.rb")
     return false unless File.exist?(rspec_file)
-    output_file = File.join(@dir, target.gsub(/\Aapp/, '') + '_spec.html')
+    output_file = File.join(@dir, target.gsub(/\Aapp/, '') + '_spec_rslt.html')
     if !@mdoconly && newer?(rspec_file, output_file)
       dir = File.dirname(output_file)
       FileUtils.mkdir_p dir unless File.directory?(dir)
