@@ -26,7 +26,7 @@
     if( g ) {
           g.AddTaskItem(new JSGantt.TaskItem(15,'create packing list for development','01/21/2015','01/21/2015','008000','',0,'黄巍',100,0,0,1,'','黄巍2015-01-21'));
 
-          g.AddTaskItem(new JSGantt.TaskItem(16,'implement all features','01/21/2015','01/23/2015','FF0000','',0,'黄巍',0,1,0,1,'',''));
+          g.AddTaskItem(new JSGantt.TaskItem(16,'implement all features','01/21/2015','01/23/2015','008000','',0,'黄巍',100,1,0,1,'',''));
 
           g.AddTaskItem(new JSGantt.TaskItem(17,'sinatra with debug, map and route','01/21/2015','01/21/2015','008000','',0,'黄巍',100,0,16,1,'','黄巍2015-01-22'));
 
@@ -38,9 +38,15 @@
 
           g.AddTaskItem(new JSGantt.TaskItem(21,'assets pipeline and helpers based on stackupper','01/23/2015','01/24/2015','008000','',0,'黄巍',100,0,16,1,'','黄巍2015-01-27'));
 
-          g.AddTaskItem(new JSGantt.TaskItem(22,'api controller and test helpers','01/28/2015','01/30/2015','C0C0C0','',0,'黄巍',0,0,16,1,'','Pending (黄巍)'));
+          g.AddTaskItem(new JSGantt.TaskItem(22,'release the first alpha version','01/30/2015','01/30/2015','008000','',1,'黄巍',100,0,0,1,'','黄巍2015-01-28'));
 
-          g.AddTaskItem(new JSGantt.TaskItem(23,'release the first alpha version','01/30/2015','01/30/2015','008000','',1,'黄巍',100,0,0,1,'','黄巍2015-01-28'));
+          g.AddTaskItem(new JSGantt.TaskItem(24,'implement API feature','01/30/2015','01/31/2015','FFD700','',0,'黄巍',0,1,0,1,'',''));
+
+          g.AddTaskItem(new JSGantt.TaskItem(25,'rack middleware rewised','01/30/2015','01/30/2015','FFA500','',0,'黄巍',0,0,24,1,'','黄巍'));
+
+          g.AddTaskItem(new JSGantt.TaskItem(26,'api test with rack test and helper','01/30/2015','01/30/2015','FFA500','',0,'黄巍',0,0,24,1,'','黄巍'));
+
+          g.AddTaskItem(new JSGantt.TaskItem(27,'api document with rspec rack test','01/31/2015','01/31/2015','B0C4DE','',0,'黄巍',0,0,24,1,'','黄巍'));
 
         g.Draw();
         g.DrawDependencies();
@@ -54,6 +60,11 @@
 
 <h3>Recent Git Log</h3> 
 <pre><code>
+* <em style='color:grey'>73752401d31bc1b4b415310b44b5a56bfc331c2f</em>
+| <strong>2015-01-30 14:13</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | <strong style='color:green'>update Gantt chart</strong>
+| 
+|  
 * <em style='color:grey'>9ed59013b23c77a954c48dc349ab5c463f946545</em>
 | <strong>2015-01-30 13:45</strong> By Huang Wei &lt;huangw@7lime.com&gt;
 | | <strong style='color:green'>refactoring development to devtools</strong>
@@ -297,11 +308,6 @@
 | * | <em style='color:grey'>b913ea2d41e49e520947c6497948b4a0d944c47f</em>
 | | | <strong>2015-01-26 16:42</strong> By Huang Wei &lt;huangw@7lime.com&gt;
 | | | | | | <strong style='color:green'>[progress] update progress to 70</strong>
-| | | 
-| | |    
-| * | <em style='color:grey'>939044f564c36405dace0b1b826e64aeb8a1569b</em>
-| | | <strong>2015-01-26 15:48</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | | | | <strong style='color:green'>[progress] update progress to 65</strong>
 | | | 
 
 </code></pre>

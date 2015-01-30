@@ -13,11 +13,15 @@ year: 2015
 % ----
 
 [+] concept: create packing list for development 01/21 @huangw:01/21
-[+] alpha: implement all features 01/21-01/23 @huangw
+[+] alpha: implement all features 01/21-01/23 @huangw:01/30
   [++] rack_route: sinatra with debug, map and route 01/21 @huangw:01/22
   [++] cucumber: cucumber test environment with server control 01/22 @huangw:01/22
   [++] i18n: i18n initialization and setup 01/22 @huangw:01/23
   [++] helpers: slim, form and table helpers 01/22-01/23 @huangw:01/23
   [++] assets: assets pipeline and helpers based on stackupper 01/23-01/24 @huangw:01/27
-  [++] api: api controller and test helpers 01/28-01/30 @huangw:P
 [+] release_v0_0_1: release the first alpha version 01/30 @huangw:01/28
+
+[+] api: implement API feature 01/30-01/31 @huangw
+  [++] rackapi: rack middleware rewised 01/30 @huangw
+  [++] apitest: api test with rack test and helper 01/30 @huangw
+  [++] apidoc: api document with rspec rack test 01/31 @huangw
