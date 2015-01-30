@@ -1,11 +1,11 @@
-require 'development/file_generator'
+require 'devtools/file_generator'
 
 namespace :gen do
   desc 'generating general ruby class/spec file from NAME'
   task :ruby do
     name = ENV['NAME'] || ENV['name']
     super_class = ENV['SUPER'] || ENV['super']
-    fail "need specify NAME=..." unless name
+    fail 'need specify NAME=...' unless name
     rf = FileGenerator::RubyFile.new(name, super_class)
     rf.render! class_file: rf.filename, spec_file: rf.spec_filename
   end

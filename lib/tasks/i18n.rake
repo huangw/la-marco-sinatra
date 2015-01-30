@@ -1,4 +1,4 @@
-require 'development/i18n_utils'
+require 'devtools/i18n_utils'
 namespace :i18n do
   desc 'start iye translation server'
   task :iye do
@@ -25,5 +25,5 @@ namespace :i18n do
   end
 
   desc 'shortcut for update:exceptions'
-  task :ue => [:'update:exceptions']
+  task ue: [:'update:exceptions']
 end

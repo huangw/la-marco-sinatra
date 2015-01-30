@@ -1,4 +1,4 @@
-require 'development/asset_mapper'
+require 'devtools/asset_mapper'
 
 namespace :assets do
   desc 'update assets and assets configuration file'

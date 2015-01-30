@@ -1,7 +1,7 @@
 require 'yaml'
 require 'google_translate'
 require 'utils/hash_flatter'
-require 'development/file_generator'
+require 'devtools/file_generator'
 
 # For i18n yaml files management
 module I18nUtils

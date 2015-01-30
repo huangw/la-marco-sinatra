@@ -1,4 +1,4 @@
-require 'development/i18n_utils'
+require 'devtools/i18n_utils'
 namespace :i18n do
   namespace :update do
     desc 'update i18n messages for templates (app/views)'
