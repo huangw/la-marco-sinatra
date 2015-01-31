@@ -34,6 +34,7 @@ module Rack
         # Do not include back trace for production or documentation
         body['backtrace'] = LaBacktraceCleaner.clean(e) unless ENV['RACK_ENV'] == 'production' || ENV['DOC']
         jbody = MultiJson.encode(body)
+        env['rack.logger'] && env['rack.logger'].fatal(e)
       end
 
       # merge the body to hash
