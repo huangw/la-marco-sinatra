@@ -24,7 +24,7 @@ export :route do
 end
 
 export :logger do
-  add_gem 'celluloid'
+  # add_gem 'celluloid'
 
   copy 'lib/la_buffered_logger.rb'
   copy 'lib/rack/log_flusher.rb'
