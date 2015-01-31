@@ -1,10 +1,14 @@
 require_relative 'web_application'
+require 'la_buffered_logger'
 
 # Routing for controllers nested in name space
 module Admin
   # root for administrator pages
   class RootPage < WebApplication
+    use Rack::LogFlusher, logger: LaBufferedLogger
+
     get('/') do
+      logger.error 'Catch an error'
       'This is the root of administration portal'
     end
 

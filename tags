@@ -44,10 +44,16 @@ HashFlatter	lib/utils/hash_flatter.rb	/^module HashFlatter$/;"	m
 I18nHelper	lib/helpers/i18n_helper.rb	/^module I18nHelper$/;"	m
 I18nUtils	lib/devtools/i18n_utils.rb	/^module I18nUtils$/;"	m
 ImageController	lib/controllers/image_controller.rb	/^class ImageController < Sinatra::Base$/;"	c
+JsonResponse	lib/rack/json_response.rb	/^  class JsonResponse$/;"	c	class:Rack
+LaBacktraceCleaner	lib/utils/la_backtrace_cleaner.rb	/^module LaBacktraceCleaner$/;"	m
+LaBufferedLogger	lib/la_buffered_logger.rb	/^class LaBufferedLogger$/;"	c
 Loader	lib/devtools/asset_mapper/loader.rb	/^  class Loader$/;"	c	class:AssetMapper
+LogFlusher	lib/rack/log_flusher.rb	/^  class LogFlusher$/;"	c	class:Rack
 PersonPage	spec/lib/route_spec.rb	/^  class PersonPage; Route << self end$/;"	c	class:Admin
 Producer	lib/devtools/asset_mapper/producer.rb	/^  class Producer$/;"	c	class:AssetMapper
 Pull	lib/devtools/asset_mapper/pull.rb	/^  class Pull$/;"	c	class:AssetMapper
+Rack	lib/rack/json_response.rb	/^module Rack$/;"	m
+Rack	lib/rack/log_flusher.rb	/^module Rack$/;"	m
 RequestMock	spec/lib/helpers/form_helper_spec.rb	/^class RequestMock$/;"	c
 RootPage	app/pages/admin_pages.rb	/^  class RootPage < WebApplication$/;"	c	class:Admin
 Route	lib/route.rb	/^class Route$/;"	c
@@ -74,22 +80,25 @@ YamlFile	lib/devtools/i18n_utils.rb	/^  class YamlFile$/;"	c
 []=	lib/route.rb	/^    def []=(app_class, route)$/;"	f	class:Route
 abs_path	lib/devtools/asset_mapper/sfile.rb	/^    def abs_path$/;"	f	class:AssetMapper.Sfile
 abs_path	lib/devtools/asset_mapper/tfile.rb	/^    def abs_path(version)$/;"	f	class:AssetMapper.Tfile
-addClass	doc/spec/lib/route_spec.html	/^function addClass(element_id, classname) {$/;"	f
+addClass	doc/spec/lib/route_spec_rslt.html	/^function addClass(element_id, classname) {$/;"	f
 add_key	lib/devtools/i18n_utils.rb	/^    def add_key(key, value = nil)$/;"	f	class:YamlFile
 add_with_gt	lib/devtools/i18n_utils.rb	/^    def add_with_gt(key, trans_key = -1)$/;"	f	class:YamlFile
 all	lib/route.rb	/^    def all$/;"	f	class:Route
 all_cookies	features/support/env.rb	/^  def all_cookies$/;"	f	class:FeatureWorld
-apply_filters	doc/spec/lib/route_spec.html	/^function apply_filters() {$/;"	f
+apply_filters	doc/spec/lib/route_spec_rslt.html	/^function apply_filters() {$/;"	f
 assets_env	lib/asset_settings.rb	/^    def assets_env$/;"	f	class:AssetSettings
-assign_display_style	doc/spec/lib/route_spec.html	/^function assign_display_style(classname, display_flag) {$/;"	f
-assign_display_style_for_group	doc/spec/lib/route_spec.html	/^function assign_display_style_for_group(classname, display_flag, subgroup_flag) {$/;"	f
+assign_display_style	doc/spec/lib/route_spec_rslt.html	/^function assign_display_style(classname, display_flag) {$/;"	f
+assign_display_style_for_group	doc/spec/lib/route_spec_rslt.html	/^function assign_display_style_for_group(classname, display_flag, subgroup_flag) {$/;"	f
 attr_with_default	lib/core_ext/attr_with_default.rb	/^  def attr_with_default(hsh)$/;"	f	class:Class
 bit_checkbox	lib/helpers/form_helper.rb	/^    def bit_checkbox(field, key, options = {})$/;"	f	class:FormHelper.FormBuilder
 button	lib/helpers/form_helper.rb	/^  def button(value = nil, options = {})$/;"	f	class:FormHelper
+call	lib/rack/json_response.rb	/^    def call(env)$/;"	f	class:Rack.JsonResponse
+call	lib/rack/log_flusher.rb	/^    def call(env)$/;"	f	class:Rack.LogFlusher
 checkbox	lib/helpers/form_helper.rb	/^    def checkbox(field, values, options = {})$/;"	f	class:FormHelper.FormBuilder
 checkbox	lib/helpers/form_helper.rb	/^  def checkbox(field, values, options = {})$/;"	f	class:FormHelper.radio
 class_name	lib/devtools/file_generator.rb	/^    def class_name$/;"	f	class:FileGenerator.RubyFile
 class_string	lib/devtools/file_generator.rb	/^    def class_string$/;"	f	class:FileGenerator.RubyFile
+clean	lib/utils/la_backtrace_cleaner.rb	/^  def self.clean(e)$/;"	F	class:LaBacktraceCleaner
 close_fieldset	lib/helpers/form_helper.rb	/^  def close_fieldset$/;"	f	class:FormHelper
 close_tag	lib/helpers/form_helper.rb	/^  def close_tag(name = 'form')$/;"	f	class:FormHelper.radio.checkbox.select
 cloud	lib/devtools/asset_mapper/producer.rb	/^    def cloud(url, opts = {})$/;"	f	class:AssetMapper.Producer
@@ -119,6 +128,7 @@ diff_file	lib/devtools/asset_mapper/vendor_file.rb	/^    def diff_file(sfile, tf
 dl_file!	lib/devtools/asset_mapper/cloud_file.rb	/^    def dl_file!(url, tfile)$/;"	f	class:AssetMapper.CloudFile
 download!	lib/devtools/asset_mapper/cloud_file.rb	/^    def download!$/;"	f	class:AssetMapper.CloudFile
 environments	lib/asset_settings.rb	/^    def environments$/;"	f	class:AssetSettings
+event	lib/la_buffered_logger.rb	/^  def event(msg, opts = {})$/;"	f	class:LaBufferedLogger
 example_file	spec/support/helpers/example_helper.rb	/^def example_file(arg)$/;"	f
 execute!	lib/devtools/asset_mapper/loader.rb	/^    def execute!(compile = false)$/;"	f	class:AssetMapper.Loader
 extract_args	lib/core_ext/hash_argument.rb	/^  def extract_args(expects)$/;"	f	class:Hash
@@ -148,6 +158,7 @@ find_common_scope	lib/devtools/i18n_utils.rb	/^    def find_common_scope(keys)$/
 find_fail_keys	lib/devtools/i18n_utils.rb	/^    def find_fail_keys(contents)$/;"	f	class:I18nUtils
 find_tt_keys	lib/devtools/i18n_utils.rb	/^    def find_tt_keys(contents)$/;"	f	class:I18nUtils
 flat_keys	lib/devtools/i18n_utils.rb	/^    def flat_keys$/;"	f	class:YamlFile
+flush!	lib/la_buffered_logger.rb	/^  def flush!$/;"	f	class:LaBufferedLogger
 for_environment	lib/confu.rb	/^    def for_environment(environment, &prc)$/;"	f	class:Confu
 form	lib/helpers/form_helper.rb	/^  def form(action = :self, options = {})$/;"	f	class:FormHelper
 form_for	lib/helpers/form_helper.rb	/^  def form_for(object, action = :self, options = {})$/;"	f	class:FormHelper
@@ -157,7 +168,7 @@ from_hex	lib/core_ext/time_short.rb	/^  def self.from_hex(hstr)$/;"	F	class:Time
 from_short	lib/core_ext/time_short.rb	/^  def self.from_short(sstr)$/;"	F	class:Time
 generate_version	lib/devtools/asset_mapper/tfile.rb	/^    def generate_version$/;"	f	class:AssetMapper.Tfile
 get	lib/asset_settings.rb	/^    def get$/;"	f	class:AssetSettings
-get_display_style	doc/spec/lib/route_spec.html	/^function get_display_style(display_flag) {$/;"	f
+get_display_style	doc/spec/lib/route_spec_rslt.html	/^function get_display_style(display_flag) {$/;"	f
 git_clone!	lib/devtools/asset_mapper/pull.rb	/^    def git_clone!$/;"	f	class:AssetMapper.Pull
 git_update	lib/devtools/asset_mapper/pull.rb	/^    def git_update$/;"	f	class:AssetMapper.Pull
 google_t	lib/devtools/i18n_utils.rb	/^    def google_t(key, lang)$/;"	f	class:I18nUtils
@@ -185,6 +196,9 @@ initialize	lib/devtools/asset_mapper/vendor_file.rb	/^    def initialize(file_id
 initialize	lib/devtools/file_generator.rb	/^    def initialize(name, su = nil)$/;"	f	class:FileGenerator.RubyFile
 initialize	lib/devtools/i18n_utils.rb	/^    def initialize(file_name)$/;"	f	class:YamlFile
 initialize	lib/helpers/form_helper.rb	/^    def initialize(parent, object, name = nil)$/;"	f	class:FormHelper.FormBuilder
+initialize	lib/la_buffered_logger.rb	/^  def initialize(opts = {})$/;"	f	class:LaBufferedLogger
+initialize	lib/rack/json_response.rb	/^    def initialize(app)$/;"	f	class:Rack.JsonResponse
+initialize	lib/rack/log_flusher.rb	/^    def initialize(app, opts = {})$/;"	f	class:Rack.LogFlusher
 initialize	spec/lib/route_spec.rb	/^  def initialize(tid)$/;"	f	class:Account
 js?	lib/devtools/asset_mapper/sfile.rb	/^    def js?$/;"	f	class:AssetMapper.Sfile
 js?	lib/devtools/asset_mapper/tfile.rb	/^    def js?$/;"	f	class:AssetMapper.Tfile
@@ -192,23 +206,21 @@ js_tag	lib/helpers/assets_helper.rb	/^  def js_tag(file_id)$/;"	f	class:AssetsHe
 key?	lib/devtools/i18n_utils.rb	/^    def key?(key)$/;"	f	class:YamlFile
 label	lib/helpers/form_helper.rb	/^    def label(field, display = nil, options = {})$/;"	f	class:FormHelper.FormBuilder
 label	lib/helpers/form_helper.rb	/^  def label(field, display = '', options = {})$/;"	f	class:FormHelper
+level=	lib/la_buffered_logger.rb	/^  def level=(lvl)$/;"	f	class:LaBufferedLogger
 load_yaml	lib/asset_settings.rb	/^    def load_yaml(file = nil)$/;"	f	class:AssetSettings
 load_yaml!	lib/asset_settings.rb	/^    def load_yaml!(file = nil)$/;"	f	class:AssetSettings
 local_assets?	lib/asset_settings.rb	/^    def local_assets?$/;"	f	class:AssetSettings
 local_url	lib/devtools/asset_mapper/sfile.rb	/^    def local_url$/;"	f	class:AssetMapper.Sfile
 local_url	lib/devtools/asset_mapper/tfile.rb	/^    def local_url$/;"	f	class:AssetMapper.Tfile
-makeRed	doc/cucumber.html	/^  function makeRed(element_id) {$/;"	f
-makeRed	doc/spec/lib/route_spec.html	/^function makeRed(element_id) {$/;"	f
-makeYellow	doc/cucumber.html	/^  function makeYellow(element_id) {$/;"	f
-makeYellow	doc/spec/lib/route_spec.html	/^function makeYellow(element_id) {$/;"	f
+makeRed	doc/spec/lib/route_spec_rslt.html	/^function makeRed(element_id) {$/;"	f
+makeYellow	doc/spec/lib/route_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
 merge_default	lib/confu.rb	/^    def merge_default(dat)$/;"	f	class:Confu.Data
 method_missing	lib/confu.rb	/^    def method_missing(met, val = nil, &prc)$/;"	f	class:Confu.Data
 method_missing	lib/helpers/form_helper.rb	/^    def method_missing(met, field = '', options = {})$/;"	f	class:FormHelper.FormBuilder
 min_abs_path	lib/devtools/asset_mapper/tfile.rb	/^    def min_abs_path$/;"	f	class:AssetMapper.Tfile
 min_file_path	lib/devtools/asset_mapper/tfile.rb	/^    def min_file_path$/;"	f	class:AssetMapper.Tfile
 mount	lib/route.rb	/^    def mount(app_class, route = nil)$/;"	f	class:Route
-moveProgressBar	doc/cucumber.html	/^  function moveProgressBar(percentDone) {$/;"	f
-moveProgressBar	doc/spec/lib/route_spec.html	/^function moveProgressBar(percentDone) {$/;"	f
+moveProgressBar	doc/spec/lib/route_spec_rslt.html	/^function moveProgressBar(percentDone) {$/;"	f
 n1	doc/assets_management.html	/^  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1<\/a><\/span>produce <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'<\/span><span style="color:#D20">application.js<\/span><span style="color:#710">'<\/span><\/span> <span style="color:#080;font-weight:bold">do<\/span>$/;"	a
 n1	doc/assets_management.html	/^  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1<\/a><\/span>= img_tag(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'<\/span><span style="color:#D20">icon\/group\/friends.png<\/span><span style="color:#710">'<\/span><\/span>)$/;"	a
 n1	doc/assets_management.html	/^  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1<\/a><\/span>= img_tag(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'<\/span><span style="color:#D20">icon\/group\/friends.png<\/span><span style="color:#710">'<\/span><\/span>, <span style="color:#606">width<\/span>: <span style="color:#00D">230<\/span>)$/;"	a
@@ -281,7 +293,7 @@ pull	lib/devtools/asset_mapper/loader.rb	/^    def pull(app_name, opts = {})$/;"
 radio	lib/helpers/form_helper.rb	/^    def radio(field, values, options = {})$/;"	f	class:FormHelper.FormBuilder
 radio	lib/helpers/form_helper.rb	/^  def radio(field, values, options = {})$/;"	f	class:FormHelper
 reload!	config/initializers/development/awesome_print.rb	/^def reload!$/;"	f
-removeClass	doc/spec/lib/route_spec.html	/^function removeClass(element_id, classname) {$/;"	f
+removeClass	doc/spec/lib/route_spec_rslt.html	/^function removeClass(element_id, classname) {$/;"	f
 render!	lib/devtools/file_generator.rb	/^    def render!(hsh)$/;"	f	class:FileGenerator.RubyFile
 renest	lib/devtools/i18n_utils.rb	/^    def renest$/;"	f	class:YamlFile
 repo_path	lib/devtools/asset_mapper/vendor_file.rb	/^    def repo_path(from)$/;"	f	class:AssetMapper.VendorFile

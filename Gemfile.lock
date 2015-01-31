@@ -114,6 +114,7 @@ GEM
     notiffany (0.0.3)
       nenv (~> 0.1)
       shellany (~> 0.0)
+    oj (2.11.4)
     parser (2.2.0.2)
       ast (>= 1.1, < 3.0)
     poltergeist (1.5.1)
@@ -222,6 +223,7 @@ DEPENDENCIES
   activesupport
   awesome_print
   capybara
+  celluloid
   cucumber
   diffy
   dotenv
@@ -237,6 +239,8 @@ DEPENDENCIES
   i18n
   iye
   mdoc
+  multi_json
+  oj
   poltergeist
   pry-byebug
   puma

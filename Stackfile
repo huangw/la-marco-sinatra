@@ -23,6 +23,13 @@ export :route do
   copy 'Guardfile', sync: false
 end
 
+export :logger do
+  add_gem 'celluloid'
+
+  copy 'lib/la_buffered_logger.rb'
+  copy 'lib/rack/log_flusher.rb'
+end
+
 export :web do
   import :route
 
@@ -70,8 +77,16 @@ export :assets_mapper do
   # copy 'app/assets/mappings.rb.sample' => 'app/assets/mappings.rb'
 end
 
+export :restul_api do
+  add_gem 'oj'
+  add_gem 'multi_json'
+  copy 'lib/rack/json_response.rb'
+end
+
 from('.') do
   import :web
   import :cucumber
   import :assets_mapper
+  import :logger
+  import :restul_api
 end
