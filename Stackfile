@@ -23,13 +23,6 @@ export :route do
   copy 'Guardfile', sync: false
 end
 
-export :logger do
-  # add_gem 'celluloid'
-
-  copy 'lib/la_buffered_logger.rb'
-  copy 'lib/rack/log_flusher.rb'
-end
-
 export :web do
   import :route
 
@@ -75,6 +68,11 @@ export :assets_mapper do
   copy 'lib/devtools/asset_mapper.rb'
   copy 'lib/devtools/asset_mapper/*.rb'
   # copy 'app/assets/mappings.rb.sample' => 'app/assets/mappings.rb'
+end
+
+export :logger do
+  copy 'lib/la_buffered_logger.rb'
+  copy 'lib/rack/log_flusher.rb'
 end
 
 export :restul_api do
