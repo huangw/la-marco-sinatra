@@ -1,23 +1,24 @@
 require 'sinatra/base'
 require 'route'
 
-# namespace for exceptions that known by the application
+# Namespace for exceptions that known by the application
 class ServerError < RuntimeError
   def status
     500
   end
 end
 
+# Generic
 class RequestError < ArgumentError
   def status
     400
   end
 end
 
-# validation errors occured in different layers
+# Validation errors occured in different layers
 class ValidationError < RequestError; end
 
-# not found, etc.
+# Not found, etc.
 class RouteError < RequestError
   def status
     404
