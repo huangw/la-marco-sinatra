@@ -32,10 +32,14 @@ class LaBufferedLogger
     @level
   end
 
+  def event(msg, opts = {})
+    @msg << msg.is_a?(Class) ? msg.new(opts) : opts.merge(message: msg)
+  end
+
   LEVELS.each_with_index do |met, lvl|
     define_method(met) do |message, opts = {}|
       return nil if lvl < LEVELS.index(level.to_sym) # skip if lower level set
-      dat = opts.merge 'severity' => lvl, 'c_at' => Time.now.to_i
+      dat = opts.merge 'severity' => lvl, 'c_at' => Time.now
 
       if message.is_a?(Exception)
         dat['exception'] = message.class.to_s

@@ -44,12 +44,16 @@ HashFlatter	lib/utils/hash_flatter.rb	/^module HashFlatter$/;"	m
 I18nHelper	lib/helpers/i18n_helper.rb	/^module I18nHelper$/;"	m
 I18nUtils	lib/devtools/i18n_utils.rb	/^module I18nUtils$/;"	m
 ImageController	lib/controllers/image_controller.rb	/^class ImageController < Sinatra::Base$/;"	c
+JsonResponse	lib/rack/json_response.rb	/^  class JsonResponse$/;"	c	class:Rack
 LaBacktraceCleaner	lib/utils/la_backtrace_cleaner.rb	/^module LaBacktraceCleaner$/;"	m
 LaBufferedLogger	lib/la_buffered_logger.rb	/^class LaBufferedLogger$/;"	c
 Loader	lib/devtools/asset_mapper/loader.rb	/^  class Loader$/;"	c	class:AssetMapper
+LogFlusher	lib/rack/log_flusher.rb	/^  class LogFlusher$/;"	c	class:Rack
 PersonPage	spec/lib/route_spec.rb	/^  class PersonPage; Route << self end$/;"	c	class:Admin
 Producer	lib/devtools/asset_mapper/producer.rb	/^  class Producer$/;"	c	class:AssetMapper
 Pull	lib/devtools/asset_mapper/pull.rb	/^  class Pull$/;"	c	class:AssetMapper
+Rack	lib/rack/json_response.rb	/^module Rack$/;"	m
+Rack	lib/rack/log_flusher.rb	/^module Rack$/;"	m
 RequestMock	spec/lib/helpers/form_helper_spec.rb	/^class RequestMock$/;"	c
 RootPage	app/pages/admin_pages.rb	/^  class RootPage < WebApplication$/;"	c	class:Admin
 Route	lib/route.rb	/^class Route$/;"	c
@@ -88,6 +92,8 @@ assign_display_style_for_group	doc/spec/lib/route_spec_rslt.html	/^function assi
 attr_with_default	lib/core_ext/attr_with_default.rb	/^  def attr_with_default(hsh)$/;"	f	class:Class
 bit_checkbox	lib/helpers/form_helper.rb	/^    def bit_checkbox(field, key, options = {})$/;"	f	class:FormHelper.FormBuilder
 button	lib/helpers/form_helper.rb	/^  def button(value = nil, options = {})$/;"	f	class:FormHelper
+call	lib/rack/json_response.rb	/^    def call(env)$/;"	f	class:Rack.JsonResponse
+call	lib/rack/log_flusher.rb	/^    def call(env)$/;"	f	class:Rack.LogFlusher
 checkbox	lib/helpers/form_helper.rb	/^    def checkbox(field, values, options = {})$/;"	f	class:FormHelper.FormBuilder
 checkbox	lib/helpers/form_helper.rb	/^  def checkbox(field, values, options = {})$/;"	f	class:FormHelper.radio
 class_name	lib/devtools/file_generator.rb	/^    def class_name$/;"	f	class:FileGenerator.RubyFile
@@ -122,6 +128,7 @@ diff_file	lib/devtools/asset_mapper/vendor_file.rb	/^    def diff_file(sfile, tf
 dl_file!	lib/devtools/asset_mapper/cloud_file.rb	/^    def dl_file!(url, tfile)$/;"	f	class:AssetMapper.CloudFile
 download!	lib/devtools/asset_mapper/cloud_file.rb	/^    def download!$/;"	f	class:AssetMapper.CloudFile
 environments	lib/asset_settings.rb	/^    def environments$/;"	f	class:AssetSettings
+event	lib/la_buffered_logger.rb	/^  def event(msg, opts = {})$/;"	f	class:LaBufferedLogger
 example_file	spec/support/helpers/example_helper.rb	/^def example_file(arg)$/;"	f
 execute!	lib/devtools/asset_mapper/loader.rb	/^    def execute!(compile = false)$/;"	f	class:AssetMapper.Loader
 extract_args	lib/core_ext/hash_argument.rb	/^  def extract_args(expects)$/;"	f	class:Hash
@@ -190,6 +197,8 @@ initialize	lib/devtools/file_generator.rb	/^    def initialize(name, su = nil)$/
 initialize	lib/devtools/i18n_utils.rb	/^    def initialize(file_name)$/;"	f	class:YamlFile
 initialize	lib/helpers/form_helper.rb	/^    def initialize(parent, object, name = nil)$/;"	f	class:FormHelper.FormBuilder
 initialize	lib/la_buffered_logger.rb	/^  def initialize(opts = {})$/;"	f	class:LaBufferedLogger
+initialize	lib/rack/json_response.rb	/^    def initialize(app)$/;"	f	class:Rack.JsonResponse
+initialize	lib/rack/log_flusher.rb	/^    def initialize(app, opts = {})$/;"	f	class:Rack.LogFlusher
 initialize	spec/lib/route_spec.rb	/^  def initialize(tid)$/;"	f	class:Account
 js?	lib/devtools/asset_mapper/sfile.rb	/^    def js?$/;"	f	class:AssetMapper.Sfile
 js?	lib/devtools/asset_mapper/tfile.rb	/^    def js?$/;"	f	class:AssetMapper.Tfile

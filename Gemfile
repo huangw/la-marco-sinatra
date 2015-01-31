@@ -11,6 +11,9 @@ gem "sinatra-flash"
 gem "sinatra-redirect-with-flash"
 gem "slim"
 gem "http_accept_language"
+gem "celluloid"
+gem "oj"
+gem "multi_json"
 
 group :development do
   gem "rake"
