@@ -10,13 +10,15 @@ end
 
 # test the restful response settings
 class RestfulAPI < Sinatra::Base
+  use Rack::LogFlusher
+  use Rack::JsonResponse
+
   configure do
     set :show_exceptions, false # true if development?
     set :raise_errors, true # let exceptions pass through (to responser)
   end
 
-  use Rack::LogFlusher, logger: LaBufferedLogger
-  use Rack::JsonResponse
+  not_found { fail RouteError, :not_found }
 
   helpers do
     def common_rsp

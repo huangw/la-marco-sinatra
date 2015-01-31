@@ -80,7 +80,9 @@ end
 export :restul_api do
   add_gem 'oj'
   add_gem 'multi_json'
+  add_gem 'recursive-open-struct'
   copy 'lib/rack/json_response.rb'
+  copy 'spec/support/helpers/api_test_helper.rb'
 end
 
 from('.') do

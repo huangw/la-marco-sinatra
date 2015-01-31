@@ -14,6 +14,7 @@ gem "http_accept_language"
 gem "celluloid"
 gem "oj"
 gem "multi_json"
+gem "recursive-open-struct"
 
 group :development do
   gem "rake"

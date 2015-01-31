@@ -5,6 +5,7 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
 API	spec/lib/route_spec.rb	/^module API$/;"	m
+APITestHelper	spec/support/helpers/api_test_helper.rb	/^module APITestHelper$/;"	m
 Account	spec/lib/route_spec.rb	/^class Account$/;"	c
 AccountPage	spec/lib/route_spec.rb	/^  class AccountPage; Route << self end$/;"	c	class:API
 AccountPage	spec/lib/route_spec.rb	/^  class AccountPage; Route << self end$/;"	c	class:Admin
@@ -26,6 +27,7 @@ AssetSettings	lib/asset_settings/environment_settings.rb	/^class AssetSettings$/
 AssetTestPage	app/pages/asset_test_page.rb	/^class AssetTestPage < WebApplication$/;"	c
 AssetsController	lib/controllers/assets_controller.rb	/^class AssetsController < Sinatra::Base$/;"	c
 AssetsHelper	lib/helpers/assets_helper.rb	/^module AssetsHelper$/;"	m
+AuthenticationError	app/pages/restful_api.rb	/^class AuthenticationError < ServerError$/;"	c
 CheckPathPage	app/pages/slimmer/check_path.rb	/^  class CheckPathPage < WebApplication$/;"	c	class:Slimmer
 Class	lib/core_ext/attr_with_default.rb	/^class Class$/;"	c
 CloudFile	lib/devtools/asset_mapper/cloud_file.rb	/^  class CloudFile < Sfile$/;"	c	class:AssetMapper
@@ -49,15 +51,20 @@ LaBacktraceCleaner	lib/utils/la_backtrace_cleaner.rb	/^module LaBacktraceCleaner
 LaBufferedLogger	lib/la_buffered_logger.rb	/^class LaBufferedLogger$/;"	c
 Loader	lib/devtools/asset_mapper/loader.rb	/^  class Loader$/;"	c	class:AssetMapper
 LogFlusher	lib/rack/log_flusher.rb	/^  class LogFlusher$/;"	c	class:Rack
+LoggerTestPage	app/pages/logger_test_page.rb	/^class LoggerTestPage < WebApplication$/;"	c
 PersonPage	spec/lib/route_spec.rb	/^  class PersonPage; Route << self end$/;"	c	class:Admin
 Producer	lib/devtools/asset_mapper/producer.rb	/^  class Producer$/;"	c	class:AssetMapper
 Pull	lib/devtools/asset_mapper/pull.rb	/^  class Pull$/;"	c	class:AssetMapper
 Rack	lib/rack/json_response.rb	/^module Rack$/;"	m
 Rack	lib/rack/log_flusher.rb	/^module Rack$/;"	m
+RequestError	config/initializers/routes.rb	/^class RequestError < ArgumentError$/;"	c
 RequestMock	spec/lib/helpers/form_helper_spec.rb	/^class RequestMock$/;"	c
+RestfulAPI	app/pages/restful_api.rb	/^class RestfulAPI < Sinatra::Base$/;"	c
 RootPage	app/pages/admin_pages.rb	/^  class RootPage < WebApplication$/;"	c	class:Admin
 Route	lib/route.rb	/^class Route$/;"	c
+RouteError	config/initializers/routes.rb	/^class RouteError < RequestError$/;"	c
 RubyFile	lib/devtools/file_generator.rb	/^  class RubyFile$/;"	c	class:FileGenerator
+ServerError	config/initializers/routes.rb	/^class ServerError < RuntimeError$/;"	c
 Sfile	lib/devtools/asset_mapper/sfile.rb	/^  class Sfile$/;"	c	class:AssetMapper
 SlimHelper	lib/helpers/slim_helper.rb	/^module SlimHelper$/;"	m
 Slimmer	app/pages/slimmer/check_path.rb	/^module Slimmer$/;"	m
@@ -71,6 +78,7 @@ Ungrouped	doc/coverage/index.html	/^  <a name="Ungrouped"><\/a>$/;"	a
 UserMock	spec/lib/helpers/form_helper_spec.rb	/^class UserMock$/;"	c
 UserPage	app/pages/admins/user_page.rb	/^  class UserPage < WebApplication$/;"	c	class:Admin
 UserPage	app/pages/users/root_page.rb	/^class UserPage < WebApplication$/;"	c
+ValidationError	config/initializers/routes.rb	/^class ValidationError < RequestError; end$/;"	c
 VendorFile	lib/devtools/asset_mapper/vendor_file.rb	/^  class VendorFile < Sfile$/;"	c	class:AssetMapper
 WebApplication	app/pages/web_application.rb	/^class WebApplication < Sinatra::Base$/;"	c
 YamlFile	lib/devtools/i18n_utils.rb	/^  class YamlFile$/;"	c
@@ -85,6 +93,7 @@ add_key	lib/devtools/i18n_utils.rb	/^    def add_key(key, value = nil)$/;"	f	cla
 add_with_gt	lib/devtools/i18n_utils.rb	/^    def add_with_gt(key, trans_key = -1)$/;"	f	class:YamlFile
 all	lib/route.rb	/^    def all$/;"	f	class:Route
 all_cookies	features/support/env.rb	/^  def all_cookies$/;"	f	class:FeatureWorld
+app	spec/restful_api_spec.rb	/^def app$/;"	f
 apply_filters	doc/spec/lib/route_spec_rslt.html	/^function apply_filters() {$/;"	f
 assets_env	lib/asset_settings.rb	/^    def assets_env$/;"	f	class:AssetSettings
 assign_display_style	doc/spec/lib/route_spec_rslt.html	/^function assign_display_style(classname, display_flag) {$/;"	f
@@ -103,6 +112,7 @@ close_fieldset	lib/helpers/form_helper.rb	/^  def close_fieldset$/;"	f	class:For
 close_tag	lib/helpers/form_helper.rb	/^  def close_tag(name = 'form')$/;"	f	class:FormHelper.radio.checkbox.select
 cloud	lib/devtools/asset_mapper/producer.rb	/^    def cloud(url, opts = {})$/;"	f	class:AssetMapper.Producer
 common_head	lib/core_ext/string_common_head.rb	/^  def common_head(str)$/;"	f	class:String
+common_rsp	app/pages/restful_api.rb	/^    def common_rsp$/;"	f	class:RestfulAPI
 compile!	lib/devtools/asset_mapper/tfile.rb	/^    def compile!$/;"	f	class:AssetMapper.Tfile
 compile?	lib/devtools/asset_mapper.rb	/^    def compile?$/;"	f	class:AssetMapper
 compile_css!	lib/devtools/asset_mapper/tfile.rb	/^    def compile_css!(new_path)$/;"	f	class:AssetMapper.Tfile
@@ -200,6 +210,7 @@ initialize	lib/la_buffered_logger.rb	/^  def initialize(opts = {})$/;"	f	class:L
 initialize	lib/rack/json_response.rb	/^    def initialize(app)$/;"	f	class:Rack.JsonResponse
 initialize	lib/rack/log_flusher.rb	/^    def initialize(app, opts = {})$/;"	f	class:Rack.LogFlusher
 initialize	spec/lib/route_spec.rb	/^  def initialize(tid)$/;"	f	class:Account
+j2o	spec/support/helpers/api_test_helper.rb	/^  def j2o(json = nil)$/;"	f	class:APITestHelper
 js?	lib/devtools/asset_mapper/sfile.rb	/^    def js?$/;"	f	class:AssetMapper.Sfile
 js?	lib/devtools/asset_mapper/tfile.rb	/^    def js?$/;"	f	class:AssetMapper.Tfile
 js_tag	lib/helpers/assets_helper.rb	/^  def js_tag(file_id)$/;"	f	class:AssetsHelper.css_tag
@@ -290,6 +301,7 @@ production_url	lib/devtools/asset_mapper/cloud_file.rb	/^    def production_url$
 production_url	lib/devtools/asset_mapper/sfile.rb	/^    def production_url$/;"	f	class:AssetMapper.Sfile
 production_url	lib/devtools/asset_mapper/tfile.rb	/^    def production_url$/;"	f	class:AssetMapper.Tfile
 pull	lib/devtools/asset_mapper/loader.rb	/^    def pull(app_name, opts = {})$/;"	f	class:AssetMapper.Loader
+r	spec/support/helpers/api_test_helper.rb	/^  def r(req = nil, body = nil, headers = {})$/;"	f	class:APITestHelper
 radio	lib/helpers/form_helper.rb	/^    def radio(field, values, options = {})$/;"	f	class:FormHelper.FormBuilder
 radio	lib/helpers/form_helper.rb	/^  def radio(field, values, options = {})$/;"	f	class:FormHelper
 reload!	config/initializers/development/awesome_print.rb	/^def reload!$/;"	f
@@ -306,14 +318,20 @@ root	lib/devtools/asset_mapper.rb	/^    def root$/;"	f	class:AssetMapper
 root_join	config/boot.rb	/^def root_join(*path)$/;"	f
 rsp	lib/helpers/slim_helper.rb	/^  def rsp(tpl = nil, opts = {})$/;"	f	class:SlimHelper
 rsp!	lib/helpers/slim_helper.rb	/^  def rsp!(*args)$/;"	f	class:SlimHelper
+s	spec/support/helpers/api_test_helper.rb	/^  def s$/;"	f	class:APITestHelper
 scope_join	lib/devtools/i18n_utils.rb	/^    def scope_join(*args)$/;"	f	class:YamlFile
 select	lib/helpers/form_helper.rb	/^    def select(field, values, options = {})$/;"	f	class:FormHelper.FormBuilder
 select	lib/helpers/form_helper.rb	/^  def select(field, values, options = {})$/;"	f	class:FormHelper.radio.checkbox
 set_options	lib/helpers/form_helper.rb	/^  def set_options(type, field, options = {})$/;"	f	class:FormHelper
 short	lib/core_ext/time_short.rb	/^  def short$/;"	f	class:Time
 single_tag	lib/helpers/form_helper.rb	/^  def single_tag(name, options = {})$/;"	f	class:FormHelper.radio.checkbox.select
+sp	spec/support/helpers/api_test_helper.rb	/^  def sp(expected_status = 200)$/;"	f	class:APITestHelper
 spec_filename	lib/devtools/file_generator.rb	/^    def spec_filename$/;"	f	class:FileGenerator.RubyFile
 spec_name	lib/devtools/file_generator.rb	/^    def spec_name$/;"	f	class:FileGenerator.RubyFile
+status	app/pages/restful_api.rb	/^  def status$/;"	f	class:AuthenticationError
+status	config/initializers/routes.rb	/^  def status$/;"	f	class:RequestError
+status	config/initializers/routes.rb	/^  def status$/;"	f	class:RouteError
+status	config/initializers/routes.rb	/^  def status$/;"	f	class:ServerError
 submit	lib/helpers/form_helper.rb	/^  def submit(value = nil, options = {})$/;"	f	class:FormHelper
 super_classname	lib/devtools/file_generator.rb	/^    def super_classname$/;"	f	class:FileGenerator.RubyFile
 table	lib/route.rb	/^    def table$/;"	f	class:Route
