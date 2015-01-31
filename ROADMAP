@@ -23,5 +23,5 @@ year: 2015
 
 [+] api: implement API feature 01/30-01/31 @huangw
   [++] rackapi: rack middleware rewised 01/30 @huangw:01/31
-  [++] apitest: api test with rack test and helper 01/30 @huangw:10
+  [++] apitest: api test with rack test and helper 01/30 @huangw:01/31
   [++] apidoc: api document with rspec rack test 01/31 @huangw
