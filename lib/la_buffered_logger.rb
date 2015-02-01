@@ -3,18 +3,22 @@
 # created at: 2015-01-31
 require 'logger'
 require 'utils/la_backtrace_cleaner'
+require 'celluloid/autostart'
+Celluloid.logger = nil
 
 # A logger buffers messages until threshold number reached or flush!
 # method explicitly called.
 class LaBufferedLogger
   include ::Logger::Severity
+  include Celluloid
+
   LEVELS = [:debug, :info, :warn, :error, :fatal, :unknown] # 0 .. 5
 
   attr_accessor :flush_threshold, :request_info
   attr_reader :level, :msgs
 
   def initialize(opts = {})
-    self.level = opts[:level] || :debug # default, store all messages
+    self.level = opts.extract_args!(level: :debug)
     @request_info, @msgs = {}, []
   end
 
@@ -32,7 +36,12 @@ class LaBufferedLogger
   end
 
   def event(type, msg, opts = {})
-    append opts.merge(type: type.to_s, message: msg.to_s)
+    append opts.merge(type: type, message: msg.to_s)
+  end
+
+  def access(status, timespend, opts = {})
+    append opts.merge(@request_info.merge(type: 'access', status: status.to_i,
+                                          tm: timespend))
   end
 
   def append(dat)

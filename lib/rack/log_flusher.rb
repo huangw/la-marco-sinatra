@@ -22,10 +22,12 @@ module Rack
         env['rack.logger'].request_info['status'] = status
         env['rack.logger'].request_info['tm'] = Time.now - t1
       rescue => e
+        status = e.respond_to?(:status) ? e.status : 500
         env['rack.logger'].fatal(e)
       end
 
-      env['rack.logger'].flush! if env['rack.logger'].respond_to?(:'flush!')
+      env['rack.logger'].access(status, Time.now - t1)
+      env['rack.logger'].async.flush!
       [status, headers, body]
     end
   end
