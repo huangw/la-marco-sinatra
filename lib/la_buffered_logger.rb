@@ -19,7 +19,6 @@ class LaBufferedLogger
   end
 
   def flush!
-    # EventLog.collection.insert @msgs.map(&:as_document)
     @msgs.each { |msg| ap msg }
     @msgs = []
   end
@@ -32,8 +31,8 @@ class LaBufferedLogger
     @level
   end
 
-  def event(msg, opts = {})
-    append msg.is_a?(Class) ? msg.new(opts) : opts.merge(message: msg)
+  def event(type, msg, opts = {})
+    append opts.merge(type: type.to_s, message: msg.to_s)
   end
 
   def append(dat)
