@@ -94,6 +94,7 @@ add_with_gt	lib/devtools/i18n_utils.rb	/^    def add_with_gt(key, trans_key = -1
 all	lib/route.rb	/^    def all$/;"	f	class:Route
 all_cookies	features/support/env.rb	/^  def all_cookies$/;"	f	class:FeatureWorld
 app	spec/restful_api_spec.rb	/^def app$/;"	f
+append	lib/la_buffered_logger.rb	/^  def append(dat)$/;"	f	class:LaBufferedLogger
 apply_filters	doc/spec/lib/route_spec_rslt.html	/^function apply_filters() {$/;"	f
 assets_env	lib/asset_settings.rb	/^    def assets_env$/;"	f	class:AssetSettings
 assign_display_style	doc/spec/lib/route_spec_rslt.html	/^function assign_display_style(classname, display_flag) {$/;"	f

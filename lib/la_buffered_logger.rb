@@ -33,7 +33,11 @@ class LaBufferedLogger
   end
 
   def event(msg, opts = {})
-    @msg << msg.is_a?(Class) ? msg.new(opts) : opts.merge(message: msg)
+    append msg.is_a?(Class) ? msg.new(opts) : opts.merge(message: msg)
+  end
+
+  def append(dat)
+    @msgs << dat
   end
 
   LEVELS.each_with_index do |met, lvl|
@@ -49,7 +53,7 @@ class LaBufferedLogger
         dat['message'] = message
       end
 
-      @msgs << dat
+      append dat
       flush! if flush_threshold && @msgs.size > flush_threshold
       dat
     end
