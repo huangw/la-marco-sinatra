@@ -27,7 +27,7 @@ describe HtmlPresenter do
 
   it 'given a list locales' do
     I18n.locale = :en
-    expect(em.to_html(:default, locales: ['zh', 'en', 'ja'])).to eq("<div class=\"default_en\">mock_email</div>")
+    expect(em.to_html(:default, locales: [:zh, :en, :ja])).to eq("<div class=\"default_en\">mock_email</div>")
 
     I18n.locale = :zh
     expect(em.to_html(:default, locales: [:zh, :en, :ja])).to eq("<div class=\"default_zh\">mock_email</div>")
