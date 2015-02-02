@@ -79,6 +79,7 @@ export :cucumber do
 
   copy 'features/step_definitions/*_steps.rb'
   copy 'features/support/env.rb'
+  copy 'lib/tasks/cucumber.rake'
 end
 
 export :restul_api do
