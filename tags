@@ -91,6 +91,7 @@ YamlFile	lib/devtools/i18n_utils.rb	/^  class YamlFile$/;"	c
 abs_path	lib/devtools/asset_mapper/sfile.rb	/^    def abs_path$/;"	f	class:AssetMapper.Sfile
 abs_path	lib/devtools/asset_mapper/tfile.rb	/^    def abs_path(version)$/;"	f	class:AssetMapper.Tfile
 access	lib/la_buffered_logger.rb	/^  def access(status, opts = {})$/;"	f	class:LaBufferedLogger
+access_recorded?	lib/la_buffered_logger.rb	/^  def access_recorded?$/;"	f	class:LaBufferedLogger
 addClass	doc/spec/lib/route_spec_rslt.html	/^function addClass(element_id, classname) {$/;"	f
 add_key	lib/devtools/i18n_utils.rb	/^    def add_key(key, value = nil)$/;"	f	class:YamlFile
 add_with_gt	lib/devtools/i18n_utils.rb	/^    def add_with_gt(key, trans_key = -1)$/;"	f	class:YamlFile

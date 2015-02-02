@@ -9,9 +9,9 @@ module Rack
     # rubocop:disable MethodLength, LineLength
     def call(env)
       t1 = Time.now
-      logger_klass = @opts.delete(:logger) || LaBufferedLogger
-      env['rack.logger'] = logger_klass.new @opts
-
+      opts = @opts.dup
+      logger_klass = opts.delete(:logger) || LaBufferedLogger
+      env['rack.logger'] = logger_klass.new opts
       req = Rack::Request.new env
       { ip: :ip, met: :request_method, path: :path, ua: :user_agent, rf: :referer }.each do |k, met|
         env['rack.logger'].request_info[k] = req.send(met) if req.send(met)
@@ -26,7 +26,7 @@ module Rack
         env['rack.logger'].fatal(e)
       end
 
-      env['rack.logger'].access(status, tm: Time.now - t1) unless env['rack.logger'].access_recorded? # recorded manually
+      env['rack.logger'].access(status, tm: Time.now - t1)
       env['rack.logger'].async.flush!
       [status, headers, body]
     end
