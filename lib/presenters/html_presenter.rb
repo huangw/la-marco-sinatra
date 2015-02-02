@@ -17,6 +17,6 @@ module HtmlPresenter
       tmpl << ".#{locale}"
     end
 
-    Tilt.new("#{tmpl}.#{ext}").render self, locals
+    Tilt.new("#{tmpl}.#{ext}").render self, dat
   end
 end
