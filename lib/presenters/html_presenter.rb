@@ -12,8 +12,8 @@ module HtmlPresenter
     tmpl = File.join(VIEW_DIR, self.class.to_s.underscore, "#{type}")
 
     if locales
-      locale = locales[0]
-      locales.each { |lc| locale = lc if lc.to_s == I18n.locale.to_s }
+      locale, user_locale = locales[0], I18n.locale.to_s
+      locale = user_locale if locales.map(&:to_s).include?(user_locale)
       tmpl << ".#{locale}"
     end
 
