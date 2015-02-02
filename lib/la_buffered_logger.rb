@@ -35,8 +35,8 @@ class LaBufferedLogger
     @level
   end
 
-  def event(type, msg, opts = {})
-    append opts.merge(type: type, message: msg.to_s)
+  def event(type, dat = {})
+    append dat.merge(type: type)
   end
 
   def access(status, opts = {})
