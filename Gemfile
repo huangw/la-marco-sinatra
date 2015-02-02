@@ -1,43 +1,43 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 # source 'http://ruby.taobao.org/'
 
-gem 'activesupport'
-gem 'dotenv'
-gem 'i18n'
-gem 'sinatra', '~> 1.4'
-gem 'puma'
-gem 'sinatra-contrib'
-gem 'sinatra-flash'
-gem 'sinatra-redirect-with-flash'
-gem 'slim'
-gem 'http_accept_language'
-gem 'celluloid'
-gem 'oj'
-gem 'multi_json'
-gem 'recursive-open-struct'
+gem "activesupport"
+gem "dotenv"
+gem "i18n"
+gem "sinatra", "~> 1.4"
+gem "puma"
+gem "sinatra-contrib"
+gem "sinatra-flash"
+gem "sinatra-redirect-with-flash"
+gem "slim"
+gem "http_accept_language"
+gem "celluloid"
+gem "oj"
+gem "multi_json"
+gem "recursive-open-struct"
 
 group :development do
-  gem 'rake'
-  gem 'rspec'
-  gem 'rspec-its'
-  gem 'pry-byebug'
-  gem 'awesome_print'
-  gem 'simplecov'
-  gem 'guard-rspec'
-  gem 'guard-rubocop'
-  gem 'guard-ctags-bundler'
-  gem 'mdoc'
-  gem 'iye'
-  gem 'google-translate'
-  gem 'guard-rake'
-  gem 'git'
-  gem 'diffy'
-  gem 'fastimage'
-  gem 'sass'
-  gem 'uglifier'
-  gem 'guard-cucumber'
-  gem 'cucumber'
-  gem 'capybara'
-  gem 'poltergeist'
-  gem 'selenium-webdriver'
+  gem "rake"
+  gem "rspec"
+  gem "rspec-its"
+  gem "pry-byebug"
+  gem "awesome_print"
+  gem "simplecov"
+  gem "guard-rspec"
+  gem "guard-rubocop"
+  gem "guard-ctags-bundler"
+  gem "mdoc"
+  gem "iye"
+  gem "google-translate"
+  gem "guard-rake"
+  gem "git"
+  gem "diffy"
+  gem "fastimage"
+  gem "sass"
+  gem "uglifier"
+  gem "guard-cucumber"
+  gem "cucumber"
+  gem "capybara"
+  gem "poltergeist"
+  gem "selenium-webdriver"
 end
