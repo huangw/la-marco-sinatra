@@ -26,7 +26,7 @@ module Rack
         env['rack.logger'].fatal(e)
       end
 
-      env['rack.logger'].access(status, tm: Time.now - t1)
+      env['rack.logger'].access(status, tm: Time.now - t1) unless env['rack.logger'].access_recorded? # recorded manually
       env['rack.logger'].async.flush!
       [status, headers, body]
     end

@@ -19,12 +19,16 @@ class LaBufferedLogger
 
   def initialize(opts = {})
     self.level = opts.extract_args!(level: :debug)
-    @request_info, @msgs = {}, []
+    @request_info, @msgs, @access_recorded = {}, [], false
   end
 
   def flush!
     @msgs.each { |msg| ap msg }
     @msgs = []
+  end
+
+  def access_recorded?
+    @access_recorded ? true : false
   end
 
   # Accept both LaLogger::ERROR (which is actually an integer), or
@@ -41,6 +45,7 @@ class LaBufferedLogger
 
   def access(status, opts = {})
     append opts.merge(status: status)
+    @access_recorded = true
   end
 
   def append(dat)
