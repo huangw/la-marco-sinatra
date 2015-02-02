@@ -39,13 +39,12 @@ class LaBufferedLogger
     append opts.merge(type: type, message: msg.to_s)
   end
 
-  def access(status, timespend, opts = {})
-    append opts.merge(@request_info.merge(type: 'access', status: status.to_i,
-                                          tm: timespend))
+  def access(status, opts = {})
+    append opts.merge(status: status)
   end
 
   def append(dat)
-    @msgs << dat
+    @msgs << request_info.merge(dat)
   end
 
   LEVELS.each_with_index do |met, lvl|

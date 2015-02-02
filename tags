@@ -53,6 +53,7 @@ LaBufferedLogger	lib/la_buffered_logger.rb	/^class LaBufferedLogger$/;"	c
 Loader	lib/devtools/asset_mapper/loader.rb	/^  class Loader$/;"	c	class:AssetMapper
 LogFlusher	lib/rack/log_flusher.rb	/^  class LogFlusher$/;"	c	class:Rack
 LoggerTestPage	app/pages/logger_test_page.rb	/^class LoggerTestPage < WebApplication$/;"	c
+MockEmail	spec/lib/presenters/html_presenter_spec.rb	/^class MockEmail$/;"	c
 PersonPage	spec/lib/route_spec.rb	/^  class PersonPage; Route << self end$/;"	c	class:Admin
 Producer	lib/devtools/asset_mapper/producer.rb	/^  class Producer$/;"	c	class:AssetMapper
 Pull	lib/devtools/asset_mapper/pull.rb	/^  class Pull$/;"	c	class:AssetMapper
@@ -89,7 +90,7 @@ YamlFile	lib/devtools/i18n_utils.rb	/^  class YamlFile$/;"	c
 []=	lib/route.rb	/^    def []=(app_class, route)$/;"	f	class:Route
 abs_path	lib/devtools/asset_mapper/sfile.rb	/^    def abs_path$/;"	f	class:AssetMapper.Sfile
 abs_path	lib/devtools/asset_mapper/tfile.rb	/^    def abs_path(version)$/;"	f	class:AssetMapper.Tfile
-access	lib/la_buffered_logger.rb	/^  def access(status, timespend, opts = {})$/;"	f	class:LaBufferedLogger
+access	lib/la_buffered_logger.rb	/^  def access(status, opts = {})$/;"	f	class:LaBufferedLogger
 addClass	doc/spec/lib/route_spec_rslt.html	/^function addClass(element_id, classname) {$/;"	f
 add_key	lib/devtools/i18n_utils.rb	/^    def add_key(key, value = nil)$/;"	f	class:YamlFile
 add_with_gt	lib/devtools/i18n_utils.rb	/^    def add_with_gt(key, trans_key = -1)$/;"	f	class:YamlFile
@@ -344,6 +345,7 @@ template_id	lib/helpers/slim_helper.rb	/^  def template_id(tpl = nil, locales = 
 text	lib/helpers/form_helper.rb	/^  def text(field, options = {})$/;"	f	class:FormHelper
 textarea	lib/helpers/form_helper.rb	/^    def textarea(field, contents = nil, options = {})$/;"	f	class:FormHelper.FormBuilder
 textarea	lib/helpers/form_helper.rb	/^  def textarea(field, contents = '', options = {})$/;"	f	class:FormHelper
+title	spec/lib/presenters/html_presenter_spec.rb	/^  def title$/;"	f	class:MockEmail
 to	lib/route.rb	/^    def to(app_class, *parts)$/;"	f	class:Route
 to_hash	lib/asset_settings.rb	/^    def to_hash$/;"	f	class:AssetSettings
 to_hash	lib/asset_settings/environment_settings.rb	/^    def to_hash$/;"	f	class:AssetSettings
