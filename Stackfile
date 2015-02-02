@@ -29,7 +29,7 @@ export :logger do
 
   copy 'lib/utils/la_backtrace_cleaner.rb'
   copy 'lib/la_buffered_logger.rb'
-  copy 'lib/rack/log_flusher.rb'
+  copy 'lib/rack/log_flusher.rb', sync: false
 end
 
 export :assets_mapper do
