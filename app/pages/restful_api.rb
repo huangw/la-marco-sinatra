@@ -1,5 +1,6 @@
 # encoding: utf-8
 # require_relative 'la_sinatra_web'
+# require_relative '../../config/initializers/web_exceptions'
 
 # Error for test application
 class AuthenticationError < ServerError
