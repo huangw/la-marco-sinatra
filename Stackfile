@@ -51,10 +51,14 @@ export :assets_mapper do
   copy 'lib/devtools/asset_mapper/*.rb'
   # copy 'app/assets/mappings.rb.sample' => 'app/assets/mappings.rb'
 end
+export :exceptions do
+  copy 'config/initializers/web_exceptions.rb'
+end
 
 export :web do
   import :route
   import :assets_mapper
+  import :exceptions
 
   add_gem 'sinatra-contrib'
   add_gem 'sinatra-flash'
