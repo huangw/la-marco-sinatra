@@ -59,14 +59,14 @@ Producer	lib/devtools/asset_mapper/producer.rb	/^  class Producer$/;"	c	class:As
 Pull	lib/devtools/asset_mapper/pull.rb	/^  class Pull$/;"	c	class:AssetMapper
 Rack	lib/rack/json_response.rb	/^module Rack$/;"	m
 Rack	lib/rack/log_flusher.rb	/^module Rack$/;"	m
-RequestError	config/initializers/routes.rb	/^class RequestError < ArgumentError$/;"	c
+RequestError	config/initializers/web_exceptions.rb	/^class RequestError < ArgumentError$/;"	c
 RequestMock	spec/lib/helpers/form_helper_spec.rb	/^class RequestMock$/;"	c
 RestfulAPI	app/pages/restful_api.rb	/^class RestfulAPI < Sinatra::Base$/;"	c
 RootPage	app/pages/admin_pages.rb	/^  class RootPage < WebApplication$/;"	c	class:Admin
 Route	lib/route.rb	/^class Route$/;"	c
-RouteError	config/initializers/routes.rb	/^class RouteError < RequestError$/;"	c
+RouteError	config/initializers/web_exceptions.rb	/^class RouteError < RequestError$/;"	c
 RubyFile	lib/devtools/file_generator.rb	/^  class RubyFile$/;"	c	class:FileGenerator
-ServerError	config/initializers/routes.rb	/^class ServerError < RuntimeError$/;"	c
+ServerError	config/initializers/web_exceptions.rb	/^class ServerError < RuntimeError$/;"	c
 Sfile	lib/devtools/asset_mapper/sfile.rb	/^  class Sfile$/;"	c	class:AssetMapper
 SlimHelper	lib/helpers/slim_helper.rb	/^module SlimHelper$/;"	m
 Slimmer	app/pages/slimmer/check_path.rb	/^module Slimmer$/;"	m
@@ -80,7 +80,7 @@ Ungrouped	doc/coverage/index.html	/^  <a name="Ungrouped"><\/a>$/;"	a
 UserMock	spec/lib/helpers/form_helper_spec.rb	/^class UserMock$/;"	c
 UserPage	app/pages/admins/user_page.rb	/^  class UserPage < WebApplication$/;"	c	class:Admin
 UserPage	app/pages/users/root_page.rb	/^class UserPage < WebApplication$/;"	c
-ValidationError	config/initializers/routes.rb	/^class ValidationError < RequestError; end$/;"	c
+ValidationError	config/initializers/web_exceptions.rb	/^class ValidationError < RequestError; end$/;"	c
 VendorFile	lib/devtools/asset_mapper/vendor_file.rb	/^  class VendorFile < Sfile$/;"	c	class:AssetMapper
 WebApplication	app/pages/web_application.rb	/^class WebApplication < Sinatra::Base$/;"	c
 YamlFile	lib/devtools/i18n_utils.rb	/^  class YamlFile$/;"	c
@@ -334,9 +334,9 @@ sp	spec/support/helpers/api_test_helper.rb	/^  def sp(expected_status = 200)$/;"
 spec_filename	lib/devtools/file_generator.rb	/^    def spec_filename$/;"	f	class:FileGenerator.RubyFile
 spec_name	lib/devtools/file_generator.rb	/^    def spec_name$/;"	f	class:FileGenerator.RubyFile
 status	app/pages/restful_api.rb	/^  def status$/;"	f	class:AuthenticationError
-status	config/initializers/routes.rb	/^  def status$/;"	f	class:RequestError
-status	config/initializers/routes.rb	/^  def status$/;"	f	class:RouteError
-status	config/initializers/routes.rb	/^  def status$/;"	f	class:ServerError
+status	config/initializers/web_exceptions.rb	/^  def status$/;"	f	class:RequestError
+status	config/initializers/web_exceptions.rb	/^  def status$/;"	f	class:RouteError
+status	config/initializers/web_exceptions.rb	/^  def status$/;"	f	class:ServerError
 submit	lib/helpers/form_helper.rb	/^  def submit(value = nil, options = {})$/;"	f	class:FormHelper
 super_classname	lib/devtools/file_generator.rb	/^    def super_classname$/;"	f	class:FileGenerator.RubyFile
 table	lib/route.rb	/^    def table$/;"	f	class:Route
