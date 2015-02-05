@@ -9,14 +9,6 @@ require 'helpers/i18n_helper'
 require 'asset_settings'
 require 'helpers/assets_helper'
 
-# load assets controllers
-unless AssetSettings.production?
-  require 'controllers/assets_controller'
-  Route.mount(AssetsController, AssetSettings.get.assets_url_prefix)
-  require 'controllers/image_controller'
-  Route.mount(ImageController, AssetSettings.get.img_url_prefix)
-end
-
 # Web application without database related settings
 class WebApplication < Sinatra::Base
   configure do

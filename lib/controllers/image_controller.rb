@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require 'fastimage'
+require 'asset_settings'
 
 # serve js/css files from local `app/assets` folder
 class ImageController < Sinatra::Base
@@ -20,6 +21,11 @@ class ImageController < Sinatra::Base
 
   # Serve the single file with the file name
   get(%r{\/([\w\/\-\.]+)}) { |f| send_file(File.join(@img_dir, f)) }
+
+  # load assets controllers
+  unless AssetSettings.production?
+    Route.mount(self, AssetSettings.get.img_url_prefix)
+  end
 end
 
 __END__
