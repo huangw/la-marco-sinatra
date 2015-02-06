@@ -17,6 +17,20 @@ end
 # validation errors occured in different layers
 class ValidationError < RequestError; end
 
+# Error for test application
+class AuthenticationError < RequestError
+  def status
+    401
+  end
+end
+
+# authorization error of the application level
+class AuthorizationError < RequestError
+  def status
+    403
+  end
+end
+
 # not found, etc.
 class RouteError < RequestError
   def status
