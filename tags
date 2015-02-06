@@ -27,7 +27,7 @@ AssetSettings	lib/asset_settings/environment_settings.rb	/^class AssetSettings$/
 AssetTestPage	app/pages/asset_test_page.rb	/^class AssetTestPage < WebApplication$/;"	c
 AssetsController	lib/controllers/assets_controller.rb	/^class AssetsController < Sinatra::Base$/;"	c
 AssetsHelper	lib/helpers/assets_helper.rb	/^module AssetsHelper$/;"	m
-AuthenticationError	config/initializers/web_exceptions.rb	/^class AuthenticationError < RequestError$/;"	c
+AuthenticationError	app/pages/restful_api.rb	/^class AuthenticationError < RequestError$/;"	c
 CheckPathPage	app/pages/slimmer/check_path.rb	/^  class CheckPathPage < WebApplication$/;"	c	class:Slimmer
 Class	lib/core_ext/attr_with_default.rb	/^class Class$/;"	c
 CloudFile	lib/devtools/asset_mapper/cloud_file.rb	/^  class CloudFile < Sfile$/;"	c	class:AssetMapper
@@ -296,6 +296,7 @@ need_compile?	lib/devtools/asset_mapper/sfile.rb	/^    def need_compile?$/;"	f	c
 not_changed?	lib/devtools/asset_mapper/tfile.rb	/^    def not_changed?(nfile, ofile)$/;"	f	class:AssetMapper.Tfile
 params	spec/lib/helpers/form_helper_spec.rb	/^  def params$/;"	f	class:FormMock
 partial	lib/helpers/slim_helper.rb	/^  def partial(pname, lcls = {})$/;"	f	class:SlimHelper
+partial_block	lib/helpers/slim_helper.rb	/^  def partial_block(bname, locals_ = {})$/;"	f	class:SlimHelper
 password	lib/helpers/form_helper.rb	/^  def password(field, options = {})$/;"	f	class:FormHelper
 path	spec/lib/helpers/form_helper_spec.rb	/^  def path$/;"	f	class:RequestMock
 preferred_locale	lib/helpers/i18n_helper.rb	/^  def preferred_locale(avails = I18n.available_locales)$/;"	f	class:I18nHelper
@@ -333,12 +334,13 @@ single_tag	lib/helpers/form_helper.rb	/^  def single_tag(name, options = {})$/;"
 sp	spec/support/helpers/api_test_helper.rb	/^  def sp(expected_status = 200)$/;"	f	class:APITestHelper
 spec_filename	lib/devtools/file_generator.rb	/^    def spec_filename$/;"	f	class:FileGenerator.RubyFile
 spec_name	lib/devtools/file_generator.rb	/^    def spec_name$/;"	f	class:FileGenerator.RubyFile
-status	config/initializers/web_exceptions.rb	/^  def status$/;"	f	class:AuthenticationError
+status	app/pages/restful_api.rb	/^  def status$/;"	f	class:AuthenticationError
 status	config/initializers/web_exceptions.rb	/^  def status$/;"	f	class:RequestError
 status	config/initializers/web_exceptions.rb	/^  def status$/;"	f	class:RouteError
 status	config/initializers/web_exceptions.rb	/^  def status$/;"	f	class:ServerError
 submit	lib/helpers/form_helper.rb	/^  def submit(value = nil, options = {})$/;"	f	class:FormHelper
 super_classname	lib/devtools/file_generator.rb	/^    def super_classname$/;"	f	class:FileGenerator.RubyFile
+t	lib/helpers/i18n_helper.rb	/^  def t(msg, opts = {})$/;"	f	class:I18nHelper
 table	lib/route.rb	/^    def table$/;"	f	class:Route
 tag	lib/helpers/form_helper.rb	/^  def tag(name, content = nil, options = {})$/;"	f	class:FormHelper.radio.checkbox.select
 template_dir	lib/helpers/slim_helper.rb	/^  def template_dir$/;"	f	class:SlimHelper

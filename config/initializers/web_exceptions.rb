@@ -14,13 +14,6 @@ class RequestError < ArgumentError
   end
 end
 
-# Error for test application
-class AuthenticationError < RequestError
-  def status
-    401
-  end
-end
-
 # validation errors occured in different layers
 class ValidationError < RequestError; end
 

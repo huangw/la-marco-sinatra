@@ -1,6 +1,13 @@
 # encoding: utf-8
 # require_relative 'la_sinatra_web'
 
+# Mock for authentication test
+class AuthenticationError < RequestError
+  def status
+    401
+  end
+end
+
 # test the restful response settings
 class RestfulAPI < Sinatra::Base
   use Rack::LogFlusher
