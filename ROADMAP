@@ -24,5 +24,5 @@ year: 2015
 [+] api: implement API feature 01/30-02/24 @huangw
   [++] rackapi: rack middleware rewised 01/30 @huangw:01/31
   [++] apitest: api test with rack test and helper 01/30 @huangw:01/31
-  [++] apiauth: one time password based http authentication 02/05 @huangw
+  [++] apiauth: one time password based http authentication 02/05 @huangw:10
   [++] apidoc: api document with rspec rack test 02/20-02/24 @huangw:25
