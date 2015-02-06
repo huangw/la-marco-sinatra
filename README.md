@@ -157,10 +157,17 @@ TODO: TableHelper暂未实现。需要时可以启动开发。
 
 #### LaBufferedLogger
 
-一个BufferedLogger对象初始化后，会缓存所有信息至内部一个hash的数组，直到到达阈值（默认100）时才会flush!到输出（console，文件或数据库）。这个设计便于在`rack.logger`中使用。
+BufferedLogger是为便于在`rack.logger`中使用而设计的。
 
-LaBufferedLogger实现标准RubyLogger所支持的所有severity，包括`:unknown`，支持直接接收Exception对象作为message。另外支持`event(klass, opts)`用于接收任何类型的event。
+一个BufferedLogger对象初始化后，会缓存所有信息至内部一个hash的数组，直到到达阈值（默认100）时才会flush!到输出（console，文件或数据库）。
 
-`LaBufferedLogger`默认输出到控制台，其它类可以扩展并重载`flash!`方法，以输出到文件或保存log信息到数据库。
+LaBufferedLogger实现标准RubyLogger所支持的所有severity，包括`:unknown`，支持直接接收Exception对象作为message：
+
+    logger.warn 'some detailed message'
+    logger.error RuntimeError.new('error message')
+
+另外支持`event(type, message, opts)`用于接收任何类型的event，以及`access`记录包含request信息的access log。`type`可为合法的class名或任意字符串。
+
+`LaBufferedLogger`将上述log信息保存在`msgs`数组，并在调用flush!时默认输出到控制台，并在调用flush!时其它类可以扩展并重载`flash!`方法，以输出到文件或保存log信息到数据库。
 
 ## Restful API

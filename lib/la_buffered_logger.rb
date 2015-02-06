@@ -3,25 +3,32 @@
 # created at: 2015-01-31
 require 'logger'
 require 'utils/la_backtrace_cleaner'
+require 'celluloid/autostart'
+Celluloid.logger = nil
 
 # A logger buffers messages until threshold number reached or flush!
 # method explicitly called.
 class LaBufferedLogger
   include ::Logger::Severity
+  include Celluloid
+
   LEVELS = [:debug, :info, :warn, :error, :fatal, :unknown] # 0 .. 5
 
   attr_accessor :flush_threshold, :request_info
   attr_reader :level, :msgs
 
   def initialize(opts = {})
-    self.level = opts[:level] || :debug # default, store all messages
-    @request_info, @msgs = {}, []
+    self.level = opts.extract_args!(level: :debug)
+    @request_info, @msgs, @access_recorded = {}, [], false
   end
 
   def flush!
-    # EventLog.collection.insert @msgs.map(&:as_document)
     @msgs.each { |msg| ap msg }
     @msgs = []
+  end
+
+  def access_recorded?
+    @access_recorded ? true : false
   end
 
   # Accept both LaLogger::ERROR (which is actually an integer), or
@@ -32,8 +39,17 @@ class LaBufferedLogger
     @level
   end
 
-  def event(msg, opts = {})
-    @msg << msg.is_a?(Class) ? msg.new(opts) : opts.merge(message: msg)
+  def event(type, dat = {})
+    append dat.merge(type: type)
+  end
+
+  def access(status, opts = {})
+    append opts.merge(status: status)
+    @access_recorded = true
+  end
+
+  def append(dat)
+    @msgs << request_info.merge(dat)
   end
 
   LEVELS.each_with_index do |met, lvl|
@@ -49,7 +65,7 @@ class LaBufferedLogger
         dat['message'] = message
       end
 
-      @msgs << dat
+      append dat
       flush! if flush_threshold && @msgs.size > flush_threshold
       dat
     end

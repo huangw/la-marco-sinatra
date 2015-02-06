@@ -40,5 +40,5 @@ namespace :i18n do
     end
   end
   desc 'shortcut for update:views'
-  task :uv => [:'update:views']
+  task uv: [:'update:views']
 end

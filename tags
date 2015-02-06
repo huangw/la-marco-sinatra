@@ -27,7 +27,7 @@ AssetSettings	lib/asset_settings/environment_settings.rb	/^class AssetSettings$/
 AssetTestPage	app/pages/asset_test_page.rb	/^class AssetTestPage < WebApplication$/;"	c
 AssetsController	lib/controllers/assets_controller.rb	/^class AssetsController < Sinatra::Base$/;"	c
 AssetsHelper	lib/helpers/assets_helper.rb	/^module AssetsHelper$/;"	m
-AuthenticationError	app/pages/restful_api.rb	/^class AuthenticationError < ServerError$/;"	c
+AuthenticationError	app/pages/restful_api.rb	/^class AuthenticationError < RequestError$/;"	c
 CheckPathPage	app/pages/slimmer/check_path.rb	/^  class CheckPathPage < WebApplication$/;"	c	class:Slimmer
 Class	lib/core_ext/attr_with_default.rb	/^class Class$/;"	c
 CloudFile	lib/devtools/asset_mapper/cloud_file.rb	/^  class CloudFile < Sfile$/;"	c	class:AssetMapper
@@ -43,6 +43,7 @@ FormHelper	lib/helpers/form_helper.rb	/^module FormHelper$/;"	m
 FormMock	spec/lib/helpers/form_helper_spec.rb	/^class FormMock$/;"	c
 Hash	lib/core_ext/hash_argument.rb	/^class Hash$/;"	c
 HashFlatter	lib/utils/hash_flatter.rb	/^module HashFlatter$/;"	m
+HtmlPresenter	lib/presenters/html_presenter.rb	/^module HtmlPresenter$/;"	m
 I18nHelper	lib/helpers/i18n_helper.rb	/^module I18nHelper$/;"	m
 I18nUtils	lib/devtools/i18n_utils.rb	/^module I18nUtils$/;"	m
 ImageController	lib/controllers/image_controller.rb	/^class ImageController < Sinatra::Base$/;"	c
@@ -52,19 +53,20 @@ LaBufferedLogger	lib/la_buffered_logger.rb	/^class LaBufferedLogger$/;"	c
 Loader	lib/devtools/asset_mapper/loader.rb	/^  class Loader$/;"	c	class:AssetMapper
 LogFlusher	lib/rack/log_flusher.rb	/^  class LogFlusher$/;"	c	class:Rack
 LoggerTestPage	app/pages/logger_test_page.rb	/^class LoggerTestPage < WebApplication$/;"	c
+MockEmail	spec/lib/presenters/html_presenter_spec.rb	/^class MockEmail$/;"	c
 PersonPage	spec/lib/route_spec.rb	/^  class PersonPage; Route << self end$/;"	c	class:Admin
 Producer	lib/devtools/asset_mapper/producer.rb	/^  class Producer$/;"	c	class:AssetMapper
 Pull	lib/devtools/asset_mapper/pull.rb	/^  class Pull$/;"	c	class:AssetMapper
 Rack	lib/rack/json_response.rb	/^module Rack$/;"	m
 Rack	lib/rack/log_flusher.rb	/^module Rack$/;"	m
-RequestError	config/initializers/routes.rb	/^class RequestError < ArgumentError$/;"	c
+RequestError	config/initializers/web_exceptions.rb	/^class RequestError < ArgumentError$/;"	c
 RequestMock	spec/lib/helpers/form_helper_spec.rb	/^class RequestMock$/;"	c
 RestfulAPI	app/pages/restful_api.rb	/^class RestfulAPI < Sinatra::Base$/;"	c
 RootPage	app/pages/admin_pages.rb	/^  class RootPage < WebApplication$/;"	c	class:Admin
 Route	lib/route.rb	/^class Route$/;"	c
-RouteError	config/initializers/routes.rb	/^class RouteError < RequestError$/;"	c
+RouteError	config/initializers/web_exceptions.rb	/^class RouteError < RequestError$/;"	c
 RubyFile	lib/devtools/file_generator.rb	/^  class RubyFile$/;"	c	class:FileGenerator
-ServerError	config/initializers/routes.rb	/^class ServerError < RuntimeError$/;"	c
+ServerError	config/initializers/web_exceptions.rb	/^class ServerError < RuntimeError$/;"	c
 Sfile	lib/devtools/asset_mapper/sfile.rb	/^  class Sfile$/;"	c	class:AssetMapper
 SlimHelper	lib/helpers/slim_helper.rb	/^module SlimHelper$/;"	m
 Slimmer	app/pages/slimmer/check_path.rb	/^module Slimmer$/;"	m
@@ -78,7 +80,7 @@ Ungrouped	doc/coverage/index.html	/^  <a name="Ungrouped"><\/a>$/;"	a
 UserMock	spec/lib/helpers/form_helper_spec.rb	/^class UserMock$/;"	c
 UserPage	app/pages/admins/user_page.rb	/^  class UserPage < WebApplication$/;"	c	class:Admin
 UserPage	app/pages/users/root_page.rb	/^class UserPage < WebApplication$/;"	c
-ValidationError	config/initializers/routes.rb	/^class ValidationError < RequestError; end$/;"	c
+ValidationError	config/initializers/web_exceptions.rb	/^class ValidationError < RequestError; end$/;"	c
 VendorFile	lib/devtools/asset_mapper/vendor_file.rb	/^  class VendorFile < Sfile$/;"	c	class:AssetMapper
 WebApplication	app/pages/web_application.rb	/^class WebApplication < Sinatra::Base$/;"	c
 YamlFile	lib/devtools/i18n_utils.rb	/^  class YamlFile$/;"	c
@@ -88,12 +90,15 @@ YamlFile	lib/devtools/i18n_utils.rb	/^  class YamlFile$/;"	c
 []=	lib/route.rb	/^    def []=(app_class, route)$/;"	f	class:Route
 abs_path	lib/devtools/asset_mapper/sfile.rb	/^    def abs_path$/;"	f	class:AssetMapper.Sfile
 abs_path	lib/devtools/asset_mapper/tfile.rb	/^    def abs_path(version)$/;"	f	class:AssetMapper.Tfile
+access	lib/la_buffered_logger.rb	/^  def access(status, opts = {})$/;"	f	class:LaBufferedLogger
+access_recorded?	lib/la_buffered_logger.rb	/^  def access_recorded?$/;"	f	class:LaBufferedLogger
 addClass	doc/spec/lib/route_spec_rslt.html	/^function addClass(element_id, classname) {$/;"	f
 add_key	lib/devtools/i18n_utils.rb	/^    def add_key(key, value = nil)$/;"	f	class:YamlFile
 add_with_gt	lib/devtools/i18n_utils.rb	/^    def add_with_gt(key, trans_key = -1)$/;"	f	class:YamlFile
 all	lib/route.rb	/^    def all$/;"	f	class:Route
 all_cookies	features/support/env.rb	/^  def all_cookies$/;"	f	class:FeatureWorld
 app	spec/restful_api_spec.rb	/^def app$/;"	f
+append	lib/la_buffered_logger.rb	/^  def append(dat)$/;"	f	class:LaBufferedLogger
 apply_filters	doc/spec/lib/route_spec_rslt.html	/^function apply_filters() {$/;"	f
 assets_env	lib/asset_settings.rb	/^    def assets_env$/;"	f	class:AssetSettings
 assign_display_style	doc/spec/lib/route_spec_rslt.html	/^function assign_display_style(classname, display_flag) {$/;"	f
@@ -138,7 +143,7 @@ diff_file	lib/devtools/asset_mapper/vendor_file.rb	/^    def diff_file(sfile, tf
 dl_file!	lib/devtools/asset_mapper/cloud_file.rb	/^    def dl_file!(url, tfile)$/;"	f	class:AssetMapper.CloudFile
 download!	lib/devtools/asset_mapper/cloud_file.rb	/^    def download!$/;"	f	class:AssetMapper.CloudFile
 environments	lib/asset_settings.rb	/^    def environments$/;"	f	class:AssetSettings
-event	lib/la_buffered_logger.rb	/^  def event(msg, opts = {})$/;"	f	class:LaBufferedLogger
+event	lib/la_buffered_logger.rb	/^  def event(type, dat = {})$/;"	f	class:LaBufferedLogger
 example_file	spec/support/helpers/example_helper.rb	/^def example_file(arg)$/;"	f
 execute!	lib/devtools/asset_mapper/loader.rb	/^    def execute!(compile = false)$/;"	f	class:AssetMapper.Loader
 extract_args	lib/core_ext/hash_argument.rb	/^  def extract_args(expects)$/;"	f	class:Hash
@@ -291,6 +296,7 @@ need_compile?	lib/devtools/asset_mapper/sfile.rb	/^    def need_compile?$/;"	f	c
 not_changed?	lib/devtools/asset_mapper/tfile.rb	/^    def not_changed?(nfile, ofile)$/;"	f	class:AssetMapper.Tfile
 params	spec/lib/helpers/form_helper_spec.rb	/^  def params$/;"	f	class:FormMock
 partial	lib/helpers/slim_helper.rb	/^  def partial(pname, lcls = {})$/;"	f	class:SlimHelper
+partial_block	lib/helpers/slim_helper.rb	/^  def partial_block(bname, locals_ = {})$/;"	f	class:SlimHelper
 password	lib/helpers/form_helper.rb	/^  def password(field, options = {})$/;"	f	class:FormHelper
 path	spec/lib/helpers/form_helper_spec.rb	/^  def path$/;"	f	class:RequestMock
 preferred_locale	lib/helpers/i18n_helper.rb	/^  def preferred_locale(avails = I18n.available_locales)$/;"	f	class:I18nHelper
@@ -329,11 +335,12 @@ sp	spec/support/helpers/api_test_helper.rb	/^  def sp(expected_status = 200)$/;"
 spec_filename	lib/devtools/file_generator.rb	/^    def spec_filename$/;"	f	class:FileGenerator.RubyFile
 spec_name	lib/devtools/file_generator.rb	/^    def spec_name$/;"	f	class:FileGenerator.RubyFile
 status	app/pages/restful_api.rb	/^  def status$/;"	f	class:AuthenticationError
-status	config/initializers/routes.rb	/^  def status$/;"	f	class:RequestError
-status	config/initializers/routes.rb	/^  def status$/;"	f	class:RouteError
-status	config/initializers/routes.rb	/^  def status$/;"	f	class:ServerError
+status	config/initializers/web_exceptions.rb	/^  def status$/;"	f	class:RequestError
+status	config/initializers/web_exceptions.rb	/^  def status$/;"	f	class:RouteError
+status	config/initializers/web_exceptions.rb	/^  def status$/;"	f	class:ServerError
 submit	lib/helpers/form_helper.rb	/^  def submit(value = nil, options = {})$/;"	f	class:FormHelper
 super_classname	lib/devtools/file_generator.rb	/^    def super_classname$/;"	f	class:FileGenerator.RubyFile
+t	lib/helpers/i18n_helper.rb	/^  def t(msg, opts = {})$/;"	f	class:I18nHelper
 table	lib/route.rb	/^    def table$/;"	f	class:Route
 tag	lib/helpers/form_helper.rb	/^  def tag(name, content = nil, options = {})$/;"	f	class:FormHelper.radio.checkbox.select
 template_dir	lib/helpers/slim_helper.rb	/^  def template_dir$/;"	f	class:SlimHelper
@@ -341,11 +348,13 @@ template_id	lib/helpers/slim_helper.rb	/^  def template_id(tpl = nil, locales = 
 text	lib/helpers/form_helper.rb	/^  def text(field, options = {})$/;"	f	class:FormHelper
 textarea	lib/helpers/form_helper.rb	/^    def textarea(field, contents = nil, options = {})$/;"	f	class:FormHelper.FormBuilder
 textarea	lib/helpers/form_helper.rb	/^  def textarea(field, contents = '', options = {})$/;"	f	class:FormHelper
+title	spec/lib/presenters/html_presenter_spec.rb	/^  def title$/;"	f	class:MockEmail
 to	lib/route.rb	/^    def to(app_class, *parts)$/;"	f	class:Route
 to_hash	lib/asset_settings.rb	/^    def to_hash$/;"	f	class:AssetSettings
 to_hash	lib/asset_settings/environment_settings.rb	/^    def to_hash$/;"	f	class:AssetSettings
 to_hash	lib/confu.rb	/^    def to_hash$/;"	f	class:Confu
 to_hash	lib/confu.rb	/^    def to_hash$/;"	f	class:Confu.Data
+to_html	lib/presenters/html_presenter.rb	/^  def to_html(type = :default, dat = {})$/;"	f	class:HtmlPresenter
 to_human	lib/devtools/i18n_utils.rb	/^    def to_human(key)$/;"	f	class:I18nUtils
 trans	lib/devtools/i18n_utils.rb	/^    def trans(key, lang)$/;"	f	class:I18nUtils
 try_require	lib/core_ext/dynamic_require.rb	/^def try_require(file)$/;"	f

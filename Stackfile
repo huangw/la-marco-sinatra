@@ -15,6 +15,7 @@ export :route do
   add_gem 'sinatra', '~> 1.4'
   add_gem 'puma'
 
+  copy 'lib/route.rb'
   copy 'config/initializers/routes.rb'
   copy 'config.ru'
   add_gem 'guard-rake', group: :development # for puma restart
@@ -23,31 +24,12 @@ export :route do
   copy 'Guardfile', sync: false
 end
 
-export :web do
-  import :route
+export :logger do
+  add_gem 'celluloid'
 
-  add_gem 'sinatra-contrib'
-  add_gem 'sinatra-flash'
-  add_gem 'sinatra-redirect-with-flash'
-  add_gem 'slim'
-
-  add_gem 'http_accept_language'
-
-  copy 'lib/tasks/i18n_view.rake'
-  copy 'lib/helpers/*_helper.rb'
-  copy 'app/pages/web_application.rb'
-end
-
-export :cucumber do
-  add_gem 'guard-cucumber', group: :development
-
-  add_gem 'cucumber', group: :development
-  add_gem 'capybara', group: :development
-  add_gem 'poltergeist', group: :development
-  add_gem 'selenium-webdriver', group: :development
-
-  copy 'features/step_definitions/*_steps.rb'
-  copy 'features/support/env.rb'
+  copy 'lib/utils/la_backtrace_cleaner.rb'
+  copy 'lib/la_buffered_logger.rb'
+  copy 'lib/rack/log_flusher.rb'
 end
 
 export :assets_mapper do
@@ -69,10 +51,40 @@ export :assets_mapper do
   copy 'lib/devtools/asset_mapper/*.rb'
   # copy 'app/assets/mappings.rb.sample' => 'app/assets/mappings.rb'
 end
+export :exceptions do
+  copy 'config/initializers/web_exceptions.rb'
+end
 
-export :logger do
-  copy 'lib/la_buffered_logger.rb'
-  copy 'lib/rack/log_flusher.rb'
+export :web do
+  import :route
+  import :assets_mapper
+  import :exceptions
+
+  add_gem 'sinatra-contrib'
+  add_gem 'sinatra-flash'
+  add_gem 'sinatra-redirect-with-flash'
+  add_gem 'slim'
+
+  add_gem 'http_accept_language'
+
+  copy 'lib/tasks/i18n_view.rake'
+  copy 'lib/helpers/*_helper.rb'
+  # copy 'app/pages/web_application.rb'
+  copy 'lib/presenters/html_presenter.rb'
+  copy 'lib/rack/json_response.rb'
+end
+
+export :cucumber do
+  add_gem 'guard-cucumber', group: :development
+
+  add_gem 'cucumber', group: :development
+  add_gem 'capybara', group: :development
+  add_gem 'poltergeist', group: :development
+  add_gem 'selenium-webdriver', group: :development
+
+  copy 'features/step_definitions/*_steps.rb'
+  copy 'features/support/env.rb'
+  copy 'lib/tasks/cucumber.rake'
 end
 
 export :restul_api do
@@ -86,7 +98,6 @@ end
 from('.') do
   import :web
   import :cucumber
-  import :assets_mapper
   import :logger
   import :restul_api
 end

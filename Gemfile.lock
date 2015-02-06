@@ -224,6 +224,7 @@ DEPENDENCIES
   activesupport
   awesome_print
   capybara
+  celluloid
   cucumber
   diffy
   dotenv

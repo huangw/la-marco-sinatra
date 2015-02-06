@@ -94,8 +94,8 @@ class Confu
     # Make the default environment
     def finalize!(ev = ENV['RACK_ENV'])
       return warn 'No configuration data to be finalized' unless @data
-      return warn 'Can not finalize without specifying an existing '\
-                  'environment' unless ev && @data[ev.to_sym]
+      return warn 'Can not finalize without an environment' unless ev
+      @data[ev.to_sym] ||= Confu::Data.new unless @data[ev.to_sym]
 
       @data[ev.to_sym]
         .merge_default(@data[:default]) unless ev.to_sym == :default

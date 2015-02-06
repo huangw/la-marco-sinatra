@@ -26,6 +26,10 @@ module SlimHelper
     slim "#{template_dir}/_#{pname}".to_sym, locals: lcls
   end
 
+  def partial_block(bname, locals_ = {})
+    slim "partial_blocks/#{bname}".to_sym, locals: locals_, layout: false
+  end
+
   # set layout files to layout (path relative to views folder)
   # use_layout(false) to disable layout
   def use_layout(layout)
