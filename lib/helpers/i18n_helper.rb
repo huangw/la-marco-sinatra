@@ -22,6 +22,6 @@ module I18nHelper
   end
 
   def ltt(msg, opts = {})
-    I18n.t 'layout.' + msg, opts
+    I18n.t 'views.layout.' + msg, opts
   end
 end
