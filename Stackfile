@@ -71,6 +71,7 @@ export :web do
   copy 'lib/helpers/*_helper.rb'
   # copy 'app/pages/web_application.rb'
   copy 'lib/presenters/html_presenter.rb'
+  copy 'lib/rack/json_response.rb'
 end
 
 export :cucumber do

@@ -16,4 +16,8 @@ module I18nHelper
 
     I18n.t msg, opts
   end
+
+  def t(msg, opts = {})
+    I18n.t msg, opts
+  end
 end
