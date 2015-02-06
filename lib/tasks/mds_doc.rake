@@ -52,8 +52,8 @@ class SpecDocument
   end
 
   def test_src(target)
-    rspec_file = target.gsub(/\Aapp\/?/, '')
-    rspec_file = File.join('spec', "#{target}_spec.rb")
+    rspec_file = target.sub(/\Aapp\/?/, '')
+    rspec_file = File.join('spec', "#{rspec_file}_spec.rb")
     return false unless File.exist?(rspec_file)
 
     output_file = File.join(@dir, target.gsub(/\Aapp/, '') + '_spec.html')
@@ -66,8 +66,8 @@ class SpecDocument
   end
 
   def test_file(target)
-    rspec_file = target.gsub(/\Aapp\/?/, '')
-    rspec_file = File.join('spec', "#{target}_spec.rb")
+    rspec_file = target.sub(/\Aapp\/?/, '')
+    rspec_file = File.join('spec', "#{rspec_file}_spec.rb")
     return false unless File.exist?(rspec_file)
     output_file = File.join(@dir, target.gsub(/\Aapp/, '') + '_spec_rslt.html')
     if !@mdoconly && newer?(rspec_file, output_file)
@@ -90,6 +90,10 @@ namespace :doc do
 
     Dir[mds_dir + '/*.md'].each do |md|
       next if md.match(/\.render\./)
+      if md.match(/api\.md\Z/)
+        puts "skip API documentation #{md}"
+        next
+      end
       SpecDocument.new(md, out_dir, opts).render
       sh "mdoc #{md.sub(/\.md\Z/, '.render.md')}"
       puts "#{md.sub(/\.md\Z/, '.html').sub('mds', out_dir)} created"

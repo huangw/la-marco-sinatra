@@ -2,7 +2,7 @@ require 'devtools/i18n_utils'
 namespace :i18n do
   desc 'start iye translation server'
   task :iye do
-    exec 'bundle exec iye ./i18n'
+    exec 'bundle exec iye "./i18n/{exceptions,views,models}"'
   end
 
   namespace :update do
