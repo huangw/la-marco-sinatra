@@ -12,6 +12,7 @@ require 'helpers/assets_helper'
 # Web application without database related settings
 class WebApplication < Sinatra::Base
   configure do
+    set :logging, nil
     set :root, Confu.root
     set :views, root_join('/app/views')
     set :assets, AssetSettings.get

@@ -27,7 +27,8 @@ AssetSettings	lib/asset_settings/environment_settings.rb	/^class AssetSettings$/
 AssetTestPage	app/pages/asset_test_page.rb	/^class AssetTestPage < WebApplication$/;"	c
 AssetsController	lib/controllers/assets_controller.rb	/^class AssetsController < Sinatra::Base$/;"	c
 AssetsHelper	lib/helpers/assets_helper.rb	/^module AssetsHelper$/;"	m
-AuthenticationError	app/pages/restful_api.rb	/^class AuthenticationError < RequestError$/;"	c
+AuthenticationError	config/initializers/web_exceptions.rb	/^class AuthenticationError < RequestError$/;"	c
+AuthorizationError	config/initializers/web_exceptions.rb	/^class AuthorizationError < RequestError$/;"	c
 CheckPathPage	app/pages/slimmer/check_path.rb	/^  class CheckPathPage < WebApplication$/;"	c	class:Slimmer
 Class	lib/core_ext/attr_with_default.rb	/^class Class$/;"	c
 CloudFile	lib/devtools/asset_mapper/cloud_file.rb	/^  class CloudFile < Sfile$/;"	c	class:AssetMapper
@@ -71,12 +72,10 @@ Sfile	lib/devtools/asset_mapper/sfile.rb	/^  class Sfile$/;"	c	class:AssetMapper
 SlimHelper	lib/helpers/slim_helper.rb	/^module SlimHelper$/;"	m
 Slimmer	app/pages/slimmer/check_path.rb	/^module Slimmer$/;"	m
 Slimmer	app/pages/slimmer/translator.rb	/^module Slimmer$/;"	m
-Specs	doc/coverage/index.html	/^  <a name="Specs"><\/a>$/;"	a
 String	lib/core_ext/string_common_head.rb	/^class String$/;"	c
 Tfile	lib/devtools/asset_mapper/tfile.rb	/^  class Tfile$/;"	c	class:AssetMapper
 Time	lib/core_ext/time_short.rb	/^class Time$/;"	c
 TranslatorPage	app/pages/slimmer/translator.rb	/^  class TranslatorPage < WebApplication$/;"	c	class:Slimmer
-Ungrouped	doc/coverage/index.html	/^  <a name="Ungrouped"><\/a>$/;"	a
 UserMock	spec/lib/helpers/form_helper_spec.rb	/^class UserMock$/;"	c
 UserPage	app/pages/admins/user_page.rb	/^  class UserPage < WebApplication$/;"	c	class:Admin
 UserPage	app/pages/users/root_page.rb	/^class UserPage < WebApplication$/;"	c
@@ -228,6 +227,7 @@ load_yaml!	lib/asset_settings.rb	/^    def load_yaml!(file = nil)$/;"	f	class:As
 local_assets?	lib/asset_settings.rb	/^    def local_assets?$/;"	f	class:AssetSettings
 local_url	lib/devtools/asset_mapper/sfile.rb	/^    def local_url$/;"	f	class:AssetMapper.Sfile
 local_url	lib/devtools/asset_mapper/tfile.rb	/^    def local_url$/;"	f	class:AssetMapper.Tfile
+ltt	lib/helpers/i18n_helper.rb	/^  def ltt(msg, opts = {})$/;"	f	class:I18nHelper
 makeRed	doc/spec/lib/route_spec_rslt.html	/^function makeRed(element_id) {$/;"	f
 makeYellow	doc/spec/lib/route_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
 merge_default	lib/confu.rb	/^    def merge_default(dat)$/;"	f	class:Confu.Data
@@ -334,7 +334,8 @@ single_tag	lib/helpers/form_helper.rb	/^  def single_tag(name, options = {})$/;"
 sp	spec/support/helpers/api_test_helper.rb	/^  def sp(expected_status = 200)$/;"	f	class:APITestHelper
 spec_filename	lib/devtools/file_generator.rb	/^    def spec_filename$/;"	f	class:FileGenerator.RubyFile
 spec_name	lib/devtools/file_generator.rb	/^    def spec_name$/;"	f	class:FileGenerator.RubyFile
-status	app/pages/restful_api.rb	/^  def status$/;"	f	class:AuthenticationError
+status	config/initializers/web_exceptions.rb	/^  def status$/;"	f	class:AuthenticationError
+status	config/initializers/web_exceptions.rb	/^  def status$/;"	f	class:AuthorizationError
 status	config/initializers/web_exceptions.rb	/^  def status$/;"	f	class:RequestError
 status	config/initializers/web_exceptions.rb	/^  def status$/;"	f	class:RouteError
 status	config/initializers/web_exceptions.rb	/^  def status$/;"	f	class:ServerError

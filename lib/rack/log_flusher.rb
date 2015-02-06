@@ -4,14 +4,14 @@ module Rack
   class LogFlusher
     def initialize(app, opts = {})
       @app, @opts = app, opts
+      @logger_klass = @opts.delete(:logger) || LaBufferedLogger
     end
 
     # rubocop:disable MethodLength, LineLength
     def call(env)
+      env['rack.logger'] = @logger_klass.new @opts
       t1 = Time.now
-      opts = @opts.dup
-      logger_klass = opts.delete(:logger) || LaBufferedLogger
-      env['rack.logger'] = logger_klass.new opts
+
       req = Rack::Request.new env
       { ip: :ip, met: :request_method, path: :path, ua: :user_agent, rf: :referer }.each do |k, met|
         env['rack.logger'].request_info[k] = req.send(met) if req.send(met)
@@ -19,6 +19,7 @@ module Rack
 
       begin
         status, headers, body = @app.call(env)
+
         env['rack.logger'].request_info['status'] = status
         env['rack.logger'].request_info['tm'] = Time.now - t1
       rescue => e
