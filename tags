@@ -27,7 +27,7 @@ AssetSettings	lib/asset_settings/environment_settings.rb	/^class AssetSettings$/
 AssetTestPage	app/pages/asset_test_page.rb	/^class AssetTestPage < WebApplication$/;"	c
 AssetsController	lib/controllers/assets_controller.rb	/^class AssetsController < Sinatra::Base$/;"	c
 AssetsHelper	lib/helpers/assets_helper.rb	/^module AssetsHelper$/;"	m
-AuthenticationError	app/pages/restful_api.rb	/^class AuthenticationError < ServerError$/;"	c
+AuthenticationError	config/initializers/web_exceptions.rb	/^class AuthenticationError < RequestError$/;"	c
 CheckPathPage	app/pages/slimmer/check_path.rb	/^  class CheckPathPage < WebApplication$/;"	c	class:Slimmer
 Class	lib/core_ext/attr_with_default.rb	/^class Class$/;"	c
 CloudFile	lib/devtools/asset_mapper/cloud_file.rb	/^  class CloudFile < Sfile$/;"	c	class:AssetMapper
@@ -333,7 +333,7 @@ single_tag	lib/helpers/form_helper.rb	/^  def single_tag(name, options = {})$/;"
 sp	spec/support/helpers/api_test_helper.rb	/^  def sp(expected_status = 200)$/;"	f	class:APITestHelper
 spec_filename	lib/devtools/file_generator.rb	/^    def spec_filename$/;"	f	class:FileGenerator.RubyFile
 spec_name	lib/devtools/file_generator.rb	/^    def spec_name$/;"	f	class:FileGenerator.RubyFile
-status	app/pages/restful_api.rb	/^  def status$/;"	f	class:AuthenticationError
+status	config/initializers/web_exceptions.rb	/^  def status$/;"	f	class:AuthenticationError
 status	config/initializers/web_exceptions.rb	/^  def status$/;"	f	class:RequestError
 status	config/initializers/web_exceptions.rb	/^  def status$/;"	f	class:RouteError
 status	config/initializers/web_exceptions.rb	/^  def status$/;"	f	class:ServerError
