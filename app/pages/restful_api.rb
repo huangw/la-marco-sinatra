@@ -3,10 +3,10 @@
 
 # test the restful response settings
 class RestfulAPI < Sinatra::Base
-  use Rack::LogFlusher
   use Rack::JsonResponse
 
   configure do
+    set :logging, nil
     set :show_exceptions, false # true if development?
     set :raise_errors, true # let exceptions pass through (to responser)
   end

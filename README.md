@@ -159,6 +159,8 @@ TODO: TableHelper暂未实现。需要时可以启动开发。
 
 BufferedLogger是为便于在`rack.logger`中使用而设计的。
 
+**注意** 一定在sinatra的configuration里`set :logging, nil`。
+
 一个BufferedLogger对象初始化后，会缓存所有信息至内部一个hash的数组，直到到达阈值（默认100）时才会flush!到输出（console，文件或数据库）。
 
 LaBufferedLogger实现标准RubyLogger所支持的所有severity，包括`:unknown`，支持直接接收Exception对象作为message：

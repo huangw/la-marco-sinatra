@@ -5,8 +5,6 @@ require 'la_buffered_logger'
 module Admin
   # root for administrator pages
   class RootPage < WebApplication
-    use Rack::LogFlusher, logger: LaBufferedLogger
-
     get('/') do
       logger.error 'Catch an error'
       'This is the root of administration portal'
