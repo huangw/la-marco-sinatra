@@ -15,12 +15,13 @@ export :route do
   add_gem 'sinatra', '~> 1.4'
   add_gem 'puma'
 
+  copy 'config.ru', sync: false
   copy 'lib/route.rb'
   copy 'config/initializers/routes.rb'
-  copy 'config.ru'
-  add_gem 'guard-rake', group: :development # for puma restart
 
+  add_gem 'guard-rake', group: :development # for puma restart
   copy 'lib/tasks/puma.rake'
+
   copy 'Guardfile', sync: false
 end
 
