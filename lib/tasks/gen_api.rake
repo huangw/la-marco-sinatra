@@ -5,12 +5,23 @@ class FileGenerator
    # API controller file generator
   class ApiFile < RubyFile
     def initialize(name, su = nil)
-      @filename = name.to_s.underscore.sub(/\Aapp\/pages\/api\//, '')
-      super "app/pages/api/#{@filename}", su
+      @filename = name.to_s.underscore
+                      .sub(/\Aapp\/pages\/api\//, '')
+                      .sub(/\.rb\Z/, '')
+                      .sub(/_api\Z/, '')
+      super "app/pages/api/#{@filename}_api", su
+    end
+
+    def class_name
+      @basename.classify.sub('Api', 'API')
+    end
+
+    def super_classname
+      @super_basename.classify.sub('Api', 'API')
     end
 
     def spec_name
-      "'#{@filename.sub(/\Aapp\/pages/, '').sub(/\.rb\Z/, '')}'"
+      "'/api#{Route.default_path(class_name)}'"
     end
   end
 end
@@ -21,7 +32,7 @@ namespace :gen do
     name = ENV['NAME'] || ENV['name']
     super_class = ENV['SUPER'] || ENV['super'] || 'restful_api'
     fail 'need specify NAME=...' unless name
-    rf = FileGenerator::RubyFile.new(name, super_class)
+    rf = FileGenerator::ApiFile.new(name, super_class)
     rf.render! controller_file: rf.filename, spec_file: rf.spec_filename
   end
 end
@@ -31,20 +42,21 @@ __END__
 @@ controller_file
 # [Controller] <%= spec_name %>
 #   (<%= filename %>)
-# vim: foldlevel=1
+# vim: foldlevel=2
 # created at: <%= Time.now.strftime('%F') %>
 
 # API controller for <%= spec_name %>
-class <%= class_string %>
-  get '/' do
-  end
+module API
+  class <%= class_string %>
+    get '/' do
+    end
 
-  Route << self
+    Route << self
+  end
 end
 
 @@ spec_file
 require 'spec_helper'
-require '<%= require_name %>'
 
 describe <%= spec_name %> do
   describe 'TODO: the function of this route [GET]' do

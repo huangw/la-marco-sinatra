@@ -4,6 +4,7 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
+API	app/pages/api/hello_doc_api.rb	/^module API$/;"	m
 API	spec/lib/route_spec.rb	/^module API$/;"	m
 APITestHelper	spec/support/helpers/api_test_helper.rb	/^module APITestHelper$/;"	m
 Account	spec/lib/route_spec.rb	/^class Account$/;"	c
@@ -44,6 +45,7 @@ FormHelper	lib/helpers/form_helper.rb	/^module FormHelper$/;"	m
 FormMock	spec/lib/helpers/form_helper_spec.rb	/^class FormMock$/;"	c
 Hash	lib/core_ext/hash_argument.rb	/^class Hash$/;"	c
 HashFlatter	lib/utils/hash_flatter.rb	/^module HashFlatter$/;"	m
+HelloDocAPI	app/pages/api/hello_doc_api.rb	/^  class HelloDocAPI < RestfulAPI$/;"	c	class:API
 HtmlPresenter	lib/presenters/html_presenter.rb	/^module HtmlPresenter$/;"	m
 I18nHelper	lib/helpers/i18n_helper.rb	/^module I18nHelper$/;"	m
 I18nUtils	lib/devtools/i18n_utils.rb	/^module I18nUtils$/;"	m
