@@ -173,3 +173,7 @@ LaBufferedLogger实现标准RubyLogger所支持的所有severity，包括`:unkno
 `LaBufferedLogger`将上述log信息保存在`msgs`数组，并在调用flush!时默认输出到控制台，并在调用flush!时其它类可以扩展并重载`flash!`方法，以输出到文件或保存log信息到数据库。
 
 ## Restful API
+
+使用`json_response`将controller的输出（hash，或抛出的一场）转为json。
+
+`rake rspec:api`测试所有`spec/pages/api/*`下的全部测试，`rake doc:api`基于这些测试的结果，以及`mds/*.api.md`生成API文档。
