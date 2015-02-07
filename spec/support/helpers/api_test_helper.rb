@@ -6,6 +6,12 @@ require 'recursive-open-struct'
 module APITestHelper
   include Rack::Test::Methods
 
+  def app
+    Rack::Builder.app do
+      Route.all.each { |path, klass| map(path) { run klass } }
+    end
+  end
+
   # add `response(some end point).hash_key.hash_key` matcher
   def r(req = nil, body = nil, headers = {})
     if req
