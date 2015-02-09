@@ -13,6 +13,7 @@ end
 
 export :route do
   add_gem 'sinatra', '~> 1.4'
+  add_gem 'sinatra-contrib' # streaming
   add_gem 'puma'
 
   copy 'config.ru', sync: false
@@ -58,7 +59,6 @@ export :web do
   import :route
   import :assets_mapper
 
-  add_gem 'sinatra-contrib'
   add_gem 'sinatra-flash'
   add_gem 'sinatra-redirect-with-flash'
   add_gem 'slim'
