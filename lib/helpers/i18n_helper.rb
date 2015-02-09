@@ -24,4 +24,8 @@ module I18nHelper
   def ltt(msg, opts = {})
     I18n.t 'views.layout.' + msg, opts
   end
+
+  def ftt(msg, opts = {})
+    I18n.t 'views.layout.flash' + msg, opts
+  end
 end
