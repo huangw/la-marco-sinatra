@@ -22,10 +22,10 @@ module I18nHelper
   end
 
   def ltt(msg, opts = {})
-    I18n.t 'views.layout.' + msg, opts
+    I18n.t 'views.layout.' + msg.to_s, opts
   end
 
   def ftt(msg, opts = {})
-    I18n.t 'views.layout.flash' + msg, opts
+    I18n.t 'views.layout.flash' + msg.to_s, opts
   end
 end
