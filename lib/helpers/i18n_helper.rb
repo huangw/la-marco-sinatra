@@ -21,14 +21,17 @@ module I18nHelper
     I18n.t msg, opts
   end
 
+  # layout i18n
   def ltt(msg, opts = {})
     I18n.t 'views.layout.' + msg.to_s, opts
   end
 
+  # flash i18n
   def ftt(msg, opts = {})
     I18n.t 'views.flash.' + msg.to_s, opts
   end
 
+  # model fields i18n
   def mtt(msg, opts = {})
     I18n.t 'mongoid.attributes.' + msg.to_s, opts
   end
