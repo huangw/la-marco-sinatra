@@ -18,11 +18,11 @@ describe HtmlPresenter do
   end
 
   it 'not exits locale' do
-    expect{ em.to_html(:default, locales: ['fr']) }.to raise_error(Errno::ENOENT)
+    expect { em.to_html(:default, locales: ['fr']) }.to raise_error(Errno::ENOENT)
   end
 
   it 'not exits type' do
-    expect{ em.to_html(:test) }.to raise_error(Errno::ENOENT)
+    expect { em.to_html(:test) }.to raise_error(Errno::ENOENT)
   end
 
   it 'given a list locales' do

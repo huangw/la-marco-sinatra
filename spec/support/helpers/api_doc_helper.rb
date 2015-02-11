@@ -125,7 +125,7 @@ if ENV['DOC']
     end
 
     config.after(:suite) do
-      Dir["mds/*.api.md"].each do |md|
+      Dir['mds/*.api.md'].each do |md|
         render_md = md.sub(/\.md\Z/, '.render.md')
         File.open(render_md, 'wb') do |wfh|
           wfh.write ERB.new(File.read(md)).result(RSpecApiDoc.get_binding)

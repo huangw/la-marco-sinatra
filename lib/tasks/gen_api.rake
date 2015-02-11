@@ -2,7 +2,7 @@ require 'devtools/file_generator'
 
 # Helper for rake to generate source files
 class FileGenerator
-   # API controller file generator
+  # API controller file generator
   class ApiFile < RubyFile
     def initialize(name, su = nil)
       @filename = name.to_s.underscore

@@ -37,13 +37,18 @@ class Route
       return nil unless @table[app_class]
       return @table[app_class] unless parts && parts.size > 0
 
-      pas = parts.map { |k| k.respond_to?(:tid) ? k.tid : k.to_s.underscore }
-      File.join(@table[app_class], *pas)
+      if parts.last.is_a?(Hash)
+        pam = '?' + parts.pop.map { |k, v| k.to_s + '=' +  v.to_s }.join('&')
+      end
+      pam ||= ''
+      pas = parts.map { |k| k.to_s.underscore.gsub('_', '/') }
+
+      File.join(@table[app_class], *pas) + pam
     end
 
     def default_path(app_class)
       app_class.to_s.underscore.sub(/_(api|page|controller)$/, '')
-        .gsub('_', '-').sub(/^\/*/, '/').pluralize
+        .gsub('_', '/').sub(/^\/*/, '/').pluralize
     end
   end
 end
