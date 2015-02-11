@@ -1,12 +1,12 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 # source 'http://ruby.taobao.org/'
 
 gem "activesupport"
 gem "dotenv"
 gem "i18n"
 gem "sinatra", "~> 1.4"
-gem "puma"
 gem "sinatra-contrib"
+gem "puma"
 gem "sinatra-flash"
 gem "sinatra-redirect-with-flash"
 gem "slim"

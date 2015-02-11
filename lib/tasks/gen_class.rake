@@ -1,7 +1,7 @@
 require 'devtools/file_generator'
 
 namespace :gen do
-  desc 'generate a general ruby class/spec file for NAME'
+  desc 'generating general ruby class/spec file from NAME'
   task :ruby do
     name = ENV['NAME'] || ENV['name']
     super_class = ENV['SUPER'] || ENV['super']
