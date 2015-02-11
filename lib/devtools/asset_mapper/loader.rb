@@ -56,5 +56,14 @@ module AssetMapper
       AssetSettings[:production].img_url_prefix = prod
       AssetSettings[:development].img_url_prefix = AssetSettings[:local_assets].img_url_prefix = local
     end
+
+    def bluemoon_url_prefix(hsh)
+      fail "invalid value #{hsh.inspect}" unless hsh.is_a?(Hash)
+      # rubocop:disable LineLength
+      prod, local = hsh.extract_args!(production: AssetSettings[:production].bluemoon_url_prefix,
+                                      local: AssetSettings[:local].bluemoon_url_prefix)
+      AssetSettings[:production].bluemoon_url_prefix = prod
+      AssetSettings[:development].bluemoon_url_prefix = AssetSettings[:local_assets].bluemoon_url_prefix = local
+    end
   end
 end
