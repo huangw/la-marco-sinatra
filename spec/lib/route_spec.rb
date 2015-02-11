@@ -55,7 +55,7 @@ describe Route do
 
       it 'accept end points with extra parts' do
         expect(Route.to(API::AccountPage, :user)).to eq('/api/accounts/user')
-        expect(Route.to(API::AccountPage, Account.new('129423'))).to eq('/api/accounts/129423')
+        # expect(Route.to(API::AccountPage, Account.new('129423'))).to eq('/api/accounts/129423')
         expect(Route.to(API::AccountPage, 'Settings')).to eq('/api/accounts/settings')
       end
     end

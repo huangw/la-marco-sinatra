@@ -9,26 +9,26 @@ module Rack
 
     # rubocop:disable MethodLength, LineLength
     def call(env)
-      env['rack.logger'] = @logger_klass.new @opts
+      @logger = env['rack.logger'] = @logger_klass.new @opts
       t1 = Time.now
 
       req = Rack::Request.new env
       { ip: :ip, met: :request_method, path: :path, ua: :user_agent, rf: :referer }.each do |k, met|
-        env['rack.logger'].request_info[k] = req.send(met) if req.send(met)
+        @logger.request_info[k] = req.send(met) if req.send(met)
       end
 
       begin
         status, headers, body = @app.call(env)
 
-        env['rack.logger'].request_info['status'] = status
-        env['rack.logger'].request_info['tm'] = Time.now - t1
+        @logger.request_info['status'] = status
+        @logger.request_info['tm'] = Time.now - t1
       rescue => e
         status = e.respond_to?(:status) ? e.status : 500
-        env['rack.logger'].fatal(e)
+        @logger.fatal(e)
       end
 
-      env['rack.logger'].access(status, tm: Time.now - t1)
-      env['rack.logger'].async.flush!
+      @logger.access(status, tm: Time.now - t1)
+      @logger.async.flush!
       [status, headers, body]
     end
   end
