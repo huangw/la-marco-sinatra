@@ -13,6 +13,8 @@ end
 
 class AccountPage; Route << self end
 
+class AccountSettingPage; Route << self end
+
 class Account
   attr_accessor :tid
   def initialize(tid)
@@ -57,6 +59,9 @@ describe Route do
         expect(Route.to(API::AccountPage, :user)).to eq('/api/accounts/user')
         # expect(Route.to(API::AccountPage, Account.new('129423'))).to eq('/api/accounts/129423')
         expect(Route.to(API::AccountPage, 'Settings')).to eq('/api/accounts/settings')
+        # expect(Route.to(AccountSettingPage, 'nickname')).to eq('/account/settings/nickname')
+        # expect(Route.to(AccountSettingPage, 'nickName')).to eq('/account/settings/nick/name')
+        # expect(Route.to(API::AccountSettingPage, 'Settings')).to eq('/api/accounts/settings')
       end
     end
 
