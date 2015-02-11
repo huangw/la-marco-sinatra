@@ -1,4 +1,5 @@
 # asset mapper module class
+# rubocop:disable LineLength
 module AssetMapper
   # Parse the assets mappings file and execute rake tasks
   class Loader
@@ -50,7 +51,6 @@ module AssetMapper
 
     def img_url_prefix(hsh)
       fail "invalid value #{hsh.inspect}" unless hsh.is_a?(Hash)
-      # rubocop:disable LineLength
       prod, local = hsh.extract_args!(production: AssetSettings[:production].img_url_prefix,
                                       local: AssetSettings[:local].img_url_prefix)
       AssetSettings[:production].img_url_prefix = prod
@@ -59,7 +59,6 @@ module AssetMapper
 
     def bluemoon_url_prefix(hsh)
       fail "invalid value #{hsh.inspect}" unless hsh.is_a?(Hash)
-      # rubocop:disable LineLength
       prod, local = hsh.extract_args!(production: AssetSettings[:production].bluemoon_url_prefix,
                                       local: AssetSettings[:local].bluemoon_url_prefix)
       AssetSettings[:production].bluemoon_url_prefix = prod

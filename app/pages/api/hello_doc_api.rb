@@ -3,8 +3,8 @@
 # vim: foldlevel=2
 # created at: 2015-02-07
 
-# API controller for '/api/hello_doc_api'
 module API
+  # API controller for '/api/hello_doc_api'
   class HelloDocAPI < RestfulAPI
     get '/' do
       { hello: 'world' }

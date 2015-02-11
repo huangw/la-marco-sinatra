@@ -2,6 +2,7 @@
 class AssetSettings
   # Settings for each specific environment, singleton get one at runtime
   class EnvironmentSettings
+    # rubocop:disable LineLength
     attr_accessor :img_dir, :img_url_prefix, :bluemoon_url_prefix, :assets_url_prefix, :files
 
     def initialize(environment)
