@@ -48,7 +48,7 @@ class Route
 
     def default_path(app_class)
       app_class.to_s.underscore.sub(/_(api|page|controller)$/, '')
-          .sub(/^\/*/, '/').pluralize
+        .sub(/^\/*/, '/').pluralize
     end
   end
 end
