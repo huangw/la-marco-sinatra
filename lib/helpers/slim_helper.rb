@@ -37,7 +37,7 @@ module SlimHelper
   end
 
   def template_dir
-    env['template_dir'] ||= Route.default_path(self.class).gsub('-', '_')
+    env['template_dir'] ||= Route.default_path(self.class)
   end
 
   def template_id(tpl = nil, locales = nil)
