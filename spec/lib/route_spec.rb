@@ -16,10 +16,10 @@ class AccountPage; Route << self end
 class AccountSettingPage; Route << self end
 
 class Account
-  attr_accessor :tid
-  def initialize(tid)
-    @tid = tid
-  end
+  # attr_accessor :tid
+  # def initialize(tid)
+  #   @tid = tid
+  # end
 end
 
 describe Route do
