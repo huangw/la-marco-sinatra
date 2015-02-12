@@ -3,6 +3,7 @@ require 'http_accept_language'
 module I18nHelper
   def preferred_locale(avails = I18n.available_locales)
     hal = HttpAcceptLanguage::Parser.new env['HTTP_ACCEPT_LANGUAGE']
+    hal.user_preferred_languages.unshift current_user.loc if respond_to?('current_user')
     hal.user_preferred_languages.unshift params[:locale] if params[:locale]
     hal.preferred_language_from(avails)
   end
