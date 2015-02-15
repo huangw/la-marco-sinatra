@@ -30,6 +30,22 @@ module SlimHelper
     slim "partial_blocks/#{bname}".to_sym, locals: locals_, layout: false
   end
 
+  # render a obj template
+  def present(obj, type = :default, dat = {})
+    locales = dat.extract_args(locales: nil)
+    dat[:obj] = obj unless dat[:obj]
+
+    tmpl = File.join('presenters', obj.class.to_s.underscore, "#{type}")
+
+    if locales
+      locale, user_locale = locales[0], I18n.locale.to_s
+      locale = user_locale if locales.map(&:to_s).include?(user_locale)
+      tmpl << ".#{locale}"
+    end
+
+    slim tmpl.to_sym, locals: locals_, layout: false
+  end
+
   # set layout files to layout (path relative to views folder)
   # use_layout(false) to disable layout
   def use_layout(layout)

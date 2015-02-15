@@ -1,7 +1,7 @@
 require 'pry-byebug'
 require 'awesome_print'
 AwesomePrint.pry!
-AwesomePrint.defaults = { indent: 2, raw: true }
+AwesomePrint.defaults = { indent: 2 }
 
 def reload!
   files = $LOADED_FEATURES.select { |f| f =~ /\A#{ENV['APP_ROOT']}\/app/ }
