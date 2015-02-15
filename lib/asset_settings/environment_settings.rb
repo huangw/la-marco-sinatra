@@ -3,7 +3,7 @@ class AssetSettings
   # Settings for each specific environment, singleton get one at runtime
   class EnvironmentSettings
     # rubocop:disable LineLength
-    attr_accessor :img_dir, :img_url_prefix, :bluemoon_url_prefix, :assets_url_prefix, :files
+    attr_accessor :img_dir, :img_url_prefix, :assets_url_prefix, :files
 
     def initialize(environment)
       @environment = environment.to_sym
@@ -11,7 +11,6 @@ class AssetSettings
       # initialize with default values
       @img_dir, @files = 'app/assets/img', {}
       @img_url_prefix = production? ? 'http://assets.vikkr.com' : '/img'
-      @bluemoon_url_prefix = '/i'
       @assets_url_prefix = production? ? 'http://assets.vikkr.com' : '/assets'
     end
 
@@ -30,7 +29,7 @@ class AssetSettings
     # Load from and dump to a hash presentation
     # ------------------------------
     def hash_keys
-      [:img_dir, :img_url_prefix, :bluemoon_url_prefix]
+      [:img_dir, :img_url_prefix]
     end
 
     def to_hash

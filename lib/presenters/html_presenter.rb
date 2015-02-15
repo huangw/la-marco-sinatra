@@ -1,12 +1,10 @@
 # encoding: utf-8
 require 'tilt'
 require 'slim'
-require 'helpers/i18n_helper'
 
 # Base on template defined under app/views/presenters,
 # render object to html code blocks
 module HtmlPresenter
-  include I18nHelper
 
   VIEW_DIR = root_join('app', 'views', 'presenters')
 
