@@ -43,7 +43,7 @@ module SlimHelper
       tmpl << ".#{locale}"
     end
 
-    slim tmpl.to_sym, locals: locals_, layout: false
+    slim tmpl.to_sym, locals: dat, layout: false
   end
 
   # set layout files to layout (path relative to views folder)
