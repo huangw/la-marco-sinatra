@@ -32,9 +32,4 @@ module I18nHelper
   def ftt(msg, opts = {})
     I18n.t 'views.flash.' + msg.to_s, opts
   end
-
-  # model fields i18n
-  def mtt(msg, opts = {})
-    I18n.t 'mongoid.attributes.' + msg.to_s, opts
-  end
 end
