@@ -46,6 +46,16 @@ module SlimHelper
     slim tmpl.to_sym, locals: dat, layout: false
   end
 
+  def paginate_block(opg, dat = {})
+    opg = opg.merge dat
+    opg[:present_type] ||= :default
+
+    type = dat.extract_args(:type) || 'table'
+    tmpl = File.join('paginate_block', type.to_s)
+
+    slim tmpl.to_sym, locals: opg, layout: false
+  end
+
   # set layout files to layout (path relative to views folder)
   # use_layout(false) to disable layout
   def use_layout(layout)
