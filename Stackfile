@@ -91,6 +91,7 @@ export :restul_api do
   add_gem 'recursive-open-struct'
   copy 'lib/rack/json_response.rb'
   copy 'lib/tasks/gen_api.rake'
+  copy 'lib/tasks/doc_api.rake'
   copy 'spec/support/helpers/api_test_helper.rb'
   copy 'spec/support/helpers/api_doc_helper.rb'
 end
