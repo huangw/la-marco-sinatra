@@ -51,7 +51,7 @@ module SlimHelper
     opg[:present_type] ||= :default
 
     type = dat.extract_args(:type) || 'table'
-    tmpl = File.join('paginate_block', type.to_s)
+    tmpl = File.join('paginate_blocks', type.to_s)
 
     slim tmpl.to_sym, locals: opg, layout: false
   end
