@@ -107,6 +107,16 @@ module FormHelper
       @parent.checkbox("#{@name}[#{field}]", { key.to_sym => display }, options)
     end
 
+    def bool_field_checkbox(field, options = {})
+      v = default_value(field, false)
+
+      display = options.delete(:label) if options[:label]
+      display ||= @object.class.human_attribute_name(field) if @object.class.respond_to?(:human_attribute_name)
+
+      options[:checked] = 'checked' if v
+      @parent.checkbox("#{@name}[#{field}]", { :'1' => display }, options)
+    end
+
     def method_missing(met, field = '', options = {})
       unless [:submit, :reset, :button].include? met
         options[:id] ||= "#{@name}_#{field}"
