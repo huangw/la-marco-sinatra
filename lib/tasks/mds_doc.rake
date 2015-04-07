@@ -20,7 +20,7 @@ class SpecDocument
         target = match[:target].gsub(/\.rb\Z/, '')
         $stderr.puts "  - (line #{ln}): #{target}"
         fail "target file for #{target}.rb not found" unless File.exist?(target + '.rb')
-        sstr = "[`#{target}.rb`](./spec/#{src_file(target)}) "
+        sstr = "【SOURCE】[`#{target}.rb`](./spec/#{src_file(target)}) "
         spec_rslt = test_file(target)
         spec_html = test_src(target)
         sstr += "(RSpec [src](./spec/#{spec_html}) [rslt](./spec/#{spec_rslt}))" if spec_html

@@ -11,6 +11,7 @@ Account	spec/lib/route_spec.rb	/^class Account$/;"	c
 AccountPage	spec/lib/route_spec.rb	/^  class AccountPage; Route << self end$/;"	c	class:API
 AccountPage	spec/lib/route_spec.rb	/^  class AccountPage; Route << self end$/;"	c	class:Admin
 AccountPage	spec/lib/route_spec.rb	/^class AccountPage; Route << self end$/;"	c
+AccountSettingPage	spec/lib/route_spec.rb	/^class AccountSettingPage; Route << self end$/;"	c
 Admin	app/pages/admin_pages.rb	/^module Admin$/;"	m
 Admin	app/pages/admins/user_page.rb	/^module Admin$/;"	m
 Admin	spec/lib/route_spec.rb	/^module Admin$/;"	m
@@ -46,7 +47,6 @@ FormMock	spec/lib/helpers/form_helper_spec.rb	/^class FormMock$/;"	c
 Hash	lib/core_ext/hash_argument.rb	/^class Hash$/;"	c
 HashFlatter	lib/utils/hash_flatter.rb	/^module HashFlatter$/;"	m
 HelloDocAPI	app/pages/api/hello_doc_api.rb	/^  class HelloDocAPI < RestfulAPI$/;"	c	class:API
-HtmlPresenter	lib/presenters/html_presenter.rb	/^module HtmlPresenter$/;"	m
 I18nHelper	lib/helpers/i18n_helper.rb	/^module I18nHelper$/;"	m
 I18nUtils	lib/devtools/i18n_utils.rb	/^module I18nUtils$/;"	m
 ImageController	lib/controllers/image_controller.rb	/^class ImageController < Sinatra::Base$/;"	c
@@ -56,7 +56,6 @@ LaBufferedLogger	lib/la_buffered_logger.rb	/^class LaBufferedLogger$/;"	c
 Loader	lib/devtools/asset_mapper/loader.rb	/^  class Loader$/;"	c	class:AssetMapper
 LogFlusher	lib/rack/log_flusher.rb	/^  class LogFlusher$/;"	c	class:Rack
 LoggerTestPage	app/pages/logger_test_page.rb	/^class LoggerTestPage < WebApplication$/;"	c
-MockEmail	spec/lib/presenters/html_presenter_spec.rb	/^class MockEmail$/;"	c
 PersonPage	spec/lib/route_spec.rb	/^  class PersonPage; Route << self end$/;"	c	class:Admin
 Producer	lib/devtools/asset_mapper/producer.rb	/^  class Producer$/;"	c	class:AssetMapper
 Pull	lib/devtools/asset_mapper/pull.rb	/^  class Pull$/;"	c	class:AssetMapper
@@ -108,7 +107,7 @@ assign_display_style	doc/spec/lib/route_spec_rslt.html	/^function assign_display
 assign_display_style_for_group	doc/spec/lib/route_spec_rslt.html	/^function assign_display_style_for_group(classname, display_flag, subgroup_flag) {$/;"	f
 attr_with_default	lib/core_ext/attr_with_default.rb	/^  def attr_with_default(hsh)$/;"	f	class:Class
 bit_checkbox	lib/helpers/form_helper.rb	/^    def bit_checkbox(field, key, options = {})$/;"	f	class:FormHelper.FormBuilder
-bluemoon_url_prefix	lib/devtools/asset_mapper/loader.rb	/^    def bluemoon_url_prefix(hsh)$/;"	f	class:AssetMapper.Loader
+bool_field_checkbox	lib/helpers/form_helper.rb	/^    def bool_field_checkbox(field, options = {})$/;"	f	class:FormHelper.FormBuilder
 button	lib/helpers/form_helper.rb	/^  def button(value = nil, options = {})$/;"	f	class:FormHelper
 call	lib/rack/json_response.rb	/^    def call(env)$/;"	f	class:Rack.JsonResponse
 call	lib/rack/log_flusher.rb	/^    def call(env)$/;"	f	class:Rack.LogFlusher
@@ -223,7 +222,6 @@ initialize	lib/helpers/form_helper.rb	/^    def initialize(parent, object, name 
 initialize	lib/la_buffered_logger.rb	/^  def initialize(opts = {})$/;"	f	class:LaBufferedLogger
 initialize	lib/rack/json_response.rb	/^    def initialize(app)$/;"	f	class:Rack.JsonResponse
 initialize	lib/rack/log_flusher.rb	/^    def initialize(app, opts = {})$/;"	f	class:Rack.LogFlusher
-initialize	spec/lib/route_spec.rb	/^  def initialize(tid)$/;"	f	class:Account
 j2o	spec/support/helpers/api_test_helper.rb	/^  def j2o(json = nil)$/;"	f	class:APITestHelper
 jhash	spec/support/helpers/api_doc_helper.rb	/^    def jhash(hsh)$/;"	f	class:RSpecApiDoc
 js?	lib/devtools/asset_mapper/sfile.rb	/^    def js?$/;"	f	class:AssetMapper.Sfile
@@ -249,7 +247,6 @@ min_file_path	lib/devtools/asset_mapper/tfile.rb	/^    def min_file_path$/;"	f	c
 model	spec/support/helpers/api_doc_helper.rb	/^    def model(*args)$/;"	f	class:RSpecApiDoc
 mount	lib/route.rb	/^    def mount(app_class, route = nil)$/;"	f	class:Route
 moveProgressBar	doc/spec/lib/route_spec_rslt.html	/^function moveProgressBar(percentDone) {$/;"	f
-mtt	lib/helpers/i18n_helper.rb	/^  def mtt(msg, opts = {})$/;"	f	class:I18nHelper
 n1	doc/assets_management.html	/^  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1<\/a><\/span>produce <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'<\/span><span style="color:#D20">application.js<\/span><span style="color:#710">'<\/span><\/span> <span style="color:#080;font-weight:bold">do<\/span>$/;"	a
 n1	doc/assets_management.html	/^  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1<\/a><\/span>= img_tag(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'<\/span><span style="color:#D20">icon\/group\/friends.png<\/span><span style="color:#710">'<\/span><\/span>)$/;"	a
 n1	doc/assets_management.html	/^  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1<\/a><\/span>= img_tag(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'<\/span><span style="color:#D20">icon\/group\/friends.png<\/span><span style="color:#710">'<\/span><\/span>, <span style="color:#606">width<\/span>: <span style="color:#00D">230<\/span>)$/;"	a
@@ -307,12 +304,14 @@ n9	doc/assets_management.html	/^<span class="line-numbers"> <a href="#n9" name="
 n9	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n9" name="n9">9<\/a><\/span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">    &lt;code&gt;&lt;strong&gt;&lt;%<\/span><span style="color:#710">=<\/span><\/span>h frame.function <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%&gt;<\/span><span style="color:#D20">&lt;\/strong<\/span><span style="color:#710">&gt;<\/span><\/span>&lt;<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">\/<\/span><span style="color:#808">code&gt;<\/span><\/span>$/;"	a
 need_compile?	lib/devtools/asset_mapper/sfile.rb	/^    def need_compile?$/;"	f	class:AssetMapper.Sfile
 not_changed?	lib/devtools/asset_mapper/tfile.rb	/^    def not_changed?(nfile, ofile)$/;"	f	class:AssetMapper.Tfile
+paginate_block	lib/helpers/slim_helper.rb	/^  def paginate_block(opg, dat = {})$/;"	f	class:SlimHelper
 params	spec/lib/helpers/form_helper_spec.rb	/^  def params$/;"	f	class:FormMock
 partial	lib/helpers/slim_helper.rb	/^  def partial(pname, lcls = {})$/;"	f	class:SlimHelper
 partial_block	lib/helpers/slim_helper.rb	/^  def partial_block(bname, locals_ = {})$/;"	f	class:SlimHelper
 password	lib/helpers/form_helper.rb	/^  def password(field, options = {})$/;"	f	class:FormHelper
 path	spec/lib/helpers/form_helper_spec.rb	/^  def path$/;"	f	class:RequestMock
 preferred_locale	lib/helpers/i18n_helper.rb	/^  def preferred_locale(avails = I18n.available_locales)$/;"	f	class:I18nHelper
+present	lib/helpers/slim_helper.rb	/^  def present(obj, type = :default, dat = {})$/;"	f	class:SlimHelper
 produce	lib/devtools/asset_mapper/loader.rb	/^    def produce(file_id, &prc)$/;"	f	class:AssetMapper.Loader
 production?	lib/asset_settings.rb	/^    def production?$/;"	f	class:AssetSettings
 production?	lib/asset_settings/environment_settings.rb	/^    def production?$/;"	f	class:AssetSettings.EnvironmentSettings
@@ -364,13 +363,11 @@ template_id	lib/helpers/slim_helper.rb	/^  def template_id(tpl = nil, locales = 
 text	lib/helpers/form_helper.rb	/^  def text(field, options = {})$/;"	f	class:FormHelper
 textarea	lib/helpers/form_helper.rb	/^    def textarea(field, contents = nil, options = {})$/;"	f	class:FormHelper.FormBuilder
 textarea	lib/helpers/form_helper.rb	/^  def textarea(field, contents = '', options = {})$/;"	f	class:FormHelper
-title	spec/lib/presenters/html_presenter_spec.rb	/^  def title$/;"	f	class:MockEmail
 to	lib/route.rb	/^    def to(app_class, *parts)$/;"	f	class:Route
 to_hash	lib/asset_settings.rb	/^    def to_hash$/;"	f	class:AssetSettings
 to_hash	lib/asset_settings/environment_settings.rb	/^    def to_hash$/;"	f	class:AssetSettings
 to_hash	lib/confu.rb	/^    def to_hash$/;"	f	class:Confu
 to_hash	lib/confu.rb	/^    def to_hash$/;"	f	class:Confu.Data
-to_html	lib/presenters/html_presenter.rb	/^  def to_html(type = :default, dat = {})$/;"	f	class:HtmlPresenter
 to_human	lib/devtools/i18n_utils.rb	/^    def to_human(key)$/;"	f	class:I18nUtils
 trans	lib/devtools/i18n_utils.rb	/^    def trans(key, lang)$/;"	f	class:I18nUtils
 try_require	lib/core_ext/dynamic_require.rb	/^def try_require(file)$/;"	f
