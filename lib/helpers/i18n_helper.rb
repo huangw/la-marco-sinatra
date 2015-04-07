@@ -6,7 +6,7 @@ module I18nHelper
     # rubocop:disable LineLength
     hal.user_preferred_languages.unshift current_user.loc.to_s if respond_to?('current_user') && current_user
     hal.user_preferred_languages.unshift params[:locale] if params[:locale]
-    hal.user_preferred_languages = hal.user_preferred_languages.map {|loc| loc.match(/zh/) ? 'zh' : loc }
+    hal.user_preferred_languages = hal.user_preferred_languages.map { |loc| loc.match(/zh/) ? 'zh' : loc }
     hal.preferred_language_from(avails) || 'zh'
   end
 
