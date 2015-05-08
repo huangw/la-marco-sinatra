@@ -57,12 +57,27 @@
 
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AccountPage</span>;</span> <span class="hljs-constant">Route</span> &lt;&lt; <span class="hljs-keyword">self</span> <span class="hljs-keyword">end</span>
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Account</span></span>
-  <span class="hljs-keyword">attr_accessor</span> <span class="hljs-symbol">:tid</span>
-  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>initialize(tid)
-    <span class="hljs-variable">@tid</span> = tid
-  <span class="hljs-keyword">end</span>
-<span class="hljs-keyword">end</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AccountSettingPage</span>;</span> <span class="hljs-constant">Route</span> &lt;&lt; <span class="hljs-keyword">self</span> <span class="hljs-keyword">end</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Account</span></span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>attr_accessor :tid
+def initialize(tid)
+  @tid = tid
+end</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">end</span>
 
 describe <span class="hljs-constant">Route</span> <span class="hljs-keyword">do</span>
   describe <span class="hljs-string">'.to'</span> <span class="hljs-keyword">do</span>
@@ -74,6 +89,10 @@ describe <span class="hljs-constant">Route</span> <span class="hljs-keyword">do<
         <span class="hljs-constant">Route</span>[<span class="hljs-constant">AccountPage</span>] = <span class="hljs-string">'/valid'</span>
         expect(<span class="hljs-constant">Route</span>.to(<span class="hljs-constant">AccountPage</span>, <span class="hljs-string">'signin'</span>)).to eq(<span class="hljs-string">'/valid/signin'</span>)
         expect(<span class="hljs-constant">Route</span>.to(<span class="hljs-constant">AccountPage</span>, <span class="hljs-symbol">:signout</span>)).to eq(<span class="hljs-string">'/valid/signout'</span>)
+      <span class="hljs-keyword">end</span>
+
+      it <span class="hljs-string">'can handle string instead of class'</span> <span class="hljs-keyword">do</span>
+        expect(<span class="hljs-constant">Route</span>.to(<span class="hljs-string">'/some/root/to/user-tid'</span>, <span class="hljs-string">'settings'</span>)).to eq(<span class="hljs-string">'/some/root/to/user-tid/settings'</span>)
       <span class="hljs-keyword">end</span>
     <span class="hljs-keyword">end</span>
 
@@ -98,9 +117,26 @@ describe <span class="hljs-constant">Route</span> <span class="hljs-keyword">do<
       <span class="hljs-keyword">end</span>
 
       it <span class="hljs-string">'accept end points with extra parts'</span> <span class="hljs-keyword">do</span>
-        expect(<span class="hljs-constant">Route</span>.to(<span class="hljs-constant">API::AccountPage</span>, <span class="hljs-symbol">:user</span>)).to eq(<span class="hljs-string">'/api/accounts/user'</span>)
-        expect(<span class="hljs-constant">Route</span>.to(<span class="hljs-constant">API::AccountPage</span>, <span class="hljs-constant">Account</span>.new(<span class="hljs-string">'129423'</span>))).to eq(<span class="hljs-string">'/api/accounts/129423'</span>)
-        expect(<span class="hljs-constant">Route</span>.to(<span class="hljs-constant">API::AccountPage</span>, <span class="hljs-string">'Settings'</span>)).to eq(<span class="hljs-string">'/api/accounts/settings'</span>)
+        expect(<span class="hljs-constant">Route</span>.to(<span class="hljs-constant">API::AccountPage</span>, <span class="hljs-symbol">:user</span>)).to eq(<span class="hljs-string">'/api/accounts/user'</span>)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>expect(Route.to(API::AccountPage, Account.new(‘129423’))).to eq(‘/api/accounts/129423’)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        expect(<span class="hljs-constant">Route</span>.to(<span class="hljs-constant">API::AccountPage</span>, <span class="hljs-string">'Settings'</span>)).to eq(<span class="hljs-string">'/api/accounts/settings'</span>)
+        expect(<span class="hljs-constant">Route</span>.to(<span class="hljs-constant">AccountSettingPage</span>, <span class="hljs-string">'nickname'</span>)).to eq(<span class="hljs-string">'/account/settings/nickname'</span>)
+        expect(<span class="hljs-constant">Route</span>.to(<span class="hljs-constant">AccountSettingPage</span>, <span class="hljs-string">'nickName'</span>)).to eq(<span class="hljs-string">'/account/settings/nick/name'</span>)
+        expect(<span class="hljs-constant">Route</span>.to(<span class="hljs-constant">AccountSettingPage</span>,<span class="hljs-string">'nickname'</span>, <span class="hljs-symbol">id:</span> <span class="hljs-number">3</span>)).to eq(<span class="hljs-string">'/account/settings/nickname?id=3'</span>)
+        expect(<span class="hljs-constant">Route</span>.to(<span class="hljs-constant">AccountSettingPage</span>,<span class="hljs-string">'nickname'</span>, <span class="hljs-constant">UserId</span><span class="hljs-symbol">:</span> <span class="hljs-number">3</span>)).to eq(<span class="hljs-string">'/account/settings/nickname?UserId=3'</span>)
       <span class="hljs-keyword">end</span>
     <span class="hljs-keyword">end</span>
 

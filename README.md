@@ -121,7 +121,7 @@ Guard设置为检测本地文件变化并重启服务器，同时监听`features
 
     rsp :index, locales: [:en, :ja]
 
-注意这里的`locales`表示的是“所有我提供了模板的locales”。即使这个例子里没有`zh`模板存在，对指定locale为`zh`的用户，SlimHelper会使用默认的模板（:en）render。因此，`:en`模板是必须存在的（这一点未来可能有所改善）。
+注意这里的`locales`表示的是“所有我提供了模板的locales”。这个例子里没有`zh`模板存在，对指定locale为`zh`的用户，SlimHelper会使用默认的模板（:en）render。因此，`:en`模板是必须存在的（这一点未来可能有所改善）。
 
 另一种方法是使用同一个模板，但是用`tt(:some_key)`将`:some_key`翻译为不同语言。`tt`由`I18nHelper`提供，会自动的按照当前页面寻找正确的scope。比如，`app/views/some/template.slim`文件里的`:some_key`，应该在`i18n/views/some/en.yml`（或`ja.yml`, `zh.yml`）里定义为`some.template.some_key`。
 
