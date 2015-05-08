@@ -84,7 +84,7 @@ class Confu
     end
     alias_method :'[]', :for_environment
 
-    # Recursively convert `OpenStruct` instance into hash format,
+    # Recursively convert `Data` instance into hash format,
     # ensure symbolic keys
     def to_hash
       fail 'Can not convert to hash unless finalized' unless finalized?

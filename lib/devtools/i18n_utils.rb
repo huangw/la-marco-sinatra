@@ -54,7 +54,8 @@ module I18nUtils
       @as_hash = YAML.load_file(filename) if File.exist?(file_name)
       @locale = @as_hash.keys.first || File.basename(file_name).sub(/\.yml\Z/, '')
 
-      @flat_hash, @added_keys = {}, {}
+      @flat_hash = {}
+      @added_keys = {}
       hash_flat(@as_hash).each { |k, v| add_key(scope_join(*k), v) }
       @added_keys = {} # workaround: cleanup added keys
       @common_scope = find_common_scope(@flat_hash.keys)

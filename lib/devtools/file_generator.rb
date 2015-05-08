@@ -45,7 +45,9 @@ class FileGenerator
 
     # rubocop:disable CyclomaticComplexity, MethodLength
     def data_tpl(id)
-      data_reached, started, contents = false, false, ''
+      data_reached = false
+      started = false
+      contents = ''
       File.open(find_caller).each do |line|
         if data_reached
           if started

@@ -101,5 +101,10 @@ namespace :doc do
       FileUtils.mv md.sub(/\.md\Z/, '.html'), out_dir
       FileUtils.rm md.sub(/\.md\Z/, '.render.md')
     end
+
+    if File.exist?('README.md')
+      sh "mdoc README.md"
+      FileUtils.mv 'README.html', 'doc/'
+    end
   end
 end
