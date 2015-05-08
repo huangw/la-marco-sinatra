@@ -64,7 +64,7 @@ Cucumber支持通过`poltergeist`或`chrome`两种driver测试，默认是`polte
 
 `rake accept`则会将测试结果以html报告的形式保存到`doc/cucumber.html`。
 
-在确保puma已经启动的情况下，可通过`rake puma:restart && rake f`来先重启服务器在执行cucumber。注意如果puma没有另外启动，则`rake s`会占据整个进程，`rake f`无法获得启动机会。因此**不要使用**`rake s && rake f`。
+在确保puma已经启动的情况下，可通过`rake puma:restart && rake f`来先重启服务器再执行cucumber。注意如果puma没有另外启动，则`rake s`会占据整个进程，`rake f`无法获得启动机会。因此**不要使用**`rake s && rake f`。
 
 Guard设置为检测本地文件变化并重启服务器，同时监听`features/*.feature`或`app/pages/*.rb`文件变化并执行cucumber。当然同样需要puma在另外的窗口运行时才有意义。
 
@@ -87,6 +87,8 @@ Guard设置为检测本地文件变化并重启服务器，同时监听`features
       get('/') do
         # redirect to /users/xxxuser_tidxxx/settings
         redirect Route.to(UserPage, current_user.tid, 'settings')
+        # redirect to /p/title-tid
+        redirect Route.to(post.url)
       end
     end
 

@@ -33,6 +33,10 @@ describe Route do
         expect(Route.to(AccountPage, 'signin')).to eq('/valid/signin')
         expect(Route.to(AccountPage, :signout)).to eq('/valid/signout')
       end
+
+      it 'can handle string instead of class' do
+        expect(Route.to('/some/root/to/user-tid', 'settings')).to eq('/some/root/to/user-tid/settings')
+      end
     end
 
     describe Admin::AccountPage do

@@ -11,7 +11,8 @@ module AssetMapper
     attr_reader :file_id, :compiled_path, :compile_files
 
     def initialize(file_id)
-      @file_id, @min_dir = file_id, AssetMapper.min_dir
+      @file_id = file_id
+      @min_dir = AssetMapper.min_dir
       warn "[WARN] file type unkown: #{file_id}, "\
            'need to be js or css' unless file_id.match(/\.(js|css)\Z/)
       @compile_files = [] # as absolute paths

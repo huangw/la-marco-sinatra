@@ -3,7 +3,8 @@ module Rack
   # Write out event logger (only need for web application)
   class LogFlusher
     def initialize(app, opts = {})
-      @app, @opts = app, opts
+      @app = app
+      @opts = opts
       @logger_klass = @opts.delete(:logger) || LaBufferedLogger
     end
 

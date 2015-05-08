@@ -6,7 +6,8 @@ module AssetMapper
     attr_accessor :app_name, :remote, :branch, :to, :update
 
     def initialize(app_name, to, opts = {})
-      @app_name, @to = app_name, to
+      @app_name = app_name
+      @to = to
       github = opts.extract_args(:github)
       vikkr = opts.extract_args(:vikkr)
       @remote = File.join('https://github.com', github) if github

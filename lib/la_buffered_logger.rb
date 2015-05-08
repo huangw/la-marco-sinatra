@@ -19,7 +19,9 @@ class LaBufferedLogger
 
   def initialize(opts = {})
     self.level = opts.extract_args!(level: :debug)
-    @request_info, @msgs, @access_recorded = {}, [], false
+    @request_info = {}
+    @msgs = []
+    @access_recorded = false
   end
 
   def flush!

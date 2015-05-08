@@ -5,8 +5,10 @@ module AssetMapper
   class Producer
     attr_reader :tfile, :sfiles
     def initialize(file_id)
-      @file_id, @tfile = file_id, Tfile.new(file_id)
-      @sfiles, @cloud_files = [], []
+      @file_id = file_id
+      @tfile = Tfile.new(file_id)
+      @sfiles = []
+      @cloud_files = []
     end
 
     # DSL command

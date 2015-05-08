@@ -1,7 +1,7 @@
 require 'active_support/inflector'
 
 # brought from https://github.com/cymen/sinatra-formhelpers-
-# rubocop:disable LineLength, MethodLength, CyclomaticComplexity, Metrics/PerceivedComplexity
+# rubocop:disable LineLength, MethodLength, CyclomaticComplexity, ModuleLength
 module FormHelper
   # a intermediate object holds default values passed to form helper
   class FormBuilder
@@ -114,7 +114,7 @@ module FormHelper
       display ||= @object.class.human_attribute_name(field) if @object.class.respond_to?(:human_attribute_name)
 
       options[:checked] = 'checked' if v
-      @parent.checkbox("#{@name}[#{field}]", { :'1' => display }, options)
+      @parent.checkbox("#{@name}[#{field}]", { '1': display }, options)
     end
 
     def method_missing(met, field = '', options = {})
@@ -140,7 +140,8 @@ module FormHelper
     met = options.delete(:method) || 'POST'
     hid_met = ''
     unless %w(POST GET).include?(met.to_s.upcase)
-      hid_met, met = hidden('_method', value: met.to_s.upcase), :post
+      hid_met = hidden('_method', value: met.to_s.upcase)
+      met = :post
     end
 
     options[:enctype] = 'multipart/form-data' if options.delete(:upload)

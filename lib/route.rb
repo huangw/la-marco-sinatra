@@ -34,16 +34,17 @@ class Route
 
     # To helper receive model as inputs:
     def to(app_class, *parts)
-      return nil unless @table[app_class]
-      return @table[app_class] unless parts && parts.size > 0
+      prefix = app_class.is_a?(Class) ? @table[app_class] : app_class.to_s
+      fail "unknown controller #{app_class}" if prefix.nil?
+      return prefix unless parts && parts.size > 0
 
       if parts.last.is_a?(Hash)
-        pam = '?' + parts.pop.map { |k, v| k.to_s + '=' +  v.to_s }.join('&')
+        pam = '?' + parts.pop.map { |k, v| k.to_s + '=' + v.to_s }.join('&')
       end
       pam ||= ''
       pas = parts.map { |k| k.to_s.underscore.gsub('_', '/') }
 
-      File.join(@table[app_class], *pas) + pam
+      File.join(prefix, *pas) + pam
     end
 
     def default_path(app_class)

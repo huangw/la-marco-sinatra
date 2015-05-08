@@ -38,7 +38,8 @@ module SlimHelper
     tmpl = File.join('presenters', obj.class.to_s.underscore, "#{type}")
 
     if locales
-      locale, user_locale = locales[0], I18n.locale.to_s
+      locale = locales[0]
+      user_locale = I18n.locale.to_s
       locale = user_locale if locales.map(&:to_s).include?(user_locale)
       tmpl << ".#{locale}"
     end
@@ -71,7 +72,8 @@ module SlimHelper
     tpl = :index if tpl.empty?
     return tpl.to_s unless locales
 
-    lc, user_lc = I18n.default_locale.to_sym, I18n.locale.to_sym
+    lc = I18n.default_locale.to_sym
+    user_lc = I18n.locale.to_sym
     lc = user_lc if locales.map(&:to_sym).include?(user_lc)
     "#{tpl}.#{lc}".to_s
   end
