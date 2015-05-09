@@ -28,7 +28,7 @@ export :route do
 end
 
 export :logger do
-  add_gem 'celluloid'
+  # add_gem 'celluloid'
 
   copy 'lib/utils/la_backtrace_cleaner.rb'
   copy 'lib/la_buffered_logger.rb'

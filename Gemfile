@@ -23,8 +23,6 @@ gem "slim"
     
 gem "http_accept_language"
     
-gem "celluloid"
-    
 gem "oj"
     
 gem "multi_json"

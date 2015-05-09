@@ -29,7 +29,8 @@ module Rack
       end
 
       @logger.access(status, tm: Time.now - t1)
-      @logger.async.flush!
+      # @logger.async.flush!
+      @logger.flush!
       [status, headers, body]
     end
   end
