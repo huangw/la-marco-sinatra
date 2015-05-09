@@ -159,7 +159,7 @@ TODO: TableHelper暂未实现。需要时可以启动开发。
 
 #### LaBufferedLogger
 
-BufferedLogger是为便于在`rack.logger`中使用而设计的。
+`BufferedLogger`是为便于在`rack.logger`中使用而设计的。
 
 **注意** 一定在sinatra的configuration里`set :logging, nil`。
 
