@@ -28,5 +28,5 @@ class WebApplication < Sinatra::Base
   helpers I18nHelper
   helpers AssetsHelper
 
-  # before { I18n.locale = preferred_locale }
+  before { I18n.locale = preferred_locale }
 end

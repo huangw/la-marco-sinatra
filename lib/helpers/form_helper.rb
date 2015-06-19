@@ -37,7 +37,8 @@ module FormHelper
           out << textarea(field, options.delete(:value),
                           options.merge(class: 'form-control'))
         else
-          out << send(type, field, options.merge(class: 'form-control'))
+          value = options.delete(:value) || default_value(field, '')
+          out << send(type, field, options.merge(class: 'form-control', value: value))
         end
       end
 
