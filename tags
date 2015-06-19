@@ -141,6 +141,8 @@ current_file_version	lib/devtools/asset_mapper/tfile.rb	/^    def current_file_v
 data_tpl	lib/devtools/file_generator.rb	/^    def data_tpl(id)$/;"	f	class:FileGenerator.RubyFile
 deep_require	lib/core_ext/dynamic_require.rb	/^def deep_require(dir, deepth = 3)$/;"	f
 default_bit_value	lib/helpers/form_helper.rb	/^    def default_bit_value(field, key, default)$/;"	f	class:FormHelper.FormBuilder
+default_img_alt	lib/helpers/assets_helper.rb	/^  def default_img_alt(obj)$/;"	f	class:AssetsHelper.css_tag.js_tag
+default_img_url	lib/helpers/assets_helper.rb	/^  def default_img_url(suffix = 'o', type = 'Image')$/;"	f	class:AssetsHelper.css_tag.js_tag
 default_path	lib/route.rb	/^    def default_path(app_class)$/;"	f	class:Route
 default_value	lib/helpers/form_helper.rb	/^    def default_value(field, default)$/;"	f	class:FormHelper.FormBuilder
 development?	lib/asset_settings.rb	/^    def development?$/;"	f	class:AssetSettings
@@ -206,7 +208,8 @@ hex	lib/core_ext/time_short.rb	/^  def hex$/;"	f	class:Time
 hidden	lib/helpers/form_helper.rb	/^  def hidden(field, options = {})$/;"	f	class:FormHelper
 i18n_message	lib/core_ext/exception_i18n_message.rb	/^  def i18n_message$/;"	f	class:Exception
 img_dir	lib/devtools/asset_mapper/loader.rb	/^    def img_dir(val)$/;"	f	class:AssetMapper.Loader
-img_tag	lib/helpers/assets_helper.rb	/^  def img_tag(file_id, opts = {})$/;"	f	class:AssetsHelper
+img_tag	lib/helpers/assets_helper.rb	/^  def img_tag(obj, opts = {})$/;"	f	class:AssetsHelper.css_tag.js_tag
+img_url	lib/helpers/assets_helper.rb	/^  def img_url(obj, opts = {})$/;"	f	class:AssetsHelper.css_tag.js_tag
 img_url_prefix	lib/devtools/asset_mapper/loader.rb	/^    def img_url_prefix(hsh)$/;"	f	class:AssetMapper.Loader
 indent	spec/support/helpers/api_doc_helper.rb	/^    def indent(count, char = ' ')$/;"	f	class:String
 initialize	lib/asset_settings/environment_settings.rb	/^    def initialize(environment)$/;"	f	class:AssetSettings.EnvironmentSettings
