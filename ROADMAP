@@ -26,4 +26,4 @@ year: 2015
   [++] apitest: api test with rack test and helper 01/30 @huangw:01/31
   [++] apidoc: api document with rspec rack test 02/20-02/24 @huangw:02/07
 
-[+] text_format: modify the text field format methods 06/19 @songcy:90
+[+] text_format: modify the text field format methods 06/19 @songcy:99
