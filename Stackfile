@@ -62,6 +62,7 @@ export :web do
   add_gem 'sinatra-flash'
   add_gem 'sinatra-redirect-with-flash'
   add_gem 'slim'
+  add_gem 'sanitize'
 
   add_gem 'http_accept_language'
 
