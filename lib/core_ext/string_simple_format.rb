@@ -5,8 +5,15 @@
 # convert newline to <br />, two newlines to separate <p></p>
 class String
   def to_simple_format
-    txt = dup.sub(/\A\s*/, '').sub(/\s*\Z/, '')
-    txt.gsub!(/\s*\n\n\s*/, '</p><p>')
-    '<p>' << txt.gsub(/\s*\n\s*/, '<br />') << '</p>'
+    to_text_field
+    # txt = dup.sub(/\A\s*/, '').sub(/\s*\Z/, '').gsub(/\\r/, '')
+    # txt.gsub!(/\s*\n\n\s*/, '</p><p>')
+    txt = Rack::Utils.escape_html(dup)
+
+    '<p>' << txt.gsub(/\n/, '<br />') << '</p>'
+  end
+
+  def to_text_field
+    sub!(/\A\s*/, '').sub!(/\s*\Z/, '').gsub!(/\r/, '')
   end
 end
