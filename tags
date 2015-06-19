@@ -75,6 +75,8 @@ SlimHelper	lib/helpers/slim_helper.rb	/^module SlimHelper$/;"	m
 Slimmer	app/pages/slimmer/check_path.rb	/^module Slimmer$/;"	m
 Slimmer	app/pages/slimmer/translator.rb	/^module Slimmer$/;"	m
 String	lib/core_ext/string_common_head.rb	/^class String$/;"	c
+String	lib/core_ext/string_short.rb	/^class String$/;"	c
+String	lib/core_ext/string_simple_format.rb	/^class String$/;"	c
 String	spec/support/helpers/api_doc_helper.rb	/^  class String$/;"	c
 Tfile	lib/devtools/asset_mapper/tfile.rb	/^  class Tfile$/;"	c	class:AssetMapper
 Time	lib/core_ext/time_short.rb	/^class Time$/;"	c
@@ -343,6 +345,7 @@ scope_join	lib/devtools/i18n_utils.rb	/^    def scope_join(*args)$/;"	f	class:Ya
 select	lib/helpers/form_helper.rb	/^    def select(field, values, options = {})$/;"	f	class:FormHelper.FormBuilder
 select	lib/helpers/form_helper.rb	/^  def select(field, values, options = {})$/;"	f	class:FormHelper.radio.checkbox
 set_options	lib/helpers/form_helper.rb	/^  def set_options(type, field, options = {})$/;"	f	class:FormHelper
+short	lib/core_ext/string_short.rb	/^  def short(leng = 20)$/;"	f	class:String
 short	lib/core_ext/time_short.rb	/^  def short$/;"	f	class:Time
 single_tag	lib/helpers/form_helper.rb	/^  def single_tag(name, options = {})$/;"	f	class:FormHelper.radio.checkbox.select
 sp	spec/support/helpers/api_test_helper.rb	/^  def sp(expected_status = 200)$/;"	f	class:APITestHelper
@@ -369,6 +372,7 @@ to_hash	lib/asset_settings/environment_settings.rb	/^    def to_hash$/;"	f	class
 to_hash	lib/confu.rb	/^    def to_hash$/;"	f	class:Confu
 to_hash	lib/confu.rb	/^    def to_hash$/;"	f	class:Confu.Data
 to_human	lib/devtools/i18n_utils.rb	/^    def to_human(key)$/;"	f	class:I18nUtils
+to_simple_format	lib/core_ext/string_simple_format.rb	/^  def to_simple_format$/;"	f	class:String
 trans	lib/devtools/i18n_utils.rb	/^    def trans(key, lang)$/;"	f	class:I18nUtils
 try_require	lib/core_ext/dynamic_require.rb	/^def try_require(file)$/;"	f
 tt	lib/helpers/i18n_helper.rb	/^  def tt(msg, opts = {})$/;"	f	class:I18nHelper

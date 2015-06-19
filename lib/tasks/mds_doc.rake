@@ -27,7 +27,42 @@ class SpecDocument
         line = line.sub(/spec:\s*[\w\/]+/, sstr)
       end
 
+      # Todo label and task list:
       line = line.gsub('TODO:', '<strong style="color: red">[TODO]</strong>')
+
+      # H/L: high/low priority; C: completed; P: pending
+      if m_dat = line.match(/(\s*\-\s*)\[(H|L|C|P)?(.+)?\](.+)/)
+        date_str = ''
+        if m_dat[3]
+          date = Date.parse(m_dat[3].to_s)
+          date_str = "[#{date.strftime("%m-%d")}]"
+          unless m_dat[2] == 'C' || m_dat[2] == 'P'
+            if date < Date.today
+              date_str = "<b style='color: red'>#{date_str}</b>"
+            elsif date == Date.today
+              date_str = "<b style='color: #F7D358'>#{date_str}</b>"
+            elsif date < Date.today + 2
+              date_str = "<b style='color: #blue'>#{date_str}</b>"
+            else
+              date_str = "<b>#{date_str}</b>"
+            end
+          end
+        end
+
+        spn = case m_dat[2]
+              when 'H' then ['<b>', '</b>']
+              when 'L' then ['<span style="color: #999999">', '</span>']
+              when 'C' then ['<span style="color: green">', '</span>']
+              when 'P' then ['<span style="color: #999999">', '</span>']
+              else
+                ['<span>', '</span>']
+              end
+        line = m_dat[1] + date_str + spn[0] + m_dat[4] + spn[1] + "\n"
+        if m_dat[2] == 'C' || m_dat[2] == 'P'
+          line = m_dat[1] + '<del>' + date_str + spn[0] + m_dat[4] + spn[1] + "</del>\n"
+        end
+      end
+
       wfh.write line
     end
     wfh.close
