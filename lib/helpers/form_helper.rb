@@ -18,7 +18,7 @@ module FormHelper
 
     def field_group(field, options = {})
       type = options.delete(:type) || :text
-      cls = 'form-group'
+      cls = options[:class].to_s + ' form-group'
 
       e_msg = [options.delete(:e_msg1)] if options[:e_msg1]
       e_msg ||= @object.errors.messages[field] if @object.respond_to?(:errors)
@@ -27,13 +27,13 @@ module FormHelper
 
       display = options.delete(:label) if options[:label]
       display ||= @object.class.human_attribute_name(field) if @object.class
-                                                               .respond_to?(:human_attribute_name)
+          .respond_to?(:human_attribute_name)
       out = label field, display, class: 'control-label'
 
       if block_given?
         out << yield
       else
-        if type == :textarea
+        if type.to_sym == :textarea
           out << textarea(field, options.delete(:value),
                           options.merge(class: 'form-control'))
         else
@@ -75,10 +75,22 @@ module FormHelper
       @parent.radio("#{@name}[#{field}]", values, options)
     end
 
+    def simple_radio(field, value, options = {})
+      options[:id] ||= "#{@name}_#{field}_#{value}"
+      options[:value] = default_radio_value(field, value, '')
+      @parent.radio("#{@name}[#{field}]", value, options)
+    end
+
     def checkbox(field, values, options = {})
       options[:id] ||= "#{@name}_#{field}"
       options[:value] = default_value(field, [])
       @parent.checkbox("#{@name}[#{field}]", values, options)
+    end
+
+    def simple_checkbox(field, value, options = {})
+      options[:id] ||= "#{@name}_#{field}_#{value}"
+      options[:value] = default_checkbox_value(field, [])
+      @parent.checkbox("#{@name}[#{field}]", value, options)
     end
 
     def select(field, values, options = {})
@@ -87,43 +99,72 @@ module FormHelper
       @parent.select("#{@name}[#{field}]", values, options)
     end
 
-    # return the checkbox keys, default is {on: }
-    def default_bit_value(field, key, default)
+    def default_radio_value(field, key, default)
       v = @parent.params[@name] &&
-          @parent.params[@name][field.to_sym] &&
-          @parent.params[@name][field.to_sym][key.to_sym]
+          @parent.params[@name][field.to_sym]
 
-      mto = field.to_s + '_' + key.to_s + '?'
-      v ||= @object.send(mto.to_sym) if @object.respond_to?(mto.to_sym)
+      mto = key.to_s + '?'
+
+      v ||= key.to_s if @object.respond_to?(mto.to_sym) && @object.send(mto.to_sym)
       v || default
     end
 
-    def bit_checkbox(field, key, options = {})
-      v = default_bit_value(field, key, false)
+    def default_checkbox_value(field, default)
+      v = @parent.params[@name] &&
+          @parent.params[@name][field.to_sym]
 
-      display = options.delete(:label) if options[:label]
-      display ||= @object.class.human_attribute_name(field.to_s + '_' + key.to_s) if @object.class.respond_to?(:human_attribute_name)
+      unless v
+        keys = @object.send("#{field}_keys".to_sym).keys
+        mto = "#{field}_on?"
 
-      options[:checked] = 'checked' if v
-      @parent.checkbox("#{@name}[#{field}]", { key.to_sym => display }, options)
+        tmp_v = []
+        keys.each do |k|
+          tmp_v.push k.to_s if @object.send(mto.to_sym, k)
+        end
+
+        v = tmp_v unless tmp_v.blank?
+      end
+
+      v || default
     end
-
-    def bool_field_checkbox(field, options = {})
-      v = default_value(field, false)
-
-      display = options.delete(:label) if options[:label]
-      display ||= @object.class.human_attribute_name(field) if @object.class.respond_to?(:human_attribute_name)
-
-      options[:checked] = 'checked' if v
-      @parent.checkbox("#{@name}[#{field}]", { '1': display }, options)
-    end
+    ## commit by songcy 2015/06/23
+    # return the checkbox keys, default is {on: }
+    # def default_bit_value(field, key, default)
+    #   v = @parent.params[@name] &&
+    #       @parent.params[@name][field.to_sym] &&
+    #       @parent.params[@name][field.to_sym][key.to_sym]
+    #
+    #   mto = field.to_s + '_' + key.to_s + '?'
+    #   v ||= @object.send(mto.to_sym) if @object.respond_to?(mto.to_sym)
+    #   v || default
+    # end
+    #
+    # def bit_checkbox(field, key, options = {})
+    #   v = default_bit_value(field, key, false)
+    #
+    #   display = options.delete(:label) if options[:label]
+    #   display ||= @object.class.human_attribute_name(field.to_s + '_' + key.to_s) if @object.class.respond_to?(:human_attribute_name)
+    #
+    #   options[:checked] = 'checked' if v
+    #   @parent.checkbox("#{@name}[#{field}]", { key.to_sym => display }, options)
+    # end
+    #
+    # def bool_field_checkbox(field, options = {})
+    #   v = default_value(field, false)
+    #
+    #   display = options.delete(:label) if options[:label]
+    #   display ||= @object.class.human_attribute_name(field) if @object.class.respond_to?(:human_attribute_name)
+    #
+    #   options[:checked] = 'checked' if v
+    #   @parent.checkbox("#{@name}[#{field}]", { '1': display }, options)
+    # end
 
     def method_missing(met, field = '', options = {})
       unless [:submit, :reset, :button].include? met
         options[:id] ||= "#{@name}_#{field}"
         field = field.to_sym if field
         options[:value] ||= @parent.params[@name] &&
-                            @parent.params[@name][field]
+            @parent.params[@name][field]
         if !options[:value] && @object.respond_to?(field)
           options[:value] = @object.send(field)
         end
@@ -147,7 +188,7 @@ module FormHelper
 
     options[:enctype] = 'multipart/form-data' if options.delete(:upload)
     out = tag(:form, nil, { action: action, method: met.to_s.upcase }
-              .merge(options)) << hid_met
+                       .merge(options)) << hid_met
 
     out << yield << close_tag('form') if block_given?
     out
@@ -307,8 +348,8 @@ module FormHelper
   # => <h1 title="shizam">shizam</h1>
   def tag(name, content = nil, options = {})
     "<#{name}" +
-      (options.length > 0 ? " #{hash_to_html_attrs(options)}" : '') +
-      (content.nil? ? '>' : ">#{content}</#{name}>")
+        (options.length > 0 ? " #{hash_to_html_attrs(options)}" : '') +
+        (content.nil? ? '>' : ">#{content}</#{name}>")
   end
 
   # Standard single closing tags
@@ -329,7 +370,7 @@ module FormHelper
   # quasi private
   def fast_escape_html(text)
     text.to_s.gsub(/\&/, '&amp;').gsub(/\"/, '&quot;')
-      .gsub(/>/, '&gt;').gsub(/</, '&lt;')
+        .gsub(/>/, '&gt;').gsub(/</, '&lt;')
   end
 
   def hash_to_html_attrs(options = {})
