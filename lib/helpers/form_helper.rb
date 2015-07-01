@@ -27,7 +27,7 @@ module FormHelper
 
       display = options.delete(:label) if options[:label]
       display ||= @object.class.human_attribute_name(field) if @object.class
-          .respond_to?(:human_attribute_name)
+                                                               .respond_to?(:human_attribute_name)
       out = label field, display, class: 'control-label'
 
       if block_given?
@@ -164,7 +164,7 @@ module FormHelper
         options[:id] ||= "#{@name}_#{field}"
         field = field.to_sym if field
         options[:value] ||= @parent.params[@name] &&
-            @parent.params[@name][field]
+                            @parent.params[@name][field]
         if !options[:value] && @object.respond_to?(field)
           options[:value] = @object.send(field)
         end
@@ -188,7 +188,7 @@ module FormHelper
 
     options[:enctype] = 'multipart/form-data' if options.delete(:upload)
     out = tag(:form, nil, { action: action, method: met.to_s.upcase }
-                       .merge(options)) << hid_met
+              .merge(options)) << hid_met
 
     out << yield << close_tag('form') if block_given?
     out
@@ -348,8 +348,8 @@ module FormHelper
   # => <h1 title="shizam">shizam</h1>
   def tag(name, content = nil, options = {})
     "<#{name}" +
-        (options.length > 0 ? " #{hash_to_html_attrs(options)}" : '') +
-        (content.nil? ? '>' : ">#{content}</#{name}>")
+      (options.length > 0 ? " #{hash_to_html_attrs(options)}" : '') +
+      (content.nil? ? '>' : ">#{content}</#{name}>")
   end
 
   # Standard single closing tags
@@ -370,7 +370,7 @@ module FormHelper
   # quasi private
   def fast_escape_html(text)
     text.to_s.gsub(/\&/, '&amp;').gsub(/\"/, '&quot;')
-        .gsub(/>/, '&gt;').gsub(/</, '&lt;')
+      .gsub(/>/, '&gt;').gsub(/</, '&lt;')
   end
 
   def hash_to_html_attrs(options = {})

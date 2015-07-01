@@ -470,7 +470,7 @@ describe FormHelper do
       end
 
       expect(rslt).to match('<form ')
-      expect(rslt).to match('<div class="form-group">' +
+      expect(rslt).to match('<div class=" form-group">' +
                         '<label class="control-label" for="user_mock_name">')
       # expect(rslt).to match('<div class="form-group has-error">' +
       #                   '<label class="control-label" for="user_mock_age"')
