@@ -28,4 +28,4 @@ year: 2015
 
 [+] text_format: modify the text field format methods 06/19 @songcy:06/19
 
-[+] logger: logstash-logger sinatra logger 07/18 @huangw
+[+] logger: logstash-logger sinatra logger 07/18 @huangw:10
