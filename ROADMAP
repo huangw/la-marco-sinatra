@@ -21,7 +21,7 @@ year: 2015
   [++] assets: assets pipeline and helpers based on stackupper 01/23-01/24 @huangw:01/27
 [+] release_v0_0_1: release the first alpha version 01/30 @huangw:01/28
 
-[+] api: implement API feature 01/30-02/24 @huangw
+[+] api: implement API feature 01/30-02/24 @huangw:10
   [++] rackapi: rack middleware rewised 01/30 @huangw:01/31
   [++] apitest: api test with rack test and helper 01/30 @huangw:01/31
   [++] apidoc: api document with rspec rack test 02/20-02/24 @huangw:02/07
