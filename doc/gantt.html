@@ -48,7 +48,9 @@
 
           g.AddTaskItem(new JSGantt.TaskItem(27,'api document with rspec rack test','02/20/2015','02/24/2015','008000','',0,'黄巍',100,0,24,1,'','黄巍2015-02-07'));
 
-          g.AddTaskItem(new JSGantt.TaskItem(29,'modify the text field format methods','06/19/2015','06/19/2015','FFA500','',0,'宋春月',0,0,0,1,'','宋春月'));
+          g.AddTaskItem(new JSGantt.TaskItem(29,'modify the text field format methods','06/19/2015','06/19/2015','008000','',0,'宋春月',100,0,0,1,'','宋春月2015-06-19'));
+
+          g.AddTaskItem(new JSGantt.TaskItem(31,'logstash-logger sinatra logger','07/18/2015','07/18/2015','B0C4DE','',0,'黄巍',0,0,0,1,'','黄巍'));
 
         g.Draw();
         g.DrawDependencies();
@@ -62,6 +64,78 @@
 
 <h3>Recent Git Log</h3> 
 <pre><code>
+* <em style='color:grey'>1a0f8836b94989ae9ce227b6511a926eac52ce7f</em>
+| <strong>2015-07-01 11:12</strong> By Songcy &lt;songcy@7lime.com&gt;
+| | <strong style='color:green'>modify the form helper spec</strong>
+| 
+|  
+* <em style='color:grey'>c534f623bda1525177138ad093228ade886ba99f</em>
+| <strong>2015-07-01 11:04</strong> By Songcy &lt;songcy@7lime.com&gt;
+| | <strong style='color:green'>modify the form helper</strong>
+| 
+|  
+* <em style='color:grey'>db01da4c07dd4a280b8c58fd7a4da86441e8c239</em>
+| <strong>2015-06-22 19:28</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | <strong style='color:green'>update rac</strong>
+| 
+|  
+* <em style='color:grey'>ba3f9598e64be3358297535fb67740adc86101e5</em>
+| <strong>2015-06-19 18:29</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | <strong style='color:green'>update progress of task text_format to 100</strong>
+| 
+|    
+*   <em style='color:grey'>2ea4a02f023720323cdbf027b08e22e03d7143dd</em>
+|\  <strong>2015-06-19 18:29</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>Merge branch 'text_format' into develop</strong>
+| | 
+| |     
+| *   <em style='color:grey'>a69d17355f364d82d8b457c5531ed4f2ee2ccf1c</em>
+| |\  <strong>2015-06-19 18:19</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+|/ /  | |   <strong style='color:green'>Merge branch 'text_format' of g:vikkr/la-marco-sinatra into</strong>
+| |    text_format
+| |   
+| |   
+| * <em style='color:grey'>8f72f44c43d90063616eeaa2094c8ce8bec1366c</em>
+| | <strong>2015-06-19 18:17</strong> By Songcy &lt;songcy@7lime.com&gt;
+| | | | <strong style='color:green'>add the gem sanitize</strong>
+| | 
+| |     
+| *   <em style='color:grey'>9eecb9e3e466ae46312f507450257e0c3d6fcfeb</em>
+| |\  <strong>2015-06-19 18:12</strong> By Songcy &lt;songcy@7lime.com&gt;
+| | | | | | <strong style='color:green'>Merge branch 'develop' into text_format</strong>
+| | | 
+| | |      
+| * |   <em style='color:grey'>bc6f270751382fc693cea96b26f75dcd8b910db2</em>
+| |\ \  <strong>2015-06-19 18:12</strong> By Songcy &lt;songcy@7lime.com&gt;
+| | | | | | | | <strong style='color:green'>Merge branch 'format' into text_format</strong>
+| | | | 
+| | | |     
+| | * | <em style='color:grey'>1b7b36d5b9101cd91d28cdc2d3ac1ac36e381d63</em>
+| | | | <strong>2015-06-19 18:09</strong> By Songcy &lt;songcy@7lime.com&gt;
+| | | | | | | | <strong style='color:green'>modify format</strong>
+| | | | 
+| | | |     
+* | | | <em style='color:grey'>42f0115a07f4db8ca54dd2eea0ca1b049c0e0d22</em>
+| |_|/  From: Songcy &lt;songcy@7lime.com&gt;
+| | | | <strong>2015-06-19 18:18</strong> By Songcy &lt;songcy@7lime.com&gt;
+|/| |   | | |   <strong style='color:green'>update progress of task text_format to 99</strong>
+| | |   
+| | |    
+* | | <em style='color:grey'>543a945c7d6a0389e1cd844d403321f1e7fa9acf</em>
+|/ /  <strong>2015-06-19 18:12</strong> By Songcy &lt;songcy@7lime.com&gt;
+| |   | |   <strong style='color:green'>update progress of task text_format to 90</strong>
+| |   
+| |   
+* | <em style='color:grey'>4ebcf027717d4d89fc31de57a52a998c410add36</em>
+| | <strong>2015-06-19 18:11</strong> By Songcy &lt;songcy@7lime.com&gt;
+| | | | <strong style='color:green'>update progress of task text_format to 10</strong>
+| | 
+| |   
+* | <em style='color:grey'>1b55ab9fd3917a72402981a9c20f778023d35783</em>
+|/  <strong>2015-06-19 18:11</strong> By Songcy &lt;songcy@7lime.com&gt;
+|   |   <strong style='color:green'>update Gantt chart</strong>
+|   
+|  
 * <em style='color:grey'>e0cb4f85a0957d49ffb4672fa963911178a58e1e</em>
 | <strong>2015-06-19 15:46</strong> By Huang Wei &lt;huangw@7lime.com&gt;
 | | <strong style='color:green'>merge server update</strong>
@@ -243,77 +317,6 @@
 | | | | <strong style='color:green'>Merge branch 'develop' of</strong>
 | |  gitlab.7lime.com:vikkr/la-marco-sinatra into develop
 | | 
-| |   
-| * <em style='color:grey'>b48516dba01c576750ae51829f946dca44f66dc1</em>
-| | <strong>2015-02-11 18:28</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | | <strong style='color:green'>update tags</strong>
-| | 
-| |     
-| *   <em style='color:grey'>b1a68d61152f7e717aa1aeb4431babd7b736bb62</em>
-| |\  <strong>2015-02-11 18:26</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | | | | <strong style='color:green'>Merge branch 'develop' of g:vikkr/la-marco-sinatra into</strong>
-| | |  develop
-| | | 
-| | |    
-| * | <em style='color:grey'>459bd9f6cde33121bdac0a5c89163f24b129e928</em>
-| | | <strong>2015-02-11 18:26</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | | | | <strong style='color:green'>update tags</strong>
-| | | 
-| | |    
-* | | <em style='color:grey'>300bd12846c747b321aeaad490fb6b40594e77d1</em>
-| | | <strong>2015-02-11 18:33</strong> By Songcy &lt;songcy@7lime.com&gt;
-| | | | | | <strong style='color:green'>modify the spec</strong>
-| | | 
-| | |    
-* | | <em style='color:grey'>6c423ce2d4a637880d04dc7a1ef7c16514264b79</em>
-| |/  <strong>2015-02-11 18:23</strong> By Songcy &lt;songcy@7lime.com&gt;
-|/|   | |   <strong style='color:green'>modify the code style</strong>
-| |   
-| |   
-* | <em style='color:grey'>4c5695947453f667e13339e6f8742b2d0bafcda0</em>
-| | <strong>2015-02-11 18:19</strong> By Songcy &lt;songcy@7lime.com&gt;
-| | | | <strong style='color:green'>modify the spec</strong>
-| | 
-| |   
-* | <em style='color:grey'>4a06f0eba95e04038801308c1534825677f2d085</em>
-| | <strong>2015-02-11 13:11</strong> By Songcy &lt;songcy@7lime.com&gt;
-| | | | <strong style='color:green'>modify the bluemoon settings</strong>
-| | 
-| |   
-* | <em style='color:grey'>b6b9b80015c696b1ff836ee03b447a35ebef5acc</em>
-| | <strong>2015-02-10 14:41</strong> By Songcy &lt;songcy@7lime.com&gt;
-| | | | <strong style='color:green'>add the i18n methods commit</strong>
-| | 
-| |   
-* | <em style='color:grey'>6c82703c8679942947a39bd91c8099f6c30c50e6</em>
-| | <strong>2015-02-10 14:34</strong> By Songcy &lt;songcy@7lime.com&gt;
-| | | | <strong style='color:green'>add the mtt methods</strong>
-| | 
-| |   
-* | <em style='color:grey'>a0a40238d91f308302a16f61f16dfd40bd2e389c</em>
-| | <strong>2015-02-09 16:56</strong> By Songcy &lt;songcy@7lime.com&gt;
-| | | | <strong style='color:green'>modify the ftt method</strong>
-| | 
-| |   
-* | <em style='color:grey'>0694aca08c7698e326453356307512c6e42e82cf</em>
-| | <strong>2015-02-09 16:54</strong> By Songcy &lt;songcy@7lime.com&gt;
-| | | | <strong style='color:green'>modify the 18n helper</strong>
-| | 
-| |   
-* | <em style='color:grey'>6a344120082eb6ba022c0238249019ee6abf1550</em>
-| | <strong>2015-02-09 16:27</strong> By Songcy &lt;songcy@7lime.com&gt;
-| | | | <strong style='color:green'>add the ftt methods</strong>
-| | 
-| |   
-* | <em style='color:grey'>c18e790372984da68e67639d10e9a17966522574</em>
-|/  <strong>2015-02-09 10:23</strong> By Songcy &lt;songcy@7lime.com&gt;
-|   |   <strong style='color:green'>modify the log_fusher</strong>
-|   
-|  
-* <em style='color:grey'>cdfa254b5cab6eecedff750995e53de0d93773e1</em>
-| <strong>2015-02-09 09:34</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | <strong style='color:green'>update streaming</strong>
-| 
 
 </code></pre>
 
