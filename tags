@@ -196,6 +196,7 @@ get_binding	spec/support/helpers/api_doc_helper.rb	/^    def get_binding$/;"	f	c
 get_display_style	doc/spec/lib/route_spec_rslt.html	/^function get_display_style(display_flag) {$/;"	f
 git_clone!	lib/devtools/asset_mapper/pull.rb	/^    def git_clone!$/;"	f	class:AssetMapper.Pull
 git_update	lib/devtools/asset_mapper/pull.rb	/^    def git_update$/;"	f	class:AssetMapper.Pull
+global_logger	config/settings/logstash_logger_settings.rb	/^def global_logger$/;"	f
 google_t	lib/devtools/i18n_utils.rb	/^    def google_t(key, lang)$/;"	f	class:I18nUtils
 handle_block	lib/confu.rb	/^    def handle_block(met, prc)$/;"	f	class:Confu.Data
 hash_flat	lib/utils/hash_flatter.rb	/^  def hash_flat(hsh, k = [])$/;"	f	class:HashFlatter
