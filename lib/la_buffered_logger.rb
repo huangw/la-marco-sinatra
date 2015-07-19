@@ -22,10 +22,11 @@ class LaBufferedLogger
     @request_info = {}
     @msgs = []
     @access_recorded = false
+    @logger = global_logger
   end
 
   def flush!
-    @msgs.each { |msg| ap msg }
+    @msgs.each { |msg| @logger.send msg['severity'], msg }
     @msgs = []
   end
 
@@ -51,13 +52,14 @@ class LaBufferedLogger
   end
 
   def append(dat)
+    request_info['severity'] ||= 'warn'
     @msgs << request_info.merge(dat)
   end
 
   LEVELS.each_with_index do |met, lvl|
     define_method(met) do |message, opts = {}|
       return nil if lvl < LEVELS.index(level.to_sym) # skip if lower level set
-      dat = opts.merge 'severity' => lvl, 'c_at' => Time.now
+      dat = opts.merge 'severity' => met.to_s # , 'c_at' => Time.now
 
       if message.is_a?(Exception)
         dat['exception'] = message.class.to_s

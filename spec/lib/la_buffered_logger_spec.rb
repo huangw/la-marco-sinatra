@@ -38,7 +38,7 @@ describe LaBufferedLogger do
       logger.level = :info
       expect(logger.info('some thing')).to_not be_nil
       expect(logger.msgs.last['message']).to eq('some thing')
-      expect(logger.msgs.last['severity']).to eq(Logger::INFO)
+      expect(logger.msgs.last['severity']).to eq('info')
     end
   end
 
@@ -46,6 +46,11 @@ describe LaBufferedLogger do
     it 'save messages only if flush!' do
       3.times { logger.error('a message') }
       expect(logger.msgs.count).to eq(3)
+      logger.flush!
+      expect(logger.msgs.count).to eq(0)
+
+      5.times { logger.info('an info message') }
+      expect(logger.msgs.count).to eq(5)
       logger.flush!
       expect(logger.msgs.count).to eq(0)
     end
