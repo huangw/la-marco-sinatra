@@ -46,11 +46,6 @@ class LaBufferedLogger
     append dat.merge(type: type)
   end
 
-  def access(status, opts = {})
-    append opts.merge(status: status)
-    @access_recorded = true
-  end
-
   def append(dat)
     request_info['severity'] ||= 'warn'
     @msgs << request_info.merge(dat)
@@ -73,5 +68,10 @@ class LaBufferedLogger
       flush! if flush_threshold && @msgs.size > flush_threshold
       dat
     end
+  end
+
+  def access(status, opts = {})
+    info opts.merge(status: status)
+    @access_recorded = true
   end
 end
