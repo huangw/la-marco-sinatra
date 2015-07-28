@@ -43,7 +43,7 @@ class LaBufferedLogger
   end
 
   def event(type, dat = {})
-    append dat.merge(type: type)
+    append dat.merge(event: type)
   end
 
   def append(dat)
