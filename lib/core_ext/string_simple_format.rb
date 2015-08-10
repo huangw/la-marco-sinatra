@@ -1,6 +1,7 @@
 # [Class] StringSimpleFormat (lib/core_ext/string_simple_format.rb)
 # vim: foldlevel=1
 # created at: 2015-06-18
+require 'sanitize'
 
 # convert newline to <br />, two newlines to separate <p></p>
 class String
@@ -15,5 +16,9 @@ class String
 
   def to_text_field
     sub!(/\A\s*/, '').sub!(/\s*\Z/, '').gsub!(/\r/, '')
+  end
+
+  def filter_tag
+    Sanitize.fragment(self, :elements=> ['a', 'b', 's', 'i', 'code', 'li'])
   end
 end
