@@ -171,6 +171,7 @@ file_type	lib/devtools/asset_mapper/sfile.rb	/^    def file_type$/;"	f	class:Ass
 file_type	lib/devtools/asset_mapper/tfile.rb	/^    def file_type$/;"	f	class:AssetMapper.Tfile
 file_version	lib/devtools/asset_mapper/tfile.rb	/^    def file_version(fname)$/;"	f	class:AssetMapper.Tfile
 filename	lib/devtools/asset_mapper/tfile.rb	/^    def filename(version)$/;"	f	class:AssetMapper.Tfile
+filter_tag	lib/core_ext/string_simple_format.rb	/^  def filter_tag$/;"	f	class:String
 finalize!	lib/confu.rb	/^    def finalize!$/;"	f	class:Confu.Data
 finalize!	lib/confu.rb	/^    def finalize!(ev = ENV['RACK_ENV'])$/;"	f	class:Confu
 finalized?	lib/confu.rb	/^    def finalized?$/;"	f	class:Confu

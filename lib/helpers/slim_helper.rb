@@ -68,7 +68,7 @@ module SlimHelper
   end
 
   def template_id(tpl = nil, locales = nil)
-    tpl ||= request.path_info.sub(/\A\//, '').gsub('-', '_').to_sym
+    tpl ||= request.path_info.sub(/\A\//, '').tr('-', '_').to_sym
     tpl = :index if tpl.empty?
     return tpl.to_s unless locales
 

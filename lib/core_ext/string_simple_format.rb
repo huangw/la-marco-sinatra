@@ -19,6 +19,6 @@ class String
   end
 
   def filter_tag
-    Sanitize.fragment(self, :elements=> ['a', 'b', 's', 'i', 'code', 'li'])
+    Sanitize.fragment(self, elements: %w(a b s i code li))
   end
 end
