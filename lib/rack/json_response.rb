@@ -25,7 +25,15 @@ module Rack
       rescue => e
         status = e.respond_to?(:status) ? e.status : 500
         headers ||= {}
-        body = { 'error' => e.class.name.underscore, 'message' => e.message }
+
+        if e.is_a?(RequestError) || e.is_a?(ServerError)
+          body = { error: e.class.name.underscore, message: e.message }
+        elsif status < 500 && status >= 400
+          body = { error: e.class.name.underscore, message: I18n.t('exceptions.ajax_options_error') }
+        else
+          body = { error: e.class.name.underscore, message: I18n.t('exceptions.server_error') }
+        end
+
         i18n_msg = e.i18n_message if e.respond_to?(:i18n_message)
         if i18n_msg
           body['i18n_message'] = i18n_msg unless i18n_msg.match(/\Atranslation missing:/)
