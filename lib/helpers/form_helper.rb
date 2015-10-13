@@ -25,10 +25,8 @@ module FormHelper
 
       cls << ' has-error' if e_msg && e_msg.size > 0 && options.delete(:add_error_class)
 
-      display = options.delete(:label) if options[:label]
-      display ||= @object.class.human_attribute_name(field) if @object.class
-                                                               .respond_to?(:human_attribute_name)
-      out = label field, display, class: 'control-label'
+      options['placeholder'] ||= @object.class.human_attribute_name(field) if @object.class.respond_to?(:human_attribute_name)
+      out = options[:label] ? (label field, options.delete(:label), class: 'control-label') : ''
 
       if block_given?
         out << yield
@@ -43,7 +41,7 @@ module FormHelper
       end
 
       if (icon_text = options.delete(:icon)) && (icon_type = options.delete(:icon_type))
-        out << "<a class='icon #{icon_type}' popover-trigger='mouseenter' popover='#{icon_text}' href='javascript:void(0)'></a>"
+        out << "<a class='icon #{icon_type}' data-toggle='tooltip' data-placement='top' data-title='#{options.delete(:icon_data_text)}' title='#{icon_text}' href='javascript:void(0)'></a>"
       end
 
       out << @parent.tag(:p, e_msg.join('; '),
