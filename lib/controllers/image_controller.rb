@@ -24,9 +24,8 @@ class ImageController < Sinatra::Base
   get(%r{\/([\w\/\-\.]+)}) { |f| send_file(File.join(@img_dir, f)) }
 
   # load assets controllers
-  unless AssetSettings.production?
-    Route.mount(self, AssetSettings.get.img_url_prefix)
-  end
+  a_url = AssetSettings.get.img_url_prefix
+  Route.mount(self, a_url) if a_url.match(/\A\//)
 end
 
 __END__

@@ -6,7 +6,8 @@ class AssetsController < Sinatra::Base
   get(%r{\/([\w\/\-\.]+)}) { |f| send_file(File.join(ENV['APP_ROOT'], f)) }
 
   # load assets controllers
-  unless AssetSettings.production?
-    Route.mount(self, AssetSettings.get.assets_url_prefix)
-  end
+  # unless AssetSettings.production?
+  a_url = AssetSettings.get.assets_url_prefix
+  Route.mount(self, a_url) if a_url.match(/\A\//)
+  # end
 end
