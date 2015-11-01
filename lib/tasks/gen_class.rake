@@ -14,8 +14,9 @@ end
 __END__
 
 @@ class_file
-# [Class] <%= class_name %> (<%= filename %>)
-# vim: foldlevel=1
+# [Class] <%= class_name %>
+#   (<%= filename %>)
+# vi: foldlevel=1
 # created at: <%= Time.now.strftime('%F') %>
 
 # Class for

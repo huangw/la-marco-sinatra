@@ -117,11 +117,19 @@ end
 namespace :doc do
   desc 'render MD documents with spec extensions'
   task :mds do
-    mds_dir = ENV['MDS_DIR'] || 'mds'
+    mds_dir = ENV['MDS_DIR'] || 'src/doc'
     out_dir = ENV['OUT_DIR'] || 'doc'
     opts = {}
     opts[:force] = true if ENV['FORCE']
     opts[:mdoconly] = true if ENV['MDOCONLY']
+
+    gen_md = [] # generated md file from erb file
+    Dir[mds_dir + '/*.md.erb'].each do |erb|
+      md = erb.sub(/\.erb\Z/, '')
+      puts "generate mardown file from '#{erb}'"
+      File.open(md, 'wb') { |h| h.write ERB.new(File.read(erb)).result(binding) }
+      gen_md << md
+    end
 
     Dir[mds_dir + '/*.md'].each do |md|
       next if md.match(/\.render\./)
@@ -139,7 +147,9 @@ namespace :doc do
 
     if File.exist?('README.md')
       sh "mdoc README.md"
-      FileUtils.mv 'README.html', 'doc/'
+      FileUtils.mv 'README.html', out_dir
     end
+
+    gen_md.each { |md| FileUtils.rm md } # drop erb generated markdown files
   end
 end

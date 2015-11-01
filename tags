@@ -245,6 +245,7 @@ local_url	lib/devtools/asset_mapper/tfile.rb	/^    def local_url$/;"	f	class:Ass
 ltt	lib/helpers/i18n_helper.rb	/^  def ltt(msg, opts = {})$/;"	f	class:I18nHelper
 makeRed	doc/spec/lib/route_spec_rslt.html	/^function makeRed(element_id) {$/;"	f
 makeYellow	doc/spec/lib/route_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
+matt	lib/helpers/i18n_helper.rb	/^  def matt(msg, opts = {})$/;"	f	class:I18nHelper
 merge_default	lib/confu.rb	/^    def merge_default(dat)$/;"	f	class:Confu.Data
 method_missing	lib/confu.rb	/^    def method_missing(met, val = nil, &prc)$/;"	f	class:Confu.Data
 method_missing	lib/helpers/form_helper.rb	/^    def method_missing(met, field = '', options = {})$/;"	f	class:FormHelper.FormBuilder
