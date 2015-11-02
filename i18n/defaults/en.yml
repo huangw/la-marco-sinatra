@@ -119,7 +119,7 @@ en:
       restrict_dependent_destroy:
         one: "Cannot delete record because a dependent %{record} exists"
         many: "Cannot delete record because dependent %{record} exist"
-      taken: has already been taken
+      taken: is already taken # has already been taken
       too_long:
         one: is too long (maximum is 1 character)
         other: is too long (maximum is %{count} characters)
