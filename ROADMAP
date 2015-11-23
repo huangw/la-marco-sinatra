@@ -29,3 +29,9 @@ year: 2015
 [+] text_format: modify the text field format methods 06/19 @songcy:06/19
 
 [+] logger: logstash-logger sinatra logger 07/18 @huangw:07/19
+
+[+] release_v0_0_2: release with built in mongodb/email support 12/05 @huangw;songcy
+  [++] rcih: rewrite rack route, cucumber, i18n and slim helpers 11/23-11/25 @huangw
+  [++] monse: mongodb based session store 11/25-11/26 @huangw
+  [++] gulp: gulb based asset pipeline with test 11/25-11/30 @huangw;songcy
+  [++] mailgun: mailgun support revised 12/01-12/03 @huangw;gaoyh
