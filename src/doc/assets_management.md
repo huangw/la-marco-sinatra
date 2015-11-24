@@ -1,4 +1,4 @@
-# Asset (js/css) Pipeline Management
+# Assets文件管理
 
 ## 概要
 

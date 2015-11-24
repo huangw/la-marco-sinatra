@@ -12,9 +12,10 @@ namespace :doc do
   desc 'Create API documentation'
   task :api do
     ENV['DOC'] = 'yes'
+    ENV['DOC_SRC'] ||= 'src/api_doc'
     if File.directory?('spec/pages/api/')
       Rake::Task['spec:api'].invoke
-      Dir['mds/*.api.render.md'].each do |md|
+      Dir["#{ENV['DOC_SRC']}/*.api.render.md"].each do |md|
         sh "aglio -t flatly -i #{md} -o #{md.sub(/\Amds\//, 'doc/')
            .sub(/\.render\.md\Z/, '.html')}"
       end

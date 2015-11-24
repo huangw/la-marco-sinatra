@@ -11,21 +11,15 @@ gem "logstash-logger"
     
 gem "i18n"
     
-gem "sinatra", "~> 1.4"
+gem "mongoid"
+    
+gem "sinatra"
     
 gem "sinatra-contrib"
     
 gem "puma"
     
-gem "sinatra-flash"
-    
-gem "sinatra-redirect-with-flash"
-    
-gem "slim"
-    
-gem "sanitize"
-    
-gem "http_accept_language"
+gem "foreman"
     
 gem "oj"
     
@@ -65,16 +59,6 @@ group :development do
   gem "mdoc"
     
   gem "guard-rake"
-    
-  gem "git"
-    
-  gem "diffy"
-    
-  gem "fastimage"
-    
-  gem "sass"
-    
-  gem "uglifier"
     
   gem "guard-cucumber"
     

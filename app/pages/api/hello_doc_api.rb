@@ -4,8 +4,8 @@
 # created at: 2015-02-07
 
 module API
-  # API controller for '/api/hello_doc_api'
-  class HelloDocAPI < RestfulAPI
+  # API controller for '/api/hello/docs'
+  class HelloDocAPI < RestfulController
     get '/' do
       { hello: 'world' }
     end

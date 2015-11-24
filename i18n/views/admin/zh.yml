@@ -1,8 +1,0 @@
----
-zh:
-  views:
-    admin:
-      index:
-        title: 联系
-      settings:
-        title: 设置

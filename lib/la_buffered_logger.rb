@@ -3,14 +3,11 @@
 # created at: 2015-01-31
 require 'logger'
 require 'utils/la_backtrace_cleaner'
-# require 'celluloid/autostart'
-# Celluloid.logger = nil
 
 # A logger buffers messages until threshold number reached or flush!
 # method explicitly called.
 class LaBufferedLogger
   include ::Logger::Severity
-  # include Celluloid
 
   LEVELS = [:debug, :info, :warn, :error, :fatal, :unknown] # 0 .. 5
 

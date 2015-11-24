@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>mongoid.rb</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>mongoid.rb</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">require</span> <span class="hljs-string">'rack/session/mongoid/version'</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">'rack/session/abstract/id'</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">'awesome_print'</span>
+
+<span class="hljs-class"><span class="hljs-keyword">module</span> <span class="hljs-title">Rack</span></span>
+  <span class="hljs-class"><span class="hljs-keyword">module</span> <span class="hljs-title">Session</span></span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>A mongoid document model for storing session data</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RackSession</span></span>
+      <span class="hljs-keyword">include</span> <span class="hljs-constant">::Mongoid::Document</span>
+      <span class="hljs-keyword">include</span> <span class="hljs-constant">::Mongoid::Timestamps::Short</span>
+      field <span class="hljs-symbol">:sid</span>, <span class="hljs-symbol">type:</span> <span class="hljs-constant">String</span>
+      field <span class="hljs-symbol">:data</span>, <span class="hljs-symbol">type:</span> <span class="hljs-constant">Hash</span>, <span class="hljs-symbol">default:</span> {}
+
+      index({ <span class="hljs-symbol">sid:</span> <span class="hljs-number">1</span> }, <span class="hljs-symbol">unique:</span> <span class="hljs-keyword">true</span>)
+    <span class="hljs-keyword">end</span>
+
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Mongoid</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">Abstract::ID</span></span></span>
+      <span class="hljs-keyword">attr_reader</span> <span class="hljs-symbol">:mutex</span>, <span class="hljs-symbol">:pool</span>
+
+      <span class="hljs-constant">DEFAULT_OPTIONS</span> = <span class="hljs-constant">Abstract::ID::DEFAULT_OPTIONS</span>.merge <span class="hljs-symbol">drop:</span> <span class="hljs-keyword">false</span>
+      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">initialize</span><span class="hljs-params">(app, options = {})</span></span>
+        <span class="hljs-keyword">super</span>
+        <span class="hljs-variable">@mutex</span> = <span class="hljs-constant">Mutex</span>.new
+        <span class="hljs-constant">RackSession</span>.create_indexes
+      <span class="hljs-keyword">end</span>
+
+      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">generate_sid</span></span>
+        loop <span class="hljs-keyword">do</span>
+          sid = <span class="hljs-keyword">super</span>
+          <span class="hljs-keyword">break</span> sid <span class="hljs-keyword">unless</span> <span class="hljs-constant">RackSession</span>.where(<span class="hljs-symbol">sid:</span> sid).asc(<span class="hljs-symbol">:_id</span>).first
+        <span class="hljs-keyword">end</span>
+      <span class="hljs-keyword">end</span>
+
+      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_session</span><span class="hljs-params">(env, sid)</span></span>
+        with_lock(env) <span class="hljs-keyword">do</span>
+          session = _get(sid)
+          <span class="hljs-keyword">unless</span> sid &amp;&amp; session
+            sid = generate_sid
+            session = {}
+            _put sid, session
+          <span class="hljs-keyword">end</span>
+          [sid, session]
+        <span class="hljs-keyword">end</span>
+      <span class="hljs-keyword">end</span>
+
+      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">set_session</span><span class="hljs-params">(env, session_id, new_session, _options)</span></span>
+        with_lock(env) <span class="hljs-keyword">do</span>
+          _put session_id, new_session
+          session_id
+        <span class="hljs-keyword">end</span>
+      <span class="hljs-keyword">end</span>
+
+      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">destroy_session</span><span class="hljs-params">(env, session_id, options)</span></span>
+        with_lock(env) <span class="hljs-keyword">do</span>
+          _delete(session_id)
+          generate_sid <span class="hljs-keyword">unless</span> options[<span class="hljs-symbol">:drop</span>]
+        <span class="hljs-keyword">end</span>
+      <span class="hljs-keyword">end</span>
+
+      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">with_lock</span><span class="hljs-params">(env)</span></span>
+        <span class="hljs-variable">@mutex</span>.lock <span class="hljs-keyword">if</span> env[<span class="hljs-string">'rack.multithread'</span>]
+        <span class="hljs-keyword">yield</span>
+      <span class="hljs-keyword">ensure</span>
+        <span class="hljs-variable">@mutex</span>.unlock <span class="hljs-keyword">if</span> <span class="hljs-variable">@mutex</span>.locked?
+      <span class="hljs-keyword">end</span>
+
+      private
+
+      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_put</span><span class="hljs-params">(sid, session)</span></span>
+        model = _exists?(sid) || <span class="hljs-constant">RackSession</span>.new(<span class="hljs-symbol">sid:</span> sid)
+        model.data = session
+        model.save!
+        model
+      <span class="hljs-keyword">end</span>
+
+      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_get</span><span class="hljs-params">(sid)</span></span>
+        model = _exists?(sid)
+        model.data <span class="hljs-keyword">if</span> model
+      <span class="hljs-keyword">end</span>
+
+      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_delete</span><span class="hljs-params">(sid)</span></span>
+        <span class="hljs-constant">RackSession</span>.where(<span class="hljs-symbol">sid:</span> sid).all.delete
+      <span class="hljs-keyword">end</span>
+
+      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_exists?</span><span class="hljs-params">(sid)</span></span>
+        <span class="hljs-constant">RackSession</span>.where(<span class="hljs-symbol">sid:</span> sid).asc(<span class="hljs-symbol">:_id</span>).first
+      <span class="hljs-keyword">end</span>
+    <span class="hljs-keyword">end</span>
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span></pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
