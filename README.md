@@ -1,19 +1,27 @@
 # La-Marco-Sinatra: Sinatra Based Web Framework
 
-> 注意：`sinatra`如果出现“undefined method `join` for #<String> ...”错误，参照`doc/monkey_patch.html`文件。
+> 注意：`sinatra`如果出现“undefined method `join` for #<String> ...”错误，参照`doc/monkey_patch.html`)文件。
 
-## 概述
+## 开发、测试和生产环境的Puma启动管理
+
+
+
+
+- `Route`机制，独立app（如bluemoon）可无缝加载或移除
+- 基于`Route`的path helper，实现对面包屑的程序化管理
+
+## 基于Rack的Route机制
+
 
 - `config.ru`实现rack标准，通过`puma`启动服务，非生产环境加载`pry-byebug`测试
-- `Route`机制，独立app（如bluemoon）可无缝加载或移除
+
 - Cucumber测试
-- 基于`Route`的path helper，实现对面包屑的程序化管理
 - slim helper, form helper和table helper
-- 基于stackupper的asset helper和compiler
+- 基于`sass/uglifier/closure-compiler`的asset helper和compiler
 - I18n机制，包括JS/Ruby同步
 - API helpers, API测试和文档helper
-
-Center Logger和Email需要数据库支持，放到单独的程序中实现。
+- 开发和生产环境管理`puma/backgroundjob`等线程的方法
+- 基于`logstash`的logger和`mailgun`的邮件发送服务
 
 ## 详细
 

@@ -4,11 +4,15 @@ attrs application_code: 'la_marco_sinatra',
       application_name: 'Sinatra Based Web Framework',
       application_version: '0.0.1'
 
-pull :'la-marco', git: 'git@gitlab.7lime.com:vikkr/la-marco.git',
-                  branch: :develop
+pull :'la-marco', vikkr: 'vikkr/la-marco.git', branch: :develop
+pull :'la-marco-mongoid', vikkr: 'vikkr/la-marco-mongoid.git', branch: :develop
 
 from :'la-marco' do
   import :full
+end
+
+from :'la-marco-mongoid' do
+  import :connection
 end
 
 export :route do
@@ -23,7 +27,6 @@ export :route do
 
   add_gem 'guard-rake', group: :development # for puma restart
   copy 'lib/tasks/puma.rake'
-
   copy 'Guardfile', sync: false
 end
 
@@ -52,7 +55,7 @@ export :assets_mapper do
   copy 'lib/tasks/assets.rake'
   copy 'lib/devtools/asset_mapper.rb'
   copy 'lib/devtools/asset_mapper/*.rb'
-  # copy 'app/assets/mappings.rb.sample' => 'app/assets/mappings.rb'
+  # copy 'app/assets/mappings.rb.sample' => 'app/assets/mappings.rb', sync: false
 end
 
 export :web do

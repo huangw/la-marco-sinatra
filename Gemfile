@@ -11,6 +11,8 @@ gem "logstash-logger"
     
 gem "i18n"
     
+gem "mongoid"
+    
 gem "sinatra", "~> 1.4"
     
 gem "sinatra-contrib"
