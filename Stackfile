@@ -16,94 +16,95 @@ from :'la-marco-mongoid' do
 end
 
 export :route do
-  add_gem 'sinatra', '~> 1.4'
+  add_gem 'sinatra' # , '~> 1.4'
   add_gem 'sinatra-contrib' # streaming
   add_gem 'puma'
 
-  copy 'config.ru', sync: false
-  copy 'config/initializers/web_exceptions.rb'
-  copy 'lib/route.rb'
-  copy 'config/initializers/routes.rb'
-
-  add_gem 'guard-rake', group: :development # for puma restart
-  copy 'lib/tasks/puma.rake'
-  copy 'Guardfile', sync: false
+#   copy 'config.ru', sync: false
+#   copy 'config/initializers/web_exceptions.rb'
+#   copy 'lib/route.rb'
+#   copy 'config/initializers/routes.rb'
+#
+#   add_gem 'guard-rake', group: :development # for puma restart
+#   copy 'lib/tasks/puma.rake'
+#   copy 'Guardfile', sync: false
 end
-
-export :logger do
-  # add_gem 'celluloid'
-
-  copy 'lib/utils/la_backtrace_cleaner.rb'
-  copy 'lib/la_buffered_logger.rb'
-  copy 'lib/rack/log_flusher.rb'
-end
-
-export :assets_mapper do
-  add_gem 'git', group: :development
-  add_gem 'diffy', group: :development
-  add_gem 'fastimage', group: :development
-  add_gem 'sass', group: :development
-  # add_gem 'closure-compiler', group: :development
-  add_gem 'uglifier', group: :development
-
-  copy 'lib/asset_settings.rb'
-  copy 'lib/asset_settings/*.rb'
-  copy 'lib/helpers/assets_helper.rb'
-  copy 'lib/controllers/assets_controller.rb'
-  copy 'lib/controllers/image_controller.rb'
-
-  copy 'lib/tasks/assets.rake'
-  copy 'lib/devtools/asset_mapper.rb'
-  copy 'lib/devtools/asset_mapper/*.rb'
-  # copy 'app/assets/mappings.rb.sample' => 'app/assets/mappings.rb', sync: false
-end
-
-export :web do
-  import :route
-  import :assets_mapper
-
-  add_gem 'sinatra-flash'
-  add_gem 'sinatra-redirect-with-flash'
-  add_gem 'slim'
-  add_gem 'sanitize'
-
-  add_gem 'http_accept_language'
-
-  copy 'lib/tasks/i18n_view.rake'
-  copy 'lib/helpers/*_helper.rb'
-  copy 'lib/core_ext/string_simple_format.rb'
-  # copy 'app/pages/web_application.rb'
-  # copy 'lib/presenters/html_presenter.rb'
-  copy 'lib/rack/json_response.rb'
-end
-
-export :cucumber do
-  add_gem 'guard-cucumber', group: :development
-
-  add_gem 'cucumber', group: :development
-  add_gem 'capybara', group: :development
-  add_gem 'poltergeist', group: :development
-  add_gem 'selenium-webdriver', group: :development
-
-  copy 'features/step_definitions/*_steps.rb'
-  copy 'features/support/env.rb'
-  copy 'lib/tasks/cucumber.rake'
-end
-
-export :restul_api do
-  add_gem 'oj'
-  add_gem 'multi_json'
-  add_gem 'recursive-open-struct'
-  copy 'lib/rack/json_response.rb'
-  copy 'lib/tasks/gen_api.rake'
-  copy 'lib/tasks/doc_api.rake'
-  copy 'spec/support/helpers/api_test_helper.rb'
-  copy 'spec/support/helpers/api_doc_helper.rb'
-end
-
+#
+# export :logger do
+#   # add_gem 'celluloid'
+#
+#   copy 'lib/utils/la_backtrace_cleaner.rb'
+#   copy 'lib/la_buffered_logger.rb'
+#   copy 'lib/rack/log_flusher.rb'
+# end
+#
+# export :assets_mapper do
+#   add_gem 'git', group: :development
+#   add_gem 'diffy', group: :development
+#   add_gem 'fastimage', group: :development
+#   add_gem 'sass', group: :development
+#   # add_gem 'closure-compiler', group: :development
+#   add_gem 'uglifier', group: :development
+#
+#   copy 'lib/asset_settings.rb'
+#   copy 'lib/asset_settings/*.rb'
+#   copy 'lib/helpers/assets_helper.rb'
+#   copy 'lib/controllers/assets_controller.rb'
+#   copy 'lib/controllers/image_controller.rb'
+#
+#   copy 'lib/tasks/assets.rake'
+#   copy 'lib/devtools/asset_mapper.rb'
+#   copy 'lib/devtools/asset_mapper/*.rb'
+#   # copy 'app/assets/mappings.rb.sample' => 'app/assets/mappings.rb', sync: false
+# end
+#
+# export :web do
+#   import :route
+#   import :assets_mapper
+#
+#   add_gem 'sinatra-flash'
+#   add_gem 'sinatra-redirect-with-flash'
+#   add_gem 'slim'
+#   add_gem 'sanitize'
+#
+#   add_gem 'http_accept_language'
+#
+#   copy 'lib/tasks/i18n_view.rake'
+#   copy 'lib/helpers/*_helper.rb'
+#   copy 'lib/core_ext/string_simple_format.rb'
+#   # copy 'app/pages/web_application.rb'
+#   # copy 'lib/presenters/html_presenter.rb'
+#   copy 'lib/rack/json_response.rb'
+# end
+#
+# export :cucumber do
+#   add_gem 'guard-cucumber', group: :development
+#
+#   add_gem 'cucumber', group: :development
+#   add_gem 'capybara', group: :development
+#   add_gem 'poltergeist', group: :development
+#   add_gem 'selenium-webdriver', group: :development
+#
+#   copy 'features/step_definitions/*_steps.rb'
+#   copy 'features/support/env.rb'
+#   copy 'lib/tasks/cucumber.rake'
+# end
+#
+# export :restul_api do
+#   add_gem 'oj'
+#   add_gem 'multi_json'
+#   add_gem 'recursive-open-struct'
+#   copy 'lib/rack/json_response.rb'
+#   copy 'lib/tasks/gen_api.rake'
+#   copy 'lib/tasks/doc_api.rake'
+#   copy 'spec/support/helpers/api_test_helper.rb'
+#   copy 'spec/support/helpers/api_doc_helper.rb'
+# end
+#
 from('.') do
-  import :web
-  import :cucumber
-  import :logger
-  import :restul_api
+  import :route
+#   import :web
+#   import :cucumber
+#   import :logger
+#   import :restul_api
 end
