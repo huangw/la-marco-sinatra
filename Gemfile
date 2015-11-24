@@ -21,6 +21,12 @@ gem "puma"
     
 gem "foreman"
     
+gem "oj"
+    
+gem "multi_json"
+    
+gem "recursive-open-struct"
+    
   
 
   

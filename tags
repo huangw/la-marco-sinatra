@@ -6,6 +6,7 @@
 !_TAG_PROGRAM_VERSION	5.8	//
 <<	lib/mongoid/ordered_list.rb	/^      def <<(obj, opts = {})$/;"	f	class:Mongoid.OrderedList.Proxy
 API	spec/lib/route_spec.rb	/^module API$/;"	m
+APITestHelper	spec/support/helpers/api_test_helper.rb	/^module APITestHelper$/;"	m
 Account	spec/lib/route_spec.rb	/^class Account$/;"	c
 AccountPage	spec/lib/route_spec.rb	/^  class AccountPage; Route << self end$/;"	c	class:API
 AccountPage	spec/lib/route_spec.rb	/^  class AccountPage; Route << self end$/;"	c	class:Admin
@@ -31,6 +32,7 @@ HashFlatter	lib/utils/hash_flatter.rb	/^module HashFlatter$/;"	m
 HashPresenter	lib/utils/hash_presenter.rb	/^module HashPresenter$/;"	m
 HashStruct	lib/utils/hash_struct.rb	/^module HashStruct$/;"	m
 I18nUtils	lib/devtools/i18n_utils.rb	/^module I18nUtils$/;"	m
+JsonResponse	lib/rack/json_response.rb	/^  class JsonResponse$/;"	c	class:Rack
 LaBacktraceCleaner	lib/utils/la_backtrace_cleaner.rb	/^module LaBacktraceCleaner$/;"	m
 LaBufferedLogger	lib/la_buffered_logger.rb	/^class LaBufferedLogger$/;"	c
 LogFlusher	lib/rack/log_flusher.rb	/^  class LogFlusher$/;"	c	class:Rack
@@ -45,6 +47,7 @@ OrderedList	lib/mongoid/ordered_list.rb	/^  module OrderedList$/;"	m	class:Mongo
 PersonPage	spec/lib/route_spec.rb	/^  class PersonPage; Route << self end$/;"	c	class:Admin
 Proxy	lib/mongoid/ordered_list.rb	/^    class Proxy$/;"	c	class:Mongoid.OrderedList
 RSpecApiDoc	spec/support/helpers/api_doc_helper.rb	/^class RSpecApiDoc$/;"	c
+Rack	lib/rack/json_response.rb	/^module Rack$/;"	m
 Rack	lib/rack/log_flusher.rb	/^module Rack$/;"	m
 Rack	lib/rack/session/mongoid.rb	/^module Rack$/;"	m
 Rack	lib/rack/session/mongoid/version.rb	/^module Rack$/;"	m
@@ -86,6 +89,7 @@ add_key	lib/devtools/i18n_utils.rb	/^    def add_key(key, value = nil)$/;"	f	cla
 add_with_gt	lib/devtools/i18n_utils.rb	/^    def add_with_gt(key, trans_key = -1)$/;"	f	class:YamlFile
 all	lib/route.rb	/^    def all$/;"	f	class:Route
 all_cookies	features/support/env.rb	/^  def all_cookies$/;"	f	class:FeatureWorld
+app	spec/support/helpers/api_test_helper.rb	/^  def app$/;"	f	class:APITestHelper
 append	lib/la_buffered_logger.rb	/^  def append(dat)$/;"	f	class:LaBufferedLogger
 apply_filters	doc/spec/lib/route_spec_rslt.html	/^function apply_filters() {$/;"	f
 assign_display_style	doc/spec/lib/route_spec_rslt.html	/^function assign_display_style(classname, display_flag) {$/;"	f
@@ -96,6 +100,7 @@ blist_hash	lib/mongoid/ordered_list.rb	/^      def blist_hash$/;"	f	class:Mongoi
 block	lib/mongoid/ordered_list.rb	/^      def block(tid)$/;"	f	class:Mongoid.OrderedList.Proxy
 by_tid	lib/mongoid/token_id.rb	/^      def self.by_tid(tid)$/;"	F	class:Mongoid.TokenId
 cache_expired?	lib/mongoid/ordered_list.rb	/^      def cache_expired?$/;"	f	class:Mongoid.OrderedList.Proxy
+call	lib/rack/json_response.rb	/^    def call(env)$/;"	f	class:Rack.JsonResponse
 call	lib/rack/log_flusher.rb	/^    def call(env)$/;"	f	class:Rack.LogFlusher
 change_order	lib/mongoid/ordered_list.rb	/^      def change_order(tids)$/;"	f	class:Mongoid.OrderedList.Proxy
 class_name	lib/devtools/file_generator.rb	/^    def class_name$/;"	f	class:FileGenerator.RubyFile
@@ -156,9 +161,11 @@ initialize	lib/devtools/file_generator.rb	/^    def initialize(name, su = nil)$/
 initialize	lib/devtools/i18n_utils.rb	/^    def initialize(file_name)$/;"	f	class:YamlFile
 initialize	lib/la_buffered_logger.rb	/^  def initialize(opts = {})$/;"	f	class:LaBufferedLogger
 initialize	lib/mongoid/ordered_list.rb	/^      def initialize(prt, fnm, cf)$/;"	f	class:Mongoid.OrderedList.Proxy
+initialize	lib/rack/json_response.rb	/^    def initialize(app)$/;"	f	class:Rack.JsonResponse
 initialize	lib/rack/log_flusher.rb	/^    def initialize(app, opts = {})$/;"	f	class:Rack.LogFlusher
 initialize	lib/rack/session/mongoid.rb	/^      def initialize(app, options = {})$/;"	f	class:Rack.Session.Mongoid
 initialize	lib/utils/hash_struct.rb	/^  def initialize(h = {})$/;"	f	class:HashStruct
+j2o	spec/support/helpers/api_test_helper.rb	/^  def j2o(json = nil)$/;"	f	class:APITestHelper
 jhash	spec/support/helpers/api_doc_helper.rb	/^    def jhash(hsh)$/;"	f	class:RSpecApiDoc
 key?	lib/devtools/i18n_utils.rb	/^    def key?(key)$/;"	f	class:YamlFile
 last	lib/mongoid/ordered_list.rb	/^      def last$/;"	f	class:Mongoid.OrderedList.Proxy
@@ -195,6 +202,7 @@ offset_after	lib/mongoid/ordered_list.rb	/^      def offset_after(tid = nil)$/;"
 ordered_list	lib/mongoid/ordered_list.rb	/^      def self.ordered_list(field_name, opts = {})$/;"	F	class:Mongoid.OrderedList
 page	lib/mongoid/paginator.rb	/^    def page(pg = 1, opts = {})$/;"	f	class:Mongoid.Criteria
 paginate	lib/mongoid/paginator.rb	/^    def paginate(pg = 1, opts = {})$/;"	f	class:Mongoid.Criteria
+r	spec/support/helpers/api_test_helper.rb	/^  def r(req = nil, body = nil, headers = {})$/;"	f	class:APITestHelper
 refresh_cache!	lib/mongoid/ordered_list.rb	/^      def refresh_cache!$/;"	f	class:Mongoid.OrderedList.Proxy
 reload!	config/initializers/development/awesome_print.rb	/^def reload!$/;"	f
 remove	lib/mongoid/ordered_list.rb	/^      def remove(tid)$/;"	f	class:Mongoid.OrderedList.Proxy
@@ -208,6 +216,7 @@ resource_for	spec/support/helpers/api_doc_helper.rb	/^    def resource_for(key)$
 retrieve	lib/mongoid/ordered_list.rb	/^      def retrieve(hsh)$/;"	f	class:Mongoid.OrderedList.Proxy
 rewrite!	lib/devtools/i18n_utils.rb	/^    def rewrite!(file = @filename)$/;"	f	class:YamlFile
 root_join	config/boot.rb	/^def root_join(*path)$/;"	f
+s	spec/support/helpers/api_test_helper.rb	/^  def s$/;"	f	class:APITestHelper
 s_find	lib/mongoid/sequence_token.rb	/^      def self.s_find(str)$/;"	F	class:Mongoid.SequenceToken
 scope_join	lib/devtools/i18n_utils.rb	/^    def scope_join(*args)$/;"	f	class:YamlFile
 seq_field	lib/mongoid/sequence_token.rb	/^      def self.seq_field$/;"	F	class:Mongoid.SequenceToken
@@ -217,6 +226,7 @@ set_session	lib/rack/session/mongoid.rb	/^      def set_session(env, session_id,
 short	lib/core_ext/string_short.rb	/^  def short(leng = 20)$/;"	f	class:String
 short	lib/core_ext/time_short.rb	/^  def short$/;"	f	class:Time
 size	lib/mongoid/ordered_list.rb	/^      def size$/;"	f	class:Mongoid.OrderedList.Proxy
+sp	spec/support/helpers/api_test_helper.rb	/^  def sp(expected_status = 200)$/;"	f	class:APITestHelper
 spec_filename	lib/devtools/file_generator.rb	/^    def spec_filename$/;"	f	class:FileGenerator.RubyFile
 spec_name	lib/devtools/file_generator.rb	/^    def spec_name$/;"	f	class:FileGenerator.RubyFile
 status	config/initializers/web_exceptions.rb	/^  def status$/;"	f	class:AuthenticationError

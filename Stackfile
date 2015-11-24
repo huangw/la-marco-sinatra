@@ -51,16 +51,16 @@ export :logger do
   copy 'lib/rack/log_flusher.rb'
 end
 
-# export :restul_api do
-#   add_gem 'oj'
-#   add_gem 'multi_json'
-#   add_gem 'recursive-open-struct'
-#   copy 'lib/rack/json_response.rb'
-#   copy 'lib/tasks/gen_api.rake'
-#   copy 'lib/tasks/doc_api.rake'
-#   copy 'spec/support/helpers/api_test_helper.rb'
-#   copy 'spec/support/helpers/api_doc_helper.rb'
-# end
+export :restul_api do
+  add_gem 'oj'
+  add_gem 'multi_json'
+  add_gem 'recursive-open-struct'
+  copy 'lib/rack/json_response.rb'
+  copy 'lib/tasks/gen_api.rake'
+  copy 'lib/tasks/doc_api.rake'
+  copy 'spec/support/helpers/api_test_helper.rb'
+  copy 'spec/support/helpers/api_doc_helper.rb'
+end
 
 
 # export :assets_mapper do
@@ -104,7 +104,7 @@ end
 from('.') do
   import :route
   import :cucumber
-  import :web
-#   import :logger
-#   import :restul_api
+  import :logger
+  import :restul_api
+  # import :web
 end
