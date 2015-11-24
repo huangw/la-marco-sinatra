@@ -54,5 +54,15 @@ group :development do
     
   gem "guard-rake"
     
+  gem "guard-cucumber"
+    
+  gem "cucumber"
+    
+  gem "capybara"
+    
+  gem "poltergeist"
+    
+  gem "selenium-webdriver"
+    
 end
   

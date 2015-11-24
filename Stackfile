@@ -28,10 +28,24 @@ export :route do
   copy 'config/puma.rb', sync: false
 
   add_gem 'guard-rake', group: :development # for puma restart
-#   copy 'lib/tasks/puma.rake'
-#   copy 'Guardfile', sync: false
+  copy 'lib/tasks/puma.rake'
+  copy 'Guardfile', sync: false
 end
-#
+
+
+export :cucumber do
+  add_gem 'guard-cucumber', group: :development
+
+  add_gem 'cucumber', group: :development
+  add_gem 'capybara', group: :development
+  add_gem 'poltergeist', group: :development
+  add_gem 'selenium-webdriver', group: :development
+
+  copy 'features/step_definitions/*_steps.rb', sync: false
+  copy 'features/support/env.rb', sync: false
+  copy 'lib/tasks/cucumber.rake'
+end
+
 # export :logger do
 #   # add_gem 'celluloid'
 #
@@ -79,19 +93,6 @@ end
 #   copy 'lib/rack/json_response.rb'
 # end
 #
-# export :cucumber do
-#   add_gem 'guard-cucumber', group: :development
-#
-#   add_gem 'cucumber', group: :development
-#   add_gem 'capybara', group: :development
-#   add_gem 'poltergeist', group: :development
-#   add_gem 'selenium-webdriver', group: :development
-#
-#   copy 'features/step_definitions/*_steps.rb'
-#   copy 'features/support/env.rb'
-#   copy 'lib/tasks/cucumber.rake'
-# end
-#
 # export :restul_api do
 #   add_gem 'oj'
 #   add_gem 'multi_json'
@@ -105,8 +106,8 @@ end
 #
 from('.') do
   import :route
+  import :cucumber
 #   import :web
-#   import :cucumber
 #   import :logger
 #   import :restul_api
 end

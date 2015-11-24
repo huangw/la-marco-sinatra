@@ -6,6 +6,8 @@
 
 * [Route机制和Puma进程管理](route.html)
 * [Rack Session Mongoid](session.html)
+* [Cucumber测试环境](cucumber.html)
+
 
 ## 各种Helpers
 
