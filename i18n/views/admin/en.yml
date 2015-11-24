@@ -1,8 +1,0 @@
----
-en:
-  views:
-    admin:
-      index:
-        title: Admin
-      settings:
-        title: Settings

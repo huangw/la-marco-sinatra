@@ -1,8 +1,0 @@
----
-ja:
-  views:
-    admin:
-      index:
-        title: 管理者
-      settings:
-        title: "[設定]"
