@@ -14,7 +14,8 @@ Cucumber直接连接puma在本地监听的8080端口进行测试。因此cucumbe
 
 可设置每个页面加载之后的停顿时间，便于直接在`chrome`环境下测试UI：
 
+    SLEEP=5 rake cc
 
 TODO: 支持更多的web driver
 
-spec:features/env.rb
+spec:features/support/env

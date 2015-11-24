@@ -14,27 +14,31 @@
   <div id="content">
     
 <ul id="markdown-toc">
-  <li><a href="#la-marco-sinatra-sinatra-based-web-framework" id="markdown-toc-la-marco-sinatra-sinatra-based-web-framework">La-Marco-Sinatra: Sinatra Based Web Framework</a>    <ul>
-      <li><a href="#section" id="markdown-toc-section">详细</a></li>
-    </ul>
-  </li>
+  <li><a href="#cucumber" id="markdown-toc-cucumber">Cucumber测试环境</a></li>
 </ul>
 
-<h1 id="la-marco-sinatra-sinatra-based-web-framework">La-Marco-Sinatra: Sinatra Based Web Framework</h1>
+<h1 id="cucumber">Cucumber测试环境</h1>
 
-<blockquote>
-  <p>注意：<code>sinatra</code>如果出现“undefined method <code>join</code> for #<string> ...”错误，参照`doc/monkey_patch.html`)文件直接修改`sinatra`源码。</string></p>
-</blockquote>
+<p>Cucumber支持通过<code>chrome</code>和<code>poltergeist</code>启动测试，默认是<code>poltergeist</code>。
+<code>chrome</code>和<code>poltergeist</code>需要分别单独安装<code>chrome-web-driver</code>和<code>phantomjs</code>。</p>
 
-<h2 id="section">详细</h2>
+<p>使用<code>poltergeist</code>启动Cucumber时，可执行<code>rake features</code>或短缩版命令<code>rake f</code>。
+<code>rake accept</code>会将测试结果以html报告的形式保存到<code>doc/cucumber.html</code>。</p>
 
-<ul>
-  <li><a href="route.html">Route机制和Puma进程管理</a></li>
-  <li><a href="session.html">Rack-Session-Mongoid</a></li>
-  <li><a href="cucumber.html">Cucumber测试环境</a></li>
-  <li><a href="log_flusher.html">LogFlusher</a></li>
-  <li><a href="slim_i18n.html">Slim和i18n工具</a></li>
-</ul>
+<p>Cucumber直接连接puma在本地监听的8080端口进行测试。因此cucumber必须在puma启动后方可执行。</p>
+
+<p>需使用<code>chrome</code>测试时，可指定<code>DRIVER=chrome rake features</code>，也可以使用短缩版的命令
+<code>rake cc</code>（Cucumber with Chrome）。也可以使用<code>rake s &amp;&amp; rake cc</code>的方式，
+首先重启<code>puma</code>再行测试。</p>
+
+<p>可设置每个页面加载之后的停顿时间，便于直接在<code>chrome</code>环境下测试UI：</p>
+
+<pre><code>SLEEP=5 rake cc
+</code></pre>
+
+<p><strong style="color: red">[TODO]</strong> 支持更多的web driver</p>
+
+<p>【SOURCE】<a href="./spec/features/support/env.html"><code>features/support/env.rb</code></a></p>
 
   </div>
 

@@ -5,10 +5,7 @@
 ## 详细
 
 * [Route机制和Puma进程管理](route.html)
-* [Rack Session Mongoid](session.html)
+* [Rack-Session-Mongoid](session.html)
 * [Cucumber测试环境](cucumber.html)
-
-
-## 各种Helpers
-
-除采用第三方的Sinatra插件如`flash helper`等之外
+* [LogFlusher](log_flusher.html)
+* [Slim和i18n工具](slim_i18n.html)

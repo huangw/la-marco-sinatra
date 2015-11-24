@@ -14,27 +14,45 @@
   <div id="content">
     
 <ul id="markdown-toc">
-  <li><a href="#la-marco-sinatra-sinatra-based-web-framework" id="markdown-toc-la-marco-sinatra-sinatra-based-web-framework">La-Marco-Sinatra: Sinatra Based Web Framework</a>    <ul>
-      <li><a href="#section" id="markdown-toc-section">详细</a></li>
+  <li><a href="#slimi18n" id="markdown-toc-slimi18n">Slim和i18n工具</a>    <ul>
+      <li><a href="#slimhelper" id="markdown-toc-slimhelper">SlimHelper</a></li>
     </ul>
   </li>
 </ul>
 
-<h1 id="la-marco-sinatra-sinatra-based-web-framework">La-Marco-Sinatra: Sinatra Based Web Framework</h1>
+<h1 id="slimi18n">Slim和i18n工具</h1>
 
-<blockquote>
-  <p>注意：<code>sinatra</code>如果出现“undefined method <code>join</code> for #<string> ...”错误，参照`doc/monkey_patch.html`)文件直接修改`sinatra`源码。</string></p>
-</blockquote>
+<h2 id="slimhelper">SlimHelper</h2>
 
-<h2 id="section">详细</h2>
+<p>一个Controller类（如<code>Admin::Analytics::PageViewPage</code>）的template模板文件保存于
+<code>Route.default_path(Admin::Analytics::PageViewPage)</code>
+（上面的例子为admin/analytics/page-view）。</p>
 
-<ul>
-  <li><a href="route.html">Route机制和Puma进程管理</a></li>
-  <li><a href="session.html">Rack-Session-Mongoid</a></li>
-  <li><a href="cucumber.html">Cucumber测试环境</a></li>
-  <li><a href="log_flusher.html">LogFlusher</a></li>
-  <li><a href="slim_i18n.html">Slim和i18n工具</a></li>
-</ul>
+<p>注意，因为Controller类可能被mount到<code>default_path</code>之外的URL，所以保存模板文件的位置，
+与URL的结构并不一致。具体的，<code>Route[Admin::Analytics::PageViewPage]</code>
+会返回类实际mount的URL地址，而<code>Route.default_path(Admin::Analytics::PageViewPage)</code>
+的返回值则是模板文件的存储地址。</p>
+
+<p><code>rsp :模板名</code>会将上述模板文件目录下的<code>模板名.slim</code>文件用于render。
+注意模板名必须以<code>symbol</code>格式指定（注意现在的rsp函数只有一个hash参数）。</p>
+
+<p><code>SlimHelper</code>会尝试从<code>path_info</code>算出默认模板，如果是静态不含<code>:param</code>的路径，
+则可以直接调用<code>rsp</code>函数，不指定模板文件ID：</p>
+
+<pre><code>class UserPage
+  get('/message') # 模板为：app/views/users/message.slim
+  get('/settings/nickname')
+    # 模板为：app/views/users/settings/nickname.slim
+  get(/) { rsp } # app/views/users/index.slim，'/'会自动map到:index
+end
+</code></pre>
+
+<p>与<code>rsp</code>相对应，<code>rsp!</code>render后直接halt当前进程（即以前的<code>hsp</code>）。</p>
+
+<p>新的<code>SlimHelper</code>不再有<code>common_rsp</code>，应直接<code>@对象变量</code>传递信息。依然有<code>partial :form</code>（使用<code>_form.slim</code>文件作为template），但是不再有<code>partial_block</code>函数
+（后者应该使用<code>HtmlPresenter</code>机制）。</p>
+
+<p><code>partial</code>功能应该用于template内部，比如：<code>partial :form</code>会调用同一文件夹下的<code>_form.slim</code>。</p>
 
   </div>
 

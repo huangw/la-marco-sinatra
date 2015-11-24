@@ -32,7 +32,6 @@ export :route do
   copy 'Guardfile', sync: false
 end
 
-
 export :cucumber do
   add_gem 'guard-cucumber', group: :development
 
@@ -46,14 +45,24 @@ export :cucumber do
   copy 'lib/tasks/cucumber.rake'
 end
 
-# export :logger do
-#   # add_gem 'celluloid'
-#
-#   copy 'lib/utils/la_backtrace_cleaner.rb'
-#   copy 'lib/la_buffered_logger.rb'
-#   copy 'lib/rack/log_flusher.rb'
+export :logger do
+  copy 'lib/utils/la_backtrace_cleaner.rb'
+  copy 'lib/la_buffered_logger.rb'
+  copy 'lib/rack/log_flusher.rb'
+end
+
+# export :restul_api do
+#   add_gem 'oj'
+#   add_gem 'multi_json'
+#   add_gem 'recursive-open-struct'
+#   copy 'lib/rack/json_response.rb'
+#   copy 'lib/tasks/gen_api.rake'
+#   copy 'lib/tasks/doc_api.rake'
+#   copy 'spec/support/helpers/api_test_helper.rb'
+#   copy 'spec/support/helpers/api_doc_helper.rb'
 # end
-#
+
+
 # export :assets_mapper do
 #   add_gem 'git', group: :development
 #   add_gem 'diffy', group: :development
@@ -73,7 +82,7 @@ end
 #   copy 'lib/devtools/asset_mapper/*.rb'
 #   # copy 'app/assets/mappings.rb.sample' => 'app/assets/mappings.rb', sync: false
 # end
-#
+
 # export :web do
 #   import :route
 #   import :assets_mapper
@@ -82,7 +91,6 @@ end
 #   add_gem 'sinatra-redirect-with-flash'
 #   add_gem 'slim'
 #   add_gem 'sanitize'
-#
 #   add_gem 'http_accept_language'
 #
 #   copy 'lib/tasks/i18n_view.rake'
@@ -92,22 +100,11 @@ end
 #   # copy 'lib/presenters/html_presenter.rb'
 #   copy 'lib/rack/json_response.rb'
 # end
-#
-# export :restul_api do
-#   add_gem 'oj'
-#   add_gem 'multi_json'
-#   add_gem 'recursive-open-struct'
-#   copy 'lib/rack/json_response.rb'
-#   copy 'lib/tasks/gen_api.rake'
-#   copy 'lib/tasks/doc_api.rake'
-#   copy 'spec/support/helpers/api_test_helper.rb'
-#   copy 'spec/support/helpers/api_doc_helper.rb'
-# end
-#
+
 from('.') do
   import :route
   import :cucumber
-#   import :web
+  import :web
 #   import :logger
 #   import :restul_api
 end
