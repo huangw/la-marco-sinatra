@@ -8,4 +8,5 @@
 * [Rack-Session-Mongoid](session.html)
 * [Cucumber测试环境](cucumber.html)
 * [LogFlusher](log_flusher.html)
+* [Restful API和Ajax Controller](restful.html)
 * [Slim和i18n工具](slim_i18n.html)

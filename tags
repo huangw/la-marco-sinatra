@@ -5,6 +5,8 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
 <<	lib/mongoid/ordered_list.rb	/^      def <<(obj, opts = {})$/;"	f	class:Mongoid.OrderedList.Proxy
+API	app/pages/api/hello_doc_api.rb	/^module API$/;"	m
+API	app/pages/restful_controller.rb	/^module API$/;"	m
 API	spec/lib/route_spec.rb	/^module API$/;"	m
 APITestHelper	spec/support/helpers/api_test_helper.rb	/^module APITestHelper$/;"	m
 Account	spec/lib/route_spec.rb	/^class Account$/;"	c
@@ -31,6 +33,7 @@ Hash	lib/core_ext/hash_argument.rb	/^class Hash$/;"	c
 HashFlatter	lib/utils/hash_flatter.rb	/^module HashFlatter$/;"	m
 HashPresenter	lib/utils/hash_presenter.rb	/^module HashPresenter$/;"	m
 HashStruct	lib/utils/hash_struct.rb	/^module HashStruct$/;"	m
+HelloDocAPI	app/pages/api/hello_doc_api.rb	/^  class HelloDocAPI < RestfulController$/;"	c	class:API
 I18nUtils	lib/devtools/i18n_utils.rb	/^module I18nUtils$/;"	m
 JsonResponse	lib/rack/json_response.rb	/^  class JsonResponse$/;"	c	class:Rack
 LaBacktraceCleaner	lib/utils/la_backtrace_cleaner.rb	/^module LaBacktraceCleaner$/;"	m
@@ -53,6 +56,7 @@ Rack	lib/rack/session/mongoid.rb	/^module Rack$/;"	m
 Rack	lib/rack/session/mongoid/version.rb	/^module Rack$/;"	m
 RackSession	lib/rack/session/mongoid.rb	/^    class RackSession$/;"	c	class:Rack.Session
 RequestError	config/initializers/web_exceptions.rb	/^class RequestError < ArgumentError$/;"	c
+RestfulController	app/pages/restful_controller.rb	/^  class RestfulController < Sinatra::Base$/;"	c	class:API
 Route	lib/route.rb	/^class Route$/;"	c
 RouteError	config/initializers/web_exceptions.rb	/^class RouteError < RequestError$/;"	c
 RubyFile	lib/devtools/file_generator.rb	/^  class RubyFile$/;"	c	class:FileGenerator
@@ -107,6 +111,7 @@ class_name	lib/devtools/file_generator.rb	/^    def class_name$/;"	f	class:FileG
 class_string	lib/devtools/file_generator.rb	/^    def class_string$/;"	f	class:FileGenerator.RubyFile
 clean	lib/utils/la_backtrace_cleaner.rb	/^  def self.clean(e)$/;"	F	class:LaBacktraceCleaner
 common_head	lib/core_ext/string_common_head.rb	/^  def common_head(str)$/;"	f	class:String
+common_rsp	app/pages/restful_controller.rb	/^      def common_rsp$/;"	f	class:API.RestfulController
 cookie	features/support/env.rb	/^  def cookie(name)$/;"	f	class:FeatureWorld
 data_tpl	lib/devtools/file_generator.rb	/^    def data_tpl(id)$/;"	f	class:FileGenerator.RubyFile
 decode	lib/mongoid/ordered_list.rb	/^      def decode(hsh)$/;"	f	class:Mongoid.OrderedList.Proxy

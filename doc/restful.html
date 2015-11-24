@@ -14,28 +14,45 @@
   <div id="content">
     
 <ul id="markdown-toc">
-  <li><a href="#la-marco-sinatra-sinatra-based-web-framework" id="markdown-toc-la-marco-sinatra-sinatra-based-web-framework">La-Marco-Sinatra: Sinatra Based Web Framework</a>    <ul>
-      <li><a href="#section" id="markdown-toc-section">详细</a></li>
+  <li><a href="#restful-api-and-ajax-controller" id="markdown-toc-restful-api-and-ajax-controller">Restful API and Ajax Controller</a>    <ul>
+      <li><a href="#rackjsonresponse" id="markdown-toc-rackjsonresponse">Rack::JsonResponse</a></li>
+      <li><a href="#api-controller" id="markdown-toc-api-controller">API Controller</a></li>
+      <li><a href="#ajax-controller" id="markdown-toc-ajax-controller">Ajax Controller</a></li>
     </ul>
   </li>
 </ul>
 
-<h1 id="la-marco-sinatra-sinatra-based-web-framework">La-Marco-Sinatra: Sinatra Based Web Framework</h1>
+<h1 id="restful-api-and-ajax-controller">Restful API and Ajax Controller</h1>
 
-<blockquote>
-  <p>注意：<code>sinatra</code>如果出现“undefined method <code>join</code> for #<string> ...”错误，参照`doc/monkey_patch.html`)文件直接修改`sinatra`源码。</string></p>
-</blockquote>
+<h2 id="rackjsonresponse">Rack::JsonResponse</h2>
 
-<h2 id="section">详细</h2>
+<p><code>Rack::JsonResponse</code>是一个rack中间件，将下游app反馈回来的Hash数据转换成Json，同时：</p>
 
 <ul>
-  <li><a href="route.html">Route机制和Puma进程管理</a></li>
-  <li><a href="session.html">Rack-Session-Mongoid</a></li>
-  <li><a href="cucumber.html">Cucumber测试环境</a></li>
-  <li><a href="log_flusher.html">LogFlusher</a></li>
-  <li><a href="restful.html">Restful API和Ajax Controller</a></li>
-  <li><a href="slim_i18n.html">Slim和i18n工具</a></li>
+  <li>Merge <code>env['response_hash']</code> 到输出的Hash</li>
+  <li>如果下游app抛出异常，将其类别、message等格式化为Json后输出</li>
+  <li>如果错误信息有对应的I18n message，将该message添加到Json输出</li>
 </ul>
+
+<p>【SOURCE】<a href="./spec/lib/rack/json_response.html"><code>lib/rack/json_response.rb</code></a></p>
+
+<h2 id="api-controller">API Controller</h2>
+
+<p><code>API::RestfulController</code>提供了一个嵌入<code>JsonResponse</code>之后的Restful API的典型实现，
+可以用作API controller的子类。</p>
+
+<p>【SOURCE】<a href="./spec/pages/restful_controller.html"><code>app/pages/restful_controller.rb</code></a></p>
+
+<p><code>rspec</code>通过<code>rack-test</code>工具测试服务器的API，因此与cucumber不同，不需要启动服务器。
+<code>ApiTestHelper</code>提供了简化<code>rspec</code>书写的一些便捷方法（如自动解码Json，自动认证等）。</p>
+
+<p>【SOURCE】<a href="./spec/spec/support/helpers/api_test_helper.html"><code>spec/support/helpers/api_test_helper.rb</code></a></p>
+
+<p><strong style="color: red">[TODO]</strong> 使用aligo工具从Rspec测试自动生成API文档。</p>
+
+<h2 id="ajax-controller">Ajax Controller</h2>
+
+<p><strong style="color: red">[TODO]</strong> 调整<code>JsonResponse</code>的输出，或开发Ajax专用的中间件。</p>
 
   </div>
 
