@@ -32,6 +32,6 @@ year: 2015
 
 [+] release_v0_0_2: release with built in mongodb/email support 12/05 @huangw;songcy
   [++] rcih: rewrite rack route, cucumber, i18n and slim helpers 11/23-11/25 @huangw:60
-  [++] monse: mongodb based session store 11/25-11/26 @huangw
-  [++] gulp: gulp based asset pipeline with test 11/25-11/30 @huangw;songcy
+  [++] monse: mongodb based session store 11/25-11/26 @huangw:11/24
+  [++] gulp: gulp based asset pipeline with test 11/25-11/30 @huangw;songcy:P
   [++] mailgun: mailgun support revised 12/01-12/03 @huangw;gaoyh
