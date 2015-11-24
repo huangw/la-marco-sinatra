@@ -20,10 +20,10 @@ export :route do
   add_gem 'sinatra-contrib' # streaming
   add_gem 'puma'
 
-#   copy 'config.ru', sync: false
-#   copy 'config/initializers/web_exceptions.rb'
-#   copy 'lib/route.rb'
-#   copy 'config/initializers/routes.rb'
+  copy 'config.ru', sync: false
+  copy 'config/initializers/web_exceptions.rb', sync: false
+  copy 'lib/route.rb'
+  copy 'config/initializers/routes.rb', sync: false
 #
 #   add_gem 'guard-rake', group: :development # for puma restart
 #   copy 'lib/tasks/puma.rake'
