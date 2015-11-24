@@ -12,3 +12,4 @@
 * [Restful API和Ajax Controller](restful.html)
 * [Assets文件管理](assets_management.html)
 * [Slim助手和Web控制器](slim_web.html)
+* [电子邮件和短信等的通知功能](email_sms.html)

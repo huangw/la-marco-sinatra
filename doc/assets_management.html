@@ -14,10 +14,228 @@
   <div id="content">
     
 <ul id="markdown-toc">
-  <li><a href="#assets" id="markdown-toc-assets">Assets文件管理</a></li>
+  <li><a href="#assets" id="markdown-toc-assets">Assets文件管理</a>    <ul>
+      <li><a href="#section" id="markdown-toc-section">概要</a></li>
+      <li><a href="#section-1" id="markdown-toc-section-1">使用流程</a>        <ul>
+          <li><a href="#section-2" id="markdown-toc-section-2">图片管理</a></li>
+          <li><a href="#git" id="markdown-toc-git">第三方Git库的下载管理</a></li>
+          <li><a href="#cssjs" id="markdown-toc-cssjs">CSS和JS文件管理</a>            <ul>
+              <li><a href="#section-3" id="markdown-toc-section-3">虚拟文件和最小化</a></li>
+              <li><a href="#url" id="markdown-toc-url">URL地址和文件获取</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#section-4" id="markdown-toc-section-4">程序实现</a>        <ul>
+          <li><a href="#assetsettings" id="markdown-toc-assetsettings">AssetSettings</a></li>
+          <li><a href="#assets-helper" id="markdown-toc-assets-helper">Assets Helper</a></li>
+          <li><a href="#assets-controller" id="markdown-toc-assets-controller">Assets Controller</a></li>
+          <li><a href="#assets-mapper" id="markdown-toc-assets-mapper">Assets Mapper</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
 </ul>
 
 <h1 id="assets">Assets文件管理</h1>
+
+<h2 id="section">概要</h2>
+
+<ul>
+  <li>管理（包括编译和最小化）<code>js/css</code>文件，同时管理logo，icon等静态图片</li>
+  <li>支持从git或http下载第三方<code>js/css</code>文件到本地</li>
+  <li>AssetsHelper统一提供<code>js_tag</code>, <code>css_tag</code>和<code>img_tag</code>，根据三种不同的环境提供不同的文件地址：
+    <ol>
+      <li><code>:production</code>：等同于<code>RACK_ENV</code>的生产环境，使用单独Asset服务器（<code>img.vikkr.com, assets.vikkr.com</code>等）</li>
+      <li><code>:local_assets</code>：<code>RACK_ENV</code>还是<code>production</code>，但是使用本地图片和本地<code>css/js</code>的最小化文件。启动服务器时需制定参数<code>RACK_ENV=production LOCAL_ASSETS = true</code>。</li>
+      <li><code>:development</code>，等同所有非production环境，使用本地未最小化的css/js文件。</li>
+    </ol>
+  </li>
+  <li>css/js可以使用第三方CDN提供的地址，但在上述2.和3.的情况下，会使用下载备份到本地的文件，因此即使没有网络也可以完成本地测试。</li>
+  <li>通过ruby DSL写assets的设置（默认在<code>app/assets/mappings.rb</code>），可以支持更灵活的语法（取代以前的<code>definition.yml</code>，AssetsHelper使用的设置文件依然保存在<code>config/assets.yml</code>）</li>
+  <li>暂时不负责编译<code>coffee/sass</code>文件。应通过Guard或单独的命令行工具另行编译成<code>js/css</code>文件，并在<code>mappings.rb</code>里加载编译后的<code>js/css</code>文件地址</li>
+</ul>
+
+<h2 id="section-1">使用流程</h2>
+
+<h3 id="section-2">图片管理</h3>
+
+<ul>
+  <li>静态图片默认存放在<code>app/assets/img</code>下（可通过设置变量<code>img_dir</code>修改，但是不建议修改）：</li>
+</ul>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>img_dir <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">other/directory/for/img</span><span style="color:#710">'</span></span>
+</pre></div>
+</div>
+</div>
+
+<ul>
+  <li>文件可以保存于根目录，如<code>app/assets/img/logo.jpg</code>，也可建子目录为<code>app/assets/img/icon/group.jpg</code>。</li>
+</ul>
+
+<p>为符合URL规范，注意不要用<code>_</code>命名文件或文件夹（可用<code>-</code>）。</p>
+
+<ul>
+  <li>指定服务器在不同的环境下如何从图片ID生成图片URL（最后的<code>/</code>可选）：</li>
+</ul>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>img_url_prefix <span style="color:#606">production</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">http://img.vikkr.com</span><span style="color:#710">'</span></span>,
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>               <span style="color:#606">local</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">/img</span><span style="color:#710">'</span></span>
+</pre></div>
+</div>
+</div>
+
+<p><code>:production</code>环境下使用<code>img_url_prefix.remote</code>，而。
+<code>:local_assets</code>和<code>:development</code>使用<code>img_url_prefix.local</code>。</p>
+
+<p>对于任意图片，如<code>image_filename = icon/group/friends.png</code>，调用<code>img_tag</code>的方法为：</p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>= img_tag(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">icon/group/friends.png</span><span style="color:#710">'</span></span>)
+</pre></div>
+</div>
+</div>
+
+<ul>
+  <li>
+    <p><code>AssetsHelper.image_tag(image_filename)</code>中图片URL为：<code>&lt;当前环境的img_url_prefix&gt;/&lt;image_filename&gt;</code>。如<code>http://img.vikkr.com/icon/group/friends.png</code>（生产环境），<code>/img/icon/group/friends.png</code>（其它环境）。</p>
+  </li>
+  <li>
+    <p><code>ImageController</code>则会在<code>app/assets/img/icon/group/friends.png</code>中寻找图片文件并<code>sendfile</code>给用户。</p>
+  </li>
+  <li>
+    <p>执行<code>rake assets:map</code>，<code>rake assets:update</code>或者<code>rake assets:compile</code>会更新<code>config/assets.yml</code>，服务器（WebApplication）通过读取此文件获得<code>AssetsSettings::EnvironmentSettings</code>的singleton instance，并在非production环境时，mount<code>AssetsMapper::ImageController</code>到<code>/img</code>（即<code>img_url_prefix.local</code>的设置位置）。</p>
+  </li>
+</ul>
+
+<p>AssetHelper并不管理具体文件的尺寸，因此需要时应手动指定尺寸：</p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>= img_tag(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">icon/group/friends.png</span><span style="color:#710">'</span></span>, <span style="color:#606">width</span>: <span style="color:#00D">230</span>)
+</pre></div>
+</div>
+</div>
+
+<p>非生产环境下可以通过<code>localhost:8080/img/index</code>列出所有现有静态图片的id和尺寸。</p>
+
+<h3 id="git">第三方Git库的下载管理</h3>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>pull <span style="color:#A60">:repoid</span>, <span style="color:#606">git</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">http://some.url.com/git/repository.git</span><span style="color:#710">'</span></span>
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>pull <span style="color:#A60">:jquery2</span>, <span style="color:#606">github</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">jquery/jquery</span><span style="color:#710">'</span></span> <span style="color:#777"># github可直接指定repository名称</span>
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span>pull <span style="color:#A60">:la</span>-marco, <span style="color:#00D">7</span><span style="color:#606">lime</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">vikkr/la-marco</span><span style="color:#710">'</span></span> <span style="color:#777"># gitlab.7lime.com的库也可缩写</span>
+</pre></div>
+</div>
+</div>
+
+<p>会将<code>https://github.com/jquery/jquery</code>下载到<code>~/.assets_cache/jquery2</code>（或任意指定的<code>pull_dir</code>）。</p>
+
+<p>注意用symbol指定下载文件夹名称（否则会被当做实际目录名而非<code>~/.aasets_cache</code>下的目录名）。</p>
+
+<p>以后就可通过vendor命令，从vendor库里拷贝文件了：</p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>produce(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">some.js</span><span style="color:#710">'</span></span>) { vendor <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">lib/some/file/vieee.jp</span><span style="color:#710">'</span></span>, <span style="color:#606">from</span>: <span style="color:#A60">:jquery2</span> }
+</pre></div>
+</div>
+</div>
+
+<p>这个文件默认会被拷贝到<code>app/assets/vendor/jquery2/vieee.jp</code>(<code>vendor_dir</code> + repository名 + 文件basename)。</p>
+
+<h3 id="cssjs">CSS和JS文件管理</h3>
+
+<h4 id="section-3">虚拟文件和最小化</h4>
+
+<p>CSS和JS管理的核心是虚拟文件（对应一个<code>AssetMapper::TargetFile</code>），如<code>application.js</code>, <code>editor.css</code>，每一个虚拟文件都是有一个或多个文件（<code>AssetMapper::SourceFile</code>）组成的。在<code>mappings.rb</code>文件里，通过<code>produce</code>命令设置：</p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>produce <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">application.js</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>  cloud <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">//code.jquery.com/jquery-2.1.3.min.js</span><span style="color:#710">'</span></span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    <span style="color:#777"># 文件会被拷贝到`app/assets/cloud/code.jquery.com/jquery-2.1.3.min.js`</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>  vendor <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">lib/min/sometool.min.js</span><span style="color:#710">'</span></span>, <span style="color:#606">from</span>: <span style="color:#A60">:bootstrap</span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    <span style="color:#777"># `~/.assets_cache/bootstrap`需已经存在</span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    <span style="color:#777"># 文件默认会被拷贝到`app/assets/vendor/bootstrap/sometool.min.js`</span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>  file <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">js/article-editor.js</span><span style="color:#710">'</span></span> <span style="color:#777"># 使用 `app/assets/js/article-editor.js`</span>
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>                              <span style="color:#777"># `app/assets`可通过`assets_dir`命令修改，</span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>                              <span style="color:#777"># 所有文件地址均相对于此地址指定</span>
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>  file <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">js/subdir/myown.js</span><span style="color:#710">'</span></span> <span style="color:#777"># 使用`app/assets/js/subdir/myown.js`，</span>
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span><span style="color:#080;font-weight:bold">end</span>
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>produce <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">editor.css</span><span style="color:#710">'</span></span>, <span style="color:#606">minimize_to</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">public/assets/css</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>  ...
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span><span style="color:#080;font-weight:bold">end</span>
+</pre></div>
+</div>
+</div>
+
+<p><strong>vendor</strong>是copy过来用、并会被压缩到我们自己的最小化<code>js/css</code>中的文件（比如application.versionid.js）。而<strong>cloud</strong>在生产环境中则是直接远程调用的，但是也会下载一个本地备份用于<code>:development</code>和<code>:local_assets</code>时的测试。</p>
+
+<p><strong>file</strong>则是普通的我们自己开发的<code>js/css</code>文件。它们可能从<code>coffee/sass/less</code>等编译而来，但这里应该指定生成的<code>js/css</code>文件。</p>
+
+<p><code>rake assets:compile</code>会针对每一个produce对象在<code>app/assets/min/</code>（此为<code>min_dir</code>变量默认所指定的目录）下生成最小化的js和css版本，并有含短缩时间戳的版本号（如<code>application.dfwee.js</code>，<code>dfwee</code>即为版本号，每秒钟对应一个，可从中复原时间戳）。</p>
+
+<p>也可另行定义min文件的存储地址：</p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>produce <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">editor.css</span><span style="color:#710">'</span></span> <span style="color:#080;font-weight:bold">do</span>
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>  <span style="color:#777"># ...</span>
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span><span style="color:#080;font-weight:bold">end</span>
+</pre></div>
+</div>
+</div>
+
+<p><code>cloud</code>指定的文件不会被压缩。</p>
+
+<p>注意<code>cloud</code>和<code>vendor/file</code>混在时，无论其指定顺序如何，<code>cloud</code>文件永远会在缩小版文件前被调用。</p>
+
+<p><code>vendor/file</code>文件则会按照定义的顺序调用或压缩在一起。</p>
+
+<h4 id="url">URL地址和文件获取</h4>
+
+<p>与图片一样，生产环境下压缩后的js/css文件应该保存于<code>//assets.vikkr.com</code>之类的子域名（可能在OSS上）。需要指定为：</p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>assets_url_prefix <span style="color:#606">production</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">http://assets.vikkr.com</span><span style="color:#710">'</span></span>
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>                  <span style="color:#606">local</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">/assets</span><span style="color:#710">'</span></span>
+</pre></div>
+</div>
+</div>
+
+<p>原理与<code>image_url_prefix</code>一样。</p>
+
+<p>对任一个produce的filename（如<code>js_tag('application.js')</code>），<code>js_tag</code>和<code>css_tag</code>会按设置顺序输出一个或多个<code>&lt;link&gt;/&lt;script&gt;</code>。</p>
+
+<ul>
+  <li><code>:production</code>环境下，cloud文件单独采用指定的地址，其他本地文件最小化为带版本号的一个文件，以<code>&lt;assets_url_prefix.production&gt;/application.xdewrwer.js</code>形式提供。</li>
+  <li><code>:local_assets</code>环境下，cloud文件为本地备份文件地址，其他本地文件最小化为带版本号的一个文件，以<code>&lt;assets_url_prefix.local&gt;/application.xdewrwer.js</code>形式提供。</li>
+  <li><code>:development</code>环境下，单独返回使用每一个组成文件，均为本地文件的URL地址</li>
+</ul>
+
+<h2 id="section-4">程序实现</h2>
+
+<h3 id="assetsettings">AssetSettings</h3>
+
+<p><code>lib/asset_settings.rb</code>文件负责解析并更新<code>config/assets.yml</code>文件。</p>
+
+<p>后者将<code>:production/:development/:local_assets</code>三个文件分别保存，<code>WebApplication</code>等controller在runtime根据当前环境获取其中一个（singleton对象）。</p>
+
+<p><code>assets.yml</code>里定义一个root地址（相当于<code>APP_ROOT</code>），对于图片只保存<code>img_dir</code>（相对于<code>APP_ROOT</code>）和<code>img_url_prefix</code>。对于css/js文件，则保存<code>files</code>Hash，为<code>虚拟文件 =&gt; 原始文件数组</code>的列表。原始文件数组的元素均为经过了<code>aasets_url_prefix</code>转换后的URL地址（注意：本地地址均是相对于<code>root</code>的）。</p>
+
+<h3 id="assets-helper">Assets Helper</h3>
+
+<p>提供<code>img_tag</code>, <code>css_tag</code>和<code>js_tag</code>，根据<code>config/assets.yml</code>（<code>AssetsSettings</code>）的设置，在不同的环境（<code>:production/:local_assets/:development</code>）输出不同的资源列表。</p>
+
+<h3 id="assets-controller">Assets Controller</h3>
+
+<p>因为资产文件不再放置于<code>public</code>文件夹下，需要根据需要（一般由WebApplication）在Route里加载<code>ImageControler</code>和<code>AssetController</code>以提供这些文件（具体的mount地址也从<code>AssetsConfig</code>获取）。</p>
+
+<h3 id="assets-mapper">Assets Mapper</h3>
+
+<p>此类仅在开发环境下通过<code>rake assets:*</code>使用。负责解析<code>app/assets/mappings.rb</code>，根据需要下载、复制、编译或最小化压缩文件，更新YAML设置文件。</p>
 
   </div>
 
