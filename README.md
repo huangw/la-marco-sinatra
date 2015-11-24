@@ -1,6 +1,7 @@
 # La-Marco-Sinatra: Sinatra Based Web Framework
 
-> 注意：`sinatra`如果出现“undefined method `join` for #<String> ...”错误，参照`doc/monkey_patch.html`)文件直接修改`sinatra`源码。
+【注意】：`sinatra`如果出现“undefined method `join` for #<String> ...”
+错误，请参照[monkey_patch.html](monkey_patch.html)文件的说明直接修改`sinatra`源码。
 
 ## 详细
 
@@ -9,4 +10,5 @@
 * [Cucumber测试环境](cucumber.html)
 * [LogFlusher](log_flusher.html)
 * [Restful API和Ajax Controller](restful.html)
-* [Slim和i18n工具](slim_i18n.html)
+* [Assets文件管理](assets_management.html)
+* [Slim助手和Web控制器](slim_web.html)
