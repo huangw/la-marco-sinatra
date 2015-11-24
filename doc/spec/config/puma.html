@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>puma.rb</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>puma.rb</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-comment">#!/usr/bin/env puma</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>The directory to operate out of.</p>
+<p>The default is the current directory.</p>
+<p>directory ‘/u/apps/lolcat’</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>Use an object or block as the rack application. This allows the
+config file to be the application itself.</p>
+<p>app do |env|
+  puts env</p>
+<p>  body = ‘Hello, World!’</p>
+<p>  [200, { ‘Content-Type’ =&gt; ‘text/plain’,
+          ‘Content-Length’ =&gt; body.length.to_s }, [body]]
+end</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>Load “path” as a rackup file.</p>
+<p>The default is “config.ru”.</p>
+<p>rackup ‘/u/apps/lolcat/config.ru’</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>Set the environment in which the rack’s app will run.
+The value must be a string.</p>
+<p>The default is “development”.</p>
+<p>environment ‘production’</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>Daemonize the server into the background. Highly suggest that
+this be combined with “pidfile” and “stdout_redirect”.</p>
+<p>The default is “false”.</p>
+<p>daemonize
+daemonize false</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>Store the pid of the server in the file at “path”.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>pidfile <span class="hljs-string">'tmp/puma.pid'</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>Use “path” as the file to store the server info state. This is
+used by “pumactl” to query and control the server.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>state_path <span class="hljs-string">'tmp/puma.state'</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>Redirect STDOUT and STDERR to files specified. The 3rd parameter
+(“append”) specifies whether the output is appended, the default is
+“false”.</p>
+<p>stdout_redirect ‘/u/apps/lolcat/log/stdout’, ‘/u/apps/lolcat/log/stderr’
+stdout_redirect ‘/u/apps/lolcat/log/stdout’, ‘/u/apps/lolcat/log/stderr’, true</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>Disable request logging.</p>
+<p>The default is “false”.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>quiet</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>Configure “min” to be the minimum number of threads to use to answer
+requests and “max” the maximum.</p>
+<p>The default is “0, 16”.</p>
+<p>threads 0, 16</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>Bind the server to “url”. “tcp://“, “unix://“ and “ssl://“ are the only
+accepted protocols.</p>
+<p>The default is “tcp://0.0.0.0:9292”.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>bind <span class="hljs-string">'tcp://0.0.0.0:8080'</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>bind ‘unix:///var/run/puma.sock’
+bind ‘unix:///var/run/puma.sock?umask=0111’
+bind ‘ssl://127.0.0.1:9292?key=path_to_key&amp;cert=path_to_cert’</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>Instead of “bind ‘ssl://127.0.0.1:9292?key=path_to_key&amp;cert=path_to_cert’” you
+can also use the “ssl_bind” option.</p>
+<p>ssl_bind ‘127.0.0.1’, ‘9292’, { key: path_to_key, cert: path_to_cert }</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>Code to run before doing a restart. This code should
+close log files, database connections, etc.</p>
+<p>This can be called multiple times to add code each time.</p>
+<p>on_restart do
+  puts ‘On restart…’
+end</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p>Command to use to restart puma. This should be just how to
+load puma itself (ie. ‘ruby -Ilib bin/puma’), not the arguments
+to puma, as those are the same as the original process.</p>
+<p>restart_command ‘/u/app/lolcat/bin/restart_puma’</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>=== Cluster mode ===</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>How many worker processes to run.</p>
+<p>The default is “0”.</p>
+<p>workers 2</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p>Code to run when a worker boots to setup the process before booting
+the app.</p>
+<p>This can be called multiple times to add hooks.</p>
+<p>on_worker_boot do
+  puts ‘On worker boot…’
+end</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>Code to run when a worker boots to setup the process after booting
+the app.</p>
+<p>This can be called multiple times to add hooks.</p>
+<p>after_worker_boot do
+  puts ‘After worker boot…’
+end</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#182;</a>
+              </div>
+              <p>Code to run when a worker shutdown.</p>
+<p>on_worker_shutdown do
+  puts ‘On worker shutdown…’
+end</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-22">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-22">&#182;</a>
+              </div>
+              <p>Allow workers to reload bundler context when master process is issued
+a USR1 signal. This allows proper reloading of gems while the master
+is preserved across a phased-restart. (incompatible with preload_app)
+(off by default)</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-23">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
+              <p>prune_bundler</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#182;</a>
+              </div>
+              <p>Preload the application before starting the workers; this conflicts with
+phased restart feature. (off by default)</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-25">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-25">&#182;</a>
+              </div>
+              <p>preload_app!</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-26">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-26">&#182;</a>
+              </div>
+              <p>Additional text to display in process listing</p>
+<p>tag ‘app name’</p>
+<p>If you do not specify a tag, Puma will infer it. If you do not want Puma
+to add a tag, use an empty string.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-27">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-27">&#182;</a>
+              </div>
+              <p>Verifies that all workers have checked in to the master process within
+the given timeout. If not the worker process will be restarted. Default
+value is 60 seconds.</p>
+<p>worker_timeout 60</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-28">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-28">&#182;</a>
+              </div>
+              <p>Change the default worker timeout for booting</p>
+<p>If unspecified, this defaults to the value of worker_timeout.</p>
+<p>worker_boot_timeout 60</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-29">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-29">&#182;</a>
+              </div>
+              <p>=== Puma control rack application ===</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-30">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-30">&#182;</a>
+              </div>
+              <p>Start the puma control rack application on “url”. This application can
+be communicated with to control the main server. Additionally, you can
+provide an authentication token, so all requests to the control server
+will need to include that token as a query parameter. This allows for
+simple authentication.</p>
+<p>Check out <a href="https://github.com/puma/puma/blob/master/lib/puma/app/status.rb">https://github.com/puma/puma/blob/master/lib/puma/app/status.rb</a>
+to see what the app has available.</p>
+<p>activate_control_app ‘unix:///var/run/pumactl.sock’
+activate_control_app ‘unix:///var/run/pumactl.sock’, { auth_token: ‘12345’ }
+activate_control_app ‘unix:///var/run/pumactl.sock’, { no_token: true }</p>
+
+            </div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

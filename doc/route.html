@@ -14,17 +14,18 @@
   <div id="content">
     
 <ul id="markdown-toc">
-  <li><a href="#route" id="markdown-toc-route">Route机制</a>    <ul>
-      <li><a href="#route-1" id="markdown-toc-route-1">Route管理</a></li>
+  <li><a href="#routepuma" id="markdown-toc-routepuma">Route机制和Puma进程管理</a>    <ul>
+      <li><a href="#route" id="markdown-toc-route">Route管理</a></li>
       <li><a href="#path" id="markdown-toc-path">获取特定path</a></li>
       <li><a href="#controller" id="markdown-toc-controller">启动时加载Controller</a></li>
+      <li><a href="#puma" id="markdown-toc-puma">Puma进程管理</a></li>
     </ul>
   </li>
 </ul>
 
-<h1 id="route">Route机制</h1>
+<h1 id="routepuma">Route机制和Puma进程管理</h1>
 
-<h2 id="route-1">Route管理</h2>
+<h2 id="route">Route管理</h2>
 
 <p>Route定义一个全局（通过Route类的一个eigenclass变量）的路由表，记录controller类
 （<code>UserPage</code>等，遵循rack标准）到URL path（mounting point，如<code>/users</code>）的映射关系。</p>
@@ -106,6 +107,25 @@ end
 脚本调用：</p>
 
 <p>【SOURCE】<a href="./spec/config/initializers/web_exceptions.html"><code>config/initializers/web_exceptions.rb</code></a></p>
+
+<h2 id="puma">Puma进程管理</h2>
+
+<p>重新使用<code>foreman</code>，用于开发和测试时启动各种服务器包括<code>puma</code>。启动<code>puma</code>时会调取
+<code>config/puma.rb</code>文件，监听8080端口并记录<code>pid</code>文件到本地<code>tmp</code>文件夹下，
+可通过<code>rake s</code>（<code>rake puma</code>的别名）快速重启。</p>
+
+<p>注意<code>puma.rb</code>设置文件屏蔽了<code>access log</code>，必要时可以打开（屏蔽掉<code>quiet</code>一行）。</p>
+
+<p>【SOURCE】<a href="./spec/config/puma.html"><code>config/puma.rb</code></a></p>
+
+<p>注意<code>app/pages/simplest_page</code>定义了一个<code>get</code>的<code>hello world</code>页面，启动puma后可以通过
+<code>http://localhost:8080/simple</code>确认是否能正常显示。</p>
+
+<p>【SOURCE】<a href="./spec/pages/simplest_page.html"><code>app/pages/simplest_page.rb</code></a></p>
+
+<p>另外，<code>Guardfile</code>通过<code>guard-rake</code>插件动态监听本地文件的修改。建议在两个不同的terminal窗口
+分别启动<code>forman start</code>和<code>bundle exec guard</code>。则任何时候修改<code>app/pages/...</code>下的文件时
+<code>guad</code>会自动重启<code>puma</code>，不需要手动执行<code>rake s</code>了。</p>
 
   </div>
 

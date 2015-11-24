@@ -6,7 +6,7 @@ class SimplestPage < Sinatra::Base
   end
 
   get '/' do
-    'hello, world!'
+    'helle, world!'
   end
 
   Route.mount self, '/simple'

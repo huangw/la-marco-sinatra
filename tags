@@ -19,6 +19,7 @@ BSON	lib/mongoid/token_id.rb	/^module BSON$/;"	m
 Class	lib/core_ext/attr_with_default.rb	/^class Class$/;"	c
 Confu	lib/confu.rb	/^class Confu$/;"	c
 ConfuMissing	lib/confu.rb	/^class ConfuMissing < NoMethodError; end$/;"	c
+CounterPage	app/pages/counter_page.rb	/^class CounterPage < Sinatra::Base$/;"	c
 Criteria	lib/mongoid/paginator.rb	/^  class Criteria$/;"	c	class:Mongoid
 Data	lib/confu.rb	/^  class Data < Hash$/;"	c	class:Confu
 EmailValidator	lib/mongoid/validators/email_validator.rb	/^class EmailValidator < ActiveModel::EachValidator$/;"	c
@@ -33,11 +34,16 @@ Mongoid	lib/mongoid/ordered_list.rb	/^module Mongoid$/;"	m
 Mongoid	lib/mongoid/paginator.rb	/^module Mongoid$/;"	m
 Mongoid	lib/mongoid/sequence_token.rb	/^module Mongoid$/;"	m
 Mongoid	lib/mongoid/token_id.rb	/^module Mongoid$/;"	m
+Mongoid	lib/rack/session/mongoid.rb	/^    class Mongoid < Abstract::ID$/;"	c	class:Rack.Session
+Mongoid	lib/rack/session/mongoid/version.rb	/^    class Mongoid < Abstract::ID$/;"	c	class:Rack.Session
 ObjectId	lib/mongoid/token_id.rb	/^  class ObjectId$/;"	c	class:BSON
 OrderedList	lib/mongoid/ordered_list.rb	/^  module OrderedList$/;"	m	class:Mongoid
 PersonPage	spec/lib/route_spec.rb	/^  class PersonPage; Route << self end$/;"	c	class:Admin
 Proxy	lib/mongoid/ordered_list.rb	/^    class Proxy$/;"	c	class:Mongoid.OrderedList
 RSpecApiDoc	spec/support/helpers/api_doc_helper.rb	/^class RSpecApiDoc$/;"	c
+Rack	lib/rack/session/mongoid.rb	/^module Rack$/;"	m
+Rack	lib/rack/session/mongoid/version.rb	/^module Rack$/;"	m
+RackSession	lib/rack/session/mongoid.rb	/^    class RackSession$/;"	c	class:Rack.Session
 RequestError	config/initializers/web_exceptions.rb	/^class RequestError < ArgumentError$/;"	c
 Route	lib/route.rb	/^class Route$/;"	c
 RouteError	config/initializers/web_exceptions.rb	/^class RouteError < RequestError$/;"	c
@@ -45,6 +51,8 @@ RubyFile	lib/devtools/file_generator.rb	/^  class RubyFile$/;"	c	class:FileGener
 Sequence	lib/mongoid/sequence_token.rb	/^class Sequence$/;"	c
 SequenceToken	lib/mongoid/sequence_token.rb	/^  module SequenceToken$/;"	m	class:Mongoid
 ServerError	config/initializers/web_exceptions.rb	/^class ServerError < RuntimeError$/;"	c
+Session	lib/rack/session/mongoid.rb	/^  module Session$/;"	m	class:Rack
+Session	lib/rack/session/mongoid/version.rb	/^  module Session$/;"	m	class:Rack
 SimplestPage	app/pages/simplest_page.rb	/^class SimplestPage < Sinatra::Base$/;"	c
 String	lib/core_ext/string_common_head.rb	/^class String$/;"	c
 String	lib/core_ext/string_short.rb	/^class String$/;"	c
@@ -59,7 +67,11 @@ YamlFile	lib/devtools/i18n_utils.rb	/^  class YamlFile$/;"	c
 []	lib/utils/hash_struct.rb	/^  def [](key)$/;"	f	class:HashStruct
 []=	lib/route.rb	/^    def []=(app_class, route)$/;"	f	class:Route
 []=	lib/utils/hash_struct.rb	/^  def []=(key, value)$/;"	f	class:HashStruct
+_delete	lib/rack/session/mongoid.rb	/^      def _delete(sid)$/;"	f	class:Rack.Session.Mongoid
+_exists?	lib/rack/session/mongoid.rb	/^      def _exists?(sid)$/;"	f	class:Rack.Session.Mongoid
+_get	lib/rack/session/mongoid.rb	/^      def _get(sid)$/;"	f	class:Rack.Session.Mongoid
 _keys_to_hash	lib/utils/hash_presenter.rb	/^  def _keys_to_hash(keys)$/;"	f	class:HashPresenter
+_put	lib/rack/session/mongoid.rb	/^      def _put(sid, session)$/;"	f	class:Rack.Session.Mongoid
 _to_hash	lib/utils/hash_presenter.rb	/^  def _to_hash(keys, type_h = {}, opts = {})$/;"	f	class:HashPresenter
 add	lib/mongoid/ordered_list.rb	/^      def add(obj, opts = {})$/;"	f	class:Mongoid.OrderedList.Proxy
 addClass	doc/spec/lib/route_spec_rslt.html	/^function addClass(element_id, classname) {$/;"	f
@@ -84,6 +96,7 @@ decode	lib/mongoid/ordered_list.rb	/^      def decode(hsh)$/;"	f	class:Mongoid.O
 deep_require	lib/core_ext/dynamic_require.rb	/^def deep_require(dir, deepth = 3)$/;"	f
 default_path	lib/route.rb	/^    def default_path(app_class)$/;"	f	class:Route
 demongoize	lib/utils/hash_struct.rb	/^      def demongoize(args)$/;"	f	class:HashStruct
+destroy_session	lib/rack/session/mongoid.rb	/^      def destroy_session(env, session_id, options)$/;"	f	class:Rack.Session.Mongoid
 each	lib/mongoid/ordered_list.rb	/^      def each$/;"	f	class:Mongoid.OrderedList.Proxy
 email_valid?	lib/mongoid/validators/email_validator.rb	/^  def email_valid?(email)$/;"	f	class:EmailValidator
 encode	lib/mongoid/ordered_list.rb	/^      def encode(obj, tid = nil)$/;"	f	class:Mongoid.OrderedList.Proxy
@@ -111,8 +124,10 @@ from_hex	lib/core_ext/time_short.rb	/^  def self.from_hex(hstr)$/;"	F	class:Time
 from_short	lib/core_ext/time_short.rb	/^  def self.from_short(sstr)$/;"	F	class:Time
 from_splits	lib/mongoid/token_id.rb	/^    def self.from_splits(tm, mp, remain)$/;"	F	class:BSON.ObjectId
 from_token_id	lib/mongoid/token_id.rb	/^    def self.from_token_id(str)$/;"	F	class:BSON.ObjectId
+generate_sid	lib/rack/session/mongoid.rb	/^      def generate_sid$/;"	f	class:Rack.Session.Mongoid
 get_binding	spec/support/helpers/api_doc_helper.rb	/^    def get_binding$/;"	f	class:RSpecApiDoc
 get_display_style	doc/spec/lib/route_spec_rslt.html	/^function get_display_style(display_flag) {$/;"	f
+get_session	lib/rack/session/mongoid.rb	/^      def get_session(env, sid)$/;"	f	class:Rack.Session.Mongoid
 global_logger	config/settings/logstash_logger_settings.rb	/^def global_logger$/;"	f
 google_t	lib/devtools/i18n_utils.rb	/^    def google_t(key, lang)$/;"	f	class:I18nUtils
 handle_block	lib/confu.rb	/^    def handle_block(met, prc)$/;"	f	class:Confu.Data
@@ -126,6 +141,7 @@ initialize	lib/confu.rb	/^    def initialize(hsh = {})$/;"	f	class:Confu.Data
 initialize	lib/devtools/file_generator.rb	/^    def initialize(name, su = nil)$/;"	f	class:FileGenerator.RubyFile
 initialize	lib/devtools/i18n_utils.rb	/^    def initialize(file_name)$/;"	f	class:YamlFile
 initialize	lib/mongoid/ordered_list.rb	/^      def initialize(prt, fnm, cf)$/;"	f	class:Mongoid.OrderedList.Proxy
+initialize	lib/rack/session/mongoid.rb	/^      def initialize(app, options = {})$/;"	f	class:Rack.Session.Mongoid
 initialize	lib/utils/hash_struct.rb	/^  def initialize(h = {})$/;"	f	class:HashStruct
 jhash	spec/support/helpers/api_doc_helper.rb	/^    def jhash(hsh)$/;"	f	class:RSpecApiDoc
 key?	lib/devtools/i18n_utils.rb	/^    def key?(key)$/;"	f	class:YamlFile
@@ -180,6 +196,7 @@ scope_join	lib/devtools/i18n_utils.rb	/^    def scope_join(*args)$/;"	f	class:Ya
 seq_field	lib/mongoid/sequence_token.rb	/^      def self.seq_field$/;"	F	class:Mongoid.SequenceToken
 sequence_id	lib/mongoid/sequence_token.rb	/^      def sequence_id$/;"	f	class:Mongoid.SequenceToken
 set_sequence_token	lib/mongoid/sequence_token.rb	/^      def set_sequence_token$/;"	f	class:Mongoid.SequenceToken
+set_session	lib/rack/session/mongoid.rb	/^      def set_session(env, session_id, new_session, _options)$/;"	f	class:Rack.Session.Mongoid
 short	lib/core_ext/string_short.rb	/^  def short(leng = 20)$/;"	f	class:String
 short	lib/core_ext/time_short.rb	/^  def short$/;"	f	class:Time
 size	lib/mongoid/ordered_list.rb	/^      def size$/;"	f	class:Mongoid.OrderedList.Proxy
@@ -213,4 +230,5 @@ update	lib/mongoid/ordered_list.rb	/^      def update(tid, obj)$/;"	f	class:Mong
 url_valid?	lib/mongoid/validators/url_validator.rb	/^  def url_valid?(url)$/;"	f	class:UrlValidator
 validate_each	lib/mongoid/validators/email_validator.rb	/^  def validate_each(record, attribute, value)$/;"	f	class:EmailValidator
 validate_each	lib/mongoid/validators/url_validator.rb	/^  def validate_each(record, attribute, value)$/;"	f	class:UrlValidator
+with_lock	lib/rack/session/mongoid.rb	/^      def with_lock(env)$/;"	f	class:Rack.Session.Mongoid
 wopen	lib/devtools/file_generator.rb	/^    def wopen(file, bit = 'wb', &prc)$/;"	f	class:FileGenerator

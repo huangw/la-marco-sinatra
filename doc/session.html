@@ -14,29 +14,21 @@
   <div id="content">
     
 <ul id="markdown-toc">
-  <li><a href="#la-marco-sinatra-sinatra-based-web-framework" id="markdown-toc-la-marco-sinatra-sinatra-based-web-framework">La-Marco-Sinatra: Sinatra Based Web Framework</a>    <ul>
-      <li><a href="#section" id="markdown-toc-section">详细</a></li>
-      <li><a href="#helpers" id="markdown-toc-helpers">各种Helpers</a></li>
-    </ul>
-  </li>
+  <li><a href="#racksessionmongoid" id="markdown-toc-racksessionmongoid">Rack::Session::Mongoid</a></li>
 </ul>
 
-<h1 id="la-marco-sinatra-sinatra-based-web-framework">La-Marco-Sinatra: Sinatra Based Web Framework</h1>
+<h1 id="racksessionmongoid">Rack::Session::Mongoid</h1>
 
-<blockquote>
-  <p>注意：<code>sinatra</code>如果出现“undefined method <code>join</code> for #<string> ...”错误，参照`doc/monkey_patch.html`)文件直接修改`sinatra`源码。</string></p>
-</blockquote>
+<p>使用Mognoid 5.0存取session数据。数据默认保存在<code>:default</code> client的
+<code>:rack_session_rack_session</code> collection，直接存储Hash，没有序列化。</p>
 
-<h2 id="section">详细</h2>
+<p><strong style="color: red">[TODO]</strong> 允许修改collection，自动测试。</p>
 
-<ul>
-  <li><a href="route.html">Route机制和Puma进程管理</a></li>
-  <li><a href="session.html">Rack Session Mongoid</a></li>
-</ul>
+<p>【SOURCE】<a href="./spec/lib/rack/session/mongoid.html"><code>lib/rack/session/mongoid.rb</code></a></p>
 
-<h2 id="helpers">各种Helpers</h2>
+<p><code>localhost:8080/counter</code>有一个简单的测试例子，实现了一个每次刷新都递增1的计数器。</p>
 
-<p>除采用第三方的Sinatra插件如<code>flash helper</code>等之外</p>
+<p>【SOURCE】<a href="./spec/pages/counter_page.html"><code>app/pages/counter_page.rb</code></a></p>
 
   </div>
 
