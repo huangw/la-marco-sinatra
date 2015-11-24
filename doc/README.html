@@ -15,9 +15,10 @@
     
 <ul id="markdown-toc">
   <li><a href="#la-marco-sinatra-sinatra-based-web-framework" id="markdown-toc-la-marco-sinatra-sinatra-based-web-framework">La-Marco-Sinatra: Sinatra Based Web Framework</a>    <ul>
-      <li><a href="#puma" id="markdown-toc-puma">在不同环境下启动Puma服务</a></li>
+      <li><a href="#routepuma" id="markdown-toc-routepuma">Route机制和Puma进程管理</a></li>
     </ul>
   </li>
+  <li><a href="#section" id="markdown-toc-section">#</a></li>
 </ul>
 
 <h1 id="la-marco-sinatra-sinatra-based-web-framework">La-Marco-Sinatra: Sinatra Based Web Framework</h1>
@@ -26,15 +27,31 @@
   <p>注意：<code>sinatra</code>如果出现“undefined method <code>join</code> for #<string> ...”错误，参照`doc/monkey_patch.html`)文件直接修改`sinatra`源码。</string></p>
 </blockquote>
 
-<h2 id="puma">在不同环境下启动Puma服务</h2>
+<h2 id="routepuma">Route机制和Puma进程管理</h2>
 
 <p>自行开发了<code>Route</code>机制，方便独立app（如bluemoon）的无缝加载或移除。同时开发了基于
 <code>Route</code>的path helper，实现对面包屑的程序化管理。</p>
 
 <p>详细参照参照<a href="route.html">Route机制</a>文档</p>
 
-<p>重新使用<code>foreman</code>，用于开发和测试时启动各种服务器包括<code>puma</code>。启动<code>puma</code>时记录<code>pid</code>
-文件到本地<code>tmp</code>文件夹下，可通过<code>rake s</code>（<code>rake server</code>的别名）快速重启。</p>
+<p>重新使用<code>foreman</code>，用于开发和测试时启动各种服务器包括<code>puma</code>。启动<code>puma</code>时会调取
+<code>config/puma.rb</code>文件，监听8080端口并记录<code>pid</code>文件到本地<code>tmp</code>文件夹下，
+可通过<code>rake s</code>（<code>rake puma</code>的别名）快速重启。</p>
+
+<p>注意<code>puma.rb</code>设置文件屏蔽了<code>access log</code>，必要时可以打开（屏蔽掉<code>quiet</code>一行）。</p>
+
+<p>spec:config/puma</p>
+
+<p>注意<code>app/pages/simplest_page</code>定义了一个<code>get</code>的<code>hello world</code>页面，启动puma后可以通过
+<code>http://localhost:8080/simple</code>确认是否能正常显示。</p>
+
+<p>spec:app/pages/simplest_page</p>
+
+<p>另外，<code>Guardfile</code>通过<code>guard-rake</code>插件动态监听本地文件的修改。建议在两个不同的terminal窗口
+分别启动<code>forman start</code>和<code>bundle exec guard</code>。则任何时候修改<code>app/pages/...</code>下的文件时
+<code>guad</code>会自动重启<code>puma</code>，不需要手动执行<code>rake s</code>了。</p>
+
+<h1 id="section">#</h1>
 
   </div>
 

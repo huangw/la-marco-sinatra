@@ -19,13 +19,15 @@ export :route do
   add_gem 'sinatra' # , '~> 1.4'
   add_gem 'sinatra-contrib' # streaming
   add_gem 'puma'
+  add_gem 'foreman'
 
   copy 'config.ru', sync: false
-  copy 'config/initializers/web_exceptions.rb', sync: false
   copy 'lib/route.rb'
   copy 'config/initializers/routes.rb', sync: false
-#
-#   add_gem 'guard-rake', group: :development # for puma restart
+  copy 'config/initializers/web_exceptions.rb', sync: false
+  copy 'config/puma.rb', sync: false
+
+  add_gem 'guard-rake', group: :development # for puma restart
 #   copy 'lib/tasks/puma.rake'
 #   copy 'Guardfile', sync: false
 end

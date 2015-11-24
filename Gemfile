@@ -19,6 +19,8 @@ gem "sinatra-contrib"
     
 gem "puma"
     
+gem "foreman"
+    
   
 
   
@@ -49,6 +51,8 @@ group :development do
   gem "google-translate"
     
   gem "mdoc"
+    
+  gem "guard-rake"
     
 end
   
