@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>form_helper.rb</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>form_helper.rb</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">require</span> <span class="hljs-string">'active_support/inflector'</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>brought from <a href="https://github.com/cymen/sinatra-formhelpers-">https://github.com/cymen/sinatra-formhelpers-</a>
+rubocop:disable LineLength, MethodLength, CyclomaticComplexity, ModuleLength</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">module</span> <span class="hljs-title">FormHelper</span></span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>a intermediate object holds default values passed to form helper</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FormBuilder</span></span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">initialize</span><span class="hljs-params">(parent, object, name = <span class="hljs-keyword">nil</span>)</span></span>
+      <span class="hljs-variable">@parent</span> = parent
+      <span class="hljs-keyword">if</span> object.is_a?(<span class="hljs-constant">Symbol</span>) || object.is_a?(<span class="hljs-constant">String</span>)
+        <span class="hljs-variable">@object</span> = object.to_sym
+        <span class="hljs-variable">@name</span> = name || object.to_sym
+      <span class="hljs-keyword">else</span>
+        <span class="hljs-variable">@name</span> = name || object.<span class="hljs-keyword">class</span>.to_s.underscore.sub(<span class="hljs-regexp">/^.*\//</span>, <span class="hljs-string">''</span>).to_sym
+        <span class="hljs-variable">@object</span> = object
+      <span class="hljs-keyword">end</span>
+    <span class="hljs-keyword">end</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">field_group</span><span class="hljs-params">(field, options = {})</span></span>
+      type = options.delete(<span class="hljs-symbol">:type</span>) || <span class="hljs-symbol">:text</span>
+      cls = options[<span class="hljs-symbol">:class</span>] ? <span class="hljs-string">"<span class="hljs-subst">#{options[<span class="hljs-symbol">:class</span>]}</span> form-group"</span> <span class="hljs-symbol">:</span> <span class="hljs-string">'form-group'</span>
+
+      e_msg = [options.delete(<span class="hljs-symbol">:e_msg1</span>)] <span class="hljs-keyword">if</span> options[<span class="hljs-symbol">:e_msg1</span>]
+      e_msg ||= <span class="hljs-variable">@object</span>.errors.messages[field] <span class="hljs-keyword">if</span> <span class="hljs-variable">@object</span>.respond_to?(<span class="hljs-symbol">:errors</span>)
+
+      cls &lt;&lt; <span class="hljs-string">' has-error'</span> <span class="hljs-keyword">if</span> e_msg &amp;&amp; e_msg.size &gt; <span class="hljs-number">0</span> &amp;&amp; options.delete(<span class="hljs-symbol">:add_error_class</span>)
+
+      options[<span class="hljs-string">'placeholder'</span>] ||= <span class="hljs-variable">@object</span>.<span class="hljs-keyword">class</span>.human_attribute_name(field) <span class="hljs-keyword">if</span> <span class="hljs-variable">@object</span>.<span class="hljs-keyword">class</span>.respond_to?(<span class="hljs-symbol">:human_attribute_name</span>)
+      out = options[<span class="hljs-symbol">:label</span>] ? (label field, options.delete(<span class="hljs-symbol">:label</span>), <span class="hljs-class"><span class="hljs-keyword">class</span>: '<span class="hljs-title">control</span>-<span class="hljs-title">label</span>') : ''</span>
+
+      <span class="hljs-keyword">if</span> block_given?
+        out &lt;&lt; <span class="hljs-keyword">yield</span>
+      <span class="hljs-keyword">else</span>
+        <span class="hljs-keyword">if</span> type.to_sym == <span class="hljs-symbol">:textarea</span>
+          out &lt;&lt; textarea(field, options.delete(<span class="hljs-symbol">:value</span>),
+                          options.merge(<span class="hljs-class"><span class="hljs-keyword">class</span>: '<span class="hljs-title">form</span>-<span class="hljs-title">control</span>'))</span>
+        <span class="hljs-keyword">else</span>
+          value = options.delete(<span class="hljs-symbol">:value</span>) || default_value(field, <span class="hljs-string">''</span>)
+          out &lt;&lt; send(type, field, options.merge(<span class="hljs-class"><span class="hljs-keyword">class</span>: '<span class="hljs-title">form</span>-<span class="hljs-title">control</span>', <span class="hljs-title">value</span>: <span class="hljs-title">value</span>))</span>
+        <span class="hljs-keyword">end</span>
+      <span class="hljs-keyword">end</span>
+
+      <span class="hljs-keyword">if</span> (icon_text = options.delete(<span class="hljs-symbol">:icon</span>)) &amp;&amp; (icon_type = options.delete(<span class="hljs-symbol">:icon_type</span>))
+        out &lt;&lt; <span class="hljs-string">"&lt;a class='icon <span class="hljs-subst">#{icon_type}</span>' data-toggle='tooltip' data-placement='top' data-title='<span class="hljs-subst">#{options.delete(<span class="hljs-symbol">:icon_data_text</span>)}</span>' title='<span class="hljs-subst">#{icon_text}</span>' href='javascript:void(0)'&gt;&lt;/a&gt;"</span>
+      <span class="hljs-keyword">end</span>
+
+      out &lt;&lt; <span class="hljs-variable">@parent</span>.tag(<span class="hljs-symbol">:p</span>, e_msg.join(<span class="hljs-string">'; '</span>),
+                         <span class="hljs-class"><span class="hljs-keyword">class</span>: '<span class="hljs-title">help</span>-<span class="hljs-title">block</span>') <span class="hljs-title">if</span> <span class="hljs-title">e_msg</span> &amp;&amp; <span class="hljs-title">e_msg</span>.<span class="hljs-title">size</span> &gt; 0</span>
+
+      <span class="hljs-variable">@parent</span>.tag <span class="hljs-symbol">:div</span>, out, <span class="hljs-class"><span class="hljs-keyword">class</span>: <span class="hljs-title">cls</span></span>
+    <span class="hljs-keyword">end</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">label</span><span class="hljs-params">(field, display = <span class="hljs-keyword">nil</span>, options = {})</span></span>
+      options[<span class="hljs-symbol">:for</span>] = <span class="hljs-string">"<span class="hljs-subst">#{<span class="hljs-variable">@name</span>}</span>_<span class="hljs-subst">#{field}</span>"</span>
+      <span class="hljs-variable">@parent</span>.label(field, display, options)
+    <span class="hljs-keyword">end</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">default_value</span><span class="hljs-params">(field, default)</span></span>
+      v = <span class="hljs-variable">@parent</span>.params[<span class="hljs-variable">@name</span>] &amp;&amp; <span class="hljs-variable">@parent</span>.params[<span class="hljs-variable">@name</span>][field.to_sym]
+      v ||= <span class="hljs-variable">@object</span>.send(field.to_sym) <span class="hljs-keyword">if</span> <span class="hljs-variable">@object</span>.respond_to?(field.to_sym)
+      v || default
+    <span class="hljs-keyword">end</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">textarea</span><span class="hljs-params">(field, contents = <span class="hljs-keyword">nil</span>, options = {})</span></span>
+      options[<span class="hljs-symbol">:id</span>] ||= <span class="hljs-string">"<span class="hljs-subst">#{<span class="hljs-variable">@name</span>}</span>_<span class="hljs-subst">#{field}</span>"</span>
+      contents ||= default_value(field, <span class="hljs-string">''</span>)
+      <span class="hljs-variable">@parent</span>.textarea(<span class="hljs-string">"<span class="hljs-subst">#{<span class="hljs-variable">@name</span>}</span>[<span class="hljs-subst">#{field}</span>]"</span>, contents, options)
+    <span class="hljs-keyword">end</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">radio</span><span class="hljs-params">(field, values, options = {})</span></span>
+      options[<span class="hljs-symbol">:id</span>] ||= <span class="hljs-string">"<span class="hljs-subst">#{<span class="hljs-variable">@name</span>}</span>_<span class="hljs-subst">#{field}</span>"</span>
+      options[<span class="hljs-symbol">:value</span>] = default_value(field, <span class="hljs-string">''</span>)
+      <span class="hljs-variable">@parent</span>.radio(<span class="hljs-string">"<span class="hljs-subst">#{<span class="hljs-variable">@name</span>}</span>[<span class="hljs-subst">#{field}</span>]"</span>, values, options)
+    <span class="hljs-keyword">end</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">simple_radio</span><span class="hljs-params">(field, value, options = {})</span></span>
+      options[<span class="hljs-symbol">:id</span>] ||= <span class="hljs-string">"<span class="hljs-subst">#{<span class="hljs-variable">@name</span>}</span>_<span class="hljs-subst">#{field}</span>_<span class="hljs-subst">#{value}</span>"</span>
+      options[<span class="hljs-symbol">:value</span>] = default_radio_value(field, value, <span class="hljs-string">''</span>)
+      <span class="hljs-variable">@parent</span>.radio(<span class="hljs-string">"<span class="hljs-subst">#{<span class="hljs-variable">@name</span>}</span>[<span class="hljs-subst">#{field}</span>]"</span>, value, options)
+    <span class="hljs-keyword">end</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">checkbox</span><span class="hljs-params">(field, values, options = {})</span></span>
+      options[<span class="hljs-symbol">:id</span>] ||= <span class="hljs-string">"<span class="hljs-subst">#{<span class="hljs-variable">@name</span>}</span>_<span class="hljs-subst">#{field}</span>"</span>
+      options[<span class="hljs-symbol">:value</span>] = default_value(field, [])
+      <span class="hljs-variable">@parent</span>.checkbox(<span class="hljs-string">"<span class="hljs-subst">#{<span class="hljs-variable">@name</span>}</span>[<span class="hljs-subst">#{field}</span>]"</span>, values, options)
+    <span class="hljs-keyword">end</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">simple_checkbox</span><span class="hljs-params">(field, value, options = {})</span></span>
+      options[<span class="hljs-symbol">:id</span>] ||= <span class="hljs-string">"<span class="hljs-subst">#{<span class="hljs-variable">@name</span>}</span>_<span class="hljs-subst">#{field}</span>_<span class="hljs-subst">#{value}</span>"</span>
+      options[<span class="hljs-symbol">:value</span>] = default_checkbox_value(field, [])
+      <span class="hljs-variable">@parent</span>.checkbox(<span class="hljs-string">"<span class="hljs-subst">#{<span class="hljs-variable">@name</span>}</span>[<span class="hljs-subst">#{field}</span>]"</span>, value, options)
+    <span class="hljs-keyword">end</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">select</span><span class="hljs-params">(field, values, options = {})</span></span>
+      options[<span class="hljs-symbol">:id</span>] ||= <span class="hljs-string">"<span class="hljs-subst">#{<span class="hljs-variable">@name</span>}</span>_<span class="hljs-subst">#{field}</span>"</span>
+      options[<span class="hljs-symbol">:value</span>] = default_value(field, <span class="hljs-string">''</span>)
+      <span class="hljs-variable">@parent</span>.select(<span class="hljs-string">"<span class="hljs-subst">#{<span class="hljs-variable">@name</span>}</span>[<span class="hljs-subst">#{field}</span>]"</span>, values, options)
+    <span class="hljs-keyword">end</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">default_radio_value</span><span class="hljs-params">(field, key, default)</span></span>
+      v = <span class="hljs-variable">@parent</span>.params[<span class="hljs-variable">@name</span>] &amp;&amp;
+          <span class="hljs-variable">@parent</span>.params[<span class="hljs-variable">@name</span>][field.to_sym]
+
+      mto = key.to_s + <span class="hljs-string">'?'</span>
+
+      v ||= key.to_s <span class="hljs-keyword">if</span> <span class="hljs-variable">@object</span>.respond_to?(mto.to_sym) &amp;&amp; <span class="hljs-variable">@object</span>.send(mto.to_sym)
+      v || default
+    <span class="hljs-keyword">end</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">default_checkbox_value</span><span class="hljs-params">(field, default)</span></span>
+      v = <span class="hljs-variable">@parent</span>.params[<span class="hljs-variable">@name</span>] &amp;&amp;
+          <span class="hljs-variable">@parent</span>.params[<span class="hljs-variable">@name</span>][field.to_sym]
+
+      <span class="hljs-keyword">unless</span> v
+        keys = <span class="hljs-variable">@object</span>.send(<span class="hljs-string">"<span class="hljs-subst">#{field}</span>_keys"</span>.to_sym).keys
+        mto = <span class="hljs-string">"<span class="hljs-subst">#{field}</span>_on?"</span>
+
+        tmp_v = []
+        keys.each <span class="hljs-keyword">do</span> |k|
+          tmp_v.push k.to_s <span class="hljs-keyword">if</span> <span class="hljs-variable">@object</span>.send(mto.to_sym, k)
+        <span class="hljs-keyword">end</span>
+
+        v = tmp_v <span class="hljs-keyword">unless</span> tmp_v.blank?
+      <span class="hljs-keyword">end</span>
+
+      v || default
+    <span class="hljs-keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <h1 id="commit-by-songcy-2015-06-23">commit by songcy 2015/06/23</h1>
+<p>return the checkbox keys, default is {on: }
+def default_bit_value(field, key, default)
+  v = @parent.params[@name] &amp;&amp;
+      @parent.params[@name][field.to_sym] &amp;&amp;
+      @parent.params[@name][field.to_sym][key.to_sym]</p>
+<p>  mto = field.to<em>s + ‘</em>‘ + key.to_s + ‘?’
+  v ||= @object.send(mto.to_sym) if @object.respond_to?(mto.to_sym)
+  v || default
+end</p>
+<p>def bit_checkbox(field, key, options = {})
+  v = default_bit_value(field, key, false)</p>
+<p>  display = options.delete(:label) if options[:label]
+  display ||= @object.class.human_attribute_name(field.to<em>s + ‘</em>‘ + key.to_s) if @object.class.respond_to?(:human_attribute_name)</p>
+<p>  options[:checked] = ‘checked’ if v
+  @parent.checkbox(“#{@name}[#{field}]”, { key.to_sym =&gt; display }, options)
+end</p>
+<p>def bool_field_checkbox(field, options = {})
+  v = default_value(field, false)</p>
+<p>  display = options.delete(:label) if options[:label]
+  display ||= @object.class.human_attribute_name(field) if @object.class.respond_to?(:human_attribute_name)</p>
+<p>  options[:checked] = ‘checked’ if v
+  @parent.checkbox(“#{@name}[#{field}]”, { ‘1’: display }, options)
+end</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">method_missing</span><span class="hljs-params">(met, field = <span class="hljs-string">''</span>, options = {})</span></span>
+      <span class="hljs-keyword">unless</span> [<span class="hljs-symbol">:submit</span>, <span class="hljs-symbol">:reset</span>, <span class="hljs-symbol">:button</span>].<span class="hljs-keyword">include</span>? met
+        options[<span class="hljs-symbol">:id</span>] ||= <span class="hljs-string">"<span class="hljs-subst">#{<span class="hljs-variable">@name</span>}</span>_<span class="hljs-subst">#{field}</span>"</span>
+        field = field.to_sym <span class="hljs-keyword">if</span> field
+        options[<span class="hljs-symbol">:value</span>] ||= <span class="hljs-variable">@parent</span>.params[<span class="hljs-variable">@name</span>] &amp;&amp;
+                            <span class="hljs-variable">@parent</span>.params[<span class="hljs-variable">@name</span>][field]
+        <span class="hljs-keyword">if</span> !options[<span class="hljs-symbol">:value</span>] &amp;&amp; <span class="hljs-variable">@object</span>.respond_to?(field)
+          options[<span class="hljs-symbol">:value</span>] = <span class="hljs-variable">@object</span>.send(field)
+        <span class="hljs-keyword">end</span>
+
+        field = <span class="hljs-string">"<span class="hljs-subst">#{<span class="hljs-variable">@name</span>}</span>[<span class="hljs-subst">#{field}</span>]"</span>
+      <span class="hljs-keyword">end</span>
+
+      <span class="hljs-variable">@parent</span>.send(met, field, options)
+    <span class="hljs-keyword">end</span>
+  <span class="hljs-keyword">end</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">form</span><span class="hljs-params">(action = <span class="hljs-symbol">:self</span>, options = {})</span></span>
+    action = request.path.sub(<span class="hljs-regexp">/^\/?/</span>, <span class="hljs-string">'/'</span>) <span class="hljs-keyword">if</span> action == <span class="hljs-symbol">:self</span>
+
+    met = options.delete(<span class="hljs-symbol">:method</span>) || <span class="hljs-string">'POST'</span>
+    hid_met = <span class="hljs-string">''</span>
+    <span class="hljs-keyword">unless</span> <span class="hljs-string">%w(POST GET)</span>.<span class="hljs-keyword">include</span>?(met.to_s.upcase)
+      hid_met = hidden(<span class="hljs-string">'_method'</span>, <span class="hljs-symbol">value:</span> met.to_s.upcase)
+      met = <span class="hljs-symbol">:post</span>
+    <span class="hljs-keyword">end</span>
+
+    options[<span class="hljs-symbol">:enctype</span>] = <span class="hljs-string">'multipart/form-data'</span> <span class="hljs-keyword">if</span> options.delete(<span class="hljs-symbol">:upload</span>)
+    out = tag(<span class="hljs-symbol">:form</span>, <span class="hljs-keyword">nil</span>, { <span class="hljs-symbol">action:</span> action, <span class="hljs-symbol">method:</span> met.to_s.upcase }
+              .merge(options)) &lt;&lt; hid_met
+
+    out &lt;&lt; <span class="hljs-keyword">yield</span> &lt;&lt; close_tag(<span class="hljs-string">'form'</span>) <span class="hljs-keyword">if</span> block_given?
+    out
+  <span class="hljs-keyword">end</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">form_for</span><span class="hljs-params">(object, action = <span class="hljs-symbol">:self</span>, options = {})</span></span>
+    fail <span class="hljs-constant">ArgumentError</span>, <span class="hljs-string">'Missing block to form_for()'</span> <span class="hljs-keyword">unless</span> block_given?
+
+    err_msg = <span class="hljs-string">''</span>
+    add_err_msg = options.delete(<span class="hljs-symbol">:add_err_msg</span>)
+
+    <span class="hljs-keyword">if</span> object.respond_to?(<span class="hljs-symbol">:errors</span>) &amp;&amp; object.errors.messages.keys.count &gt; <span class="hljs-number">0</span> &amp;&amp; add_err_msg
+      err_msg = <span class="hljs-constant">I18n</span>.t <span class="hljs-string">'activerecord.errors.template.header'</span>,
+                       <span class="hljs-symbol">count:</span> object.errors.messages.keys.count,
+                       <span class="hljs-symbol">model:</span> object.<span class="hljs-keyword">class</span>.model_name.human
+    <span class="hljs-keyword">end</span>
+
+    out = <span class="hljs-keyword">yield</span>(<span class="hljs-constant">FormBuilder</span>.new(<span class="hljs-keyword">self</span>, object, options.delete(<span class="hljs-symbol">:name</span>))) || <span class="hljs-string">''</span>
+    err_msg &lt;&lt; form(action, options) &lt;&lt; out &lt;&lt; close_tag(<span class="hljs-string">'form'</span>)
+  <span class="hljs-keyword">end</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fieldset</span><span class="hljs-params">(legend = <span class="hljs-keyword">nil</span>)</span></span>
+    legend = legend ? <span class="hljs-string">"&lt;legend&gt;<span class="hljs-subst">#{fast_escape_html(legend)}</span>&lt;/legend&gt;"</span> <span class="hljs-symbol">:</span> <span class="hljs-string">''</span>
+    tag(<span class="hljs-symbol">:fieldset</span>) &lt;&lt; legend
+  <span class="hljs-keyword">end</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">close_fieldset</span></span>
+    close_tag(<span class="hljs-string">'fieldset'</span>)
+  <span class="hljs-keyword">end</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fieldset_for</span><span class="hljs-params">(object, name = <span class="hljs-keyword">nil</span>, legend = <span class="hljs-keyword">nil</span>)</span></span>
+    fail <span class="hljs-constant">ArgumentError</span>, <span class="hljs-string">'Missing block to fieldset()'</span> <span class="hljs-keyword">unless</span> block_given?
+    legend ||= object.respond_to?(<span class="hljs-symbol">:model_name</span>) ? object.model_name.human <span class="hljs-symbol">:</span> object.<span class="hljs-keyword">class</span>.to_s
+    out = <span class="hljs-keyword">yield</span>(<span class="hljs-constant">FormBuilder</span>.new(<span class="hljs-keyword">self</span>, object, name)) || <span class="hljs-string">''</span>
+    fieldset(legend) &lt;&lt; out &lt;&lt; close_fieldset
+  <span class="hljs-keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>add default values for the options argument</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">set_options</span><span class="hljs-params">(type, field, options = {})</span></span>
+    opts = {}
+    opts[<span class="hljs-symbol">:type</span>] = type
+    opts[<span class="hljs-symbol">:name</span>] = options.delete(<span class="hljs-symbol">:name</span>) || field.to_s.underscore.to_sym
+    opts[<span class="hljs-symbol">:id</span>] = options.delete(<span class="hljs-symbol">:id</span>) || css_id(opts[<span class="hljs-symbol">:name</span>])
+    options[<span class="hljs-symbol">:value</span>] = params[opts[<span class="hljs-symbol">:name</span>]] <span class="hljs-keyword">if</span> params[opts[<span class="hljs-symbol">:name</span>]]
+    opts.merge(options)
+  <span class="hljs-keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>Form field label</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">label</span><span class="hljs-params">(field, display = <span class="hljs-string">''</span>, options = {})</span></span>
+    display = field.to_s.capitalize <span class="hljs-keyword">if</span> display.<span class="hljs-keyword">nil</span>? || display == <span class="hljs-string">''</span>
+    options[<span class="hljs-symbol">:for</span>] ||= css_id(field)
+    tag <span class="hljs-symbol">:label</span>, display, options
+  <span class="hljs-keyword">end</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">textarea</span><span class="hljs-params">(field, contents = <span class="hljs-string">''</span>, options = {})</span></span>
+    opts = set_options(<span class="hljs-symbol">:textarea</span>, field, options)
+    opts.delete(<span class="hljs-symbol">:type</span>)
+    tag <span class="hljs-symbol">:textarea</span>, contents, opts
+  <span class="hljs-keyword">end</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hidden</span><span class="hljs-params">(field, options = {})</span></span>
+    single_tag(<span class="hljs-symbol">:input</span>, set_options(<span class="hljs-symbol">:hidden</span>, field, options))
+  <span class="hljs-keyword">end</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">text</span><span class="hljs-params">(field, options = {})</span></span>
+    single_tag(<span class="hljs-symbol">:input</span>, set_options(<span class="hljs-symbol">:text</span>, field, options))
+  <span class="hljs-keyword">end</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">password</span><span class="hljs-params">(field, options = {})</span></span>
+    single_tag(<span class="hljs-symbol">:input</span>, set_options(<span class="hljs-symbol">:password</span>, field, options))
+  <span class="hljs-keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>General purpose button, usually these need JavaScript hooks.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">button</span><span class="hljs-params">(value = <span class="hljs-keyword">nil</span>, options = {})</span></span>
+    field = options[<span class="hljs-symbol">:name</span>] || <span class="hljs-string">'button'</span>
+    value = <span class="hljs-string">'Button'</span> <span class="hljs-keyword">if</span> value.<span class="hljs-keyword">nil</span>? || value == <span class="hljs-string">''</span>
+    options[<span class="hljs-symbol">:value</span>] ||= value
+    single_tag(<span class="hljs-symbol">:input</span>, set_options(<span class="hljs-symbol">:button</span>, field, options))
+  <span class="hljs-keyword">end</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">submit</span><span class="hljs-params">(value = <span class="hljs-keyword">nil</span>, options = {})</span></span>
+    field = options[<span class="hljs-symbol">:name</span>] || <span class="hljs-string">'submit'</span>
+    value = <span class="hljs-string">'Submit'</span> <span class="hljs-keyword">if</span> value.<span class="hljs-keyword">nil</span>? || value == <span class="hljs-string">''</span>
+    options[<span class="hljs-symbol">:value</span>] ||= value
+    single_tag(<span class="hljs-symbol">:input</span>, set_options(<span class="hljs-symbol">:submit</span>, field, options))
+  <span class="hljs-keyword">end</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">reset</span><span class="hljs-params">(value = <span class="hljs-keyword">nil</span>, options = {})</span></span>
+    field = options[<span class="hljs-symbol">:name</span>] || <span class="hljs-string">'reset'</span>
+    value = <span class="hljs-string">'Reset'</span> <span class="hljs-keyword">if</span> value.<span class="hljs-keyword">nil</span>? || value == <span class="hljs-string">''</span>
+    options[<span class="hljs-symbol">:value</span>] ||= value
+    single_tag(<span class="hljs-symbol">:input</span>, set_options(<span class="hljs-symbol">:reset</span>, field, options))
+  <span class="hljs-keyword">end</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">radio</span><span class="hljs-params">(field, values, options = {})</span></span>
+    opts = set_options(<span class="hljs-symbol">:radio</span>, field, options)
+    join<span class="hljs-number">_</span> = options.delete(<span class="hljs-symbol">:join</span>) || <span class="hljs-string">' '</span>
+
+    values = [values] <span class="hljs-keyword">if</span> values.is_a?(<span class="hljs-constant">String</span>) || values.is_a?(<span class="hljs-constant">Symbol</span>)
+    values = <span class="hljs-constant">Hash</span>[values.map { |k| [k.to_s, k.to_s] }] <span class="hljs-keyword">if</span> values.is_a?(<span class="hljs-constant">Array</span>)
+
+    id = opts.delete(<span class="hljs-symbol">:id</span>)
+    vals = opts.delete(<span class="hljs-symbol">:value</span>) || <span class="hljs-string">''</span>
+    values.map <span class="hljs-keyword">do</span> |value<span class="hljs-number">_</span>, label<span class="hljs-number">_</span>|
+      opts<span class="hljs-number">_</span> = opts.dup
+      opts<span class="hljs-number">_</span>[<span class="hljs-symbol">:id</span>] = <span class="hljs-string">"<span class="hljs-subst">#{id}</span>_<span class="hljs-subst">#{value<span class="hljs-number">_</span>.to_s.underscore}</span>"</span>
+      opts<span class="hljs-number">_</span>[<span class="hljs-symbol">:value</span>] = value<span class="hljs-number">_</span>
+      opts<span class="hljs-number">_</span>[<span class="hljs-symbol">:checked</span>] = <span class="hljs-string">'checked'</span> <span class="hljs-keyword">if</span> vals.to_s == value<span class="hljs-number">_</span>.to_s
+      single_tag(<span class="hljs-symbol">:input</span>, opts<span class="hljs-number">_</span>) + <span class="hljs-string">' '</span> + label(opts<span class="hljs-number">_</span>[<span class="hljs-symbol">:id</span>], label<span class="hljs-number">_</span>)
+    <span class="hljs-keyword">end</span>.join(join<span class="hljs-number">_</span>)
+  <span class="hljs-keyword">end</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">checkbox</span><span class="hljs-params">(field, values, options = {})</span></span>
+    opts = set_options(<span class="hljs-symbol">:checkbox</span>, field, options)
+    opts[<span class="hljs-symbol">:name</span>] = <span class="hljs-string">"<span class="hljs-subst">#{opts[<span class="hljs-symbol">:name</span>]}</span>[]"</span>.to_sym
+    join<span class="hljs-number">_</span> = options.delete(<span class="hljs-symbol">:join</span>) || <span class="hljs-string">' '</span>
+
+    values = [values] <span class="hljs-keyword">if</span> values.is_a?(<span class="hljs-constant">String</span>) || values.is_a?(<span class="hljs-constant">Symbol</span>)
+    values = <span class="hljs-constant">Hash</span>[values.map { |k| [k.to_s, k.to_s] }] <span class="hljs-keyword">if</span> values.is_a?(<span class="hljs-constant">Array</span>)
+
+    id = opts.delete(<span class="hljs-symbol">:id</span>)
+    vals = opts.delete(<span class="hljs-symbol">:value</span>) || []
+    vals = vals.map(&amp;<span class="hljs-symbol">:to_s</span>)
+    values.map <span class="hljs-keyword">do</span> |value<span class="hljs-number">_</span>, label<span class="hljs-number">_</span>|
+      opts<span class="hljs-number">_</span> = opts.dup
+      opts<span class="hljs-number">_</span>[<span class="hljs-symbol">:id</span>] = <span class="hljs-string">"<span class="hljs-subst">#{id}</span>_<span class="hljs-subst">#{value<span class="hljs-number">_</span>.to_s.underscore}</span>"</span>
+      opts<span class="hljs-number">_</span>[<span class="hljs-symbol">:value</span>] = value<span class="hljs-number">_</span>
+      opts<span class="hljs-number">_</span>[<span class="hljs-symbol">:checked</span>] = <span class="hljs-string">'checked'</span> <span class="hljs-keyword">if</span> vals.<span class="hljs-keyword">include</span>?(value<span class="hljs-number">_</span>.to_s)
+      single_tag(<span class="hljs-symbol">:input</span>, opts<span class="hljs-number">_</span>) + <span class="hljs-string">' '</span> + label(opts<span class="hljs-number">_</span>[<span class="hljs-symbol">:id</span>], label<span class="hljs-number">_</span>)
+    <span class="hljs-keyword">end</span>.join(join<span class="hljs-number">_</span>)
+  <span class="hljs-keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>Form select dropdown.  Currently only single-select
+(not multi-select) is supported.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">select</span><span class="hljs-params">(field, values, options = {})</span></span>
+    opts = set_options(<span class="hljs-symbol">:select</span>, field, options)
+    opts.delete(<span class="hljs-symbol">:type</span>)
+
+    values = [values] <span class="hljs-keyword">if</span> values.is_a?(<span class="hljs-constant">String</span>) || values.is_a?(<span class="hljs-constant">Symbol</span>)
+    values = <span class="hljs-constant">Hash</span>[values.map { |k| [k.to_s, k.to_s] }] <span class="hljs-keyword">if</span> values.is_a?(<span class="hljs-constant">Array</span>)
+
+    id = opts[<span class="hljs-symbol">:id</span>]
+    vals = opts.delete(<span class="hljs-symbol">:value</span>) || <span class="hljs-string">''</span>
+    content = values.map <span class="hljs-keyword">do</span> |value<span class="hljs-number">_</span>, label<span class="hljs-number">_</span>|
+      opts<span class="hljs-number">_</span> = {}
+      opts<span class="hljs-number">_</span>[<span class="hljs-symbol">:id</span>] = <span class="hljs-string">"<span class="hljs-subst">#{id}</span>_<span class="hljs-subst">#{value<span class="hljs-number">_</span>.to_s.underscore}</span>"</span>
+      opts<span class="hljs-number">_</span>[<span class="hljs-symbol">:value</span>] = value<span class="hljs-number">_</span>
+      opts<span class="hljs-number">_</span>[<span class="hljs-symbol">:selected</span>] = <span class="hljs-string">'selected'</span> <span class="hljs-keyword">if</span> vals.to_s == value<span class="hljs-number">_</span>.to_s
+      tag <span class="hljs-symbol">:option</span>, label<span class="hljs-number">_</span>, opts<span class="hljs-number">_</span>
+    <span class="hljs-keyword">end</span>.join(<span class="hljs-string">''</span>)
+
+    tag <span class="hljs-symbol">:select</span>, content, opts
+  <span class="hljs-keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>Standard open and close tags
+EX : tag :h1, “shizam”, :title =&gt; “shizam”
+=&gt; <h1 title="shizam">shizam</h1></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">tag</span><span class="hljs-params">(name, content = <span class="hljs-keyword">nil</span>, options = {})</span></span>
+    <span class="hljs-string">"&lt;<span class="hljs-subst">#{name}</span>"</span> +
+      (options.length &gt; <span class="hljs-number">0</span> ? <span class="hljs-string">" <span class="hljs-subst">#{hash_to_html_attrs(options)}</span>"</span> <span class="hljs-symbol">:</span> <span class="hljs-string">''</span>) +
+      (content.<span class="hljs-keyword">nil</span>? ? <span class="hljs-string">'&gt;'</span> <span class="hljs-symbol">:</span> <span class="hljs-string">"&gt;<span class="hljs-subst">#{content}</span>&lt;/<span class="hljs-subst">#{name}</span>&gt;"</span>)
+  <span class="hljs-keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>Standard single closing tags
+single_tag :img, :src =&gt; “images/google.jpg”
+=&gt; <img src="images/google.jpg" /></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">single_tag</span><span class="hljs-params">(name, options = {})</span></span>
+    <span class="hljs-keyword">if</span> options.length &gt; <span class="hljs-number">0</span>
+      <span class="hljs-string">"&lt;<span class="hljs-subst">#{name}</span> <span class="hljs-subst">#{hash_to_html_attrs(options)}</span> /&gt;"</span>
+    <span class="hljs-keyword">else</span>
+      <span class="hljs-string">"&lt;<span class="hljs-subst">#{name}</span> /&gt;"</span>
+    <span class="hljs-keyword">end</span>
+  <span class="hljs-keyword">end</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">close_tag</span><span class="hljs-params">(name = <span class="hljs-string">'form'</span>)</span></span>
+    <span class="hljs-string">"&lt;/<span class="hljs-subst">#{name}</span>&gt;"</span>
+  <span class="hljs-keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>quasi private</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fast_escape_html</span><span class="hljs-params">(text)</span></span>
+    text.to_s.gsub(<span class="hljs-regexp">/\&amp;/</span>, <span class="hljs-string">'&amp;amp;'</span>).gsub(<span class="hljs-regexp">/\"/</span>, <span class="hljs-string">'&amp;quot;'</span>)
+      .gsub(<span class="hljs-regexp">/&gt;/</span>, <span class="hljs-string">'&amp;gt;'</span>).gsub(<span class="hljs-regexp">/&lt;/</span>, <span class="hljs-string">'&amp;lt;'</span>)
+  <span class="hljs-keyword">end</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hash_to_html_attrs</span><span class="hljs-params">(options = {})</span></span>
+    html_attrs = []
+    options.keys.each <span class="hljs-keyword">do</span> |key|
+      <span class="hljs-keyword">next</span> <span class="hljs-keyword">if</span> options[key].<span class="hljs-keyword">nil</span>? <span class="hljs-comment"># do not include empty attributes</span>
+      <span class="hljs-keyword">if</span> options[key].is_a?(<span class="hljs-constant">Symbol</span>) &amp;&amp; options[key] == <span class="hljs-symbol">:empty</span>
+        html_attrs &lt;&lt; key.to_s
+      <span class="hljs-keyword">else</span>
+        html_attrs &lt;&lt; <span class="hljs-string">%(<span class="hljs-subst">#{key}</span>="<span class="hljs-subst">#{fast_escape_html(options[key])}</span>")</span>
+      <span class="hljs-keyword">end</span>
+    <span class="hljs-keyword">end</span>
+    html_attrs.join <span class="hljs-string">' '</span>
+  <span class="hljs-keyword">end</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">css_id</span><span class="hljs-params">(*things)</span></span>
+    things.compact.map(&amp;<span class="hljs-symbol">:to_s</span>).join(<span class="hljs-string">'_'</span>).downcase.gsub(<span class="hljs-regexp">/\W/</span>, <span class="hljs-string">'_'</span>)
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span></pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

@@ -13,6 +13,12 @@ gem "i18n"
     
 gem "mongoid"
     
+gem "oj"
+    
+gem "multi_json"
+    
+gem "recursive-open-struct"
+    
 gem "sinatra"
     
 gem "sinatra-contrib"
@@ -21,11 +27,15 @@ gem "puma"
     
 gem "foreman"
     
-gem "oj"
+gem "sinatra-flash"
     
-gem "multi_json"
+gem "sinatra-redirect-with-flash"
     
-gem "recursive-open-struct"
+gem "slim"
+    
+gem "sanitize"
+    
+gem "http_accept_language"
     
   
 
@@ -58,8 +68,6 @@ group :development do
     
   gem "mdoc"
     
-  gem "guard-rake"
-    
   gem "guard-cucumber"
     
   gem "cucumber"
@@ -69,6 +77,8 @@ group :development do
   gem "poltergeist"
     
   gem "selenium-webdriver"
+    
+  gem "guard-rake"
     
   gem "git"
     
