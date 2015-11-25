@@ -76,7 +76,7 @@ Rack	lib/rack/json_response.rb	/^module Rack$/;"	m
 Rack	lib/rack/log_flusher.rb	/^module Rack$/;"	m
 Rack	lib/rack/session/mongoid.rb	/^module Rack$/;"	m
 Rack	lib/rack/session/mongoid/version.rb	/^module Rack$/;"	m
-RackSession	lib/rack/session/mongoid.rb	/^    class RackSession$/;"	c	class:Rack.Session
+RackSession	lib/rack/session/mongoid.rb	/^class RackSession$/;"	c
 RequestError	config/initializers/web_exceptions.rb	/^class RequestError < ArgumentError$/;"	c
 RequestMock	spec/lib/helpers/form_helper_spec.rb	/^class RequestMock$/;"	c
 RestfulController	app/pages/restful_controller.rb	/^  class RestfulController < Sinatra::Base$/;"	c	class:API

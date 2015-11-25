@@ -2,18 +2,18 @@ require 'rack/session/mongoid/version'
 require 'rack/session/abstract/id'
 require 'awesome_print'
 
+# A mongoid document model for storing session data
+class RackSession
+  include ::Mongoid::Document
+  include ::Mongoid::Timestamps::Short
+  field :sid, type: String
+  field :data, type: Hash, default: {}
+
+  index({ sid: 1 }, unique: true)
+end
+
 module Rack
   module Session
-    # A mongoid document model for storing session data
-    class RackSession
-      include ::Mongoid::Document
-      include ::Mongoid::Timestamps::Short
-      field :sid, type: String
-      field :data, type: Hash, default: {}
-
-      index({ sid: 1 }, unique: true)
-    end
-
     class Mongoid < Abstract::ID
       attr_reader :mutex, :pool
 
