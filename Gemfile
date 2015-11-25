@@ -70,5 +70,15 @@ group :development do
     
   gem "selenium-webdriver"
     
+  gem "git"
+    
+  gem "diffy"
+    
+  gem "fastimage"
+    
+  gem "sass"
+    
+  gem "uglifier"
+    
 end
   

@@ -64,25 +64,23 @@ export :restul_api do
   copy 'spec/support/helpers/api_doc_helper.rb'
 end
 
-# export :assets_mapper do
-#   add_gem 'git', group: :development
-#   add_gem 'diffy', group: :development
-#   add_gem 'fastimage', group: :development
-#   add_gem 'sass', group: :development
-#   # add_gem 'closure-compiler', group: :development
-#   add_gem 'uglifier', group: :development
-#
-#   copy 'lib/asset_settings.rb'
-#   copy 'lib/asset_settings/*.rb'
-#   copy 'lib/helpers/assets_helper.rb'
-#   copy 'lib/controllers/assets_controller.rb'
-#   copy 'lib/controllers/image_controller.rb'
-#
-#   copy 'lib/tasks/assets.rake'
-#   copy 'lib/devtools/asset_mapper.rb'
-#   copy 'lib/devtools/asset_mapper/*.rb'
-#   # copy 'app/assets/mappings.rb.sample' => 'app/assets/mappings.rb', sync: false
-# end
+export :assets_mapper do
+  add_gem 'git', group: :development
+  add_gem 'diffy', group: :development
+  add_gem 'fastimage', group: :development
+  add_gem 'sass', group: :development
+  # add_gem 'closure-compiler', group: :development
+  add_gem 'uglifier', group: :development
+
+  copy 'lib/asset_settings.rb'
+  copy 'lib/asset_settings/*.rb'
+  copy 'lib/devtools/asset_mapper.rb'
+  copy 'lib/devtools/asset_mapper/*.rb'
+  copy 'lib/tasks/assets.rake'
+  copy 'lib/helpers/assets_helper.rb'
+  copy 'lib/controllers/assets_controller.rb'
+  copy 'lib/controllers/image_controller.rb'
+end
 
 # export :web do
 #   import :route
@@ -107,5 +105,6 @@ from('.') do
   import :cucumber
   import :logger
   import :restul_api
+  import :assets_mapper
   # import :web
 end
