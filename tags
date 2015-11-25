@@ -35,7 +35,7 @@ Class	lib/core_ext/attr_with_default.rb	/^class Class$/;"	c
 CloudFile	lib/devtools/asset_mapper/cloud_file.rb	/^  class CloudFile < Sfile$/;"	c	class:AssetMapper
 Confu	lib/confu.rb	/^class Confu$/;"	c
 ConfuMissing	lib/confu.rb	/^class ConfuMissing < NoMethodError; end$/;"	c
-CounterPage	app/pages/counter_page.rb	/^class CounterPage < Sinatra::Base$/;"	c
+CounterPage	app/pages/counter_page.rb	/^class CounterPage < WebController$/;"	c
 Criteria	lib/mongoid/paginator.rb	/^  class Criteria$/;"	c	class:Mongoid
 Data	lib/confu.rb	/^  class Data < Hash$/;"	c	class:Confu
 EmailValidator	lib/mongoid/validators/email_validator.rb	/^class EmailValidator < ActiveModel::EachValidator$/;"	c
@@ -102,6 +102,7 @@ UrlValidator	lib/mongoid/validators/url_validator.rb	/^class UrlValidator < Acti
 UserMock	spec/lib/helpers/form_helper_spec.rb	/^class UserMock$/;"	c
 ValidationError	config/initializers/web_exceptions.rb	/^class ValidationError < RequestError; end$/;"	c
 VendorFile	lib/devtools/asset_mapper/vendor_file.rb	/^  class VendorFile < Sfile$/;"	c	class:AssetMapper
+WebController	app/pages/web_controller.rb	/^class WebController < Sinatra::Base$/;"	c
 YamlFile	lib/devtools/i18n_utils.rb	/^  class YamlFile$/;"	c
 []	lib/asset_settings.rb	/^    def [](env)$/;"	f	class:AssetSettings
 []	lib/asset_settings/environment_settings.rb	/^    def [](filename)$/;"	f	class:AssetSettings.EnvironmentSettings
