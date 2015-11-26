@@ -100,6 +100,7 @@ Time	lib/core_ext/time_short.rb	/^class Time$/;"	c
 TokenId	lib/mongoid/token_id.rb	/^  module TokenId$/;"	m	class:Mongoid
 UrlValidator	lib/mongoid/validators/url_validator.rb	/^class UrlValidator < ActiveModel::EachValidator$/;"	c
 UserMock	spec/lib/helpers/form_helper_spec.rb	/^class UserMock$/;"	c
+UserSettingPage	app/pages/user_setting_page.rb	/^class UserSettingPage < WebController$/;"	c
 ValidationError	config/initializers/web_exceptions.rb	/^class ValidationError < RequestError; end$/;"	c
 VendorFile	lib/devtools/asset_mapper/vendor_file.rb	/^  class VendorFile < Sfile$/;"	c	class:AssetMapper
 WebController	app/pages/web_controller.rb	/^class WebController < Sinatra::Base$/;"	c
@@ -196,6 +197,7 @@ default_img_alt	lib/helpers/assets_helper.rb	/^  def default_img_alt(obj)$/;"	f	
 default_img_url	lib/helpers/assets_helper.rb	/^  def default_img_url(suffix = 'o', type = 'Image')$/;"	f	class:AssetsHelper.css_tag.js_tag
 default_path	lib/route.rb	/^    def default_path(app_class)$/;"	f	class:Route
 default_radio_value	lib/helpers/form_helper.rb	/^    def default_radio_value(field, key, default)$/;"	f	class:FormHelper.FormBuilder
+default_url	lib/route.rb	/^    def default_url(app_class)$/;"	f	class:Route
 default_value	lib/helpers/form_helper.rb	/^    def default_value(field, default)$/;"	f	class:FormHelper.FormBuilder
 demongoize	lib/utils/hash_struct.rb	/^      def demongoize(args)$/;"	f	class:HashStruct
 destroy_session	lib/rack/session/mongoid.rb	/^      def destroy_session(env, session_id, options)$/;"	f	class:Rack.Session.Mongoid

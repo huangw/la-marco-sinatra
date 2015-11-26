@@ -119,7 +119,7 @@
             </div>
             
             <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">mount</span><span class="hljs-params">(app_class, route = <span class="hljs-keyword">nil</span>)</span></span>
-      route ||= default_path(app_class).tr(<span class="hljs-string">'_'</span>, <span class="hljs-string">'/'</span>)
+      route ||= default_url(app_class)
       table[app_class] = route
     <span class="hljs-keyword">end</span>
     alias_method <span class="hljs-symbol">:<span class="hljs-string">'&lt;&lt;'</span></span>, <span class="hljs-symbol">:mount</span></pre></div></div>
@@ -152,8 +152,12 @@
     <span class="hljs-keyword">end</span>
 
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">default_path</span><span class="hljs-params">(app_class)</span></span>
-      app_class.to_s.underscore.sub(<span class="hljs-regexp">/_(api|page|controller)$/</span>, <span class="hljs-string">''</span>)
+      app_class.to_s.underscore.sub(<span class="hljs-regexp">/_(api|page|controller)\Z/</span>, <span class="hljs-string">''</span>)
         .sub(<span class="hljs-regexp">/^\/*/</span>, <span class="hljs-string">'/'</span>).pluralize
+    <span class="hljs-keyword">end</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">default_url</span><span class="hljs-params">(app_class)</span></span>
+      default_path(app_class).tr(<span class="hljs-string">'_'</span>, <span class="hljs-string">'/'</span>)
     <span class="hljs-keyword">end</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span></pre></div></div>

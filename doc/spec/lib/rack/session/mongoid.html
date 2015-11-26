@@ -32,10 +32,7 @@
             
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">require</span> <span class="hljs-string">'rack/session/mongoid/version'</span>
 <span class="hljs-keyword">require</span> <span class="hljs-string">'rack/session/abstract/id'</span>
-<span class="hljs-keyword">require</span> <span class="hljs-string">'awesome_print'</span>
-
-<span class="hljs-class"><span class="hljs-keyword">module</span> <span class="hljs-title">Rack</span></span>
-  <span class="hljs-class"><span class="hljs-keyword">module</span> <span class="hljs-title">Session</span></span></pre></div></div>
+<span class="hljs-keyword">require</span> <span class="hljs-string">'awesome_print'</span></pre></div></div>
             
         </li>
         
@@ -50,15 +47,17 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RackSession</span></span>
-      <span class="hljs-keyword">include</span> <span class="hljs-constant">::Mongoid::Document</span>
-      <span class="hljs-keyword">include</span> <span class="hljs-constant">::Mongoid::Timestamps::Short</span>
-      field <span class="hljs-symbol">:sid</span>, <span class="hljs-symbol">type:</span> <span class="hljs-constant">String</span>
-      field <span class="hljs-symbol">:data</span>, <span class="hljs-symbol">type:</span> <span class="hljs-constant">Hash</span>, <span class="hljs-symbol">default:</span> {}
+            <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RackSession</span></span>
+  <span class="hljs-keyword">include</span> <span class="hljs-constant">::Mongoid::Document</span>
+  <span class="hljs-keyword">include</span> <span class="hljs-constant">::Mongoid::Timestamps::Short</span>
+  field <span class="hljs-symbol">:sid</span>, <span class="hljs-symbol">type:</span> <span class="hljs-constant">String</span>
+  field <span class="hljs-symbol">:data</span>, <span class="hljs-symbol">type:</span> <span class="hljs-constant">Hash</span>, <span class="hljs-symbol">default:</span> {}
 
-      index({ <span class="hljs-symbol">sid:</span> <span class="hljs-number">1</span> }, <span class="hljs-symbol">unique:</span> <span class="hljs-keyword">true</span>)
-    <span class="hljs-keyword">end</span>
+  index({ <span class="hljs-symbol">sid:</span> <span class="hljs-number">1</span> }, <span class="hljs-symbol">unique:</span> <span class="hljs-keyword">true</span>)
+<span class="hljs-keyword">end</span>
 
+<span class="hljs-class"><span class="hljs-keyword">module</span> <span class="hljs-title">Rack</span></span>
+  <span class="hljs-class"><span class="hljs-keyword">module</span> <span class="hljs-title">Session</span></span>
     <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Mongoid</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">Abstract::ID</span></span></span>
       <span class="hljs-keyword">attr_reader</span> <span class="hljs-symbol">:mutex</span>, <span class="hljs-symbol">:pool</span>
 
