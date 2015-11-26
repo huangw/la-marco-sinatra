@@ -8,17 +8,25 @@ class FileGenerator
       @filename = name.to_s.underscore
                       .sub(/\Aapp\/pages\//, '')
                       .sub(/\.rb\Z/, '')
-      filepath += '_page' unless @filename.match((/_(api|page|controller)\Z/))
+      filepath = "#{@filename}_page" unless @filename.match((/_(api|page|controller)\Z/))
       su ||= 'WebController'
       super "app/pages/#{filepath}", su
     end
 
-    def pathname
+    def file_path
       Route.default_path(class_name)
     end
 
-    def feeture_filename
-      File.join('features', "#{pathname}.feature")
+    def url_path
+      Route.default_url(class_name)
+    end
+
+    def feature_filename
+      File.join('features', "#{file_path}.feature")
+    end
+
+    def view_filename
+      File.join('app', 'views', file_path, 'index.slim')
     end
   end
 end
@@ -38,12 +46,12 @@ end
 __END__
 
 @@ controller_file
-# [Controller] <%= classname %>
+# [Controller] <%= class_name %>
 #   (<%= filename %>)
 # vim: foldlevel=1
 # created at: <%= Time.now.strftime('%F') %>
 
-# Web page controller for <%= classname %>
+# Web page controller for path to '<%= url_path %>'
 class <%= class_string %>
   get '/' do
     rsp :index
@@ -53,12 +61,12 @@ class <%= class_string %>
 end
 
 @@ view_file
-=h1 tt("<%= classname %>.title")
+=h2 tt("title")
 
 @@ feature_file
-Feature: walk through pages for <%= classname %>
+Feature: walk through pages for '<%= url_path %>' (<%= class_name %>)
   Include the description here
 
-  Scenario: show '/index' page
-    Given I visit to "/index"
-    Then I should see the text "Hello, world!"
+  Scenario: show '<%= url_path %>/index' page
+    Given I visit to "<%= url_path %>/index"
+    Then I should see the text "<%= class_name %>"
