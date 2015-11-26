@@ -9,7 +9,6 @@ class FileGenerator
                       .sub(/\Aapp\/pages\//, '')
                       .sub(/\.rb\Z/, '')
       filepath = "#{@filename}_page" unless @filename.match((/_(api|page|controller)\Z/))
-      su ||= 'WebController'
       super "app/pages/#{filepath}", su
     end
 
@@ -35,7 +34,7 @@ namespace :gen do
   desc 'generate api controller and spec file for NAME'
   task :page do
     name = ENV['NAME'] || ENV['name']
-    super_class = ENV['SUPER'] || ENV['super'] || 'restful_api'
+    super_class = ENV['SUPER'] || ENV['super'] || 'web_controller'
     fail 'need specify NAME=...' unless name
     rf = FileGenerator::ControllerFile.new(name, super_class)
     rf.render! controller_file: rf.filename, view_file: rf.view_filename,
@@ -61,12 +60,12 @@ class <%= class_string %>
 end
 
 @@ view_file
-=h2 tt("title")
+h2= tt("title")
 
 @@ feature_file
 Feature: walk through pages for '<%= url_path %>' (<%= class_name %>)
   Include the description here
 
-  Scenario: show '<%= url_path %>/index' page
-    Given I visit to "<%= url_path %>/index"
+  Scenario: show '<%= url_path %>' page
+    Given I visit to "<%= url_path %>"
     Then I should see the text "<%= class_name %>"

@@ -85,3 +85,13 @@ spec:lib/helpers/form_helper
 ## Table Helper
 
 TODO: 与Angular等联动
+
+## 自动生成页面
+
+`rake gen:page`会自动生成三个文件，比如执行`rake gen:page name=user_setting`
+（注意没有`s`），会生成以`WebController`为基类的`app/pages/user_settings_page.rb`，
+相应的slim模板`app/views/user_settings/index.slim`，
+和`features/user_settings.feature`。
+
+然后执行`rake i18n:uv`会添加`index.slim`中的i18n用的关键字，之后在浏览器浏览
+`http://localhost:8080/user/settings`应该就可以看到希望的结果了。
