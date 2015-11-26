@@ -170,10 +170,15 @@ controller在runtime根据当前环境获取其中一个（singleton对象）。
 原始文件数组的元素均为经过了`aasets_url_prefix`转换后的URL地址
 （注意：本地地址均是相对于`root`的）。
 
+spec:lib/asset_settings
+spec:lib/asset_settings/environment_settings
+
 ### Assets Helper
 
 提供`img_tag`, `css_tag`和`js_tag`，根据`config/assets.yml`（`AssetsSettings`）的设置，
 在不同的环境（`:production/:local_assets/:development`）输出不同的资源列表。
+
+spec:lib/helpers/assets_helper
 
 ### Assets Controller
 
@@ -181,7 +186,12 @@ controller在runtime根据当前环境获取其中一个（singleton对象）。
 在Route里加载`ImageControler`和`AssetController`以提供这些文件（具体的mount地址也从
 `AssetsConfig`获取）。
 
+spec:lib/controllers/assets_controller
+spec:lib/controllers/image_controller
+
 ### Assets Mapper
 
 此类仅在开发环境下通过`rake assets:*`使用。负责解析`app/assets/mappings.rb`，
 根据需要下载、复制、编译或最小化压缩文件，更新YAML设置文件。
+
+spec:lib/devtools/asset_mapper

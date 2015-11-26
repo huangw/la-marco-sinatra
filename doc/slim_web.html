@@ -16,6 +16,12 @@
 <ul id="markdown-toc">
   <li><a href="#slimweb" id="markdown-toc-slimweb">Slim工具和Web控制器</a>    <ul>
       <li><a href="#slimhelper" id="markdown-toc-slimhelper">SlimHelper</a></li>
+      <li><a href="#i18n-helper" id="markdown-toc-i18n-helper">i18n Helper</a>        <ul>
+          <li><a href="#section" id="markdown-toc-section">面包屑</a></li>
+        </ul>
+      </li>
+      <li><a href="#form-helper" id="markdown-toc-form-helper">Form Helper</a></li>
+      <li><a href="#table-helper" id="markdown-toc-table-helper">Table Helper</a></li>
     </ul>
   </li>
 </ul>
@@ -43,16 +49,73 @@
   get('/message') # 模板为：app/views/users/message.slim
   get('/settings/nickname')
     # 模板为：app/views/users/settings/nickname.slim
-  get(/) { rsp } # app/views/users/index.slim，'/'会自动map到:index
+  get(/) # app/views/users/index.slim，'/'会自动map到:index
 end
 </code></pre>
 
 <p>与<code>rsp</code>相对应，<code>rsp!</code>render后直接halt当前进程（即以前的<code>hsp</code>）。</p>
 
 <p>新的<code>SlimHelper</code>不再有<code>common_rsp</code>，应直接<code>@对象变量</code>传递信息。依然有<code>partial :form</code>（使用<code>_form.slim</code>文件作为template），但是不再有<code>partial_block</code>函数
-（后者应该使用<code>HtmlPresenter</code>机制）。</p>
+（后者应该使用模型自身的<code>HtmlPresenter</code>机制）。</p>
 
 <p><code>partial</code>功能应该用于template内部，比如：<code>partial :form</code>会调用同一文件夹下的<code>_form.slim</code>。</p>
+
+<h2 id="i18n-helper">i18n Helper</h2>
+
+<p>有两种方式在slim模块中实现i18n，两种可以并用。第一种方式是，针对不同locale分别做一个模板，
+比如<code>index.en.yml</code>和<code>index.ja.yaml</code>。模板的locale必须包含在<code>supported_locales</code>中，
+默认是<code>en, ja, zh</code>（统一使用缩略写法，不再用’zh-CN’的方式了）。然后render时，指定：</p>
+
+<pre><code>rsp :index, locales: [:en, :ja]
+</code></pre>
+
+<p>注意这里的<code>locales</code>表示的是“所有我提供了模板的locales”。这个例子里没有<code>zh</code>模板存在，
+对指定locale为<code>zh</code>的用户，SlimHelper会使用默认的模板（:en）render。
+因此，<code>:en</code>模板是必须存在的（这一点未来可能有所改善）。</p>
+
+<p>另一种方法是使用同一个模板，但是用<code>tt(:some_key)</code>将<code>:some_key</code>翻译为不同语言。
+<code>tt</code>由<code>I18nHelper</code>提供，会自动的按照当前页面寻找正确的scope。
+比如，<code>app/views/some/template.slim</code>文件里的<code>:some_key</code>，应该在
+<code>i18n/views/some/en.yml</code>（或<code>ja.yml</code>, <code>zh.yml</code>）里定义为<code>some.template.some_key</code>。</p>
+
+<p>在slim文件内增加新的key到<code>tt</code>之后（注意必须用<code>:xxx</code>，也就是symbol形式），然后执行
+<code>rake i18n:uv</code>，后者会自动在yaml文件里添加新的key，并通过google translate预设一个翻译。
+以后则可以通过</p>
+
+<pre><code>$ rake i18n:iye
+</code></pre>
+
+<p>启动翻译服务，通过浏览器人力对照翻译。</p>
+
+<p>【SOURCE】<a href="./spec/lib/helpers/i18n_helper.html"><code>lib/helpers/i18n_helper.rb</code></a></p>
+
+<h3 id="section">面包屑</h3>
+
+<p>因为<code>Route</code>加载时可以指定任意的mount point，比如<code>User::RootPage =&gt; '/'</code>，
+系统无法从任意位置完全自动的生成面包屑（包括所有上级目录的连接和i18n的页面title）。
+但是主要遵循几个简单原则，则手动生成面包屑也非常轻松：</p>
+
+<p>首先，所有直接链接到目录的页面，均应命名为<code>index</code>。
+比如<code>/user/</code>对应<code>user/index</code>。它的i18n标题的翻译键则应该为：<code>user.index.title</code>。</p>
+
+<p>比如<code>User::AccountPage</code>里的<code>get '/message_center'</code>，如果加载在了默认路径
+（<code>user/accounts/message_center</code>），则它的面包屑的各段的翻译key应该为
+<code>[:user.index.title, :user.accounts.index.title, :user.accounts.message_center.title]</code>。</p>
+
+<p>理论上只要上述<code>index</code>页面对应的slim模板存在，则<code>rake i18n:uv</code>也应该生成了这些key，
+在render面包屑时可以使用。</p>
+
+<p>注意：不要字模板文件中使用<code>title</code>关键字，如<code>/title/some.slim</code>或是<code>/some/title.slim</code>。</p>
+
+<h2 id="form-helper">Form Helper</h2>
+
+<p>是一个简单的输出与表单相关的HTML代码的DSL方法集。具体用法参照其<code>rspec</code>测试文件。</p>
+
+<p>【SOURCE】<a href="./spec/lib/helpers/form_helper.html"><code>lib/helpers/form_helper.rb</code></a> (RSpec <a href="./spec/lib/helpers/form_helper_spec.html">src</a> <a href="./spec/lib/helpers/form_helper_spec_rslt.html">rslt</a>)</p>
+
+<h2 id="table-helper">Table Helper</h2>
+
+<p><strong style="color: red">[TODO]</strong> 与Angular等联动</p>
 
   </div>
 

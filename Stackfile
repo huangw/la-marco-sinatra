@@ -82,29 +82,29 @@ export :assets_mapper do
   copy 'lib/controllers/image_controller.rb'
 end
 
-# export :web do
-#   import :route
-#   import :assets_mapper
-#
-#   add_gem 'sinatra-flash'
-#   add_gem 'sinatra-redirect-with-flash'
-#   add_gem 'slim'
-#   add_gem 'sanitize'
-#   add_gem 'http_accept_language'
-#
-#   copy 'lib/tasks/i18n_view.rake'
-#   copy 'lib/helpers/*_helper.rb'
-#   copy 'lib/core_ext/string_simple_format.rb'
-#   # copy 'app/pages/web_application.rb'
-#   # copy 'lib/presenters/html_presenter.rb'
-#   copy 'lib/rack/json_response.rb'
-# end
+export :web do
+  import :route
+  import :assets_mapper
+
+  add_gem 'sinatra-flash'
+  add_gem 'sinatra-redirect-with-flash'
+  add_gem 'slim'
+  add_gem 'sanitize'
+  add_gem 'http_accept_language'
+
+  copy 'lib/core_ext/string_simple_format.rb'
+  copy 'lib/tasks/i18n_view.rake'
+  copy 'lib/helpers/*_helper.rb'
+
+  # copy 'lib/presenters/html_presenter.rb'
+  copy 'app/pages/web_controller.rb', sync: false
+end
 
 from('.') do
-  import :route
+  # import :route
   import :cucumber
   import :logger
   import :restul_api
-  import :assets_mapper
-  # import :web
+  # import :assets_mapper
+  import :web
 end

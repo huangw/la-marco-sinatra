@@ -1,0 +1,6 @@
+---
+ja:
+  views:
+    user_settings:
+      index:
+        title: ユーザ設定

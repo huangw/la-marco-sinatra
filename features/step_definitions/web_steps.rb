@@ -10,7 +10,7 @@ end
 Given(/^I visit to "(.*)"$/) do |path|
   visit path
   sleep_for = ENV['SLEEP'].to_i if ENV['SLEEP']
-  sleep sleep_for
+  sleep sleep_for if sleep_for
 end
 
 Then(/^debug$/) { debugger }

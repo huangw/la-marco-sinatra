@@ -1,12 +1,7 @@
+require_relative 'web_controller'
+
 # Use mongoid to store session data
-class CounterPage < Sinatra::Base
-  configure do
-    set :logging, nil
-    set :root, Confu.root
-  end
-
-  use Rack::Session::Mongoid
-
+class CounterPage < WebController
   get '/' do
     session['counter'] ||= 0
     session['counter'] += 1
