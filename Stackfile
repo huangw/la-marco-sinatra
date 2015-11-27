@@ -12,7 +12,7 @@ from :'la-marco' do
 end
 
 from :'la-marco-mongoid' do
-  import :connection
+  import :full
 end
 
 export :route do
@@ -100,11 +100,27 @@ export :web do
   copy 'app/pages/web_controller.rb', sync: false
 end
 
+export :email do
+  add_gem 'faraday'
+  add_gem 'liquid'
+
+  copy 'lib/email_render.rb'
+  # copy 'lib/models/email.rb'
+  # copy 'lib/controllers/email_controller.rb'
+  # copy 'lib/senders/*.rb'
+  # copy 'lib/tasks/gen_email.rake'
+  # copy 'lib/tasks/email_test.rake'
+end
+
 from('.') do
   # import :route
   import :cucumber
   import :logger
+
   import :restul_api
+
   # import :assets_mapper
   import :web
+
+  import :email
 end

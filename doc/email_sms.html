@@ -16,11 +16,12 @@
 <ul id="markdown-toc">
   <li><a href="#section" id="markdown-toc-section">电子邮件和短信等的通知功能</a>    <ul>
       <li><a href="#section-1" id="markdown-toc-section-1">发送电子邮件</a>        <ul>
-          <li><a href="#email" id="markdown-toc-email">邮件模型 Email</a></li>
+          <li><a href="#emailrender" id="markdown-toc-emailrender">邮件模块 EmailRender</a></li>
           <li><a href="#mailsender" id="markdown-toc-mailsender">邮件发送服务 MailSender</a></li>
+          <li><a href="#section-2" id="markdown-toc-section-2">邮件开发和测试</a></li>
         </ul>
       </li>
-      <li><a href="#sms" id="markdown-toc-sms">短信 Sms</a></li>
+      <li><a href="#sms" id="markdown-toc-sms">短信 SMS</a></li>
     </ul>
   </li>
 </ul>
@@ -29,14 +30,38 @@
 
 <h2 id="section-1">发送电子邮件</h2>
 
-<h3 id="email">邮件模型 Email</h3>
+<h3 id="emailrender">邮件模块 EmailRender</h3>
+
+<p>邮件模块负责render不同语言、不同格式（txt或html）邮件body和header。</p>
+
+<p>各个模型需要通过<code>#available_formats</code>, <code>#available_locales</code>指定可用模板的种类。
+邮件发送时，<code>#delivery!</code>方法会根据当前的I18n环境和发送方法（<code>sender</code>）选择所采用的模板。</p>
+
+<p>邮件模板默认为<code>liquid</code>格式，<code>subject</code>等以yaml格式写在<code>#available_formats.first</code>
+模板的最前面几行（以空白与body部分区分开）。邮件header中还可以指定邮件发送的方式
+（<code>mailgun</code>, <code>sendcloud</code> … 等），因此不同种类的邮件可以通过不同的方法发送。</p>
+
+<p>虽然任何类都可以<code>include EmailRender</code>，但建议将邮件全部统一为某个模型的子类，便于管理。</p>
+
+<p>【SOURCE】<a href="./spec/lib/email_render.html"><code>lib/email_render.rb</code></a> (RSpec <a href="./spec/lib/email_render_spec.html">src</a> <a href="./spec/lib/email_render_spec_rslt.html">rslt</a>)</p>
 
 <h3 id="mailsender">邮件发送服务 MailSender</h3>
 
-<p>发送服务是一种通用接口，背后可以通过mailgun，sendcloud等不同第三方服务实现。
+<p>发送服务是一种通用接口，可以接受各种header, html body, text body等参数并<code>#delivery!</code>。
+不同的发送服务的子类实现通过mailgun，sendcloud等不同第三方服务实现邮件发送。
 甚至不同邮件的可以选用不同的发送服务（如注册邮件采用送达率更高的服务）。</p>
 
-<h2 id="sms">短信 Sms</h2>
+<h3 id="section-2">邮件开发和测试</h3>
+
+<p>使用<code>rake gen:email</code>可以自动创建邮件模型和相应的模板（两种格式和三种语言，
+但可通过<code>ENV['locales']</code>和<code>ENV['formats']</code>指定）。</p>
+
+<p>测试邮件是否发送成功应该通过验证数据库模型的方法进行。<code>la-marco-sinatra</code>还提供了一套
+<code>email_controller</code>，可在开发环境下挂载到rack以便于确认render后的邮件效果。</p>
+
+<h2 id="sms">短信 SMS</h2>
+
+<p><strong style="color: red">[TODO]</strong> 选择国内合适的服务</p>
 
   </div>
 

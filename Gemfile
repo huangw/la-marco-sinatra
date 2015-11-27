@@ -37,6 +37,10 @@ gem "sanitize"
     
 gem "http_accept_language"
     
+gem "faraday"
+    
+gem "liquid"
+    
   
 
   
@@ -67,6 +71,12 @@ group :development do
   gem "google-translate"
     
   gem "mdoc"
+    
+  gem "factory_girl"
+    
+  gem "faker"
+    
+  gem "table_print"
     
   gem "guard-cucumber"
     
