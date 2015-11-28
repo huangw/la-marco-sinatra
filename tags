@@ -49,9 +49,12 @@ CounterPage	app/pages/counter_page.rb	/^class CounterPage < WebController$/;"	c
 Criteria	lib/mongoid/paginator.rb	/^  class Criteria$/;"	c	class:Mongoid
 CronJob	lib/background/cron_job.rb	/^  module CronJob$/;"	m	class:Background
 Data	lib/confu.rb	/^  class Data < Hash$/;"	c	class:Confu
+Email	app/models/email.rb	/^  class Email$/;"	c	class:Emails
 EmailField	lib/mongoid/field_candy/email_field.rb	/^    module EmailField$/;"	m	class:Mongoid.FieldCandy
 EmailRender	lib/email_render.rb	/^module EmailRender$/;"	m
 EmailValidator	lib/mongoid/validators/email_validator.rb	/^class EmailValidator < ActiveModel::EachValidator$/;"	c
+Emails	app/models/email.rb	/^module Emails$/;"	m
+Emails	app/models/emails/mock_email.rb	/^module Emails$/;"	m
 EnvironmentSettings	lib/asset_settings/environment_settings.rb	/^  class EnvironmentSettings$/;"	c	class:AssetSettings
 Exception	lib/core_ext/exception_i18n_message.rb	/^class Exception$/;"	c
 FeatureWorld	features/support/env.rb	/^class FeatureWorld$/;"	c
@@ -81,9 +84,9 @@ LaBacktraceCleaner	lib/utils/la_backtrace_cleaner.rb	/^module LaBacktraceCleaner
 LaBufferedLogger	lib/la_buffered_logger.rb	/^class LaBufferedLogger$/;"	c
 Loader	lib/devtools/asset_mapper/loader.rb	/^  class Loader$/;"	c	class:AssetMapper
 LogFlusher	lib/rack/log_flusher.rb	/^  class LogFlusher$/;"	c	class:Rack
-MockEmail	spec/lib/email_render_spec.rb	/^class MockEmail$/;"	c
-MockEmailLessLocale	spec/lib/email_render_spec.rb	/^class MockEmailLessLocale < MockEmail$/;"	c
-MockEmailWithoutLocale	spec/lib/email_render_spec.rb	/^class MockEmailWithoutLocale < MockEmail$/;"	c
+MockEmail	app/models/emails/mock_email.rb	/^  class MockEmail < Email$/;"	c	class:Emails
+MockEmailLessLocale	spec/lib/email_render_spec.rb	/^class MockEmailLessLocale < Emails::MockEmail$/;"	c
+MockEmailWithoutLocale	spec/lib/email_render_spec.rb	/^class MockEmailWithoutLocale < Emails::MockEmail$/;"	c
 Mongoid	lib/mongoid/field_candy/bool_field.rb	/^module Mongoid$/;"	m
 Mongoid	lib/mongoid/field_candy/cache_field.rb	/^module Mongoid$/;"	m
 Mongoid	lib/mongoid/field_candy/checkbox_field.rb	/^module Mongoid$/;"	m
@@ -564,6 +567,8 @@ textarea	lib/helpers/form_helper.rb	/^  def textarea(field, contents = '', optio
 tid_length	lib/mongoid/ordered_list.rb	/^      def tid_length$/;"	f	class:Mongoid.OrderedList.Proxy
 to	lib/route.rb	/^    def to(app_class, *parts)$/;"	f	class:Route
 to_cache	lib/mongoid/ordered_list.rb	/^      def to_cache$/;"	f	class:Mongoid.OrderedList.Proxy
+to_hash	app/models/email.rb	/^    def to_hash$/;"	f	class:Emails.Email
+to_hash	app/models/emails/mock_email.rb	/^    def to_hash$/;"	f	class:Emails.MockEmail
 to_hash	lib/asset_settings.rb	/^    def to_hash$/;"	f	class:AssetSettings
 to_hash	lib/asset_settings/environment_settings.rb	/^    def to_hash$/;"	f	class:AssetSettings
 to_hash	lib/confu.rb	/^    def to_hash$/;"	f	class:Confu

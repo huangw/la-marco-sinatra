@@ -1,28 +1,23 @@
 require 'spec_helper'
 require 'email_render'
 
-class MockEmail
-  include Mongoid::Document
-  include EmailRender
-end
-
-class MockEmailLessLocale < MockEmail
+class MockEmailLessLocale < Emails::MockEmail
   def available_locales
     [:de, :it]
   end
 end
 
-class MockEmailWithoutLocale < MockEmail
+class MockEmailWithoutLocale < Emails::MockEmail
   def available_locales
     []
   end
 end
 
 describe EmailRender do
-  subject(:email) { MockEmail.new to: 'huangw@pe-po.com' }
+  subject(:email) { Emails::MockEmail.new to: 'huangw@pe-po.com' }
   describe '#to' do
     it 'is required' do
-      expect(MockEmail.new).to have_validate_error(:blank).on(:to)
+      expect(Emails::MockEmail.new).to have_validate_error(:blank).on(:to)
     end
   end
 
@@ -43,9 +38,9 @@ describe EmailRender do
 
   describe '#template_name' do
     it 'return the template for render the email model' do
-      expect(email.template_name).to eq('app/views/mock_email.en.txt')
-      expect(email.template_name(:html)).to eq('app/views/mock_email.en.html')
-      expect(email.template_name(:html, :fr)).to eq('app/views/mock_email.fr.html')
+      expect(email.template_name).to eq('app/views/emails/mock_email.en.txt')
+      expect(email.template_name(:html)).to eq('app/views/emails/mock_email.en.html')
+      expect(email.template_name(:html, :fr)).to eq('app/views/emails/mock_email.fr.html')
     end
 
     it 'return the first locale as the default locale' do

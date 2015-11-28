@@ -117,5 +117,10 @@ module EmailRender
       sender.deliver!(@headers, @bodies)
     end
     alias_method :deliver!, :process!
+
+    def deliver_later(sec = 0)
+      self.not_before = Time.now + sec
+      save!
+    end
   end
 end

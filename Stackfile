@@ -110,10 +110,10 @@ export :email do
   add_gem 'liquid'
 
   copy 'lib/email_render.rb'
-  # copy 'lib/models/email.rb'
+  copy 'app/models/email.rb', sync: false
   # copy 'lib/controllers/email_controller.rb'
   # copy 'lib/senders/*.rb'
-  # copy 'lib/tasks/gen_email.rake'
+  copy 'lib/tasks/gen_email.rake'
   # copy 'lib/tasks/email_test.rake'
 end
 
