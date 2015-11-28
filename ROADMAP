@@ -35,4 +35,4 @@ year: 2015
   [++] monse: mongodb based session store 11/25-11/26 @huangw:11/24
   [++] asset_r: revise asset pipeline, lint and BDD for css and js 11/25-11/26 @huangw:11/25
   [++] web_form: web controller, slim and form helpers 11/26-11/30 @huangw:11/26
-  [++] mailgun: mailgun support revised 12/01-12/03 @huangw;gaoyh:25
+  [++] mailgun: mailgun support revised 12/01-12/03 @huangw;gaoyh:30
