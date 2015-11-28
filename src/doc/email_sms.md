@@ -15,6 +15,12 @@
 
 虽然任何类都可以`include EmailRender`，但建议将邮件全部统一为某个模型的子类，便于管理。
 
+邮件模型同时后台任务，只是controller可以在需要时直接执行`#delivery!`，该方法是`#process!`
+的同名方法，因此作为后台任务的邮件模型会直接以完成状态保存，不会被`background_worker`执行。
+否则可以选择`#delivery_later!(seconds)`，交由后台发送。（如果controller处于防火墙之后，
+无法直接连接外部服务发送邮件，则`#delivery_later`就是唯一可以发送邮件的方法了，
+可以指定`seconds = 0`，则运行在防火墙外的服务器上的后台任务会尽快发送邮件）。
+
 spec:lib/email_render
 
 ### 邮件发送服务 MailSender

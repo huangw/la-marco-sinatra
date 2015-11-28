@@ -13,6 +13,10 @@ gem "i18n"
     
 gem "mongoid"
     
+gem "daemon-spawn"
+    
+gem "foreman"
+    
 gem "oj"
     
 gem "multi_json"
@@ -24,8 +28,6 @@ gem "sinatra"
 gem "sinatra-contrib"
     
 gem "puma"
-    
-gem "foreman"
     
 gem "sinatra-flash"
     
