@@ -31,6 +31,13 @@ AssetsHelper	lib/helpers/assets_helper.rb	/^module AssetsHelper$/;"	m
 AuthenticationError	config/initializers/web_exceptions.rb	/^class AuthenticationError < RequestError$/;"	c
 AuthorizationError	config/initializers/web_exceptions.rb	/^class AuthorizationError < RequestError$/;"	c
 BSON	lib/mongoid/token_id.rb	/^module BSON$/;"	m
+Background	lib/background/cron_job.rb	/^module Background$/;"	m
+Background	lib/background/job.rb	/^module Background$/;"	m
+Background	lib/background/simple_job.rb	/^module Background$/;"	m
+Background	lib/background/worker.rb	/^module Background$/;"	m
+Background	lib/background/worker_pool.rb	/^module Background$/;"	m
+BackgroundJobSettings	config/settings/background_job_settings.rb	/^class BackgroundJobSettings$/;"	c
+BjWorker	app/bin/bj_worker	/^  class BjWorker < DaemonSpawn::Base$/;"	c
 BoolField	lib/mongoid/field_candy/bool_field.rb	/^    module BoolField$/;"	m	class:Mongoid.FieldCandy
 CacheField	lib/mongoid/field_candy/cache_field.rb	/^    module CacheField$/;"	m	class:Mongoid.FieldCandy
 CheckboxField	lib/mongoid/field_candy/checkbox_field.rb	/^    module CheckboxField$/;"	m	class:Mongoid.FieldCandy
@@ -40,6 +47,7 @@ Confu	lib/confu.rb	/^class Confu$/;"	c
 ConfuMissing	lib/confu.rb	/^class ConfuMissing < NoMethodError; end$/;"	c
 CounterPage	app/pages/counter_page.rb	/^class CounterPage < WebController$/;"	c
 Criteria	lib/mongoid/paginator.rb	/^  class Criteria$/;"	c	class:Mongoid
+CronJob	lib/background/cron_job.rb	/^  module CronJob$/;"	m	class:Background
 Data	lib/confu.rb	/^  class Data < Hash$/;"	c	class:Confu
 EmailField	lib/mongoid/field_candy/email_field.rb	/^    module EmailField$/;"	m	class:Mongoid.FieldCandy
 EmailRender	lib/email_render.rb	/^module EmailRender$/;"	m
@@ -67,6 +75,7 @@ HelloDocAPI	app/pages/api/hello_doc_api.rb	/^  class HelloDocAPI < RestfulContro
 I18nHelper	lib/helpers/i18n_helper.rb	/^module I18nHelper$/;"	m
 I18nUtils	lib/devtools/i18n_utils.rb	/^module I18nUtils$/;"	m
 ImageController	lib/controllers/image_controller.rb	/^class ImageController < Sinatra::Base$/;"	c
+Job	lib/background/job.rb	/^  module Job$/;"	m	class:Background
 JsonResponse	lib/rack/json_response.rb	/^  class JsonResponse$/;"	c	class:Rack
 LaBacktraceCleaner	lib/utils/la_backtrace_cleaner.rb	/^module LaBacktraceCleaner$/;"	m
 LaBufferedLogger	lib/la_buffered_logger.rb	/^class LaBufferedLogger$/;"	c
@@ -74,6 +83,7 @@ Loader	lib/devtools/asset_mapper/loader.rb	/^  class Loader$/;"	c	class:AssetMap
 LogFlusher	lib/rack/log_flusher.rb	/^  class LogFlusher$/;"	c	class:Rack
 MockEmail	spec/lib/email_render_spec.rb	/^class MockEmail$/;"	c
 MockEmailLessLocale	spec/lib/email_render_spec.rb	/^class MockEmailLessLocale < MockEmail$/;"	c
+MockEmailWithoutLocale	spec/lib/email_render_spec.rb	/^class MockEmailWithoutLocale < MockEmail$/;"	c
 Mongoid	lib/mongoid/field_candy/bool_field.rb	/^module Mongoid$/;"	m
 Mongoid	lib/mongoid/field_candy/cache_field.rb	/^module Mongoid$/;"	m
 Mongoid	lib/mongoid/field_candy/checkbox_field.rb	/^module Mongoid$/;"	m
@@ -114,6 +124,7 @@ ServerError	config/initializers/web_exceptions.rb	/^class ServerError < RuntimeE
 Session	lib/rack/session/mongoid.rb	/^  module Session$/;"	m	class:Rack
 Session	lib/rack/session/mongoid/version.rb	/^  module Session$/;"	m	class:Rack
 Sfile	lib/devtools/asset_mapper/sfile.rb	/^  class Sfile$/;"	c	class:AssetMapper
+SimpleJob	lib/background/simple_job.rb	/^  module SimpleJob$/;"	m	class:Background
 SimplestPage	app/pages/simplest_page.rb	/^class SimplestPage < Sinatra::Base$/;"	c
 SlimHelper	lib/helpers/slim_helper.rb	/^module SlimHelper$/;"	m
 String	lib/core_ext/string_common_head.rb	/^class String$/;"	c
@@ -134,6 +145,8 @@ UserSettingPage	app/pages/user_setting_page.rb	/^class UserSettingPage < WebCont
 ValidationError	config/initializers/web_exceptions.rb	/^class ValidationError < RequestError; end$/;"	c
 VendorFile	lib/devtools/asset_mapper/vendor_file.rb	/^  class VendorFile < Sfile$/;"	c	class:AssetMapper
 WebController	app/pages/web_controller.rb	/^class WebController < Sinatra::Base$/;"	c
+Worker	lib/background/worker.rb	/^  class Worker$/;"	c	class:Background
+WorkerPool	lib/background/worker_pool.rb	/^  class WorkerPool$/;"	c	class:Background
 YamlFile	lib/devtools/i18n_utils.rb	/^  class YamlFile$/;"	c
 []	lib/asset_settings.rb	/^    def [](env)$/;"	f	class:AssetSettings
 []	lib/asset_settings/environment_settings.rb	/^    def [](filename)$/;"	f	class:AssetSettings.EnvironmentSettings
@@ -165,6 +178,7 @@ add_key	lib/devtools/i18n_utils.rb	/^    def add_key(key, value = nil)$/;"	f	cla
 add_with_gt	lib/devtools/i18n_utils.rb	/^    def add_with_gt(key, trans_key = -1)$/;"	f	class:YamlFile
 all	lib/route.rb	/^    def all$/;"	f	class:Route
 all_cookies	features/support/env.rb	/^  def all_cookies$/;"	f	class:FeatureWorld
+all_worker_stopped?	lib/background/worker_pool.rb	/^    def all_worker_stopped?$/;"	f	class:Background.WorkerPool
 app	spec/support/helpers/api_test_helper.rb	/^  def app$/;"	f	class:APITestHelper
 append	lib/la_buffered_logger.rb	/^  def append(dat)$/;"	f	class:LaBufferedLogger
 apply_filters	doc/spec/lib/asset_settings/environment_settings_spec_rslt.html	/^function apply_filters() {$/;"	f
@@ -193,6 +207,7 @@ attr_with_default	lib/core_ext/attr_with_default.rb	/^  def attr_with_default(hs
 available_formats	lib/email_render.rb	/^    def available_formats$/;"	f	class:EmailRender
 available_locales	lib/email_render.rb	/^    def available_locales$/;"	f	class:EmailRender
 available_locales	spec/lib/email_render_spec.rb	/^  def available_locales$/;"	f	class:MockEmailLessLocale
+available_locales	spec/lib/email_render_spec.rb	/^  def available_locales$/;"	f	class:MockEmailWithoutLocale
 blist	lib/mongoid/ordered_list.rb	/^      def blist$/;"	f	class:Mongoid.OrderedList.Proxy
 blist_hash	lib/mongoid/ordered_list.rb	/^      def blist_hash$/;"	f	class:Mongoid.OrderedList.Proxy
 block	lib/mongoid/ordered_list.rb	/^      def block(tid)$/;"	f	class:Mongoid.OrderedList.Proxy
@@ -236,8 +251,11 @@ decode	lib/mongoid/field_candy/text_area.rb	/^      def decode(hsh)$/;"	f	class:
 decode	lib/mongoid/ordered_list.rb	/^      def decode(hsh)$/;"	f	class:Mongoid.OrderedList.Proxy
 deep_require	lib/core_ext/dynamic_require.rb	/^def deep_require(dir, deepth = 3)$/;"	f
 default_checkbox_value	lib/helpers/form_helper.rb	/^    def default_checkbox_value(field, default)$/;"	f	class:FormHelper.FormBuilder
+default_format	lib/email_render.rb	/^    def default_format$/;"	f	class:EmailRender
 default_img_alt	lib/helpers/assets_helper.rb	/^  def default_img_alt(obj)$/;"	f	class:AssetsHelper.css_tag.js_tag
 default_img_url	lib/helpers/assets_helper.rb	/^  def default_img_url(suffix = 'o', type = 'Image')$/;"	f	class:AssetsHelper.css_tag.js_tag
+default_job_state	lib/background/job.rb	/^      def default_job_state$/;"	f	class:Background.Job
+default_job_state	lib/background/simple_job.rb	/^      def default_job_state$/;"	f	class:Background.SimpleJob
 default_locale	lib/email_render.rb	/^    def default_locale$/;"	f	class:EmailRender
 default_path	lib/route.rb	/^    def default_path(app_class)$/;"	f	class:Route
 default_radio_value	lib/helpers/form_helper.rb	/^    def default_radio_value(field, key, default)$/;"	f	class:FormHelper.FormBuilder
@@ -252,6 +270,7 @@ download!	lib/devtools/asset_mapper/cloud_file.rb	/^    def download!$/;"	f	clas
 drop_db	config/initializers/development/mongoid_pry.rb	/^def drop_db$/;"	f
 each	lib/mongoid/ordered_list.rb	/^      def each$/;"	f	class:Mongoid.OrderedList.Proxy
 email_field	lib/mongoid/field_candy/email_field.rb	/^        def self.email_field(field_name, opts = {})$/;"	F	class:Mongoid.FieldCandy.EmailField
+email_sender	config/settings/email_sender_setttings.rb	/^def email_sender(_type = nil)$/;"	f
 email_valid?	lib/mongoid/validators/email_validator.rb	/^  def email_valid?(email)$/;"	f	class:EmailValidator
 encode	lib/mongoid/ordered_list.rb	/^      def encode(obj, tid = nil)$/;"	f	class:Mongoid.OrderedList.Proxy
 environments	lib/asset_settings.rb	/^    def environments$/;"	f	class:AssetSettings
@@ -336,6 +355,8 @@ img_url_prefix	lib/devtools/asset_mapper/loader.rb	/^    def img_url_prefix(hsh)
 indent	spec/support/helpers/api_doc_helper.rb	/^    def indent(count, char = ' ')$/;"	f	class:String
 indexes	config/initializers/development/mongoid_pry.rb	/^def indexes$/;"	f
 initialize	lib/asset_settings/environment_settings.rb	/^    def initialize(environment)$/;"	f	class:AssetSettings.EnvironmentSettings
+initialize	lib/background/worker.rb	/^    def initialize(klass, opts = {})$/;"	f	class:Background.Worker
+initialize	lib/background/worker_pool.rb	/^    def initialize(opts = {})$/;"	f	class:Background.WorkerPool
 initialize	lib/confu.rb	/^    def initialize(hsh = {})$/;"	f	class:Confu.Data
 initialize	lib/devtools/asset_mapper/cloud_file.rb	/^    def initialize(url, opts = {})$/;"	f	class:AssetMapper.CloudFile
 initialize	lib/devtools/asset_mapper/loader.rb	/^    def initialize(file = nil)$/;"	f	class:AssetMapper.Loader
@@ -371,6 +392,7 @@ local_url	lib/devtools/asset_mapper/sfile.rb	/^    def local_url$/;"	f	class:Ass
 local_url	lib/devtools/asset_mapper/tfile.rb	/^    def local_url$/;"	f	class:AssetMapper.Tfile
 localized?	lib/email_render.rb	/^    def localized?$/;"	f	class:EmailRender
 ltt	lib/helpers/i18n_helper.rb	/^  def ltt(msg, opts = {})$/;"	f	class:I18nHelper
+main_loop	lib/background/worker_pool.rb	/^    def main_loop$/;"	f	class:Background.WorkerPool
 makeRed	doc/spec/lib/asset_settings/environment_settings_spec_rslt.html	/^function makeRed(element_id) {$/;"	f
 makeRed	doc/spec/lib/asset_settings_spec_rslt.html	/^function makeRed(element_id) {$/;"	f
 makeRed	doc/spec/lib/email_render_spec_rslt.html	/^function makeRed(element_id) {$/;"	f
@@ -386,6 +408,7 @@ makeYellow	doc/spec/lib/la_buffered_logger_spec_rslt.html	/^function makeYellow(
 makeYellow	doc/spec/lib/rack/json_response_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
 makeYellow	doc/spec/lib/route_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
 matt	lib/helpers/i18n_helper.rb	/^  def matt(msg, opts = {})$/;"	f	class:I18nHelper
+max_retry	lib/background/job.rb	/^      def max_retry$/;"	f	class:Background.Job
 merge_default	lib/confu.rb	/^    def merge_default(dat)$/;"	f	class:Confu.Data
 method_missing	lib/confu.rb	/^    def method_missing(met, val = nil, &prc)$/;"	f	class:Confu.Data
 method_missing	lib/helpers/form_helper.rb	/^    def method_missing(met, field = '', options = {})$/;"	f	class:FormHelper.FormBuilder
@@ -424,6 +447,7 @@ n8	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n8" name="n8">8
 n9	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n9" name="n9">9<\/a><\/span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">    &lt;code&gt;&lt;strong&gt;&lt;%<\/span><span style="color:#710">=<\/span><\/span>h frame.function <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%&gt;<\/span><span style="color:#D20">&lt;\/strong<\/span><span style="color:#710">&gt;<\/span><\/span>&lt;<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">\/<\/span><span style="color:#808">code&gt;<\/span><\/span>$/;"	a
 need_compile?	lib/devtools/asset_mapper/sfile.rb	/^    def need_compile?$/;"	f	class:AssetMapper.Sfile
 new_tid	lib/mongoid/ordered_list.rb	/^      def new_tid$/;"	f	class:Mongoid.OrderedList.Proxy
+no_more_retry?	lib/background/job.rb	/^      def no_more_retry?$/;"	f	class:Background.Job
 not_changed?	lib/devtools/asset_mapper/tfile.rb	/^    def not_changed?(nfile, ofile)$/;"	f	class:AssetMapper.Tfile
 offset_after	lib/mongoid/ordered_list.rb	/^      def offset_after(tid = nil)$/;"	f	class:Mongoid.OrderedList.Proxy
 ordered_list	lib/mongoid/ordered_list.rb	/^      def self.ordered_list(field_name, opts = {})$/;"	F	class:Mongoid.OrderedList
@@ -431,12 +455,18 @@ page	lib/mongoid/paginator.rb	/^    def page(pg = 1, opts = {})$/;"	f	class:Mong
 paginate	lib/mongoid/paginator.rb	/^    def paginate(pg = 1, opts = {})$/;"	f	class:Mongoid.Criteria
 paginate_block	lib/helpers/slim_helper.rb	/^  def paginate_block(opg, dat = {})$/;"	f	class:SlimHelper
 params	spec/lib/helpers/form_helper_spec.rb	/^  def params$/;"	f	class:FormMock
+parse	lib/email_render.rb	/^    def parse(extra_headers = {})$/;"	f	class:EmailRender
 partial	lib/helpers/slim_helper.rb	/^  def partial(pname, lcls = {})$/;"	f	class:SlimHelper
 partial_block	lib/helpers/slim_helper.rb	/^  def partial_block(bname, locals_ = {})$/;"	f	class:SlimHelper
 password	lib/helpers/form_helper.rb	/^  def password(field, options = {})$/;"	f	class:FormHelper
 path	spec/lib/helpers/form_helper_spec.rb	/^  def path$/;"	f	class:RequestMock
+perform	lib/background/cron_job.rb	/^      def self.perform(worker = 'anonymous worker', logger = nil)$/;"	F	class:Background.CronJob
+perform	lib/background/job.rb	/^      def self.perform(worker = 'anonymous worker', logger = nil)$/;"	F	class:Background.Job
+perform	lib/background/simple_job.rb	/^      def self.perform(worker = 'anonymous worker', logger = nil)$/;"	F	class:Background.SimpleJob
+pool_option	config/settings/background_job_settings.rb	/^  def self.pool_option$/;"	F	class:BackgroundJobSettings
 preferred_locale	lib/helpers/i18n_helper.rb	/^  def preferred_locale(avails = I18n.available_locales)$/;"	f	class:I18nHelper
 present	lib/helpers/slim_helper.rb	/^  def present(obj, type = :default, dat = {})$/;"	f	class:SlimHelper
+process!	lib/email_render.rb	/^    def process!$/;"	f	class:EmailRender
 produce	lib/devtools/asset_mapper/loader.rb	/^    def produce(file_id, &prc)$/;"	f	class:AssetMapper.Loader
 production?	lib/asset_settings.rb	/^    def production?$/;"	f	class:AssetSettings
 production?	lib/asset_settings/environment_settings.rb	/^    def production?$/;"	f	class:AssetSettings.EnvironmentSettings
@@ -467,7 +497,9 @@ require_all	lib/core_ext/dynamic_require.rb	/^def require_all(pattern)$/;"	f
 require_name	lib/devtools/file_generator.rb	/^    def require_name$/;"	f	class:FileGenerator.RubyFile
 reset	lib/helpers/form_helper.rb	/^  def reset(value = nil, options = {})$/;"	f	class:FormHelper
 resource_for	spec/support/helpers/api_doc_helper.rb	/^    def resource_for(key)$/;"	f	class:RSpecApiDoc
+retried	lib/background/job.rb	/^      def retried$/;"	f	class:Background.Job
 retrieve	lib/mongoid/ordered_list.rb	/^      def retrieve(hsh)$/;"	f	class:Mongoid.OrderedList.Proxy
+retry_delay	lib/background/job.rb	/^      def retry_delay$/;"	f	class:Background.Job
 rewrite!	lib/devtools/i18n_utils.rb	/^    def rewrite!(file = @filename)$/;"	f	class:YamlFile
 root	lib/devtools/asset_mapper.rb	/^    def root$/;"	f	class:AssetMapper
 root_join	config/boot.rb	/^def root_join(*path)$/;"	f
@@ -478,11 +510,14 @@ s_find	lib/mongoid/sequence_token.rb	/^      def self.s_find(str)$/;"	F	class:Mo
 scope_join	lib/devtools/i18n_utils.rb	/^    def scope_join(*args)$/;"	f	class:YamlFile
 select	lib/helpers/form_helper.rb	/^    def select(field, values, options = {})$/;"	f	class:FormHelper.FormBuilder
 select	lib/helpers/form_helper.rb	/^  def select(field, values, options = {})$/;"	f	class:FormHelper.radio.checkbox
+sender	lib/email_render.rb	/^    def sender$/;"	f	class:EmailRender
 seq_field	lib/mongoid/sequence_token.rb	/^      def self.seq_field$/;"	F	class:Mongoid.SequenceToken
 sequence_id	lib/mongoid/sequence_token.rb	/^      def sequence_id$/;"	f	class:Mongoid.SequenceToken
 set_options	lib/helpers/form_helper.rb	/^  def set_options(type, field, options = {})$/;"	f	class:FormHelper
 set_sequence_token	lib/mongoid/sequence_token.rb	/^      def set_sequence_token$/;"	f	class:Mongoid.SequenceToken
 set_session	lib/rack/session/mongoid.rb	/^      def set_session(env, session_id, new_session, _options)$/;"	f	class:Rack.Session.Mongoid
+set_trap	lib/background/worker_pool.rb	/^    def set_trap$/;"	f	class:Background.WorkerPool
+setup_header	lib/email_render.rb	/^    def setup_header(dat)$/;"	f	class:EmailRender
 short	lib/core_ext/string_short.rb	/^  def short(leng = 20)$/;"	f	class:String
 short	lib/core_ext/time_short.rb	/^  def short$/;"	f	class:Time
 simple_checkbox	lib/helpers/form_helper.rb	/^    def simple_checkbox(field, value, options = {})$/;"	f	class:FormHelper.FormBuilder
@@ -492,11 +527,20 @@ size	lib/mongoid/ordered_list.rb	/^      def size$/;"	f	class:Mongoid.OrderedLis
 sp	spec/support/helpers/api_test_helper.rb	/^  def sp(expected_status = 200)$/;"	f	class:APITestHelper
 spec_filename	lib/devtools/file_generator.rb	/^    def spec_filename$/;"	f	class:FileGenerator.RubyFile
 spec_name	lib/devtools/file_generator.rb	/^    def spec_name$/;"	f	class:FileGenerator.RubyFile
+start	app/bin/bj_worker	/^    def start(_args = nil)$/;"	f	class:BjWorker
+start!	lib/background/worker_pool.rb	/^    def start!$/;"	f	class:Background.WorkerPool
+start_loop	lib/background/worker.rb	/^    def start_loop$/;"	f	class:Background.Worker
+start_workers	lib/background/worker_pool.rb	/^    def start_workers(klass, num)$/;"	f	class:Background.WorkerPool
+state	lib/background/worker.rb	/^    def state$/;"	f	class:Background.Worker
 status	config/initializers/web_exceptions.rb	/^  def status$/;"	f	class:AuthenticationError
 status	config/initializers/web_exceptions.rb	/^  def status$/;"	f	class:AuthorizationError
 status	config/initializers/web_exceptions.rb	/^  def status$/;"	f	class:RequestError
 status	config/initializers/web_exceptions.rb	/^  def status$/;"	f	class:RouteError
 status	config/initializers/web_exceptions.rb	/^  def status$/;"	f	class:ServerError
+stop	app/bin/bj_worker	/^    def stop$/;"	f	class:BjWorker
+stop	lib/background/worker_pool.rb	/^    def stop$/;"	f	class:Background.WorkerPool
+stop!	lib/background/worker_pool.rb	/^    def stop!$/;"	f	class:Background.WorkerPool
+stop_loop!	lib/background/worker.rb	/^    def stop_loop!$/;"	f	class:Background.Worker
 struct	lib/struct/text_block.rb	/^  def struct$/;"	f	class:TextBlock
 submit	lib/helpers/form_helper.rb	/^  def submit(value = nil, options = {})$/;"	f	class:FormHelper
 super_classname	lib/devtools/file_generator.rb	/^    def super_classname$/;"	f	class:FileGenerator.RubyFile
@@ -510,6 +554,7 @@ template_dir	lib/email_render.rb	/^    def template_dir$/;"	f	class:EmailRender
 template_dir	lib/helpers/slim_helper.rb	/^  def template_dir$/;"	f	class:SlimHelper
 template_id	lib/helpers/slim_helper.rb	/^  def template_id(tpl = nil, locales = nil)$/;"	f	class:SlimHelper
 template_name	lib/email_render.rb	/^    def template_name(format = nil, locale = nil)$/;"	f	class:EmailRender
+terminated?	lib/background/worker.rb	/^    def terminated?$/;"	f	class:Background.Worker
 text	lib/helpers/form_helper.rb	/^  def text(field, options = {})$/;"	f	class:FormHelper
 text_area	lib/mongoid/field_candy/text_area.rb	/^        def self.text_area(field_name, opts = {})$/;"	F	class:Mongoid.FieldCandy.TextArea
 text_field	lib/mongoid/field_candy/text_field.rb	/^        def self.text_field(field_name, opts = {})$/;"	F	class:Mongoid.FieldCandy.TextField
@@ -547,6 +592,7 @@ update_yaml!	lib/asset_settings.rb	/^    def update_yaml!(file = nil)$/;"	f	clas
 url_field	lib/mongoid/field_candy/url_field.rb	/^        def self.url_field(field_name, opts = {})$/;"	F	class:Mongoid.FieldCandy.URLField
 url_valid?	lib/mongoid/validators/url_validator.rb	/^  def url_valid?(url)$/;"	f	class:UrlValidator
 use_layout	lib/helpers/slim_helper.rb	/^  def use_layout(layout)$/;"	f	class:SlimHelper
+valid_fields	lib/email_render.rb	/^    def valid_fields$/;"	f	class:EmailRender
 validate_each	lib/mongoid/validators/email_validator.rb	/^  def validate_each(record, attribute, value)$/;"	f	class:EmailValidator
 validate_each	lib/mongoid/validators/url_validator.rb	/^  def validate_each(record, attribute, value)$/;"	f	class:UrlValidator
 vendor	lib/devtools/asset_mapper/producer.rb	/^    def vendor(filename, opts = {})$/;"	f	class:AssetMapper.Producer
