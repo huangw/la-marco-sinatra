@@ -2,7 +2,7 @@ require 'devtools/file_generator'
 
 # Helper for rake to generate source files
 class FileGenerator
-  # API controller file generator
+  # Web Page controller and view templates file generator
   class ControllerFile < RubyFile
     def initialize(name, su = nil)
       @filename = name.to_s.underscore
@@ -31,7 +31,7 @@ class FileGenerator
 end
 
 namespace :gen do
-  desc 'generate api controller and spec file for NAME'
+  desc 'generate web controller, views and feature file for NAME'
   task :page do
     name = ENV['NAME'] || ENV['name']
     super_class = ENV['SUPER'] || ENV['super'] || 'web_controller'
