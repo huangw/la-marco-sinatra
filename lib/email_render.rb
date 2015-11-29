@@ -12,7 +12,6 @@ module EmailRender
 
   included do
     attr_accessor :headers, :bodies
-    attr_writer :sender
 
     include Background::Job
 
@@ -80,7 +79,7 @@ module EmailRender
     # ---------------------
 
     def valid_fields
-      %w(to cc bcc subject from sender reply-to return-path inline)
+      %w(to cc bcc subject from sender_type reply-to return-path inline)
     end
 
     def parse(extra_headers = {})
@@ -108,13 +107,13 @@ module EmailRender
     # delivery the email
     # ---------------------
 
-    # default sender defined at `config/settings/email_sender_settings`
-    def sender
-      @sender ||= default_sender
+    # nil if not defined in template file or by extra rendering data
+    def sender_type
+      @headers['sender_type'] if @headers
     end
 
     def process!
-      sender.deliver!(@headers, @bodies)
+      email_sender(sender_type).deliver!(@headers, @bodies)
     end
     alias_method :deliver!, :process!
 
