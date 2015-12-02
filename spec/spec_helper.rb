@@ -1,7 +1,6 @@
 # encoding: utf-8
 require 'simplecov'
 SimpleCov.start do
-  add_group 'Specs', 'spec'
   add_filter 'spec/spec_helper.rb'
   coverage_dir 'doc/coverage'
 end

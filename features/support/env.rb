@@ -58,4 +58,12 @@ World { FeatureWorld.new }
 
 # cleanup after cucumber
 at_exit do
+  # puts 'Delete all image files'
+  # Image.all.each(&:delete_files)
+  #
+  # puts 'Drop database'
+  # Mongoid.default_session.drop
+  #
+  # puts 'seeds'
+  # `rake db:seeds`
 end

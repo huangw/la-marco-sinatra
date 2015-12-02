@@ -27,6 +27,11 @@ Then(/^页面应包含\s*"([^"]*)"$/) do |text|
   expect(page).to have_content(text)
 end
 
+假如(/^我在"([^"]*)"中上传图像"([^"]*)"$/) do |field, path|
+  execute_script("$('##{field}').show()")
+  attach_file(field, File.join(ENV['APP_ROOT'], path))
+end
+
 Then(/^页面应包含按钮"(.*?)"$/) do |text|
   expect(page).to have_button(text)
 end

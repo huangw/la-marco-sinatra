@@ -14,56 +14,118 @@
   <div id="content">
     
 <ul id="markdown-toc">
-  <li><a href="#route">Route机制</a></li>
+  <li><a href="#routepuma" id="markdown-toc-routepuma">Route机制和Puma进程管理</a>    <ul>
+      <li><a href="#route" id="markdown-toc-route">Route管理</a></li>
+      <li><a href="#path" id="markdown-toc-path">获取特定path</a></li>
+      <li><a href="#controller" id="markdown-toc-controller">启动时加载Controller</a></li>
+      <li><a href="#puma" id="markdown-toc-puma">Puma进程管理</a></li>
+    </ul>
+  </li>
 </ul>
 
-<h1 id="route">Route机制</h1>
+<h1 id="routepuma">Route机制和Puma进程管理</h1>
 
-<p>Route定义一个全局（通过Route类的一个eigenclass变量）的路由表，记录controller类（<code>UserPage</code>等，遵循rack标准）到URL path（mounting point，如<code>/users</code>）的映射关系。</p>
+<h2 id="route">Route管理</h2>
 
-<p><code>Route.table</code>返回<code>类 =&gt; 路径</code>，<code>Route.all</code>则返回<code>路径 =&gt; 类</code>格式的Hash。注意1.9之后的Ruby Hash是有序的，all的顺序与table相反。</p>
+<p>Route定义一个全局（通过Route类的一个eigenclass变量）的路由表，记录controller类
+（<code>UserPage</code>等，遵循rack标准）到URL path（mounting point，如<code>/users</code>）的映射关系。</p>
 
-<p>一般来说，我们通过<code>Route.mount AppClass, '/path'</code>或<code>Route &lt;&lt; AppClass</code>将controller加载到<code>Route.table</code>，当path没有指定时，Route会自动转换<code>NameSpace::ClassNamePage</code>为<code>name/space/class/names</code>的形式（末尾的<code>Controller/Page/API</code>会被删除）。</p>
+<p><code>Route.table</code>返回<code>类 =&gt; 路径</code>，<code>Route.all</code>则返回<code>路径 =&gt; 类</code>格式的Hash。
+注意1.9之后的Ruby Hash是有序的，all的顺序与table相反。</p>
 
-<p><code>config.ru</code>（标准的rack程序入口）里，会顺序调用并map所有的<code>Route.all</code>到一个大的Rack::Builder application。</p>
-
-<p>如果所有的Controller Class都放在<code>app/pages</code>下，默认的<code>routes</code>文件会由浅至深调用其中全部的ruby文件。<code>Route.all</code>则会以相反的顺序将其map到<code>control.ru</code>。这样大致可以保证<code>/</code>之类更“一般”的route会出现在寻址表的最后。</p>
+<p>一般来说，我们通过<code>Route.mount AppClass, '/path'</code>或
+<code>Route &lt;&lt; AppClass</code>将controller加载到<code>Route.table</code>，当path没有指定时，
+Route会自动转换<code>NameSpace::ClassNamePage</code>为<code>name/space/class/names</code>的形式
+（末尾的<code>Controller/Page/API</code>会被删除）。</p>
 
 <p>Controller类使用默认route路径时，可以在定义时直接加载：</p>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">UserPage</span> &lt; <span style="color:#036;font-weight:bold">WebApplication</span>
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>  get(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">/</span><span style="color:#710">'</span></span>) { ... }
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>  <span style="color:#036;font-weight:bold">Route</span> &lt;&lt; <span style="color:#069">self</span>
-<span class="line-numbers"><a href="#n5" name="n5">5</a></span><span style="color:#080;font-weight:bold">end</span>
-</pre></div>
-</div>
-</div>
+<pre><code>class UserPage &lt; WebApplication
+  get('/') { ... }
+
+  Route &lt;&lt; self
+end
+</code></pre>
 
 <p>默认路径由<code>default_route</code>函数根据类名（<code>UserPage</code>）计算出。</p>
 
 <p>也可同时定义特定path：</p>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">UserPage</span> &lt; <span style="color:#036;font-weight:bold">WebApplication</span>
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>  get(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">/</span><span style="color:#710">'</span></span>) { ... }
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>
-<span class="line-numbers"><a href="#n4" name="n4">4</a></span>  <span style="color:#036;font-weight:bold">Route</span>.mount(<span style="color:#069">self</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">/user</span><span style="color:#710">'</span></span>)
-<span class="line-numbers"><a href="#n5" name="n5">5</a></span><span style="color:#080;font-weight:bold">end</span>
-</pre></div>
-</div>
-</div>
+<pre><code>class UserPage &lt; WebApplication
+  get('/') { ... }
+
+  Route.mount(self, '/user')
+end
+</code></pre>
 
 <p>或在任意地方、根据特定条件加载：</p>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span style="color:#036;font-weight:bold">Route</span>.mount(<span style="color:#036;font-weight:bold">LogViewApp</span>, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">/logs</span><span style="color:#710">'</span></span>) <span style="color:#080;font-weight:bold">if</span> <span style="color:#036;font-weight:bold">RACK_ENV</span> == <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">development</span><span style="color:#710">'</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code>Route.mount(LogViewApp, '/logs') if RACK_ENV == 'development'
+</code></pre>
 
-<p><a href="./spec/lib/route.html"><code>lib/route.rb</code></a> (<a href="./spec/lib/route_spec.html">RSpec</a>)</p>
+<p>【SOURCE】<a href="./spec/lib/route.html"><code>lib/route.rb</code></a> (RSpec <a href="./spec/lib/route_spec.html">src</a> <a href="./spec/lib/route_spec_rslt.html">rslt</a>)</p>
+
+<h2 id="path">获取特定path</h2>
+
+<p><code>to</code>（<code>url</code>的同名函数）是sinatra提供的获取同一controller内其它页面URL的方法，比如</p>
+
+<pre><code>class UserPage &lt; WebApplication
+  get('/settings') { ... }
+  get('/') { rediret to('settings') } # redirect to the url of above
+
+  Route &lt;&lt; self # =&gt; mount to '/users/'
+end
+</code></pre>
+
+<p><code>Route.to</code>方法（可接受多个参数）则是一种“全局”跳转：</p>
+
+<pre><code>class BookPage &lt; WebApplication
+  get('/') do
+    # redirect to /users/xxxuser_tidxxx/settings
+    redirect Route.to(UserPage, current_user.tid, 'settings')
+    # redirect to /p/title-tid
+    redirect Route.to(post.url)
+  end
+end
+</code></pre>
+
+<h2 id="controller">启动时加载Controller</h2>
+
+<p>程序启动时<code>config/boot.rb</code>会在<code>config/routes.rb</code>文件存在时调用它，后者会顺序加载所有
+<code>app/helpers</code>和<code>app/pages</code>下面的ruby文件。旧版的<code>app/lib/*</code>文件移动到<code>lib</code>目录下，
+需要使用时手动加载（一般来说应该已经被base controller加载了）。</p>
+
+<p>最后<code>config/routes.rb</code>会“从浅到深”的加载<code>app/pages</code>下的所有文件。
+<code>Route.all</code>会以相反的顺序将其map到<code>control.ru</code>。
+这样大致可以保证<code>/</code>之类更“一般”的route会出现在寻址表的最后。
+<code>config.ru</code>（标准的rack程序入口）里，会顺序调用并map所有的<code>Route.all</code>到一个大的
+<code>Rack::Builder</code> application。</p>
+
+<p>【SOURCE】<a href="./spec/config/initializers/routes.html"><code>config/initializers/routes.rb</code></a></p>
+
+<p>注意<code>web exceptions</code>设置文件中定义了特定Ruby异常对应的HTTP错误代码，会被<code>routes</code>初始化
+脚本调用：</p>
+
+<p>【SOURCE】<a href="./spec/config/initializers/web_exceptions.html"><code>config/initializers/web_exceptions.rb</code></a></p>
+
+<h2 id="puma">Puma进程管理</h2>
+
+<p>重新使用<code>foreman</code>，用于开发和测试时启动各种服务器包括<code>puma</code>。启动<code>puma</code>时会调取
+<code>config/puma.rb</code>文件，监听8080端口并记录<code>pid</code>文件到本地<code>tmp</code>文件夹下，
+可通过<code>rake s</code>（<code>rake puma</code>的别名）快速重启。</p>
+
+<p>注意<code>puma.rb</code>设置文件屏蔽了<code>access log</code>，必要时可以打开（屏蔽掉<code>quiet</code>一行）。</p>
+
+<p>【SOURCE】<a href="./spec/config/puma.html"><code>config/puma.rb</code></a></p>
+
+<p>注意<code>app/pages/simplest_page</code>定义了一个<code>get</code>的<code>hello world</code>页面，启动puma后可以通过
+<code>http://localhost:8080/simple</code>确认是否能正常显示。</p>
+
+<p>【SOURCE】<a href="./spec/pages/simplest_page.html"><code>app/pages/simplest_page.rb</code></a></p>
+
+<p>另外，<code>Guardfile</code>通过<code>guard-rake</code>插件动态监听本地文件的修改。建议在两个不同的terminal窗口
+分别启动<code>forman start</code>和<code>bundle exec guard</code>。则任何时候修改<code>app/pages/...</code>下的文件时
+<code>guad</code>会自动重启<code>puma</code>，不需要手动执行<code>rake s</code>了。</p>
 
   </div>
 

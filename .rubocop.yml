@@ -8,3 +8,7 @@ Style/Semicolon:
   Enabled: false
 Style/EachWithObject:
   Enabled: false
+Style/RegexpLiteral:
+  Enabled: false
+Documentation:
+  Enabled: false

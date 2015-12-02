@@ -1,22 +1,22 @@
 ---
 :production:
   :img_dir: app/assets/img
-  :img_url_prefix: "/img"
+  :img_url_prefix: http://assets.vikkr.com
   :files:
     application.css:
     - http://cdn.amazeui.org/amazeui/2.1.0/css/amazeui.min.css
-    - http://assets.vikkr.com/application.db185.css
+    - http://assets.vikkr.com/application.stw9y.css
     application.js:
-    - http://assets.vikkr.com/application.db185.js
+    - http://assets.vikkr.com/application.stw9z.js
 :local_assets:
   :img_dir: app/assets/img
   :img_url_prefix: "/img"
   :files:
     application.css:
     - "/assets/app/assets/cloud/cdn.amazeui.org/amazeui.min.css"
-    - "/assets/app/assets/min/application.db185.css"
+    - "/assets/app/assets/min/application.stw9y.css"
     application.js:
-    - "/assets/app/assets/min/application.db185.js"
+    - "/assets/app/assets/min/application.stw9z.js"
 :development:
   :img_dir: app/assets/img
   :img_url_prefix: "/img"

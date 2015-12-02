@@ -13,11 +13,13 @@ end
 
 class AccountPage; Route << self end
 
+class AccountSettingPage; Route << self end
+
 class Account
-  attr_accessor :tid
-  def initialize(tid)
-    @tid = tid
-  end
+  # attr_accessor :tid
+  # def initialize(tid)
+  #   @tid = tid
+  # end
 end
 
 describe Route do
@@ -30,6 +32,10 @@ describe Route do
         Route[AccountPage] = '/valid'
         expect(Route.to(AccountPage, 'signin')).to eq('/valid/signin')
         expect(Route.to(AccountPage, :signout)).to eq('/valid/signout')
+      end
+
+      it 'can handle string instead of class' do
+        expect(Route.to('/some/root/to/user-tid', 'settings')).to eq('/some/root/to/user-tid/settings')
       end
     end
 
@@ -55,8 +61,12 @@ describe Route do
 
       it 'accept end points with extra parts' do
         expect(Route.to(API::AccountPage, :user)).to eq('/api/accounts/user')
-        expect(Route.to(API::AccountPage, Account.new('129423'))).to eq('/api/accounts/129423')
+        # expect(Route.to(API::AccountPage, Account.new('129423'))).to eq('/api/accounts/129423')
         expect(Route.to(API::AccountPage, 'Settings')).to eq('/api/accounts/settings')
+        expect(Route.to(AccountSettingPage, 'nickname')).to eq('/account/settings/nickname')
+        expect(Route.to(AccountSettingPage, 'nickName')).to eq('/account/settings/nick/name')
+        expect(Route.to(AccountSettingPage,'nickname', id: 3)).to eq('/account/settings/nickname?id=3')
+        expect(Route.to(AccountSettingPage,'nickname', UserId: 3)).to eq('/account/settings/nickname?UserId=3')
       end
     end
 

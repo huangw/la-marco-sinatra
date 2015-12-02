@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'development/asset_mapper'
+require 'devtools/asset_mapper'
 
 describe AssetMapper::Sfile do
   subject(:sf) { AssetMapper::Sfile.new('js/sample.js') }

@@ -27,23 +27,33 @@ class Route
 
     # add class to default route
     def mount(app_class, route = nil)
-      route ||= default_path(app_class)
+      route ||= default_url(app_class)
       table[app_class] = route
     end
     alias_method :'<<', :mount
 
     # To helper receive model as inputs:
     def to(app_class, *parts)
-      return nil unless @table[app_class]
-      return @table[app_class] unless parts && parts.size > 0
+      prefix = app_class.is_a?(Class) ? @table[app_class] : app_class.to_s
+      fail "unknown controller #{app_class}" if prefix.nil?
+      return prefix unless parts && parts.size > 0
 
-      pas = parts.map { |k| k.respond_to?(:tid) ? k.tid : k.to_s.underscore }
-      File.join(@table[app_class], *pas)
+      if parts.last.is_a?(Hash)
+        pam = '?' + parts.pop.map { |k, v| k.to_s + '=' + v.to_s }.join('&')
+      end
+      pam ||= ''
+      pas = parts.map { |k| k.to_s.underscore.tr('_', '/') }
+
+      File.join(prefix, *pas) + pam
     end
 
     def default_path(app_class)
-      app_class.to_s.underscore.sub(/_(api|page|controller)$/, '')
-        .gsub('_', '-').sub(/^\/*/, '/').pluralize
+      app_class.to_s.underscore.sub(/_(api|page|controller)\Z/, '')
+        .sub(/^\/*/, '/').pluralize
+    end
+
+    def default_url(app_class)
+      default_path(app_class).tr('_', '/')
     end
   end
 end

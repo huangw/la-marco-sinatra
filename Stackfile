@@ -4,38 +4,32 @@ attrs application_code: 'la_marco_sinatra',
       application_name: 'Sinatra Based Web Framework',
       application_version: '0.0.1'
 
-pull :'la-marco', git: 'git@gitlab.7lime.com:vikkr/la-marco.git',
-                  branch: :develop
+pull :'la-marco', vikkr: 'vikkr/la-marco.git', branch: :develop
+pull :'la-marco-mongoid', vikkr: 'vikkr/la-marco-mongoid.git', branch: :develop
 
 from :'la-marco' do
   import :full
 end
 
-export :route do
-  add_gem 'sinatra', '~> 1.4'
-  add_gem 'puma'
-
-  copy 'config/initializers/routes.rb'
-  copy 'config.ru'
-  add_gem 'guard-rake', group: :development # for puma restart
-
-  copy 'lib/tasks/puma.rake'
-  copy 'Guardfile', sync: false
+from :'la-marco-mongoid' do
+  import :full
 end
 
-export :web do
-  import :route
+export :route do
+  add_gem 'sinatra' # , '~> 1.4'
+  add_gem 'sinatra-contrib' # streaming
+  add_gem 'puma'
+  add_gem 'foreman'
 
-  add_gem 'sinatra-contrib'
-  add_gem 'sinatra-flash'
-  add_gem 'sinatra-redirect-with-flash'
-  add_gem 'slim'
+  copy 'config.ru', sync: false
+  copy 'lib/route.rb'
+  copy 'config/initializers/routes.rb', sync: false
+  copy 'config/initializers/web_exceptions.rb', sync: false
+  copy 'config/puma.rb', sync: false
 
-  add_gem 'http_accept_language'
-
-  copy 'lib/tasks/i18n_view.rake'
-  copy 'lib/helpers/*_helper.rb'
-  copy 'app/pages/web_application.rb'
+  add_gem 'guard-rake', group: :development # for puma restart
+  copy 'lib/tasks/puma.rake'
+  copy 'Guardfile', sync: false
 end
 
 export :cucumber do
@@ -46,8 +40,28 @@ export :cucumber do
   add_gem 'poltergeist', group: :development
   add_gem 'selenium-webdriver', group: :development
 
-  copy 'features/step_definitions/*_steps.rb'
-  copy 'features/support/env.rb'
+  copy 'features/step_definitions/*_steps.rb', sync: false
+  copy 'features/support/env.rb', sync: false
+  copy 'lib/tasks/cucumber.rake'
+end
+
+export :logger do
+  copy 'lib/utils/la_backtrace_cleaner.rb'
+  copy 'lib/la_buffered_logger.rb'
+  copy 'lib/rack/log_flusher.rb'
+end
+
+export :restul_api do
+  add_gem 'oj'
+  add_gem 'multi_json'
+  add_gem 'recursive-open-struct'
+
+  copy 'lib/rack/json_response.rb'
+  copy 'app/pages/restful_controller.rb', sync: false
+  copy 'lib/tasks/gen_api.rake'
+  copy 'lib/tasks/doc_api.rake'
+  copy 'spec/support/helpers/api_test_helper.rb'
+  copy 'spec/support/helpers/api_doc_helper.rb'
 end
 
 export :assets_mapper do
@@ -60,18 +74,53 @@ export :assets_mapper do
 
   copy 'lib/asset_settings.rb'
   copy 'lib/asset_settings/*.rb'
+  copy 'lib/devtools/asset_mapper.rb'
+  copy 'lib/devtools/asset_mapper/*.rb'
+  copy 'lib/tasks/assets.rake'
   copy 'lib/helpers/assets_helper.rb'
   copy 'lib/controllers/assets_controller.rb'
   copy 'lib/controllers/image_controller.rb'
+end
 
-  copy 'lib/tasks/assets.rake'
-  copy 'lib/development/asset_mapper.rb'
-  copy 'lib/development/asset_mapper/*.rb'
-  # copy 'app/assets/mappings.rb.sample' => 'app/assets/mappings.rb'
+export :web do
+  import :route
+  import :assets_mapper
+
+  add_gem 'sinatra-flash'
+  add_gem 'sinatra-redirect-with-flash'
+  add_gem 'slim'
+  add_gem 'sanitize'
+  add_gem 'http_accept_language'
+
+  copy 'lib/rack/session/mongoid.rb'
+  copy 'lib/rack/session/mongoid/*.rb'
+  copy 'lib/core_ext/string_simple_format.rb'
+  copy 'lib/tasks/i18n_view.rake'
+  copy 'lib/helpers/*_helper.rb'
+
+  # copy 'lib/presenters/html_presenter.rb'
+  copy 'app/pages/web_controller.rb', sync: false
+end
+
+export :email do
+  add_gem 'liquid'
+  add_gem 'mailgun-ruby'
+
+  copy 'lib/emails/*.rb'
+  copy 'app/models/email.rb', sync: false
+  # copy 'lib/controllers/email_controller.rb'
+  copy 'lib/tasks/gen_email.rake'
+  # copy 'lib/tasks/email_test.rake'
 end
 
 from('.') do
-  import :web
+  # import :route
   import :cucumber
-  import :assets_mapper
+  import :logger
+
+  import :restul_api
+
+  # import :assets_mapper
+  import :web
+  import :email
 end

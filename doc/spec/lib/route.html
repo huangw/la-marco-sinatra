@@ -47,7 +47,7 @@
             
             <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Route</span></span>
   <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-inheritance">&lt;</span><span class="hljs-inheritance">&lt; <span class="hljs-parent">self</span></span></span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> </span>table
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">table</span></span>
       <span class="hljs-variable">@table</span> ||= {} <span class="hljs-comment"># ControllerClass =&gt; '/maunt/point'</span>
     <span class="hljs-keyword">end</span></pre></div></div>
             
@@ -65,7 +65,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">def</span> </span>all
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">all</span></span>
       <span class="hljs-constant">Hash</span>[table.map { |k, rt| [rt, k.new] }]
     <span class="hljs-keyword">end</span></pre></div></div>
             
@@ -82,7 +82,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">def</span> </span>[]=(app_class, route)
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">[]=</span><span class="hljs-params">(app_class, route)</span></span>
       table[app_class] = route.to_s
     <span class="hljs-keyword">end</span></pre></div></div>
             
@@ -99,7 +99,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">def</span> </span>[](key)
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">[]</span><span class="hljs-params">(key)</span></span>
       <span class="hljs-keyword">return</span> table[key] <span class="hljs-keyword">if</span> key.is_a?(<span class="hljs-constant">Class</span>)
       <span class="hljs-keyword">return</span> all[key].<span class="hljs-keyword">class</span> <span class="hljs-keyword">if</span> key.is_a?(<span class="hljs-constant">String</span>)
       <span class="hljs-keyword">nil</span>
@@ -118,8 +118,8 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">def</span> </span>mount(app_class, route = <span class="hljs-keyword">nil</span>)
-      route ||= default_path(app_class)
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">mount</span><span class="hljs-params">(app_class, route = <span class="hljs-keyword">nil</span>)</span></span>
+      route ||= default_url(app_class)
       table[app_class] = route
     <span class="hljs-keyword">end</span>
     alias_method <span class="hljs-symbol">:<span class="hljs-string">'&lt;&lt;'</span></span>, <span class="hljs-symbol">:mount</span></pre></div></div>
@@ -137,17 +137,27 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">def</span> </span>to(app_class, *parts)
-      <span class="hljs-keyword">return</span> <span class="hljs-keyword">nil</span> <span class="hljs-keyword">unless</span> <span class="hljs-variable">@table</span>[app_class]
-      <span class="hljs-keyword">return</span> <span class="hljs-variable">@table</span>[app_class] <span class="hljs-keyword">unless</span> parts &amp;&amp; parts.size &gt; <span class="hljs-number">0</span>
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">to</span><span class="hljs-params">(app_class, *parts)</span></span>
+      prefix = app_class.is_a?(<span class="hljs-constant">Class</span>) ? <span class="hljs-variable">@table</span>[app_class] <span class="hljs-symbol">:</span> app_class.to_s
+      fail <span class="hljs-string">"unknown controller <span class="hljs-subst">#{app_class}</span>"</span> <span class="hljs-keyword">if</span> prefix.<span class="hljs-keyword">nil</span>?
+      <span class="hljs-keyword">return</span> prefix <span class="hljs-keyword">unless</span> parts &amp;&amp; parts.size &gt; <span class="hljs-number">0</span>
 
-      pas = parts.map { |k| k.respond_to?(<span class="hljs-symbol">:tid</span>) ? k.tid <span class="hljs-symbol">:</span> k.to_s.underscore }
-      <span class="hljs-constant">File</span>.join(<span class="hljs-variable">@table</span>[app_class], *pas)
+      <span class="hljs-keyword">if</span> parts.last.is_a?(<span class="hljs-constant">Hash</span>)
+        pam = <span class="hljs-string">'?'</span> + parts.pop.map { |k, v| k.to_s + <span class="hljs-string">'='</span> + v.to_s }.join(<span class="hljs-string">'&amp;'</span>)
+      <span class="hljs-keyword">end</span>
+      pam ||= <span class="hljs-string">''</span>
+      pas = parts.map { |k| k.to_s.underscore.tr(<span class="hljs-string">'_'</span>, <span class="hljs-string">'/'</span>) }
+
+      <span class="hljs-constant">File</span>.join(prefix, *pas) + pam
     <span class="hljs-keyword">end</span>
 
-    <span class="hljs-function"><span class="hljs-keyword">def</span> </span>default_path(app_class)
-      app_class.to_s.underscore.sub(<span class="hljs-regexp">/_(api|page|controller)$/</span>, <span class="hljs-string">''</span>)
-        .gsub(<span class="hljs-string">'_'</span>, <span class="hljs-string">'-'</span>).sub(<span class="hljs-regexp">/^\/*/</span>, <span class="hljs-string">'/'</span>).pluralize
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">default_path</span><span class="hljs-params">(app_class)</span></span>
+      app_class.to_s.underscore.sub(<span class="hljs-regexp">/_(api|page|controller)\Z/</span>, <span class="hljs-string">''</span>)
+        .sub(<span class="hljs-regexp">/^\/*/</span>, <span class="hljs-string">'/'</span>).pluralize
+    <span class="hljs-keyword">end</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">default_url</span><span class="hljs-params">(app_class)</span></span>
+      default_path(app_class).tr(<span class="hljs-string">'_'</span>, <span class="hljs-string">'/'</span>)
     <span class="hljs-keyword">end</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span></pre></div></div>

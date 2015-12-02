@@ -84,7 +84,7 @@ class Confu
     end
     alias_method :'[]', :for_environment
 
-    # Recursively convert `OpenStruct` instance into hash format,
+    # Recursively convert `Data` instance into hash format,
     # ensure symbolic keys
     def to_hash
       fail 'Can not convert to hash unless finalized' unless finalized?
@@ -94,8 +94,8 @@ class Confu
     # Make the default environment
     def finalize!(ev = ENV['RACK_ENV'])
       return warn 'No configuration data to be finalized' unless @data
-      return warn 'Can not finalize without specifying an existing '\
-                  'environment' unless ev && @data[ev.to_sym]
+      return warn 'Can not finalize without an environment' unless ev
+      @data[ev.to_sym] ||= Confu::Data.new unless @data[ev.to_sym]
 
       @data[ev.to_sym]
         .merge_default(@data[:default]) unless ev.to_sym == :default

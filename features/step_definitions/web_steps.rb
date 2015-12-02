@@ -9,13 +9,15 @@ end
 
 Given(/^I visit to "(.*)"$/) do |path|
   visit path
+  sleep_for = ENV['SLEEP'].to_i if ENV['SLEEP']
+  sleep sleep_for if sleep_for
 end
 
 Then(/^debug$/) { debugger }
 
 Then(/^take a screen shot as "(.*?)"$/) do |filename|
   FileUtils.mkdir 'doc/screenshots' unless File.directory?('doc/screenshots')
-  sleep 1 if ENV['DRIVER'] == 'chrome'
+  sleep 1
   save_screenshot("doc/screenshots/#{filename}.png", full: true)
   embed("./screenshots/#{filename}.png", 'image/png', "SCREENSHOT for #{filename}")
 end

@@ -26,6 +26,37 @@ module SlimHelper
     slim "#{template_dir}/_#{pname}".to_sym, locals: lcls
   end
 
+  def partial_block(bname, locals_ = {})
+    slim "partial_blocks/#{bname}".to_sym, locals: locals_, layout: false
+  end
+
+  # render a obj template
+  def present(obj, type = :default, dat = {})
+    locales = dat.extract_args(locales: nil)
+    dat[:obj] = obj unless dat[:obj]
+
+    tmpl = File.join('presenters', obj.class.to_s.underscore, "#{type}")
+
+    if locales
+      locale = locales[0]
+      user_locale = I18n.locale.to_s
+      locale = user_locale if locales.map(&:to_s).include?(user_locale)
+      tmpl << ".#{locale}"
+    end
+
+    slim tmpl.to_sym, locals: dat, layout: false
+  end
+
+  def paginate_block(opg, dat = {})
+    opg = opg.merge dat
+    opg[:present_type] ||= :default
+
+    type = dat.extract_args(:type) || 'table'
+    tmpl = File.join('paginate_blocks', type.to_s)
+
+    slim tmpl.to_sym, locals: opg, layout: false
+  end
+
   # set layout files to layout (path relative to views folder)
   # use_layout(false) to disable layout
   def use_layout(layout)
@@ -33,15 +64,16 @@ module SlimHelper
   end
 
   def template_dir
-    env['template_dir'] ||= Route.default_path(self.class).gsub('-', '_')
+    env['template_dir'] ||= Route.default_path(self.class)
   end
 
   def template_id(tpl = nil, locales = nil)
-    tpl ||= request.path_info.sub(/\A\//, '').gsub('-', '_').to_sym
+    tpl ||= request.path_info.sub(/\A\//, '').to_sym
     tpl = :index if tpl.empty?
     return tpl.to_s unless locales
 
-    lc, user_lc = I18n.default_locale.to_sym, I18n.locale.to_sym
+    lc = I18n.default_locale.to_sym
+    user_lc = I18n.locale.to_sym
     lc = user_lc if locales.map(&:to_sym).include?(user_lc)
     "#{tpl}.#{lc}".to_s
   end

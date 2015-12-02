@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'development/asset_mapper'
+require 'devtools/asset_mapper'
 
 describe AssetMapper::Loader do
   subject(:al) { AssetMapper::Loader.new }

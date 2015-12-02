@@ -1,7 +1,7 @@
 require 'active_support/inflector'
 
 # brought from https://github.com/cymen/sinatra-formhelpers-
-# rubocop:disable LineLength, MethodLength, CyclomaticComplexity, Metrics/PerceivedComplexity
+# rubocop:disable LineLength, MethodLength, CyclomaticComplexity, ModuleLength
 module FormHelper
   # a intermediate object holds default values passed to form helper
   class FormBuilder
@@ -18,31 +18,30 @@ module FormHelper
 
     def field_group(field, options = {})
       type = options.delete(:type) || :text
-      cls = 'form-group'
+      cls = options[:class] ? "#{options[:class]} form-group" : 'form-group'
 
       e_msg = [options.delete(:e_msg1)] if options[:e_msg1]
       e_msg ||= @object.errors.messages[field] if @object.respond_to?(:errors)
 
       cls << ' has-error' if e_msg && e_msg.size > 0 && options.delete(:add_error_class)
 
-      display = options.delete(:label) if options[:label]
-      display ||= @object.class.human_attribute_name(field) if @object.class
-                                                               .respond_to?(:human_attribute_name)
-      out = label field, display, class: 'control-label'
+      options['placeholder'] ||= @object.class.human_attribute_name(field) if @object.class.respond_to?(:human_attribute_name)
+      out = options[:label] ? (label field, options.delete(:label), class: 'control-label') : ''
 
       if block_given?
         out << yield
       else
-        if type == :textarea
+        if type.to_sym == :textarea
           out << textarea(field, options.delete(:value),
                           options.merge(class: 'form-control'))
         else
-          out << send(type, field, options.merge(class: 'form-control'))
+          value = options.delete(:value) || default_value(field, '')
+          out << send(type, field, options.merge(class: 'form-control', value: value))
         end
       end
 
       if (icon_text = options.delete(:icon)) && (icon_type = options.delete(:icon_type))
-        out << "<a class='icon #{icon_type}' popover-trigger='mouseenter' popover='#{icon_text}' href='javascript:void(0)'></a>"
+        out << "<a class='icon #{icon_type}' data-toggle='tooltip' data-placement='top' data-title='#{options.delete(:icon_data_text)}' title='#{icon_text}' href='javascript:void(0)'></a>"
       end
 
       out << @parent.tag(:p, e_msg.join('; '),
@@ -74,10 +73,22 @@ module FormHelper
       @parent.radio("#{@name}[#{field}]", values, options)
     end
 
+    def simple_radio(field, value, options = {})
+      options[:id] ||= "#{@name}_#{field}_#{value}"
+      options[:value] = default_radio_value(field, value, '')
+      @parent.radio("#{@name}[#{field}]", value, options)
+    end
+
     def checkbox(field, values, options = {})
       options[:id] ||= "#{@name}_#{field}"
       options[:value] = default_value(field, [])
       @parent.checkbox("#{@name}[#{field}]", values, options)
+    end
+
+    def simple_checkbox(field, value, options = {})
+      options[:id] ||= "#{@name}_#{field}_#{value}"
+      options[:value] = default_checkbox_value(field, [])
+      @parent.checkbox("#{@name}[#{field}]", value, options)
     end
 
     def select(field, values, options = {})
@@ -86,26 +97,66 @@ module FormHelper
       @parent.select("#{@name}[#{field}]", values, options)
     end
 
-    # return the checkbox keys, default is {on: }
-    def default_bit_value(field, key, default)
+    def default_radio_value(field, key, default)
       v = @parent.params[@name] &&
-          @parent.params[@name][field.to_sym] &&
-          @parent.params[@name][field.to_sym][key.to_sym]
+          @parent.params[@name][field.to_sym]
 
-      mto = field.to_s + '_' + key.to_s + '?'
-      v ||= @object.send(mto.to_sym) if @object.respond_to?(mto.to_sym)
+      mto = key.to_s + '?'
+
+      v ||= key.to_s if @object.respond_to?(mto.to_sym) && @object.send(mto.to_sym)
       v || default
     end
 
-    def bit_checkbox(field, key, options = {})
-      v = default_bit_value(field, key, false)
+    def default_checkbox_value(field, default)
+      v = @parent.params[@name] &&
+          @parent.params[@name][field.to_sym]
 
-      display = options.delete(:label) if options[:label]
-      display ||= @object.class.human_attribute_name(field.to_s + '_' + key.to_s) if @object.class.respond_to?(:human_attribute_name)
+      unless v
+        keys = @object.send("#{field}_keys".to_sym).keys
+        mto = "#{field}_on?"
 
-      options[:checked] = 'checked' if v
-      @parent.checkbox("#{@name}[#{field}]", { key.to_sym => display }, options)
+        tmp_v = []
+        keys.each do |k|
+          tmp_v.push k.to_s if @object.send(mto.to_sym, k)
+        end
+
+        v = tmp_v unless tmp_v.blank?
+      end
+
+      v || default
     end
+
+    ## commit by songcy 2015/06/23
+    # return the checkbox keys, default is {on: }
+    # def default_bit_value(field, key, default)
+    #   v = @parent.params[@name] &&
+    #       @parent.params[@name][field.to_sym] &&
+    #       @parent.params[@name][field.to_sym][key.to_sym]
+    #
+    #   mto = field.to_s + '_' + key.to_s + '?'
+    #   v ||= @object.send(mto.to_sym) if @object.respond_to?(mto.to_sym)
+    #   v || default
+    # end
+    #
+    # def bit_checkbox(field, key, options = {})
+    #   v = default_bit_value(field, key, false)
+    #
+    #   display = options.delete(:label) if options[:label]
+    #   display ||= @object.class.human_attribute_name(field.to_s + '_' + key.to_s) if @object.class.respond_to?(:human_attribute_name)
+    #
+    #   options[:checked] = 'checked' if v
+    #   @parent.checkbox("#{@name}[#{field}]", { key.to_sym => display }, options)
+    # end
+    #
+    # def bool_field_checkbox(field, options = {})
+    #   v = default_value(field, false)
+    #
+    #   display = options.delete(:label) if options[:label]
+    #   display ||= @object.class.human_attribute_name(field) if @object.class.respond_to?(:human_attribute_name)
+    #
+    #   options[:checked] = 'checked' if v
+    #   @parent.checkbox("#{@name}[#{field}]", { '1': display }, options)
+    # end
 
     def method_missing(met, field = '', options = {})
       unless [:submit, :reset, :button].include? met
@@ -130,7 +181,8 @@ module FormHelper
     met = options.delete(:method) || 'POST'
     hid_met = ''
     unless %w(POST GET).include?(met.to_s.upcase)
-      hid_met, met = hidden('_method', value: met.to_s.upcase), :post
+      hid_met = hidden('_method', value: met.to_s.upcase)
+      met = :post
     end
 
     options[:enctype] = 'multipart/form-data' if options.delete(:upload)
