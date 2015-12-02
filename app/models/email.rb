@@ -1,4 +1,6 @@
-require 'email_render'
+require 'emails/render'
+require 'emails/fake_sender'
+require 'emails/mailgun_sender'
 
 # Email name space
 module Emails
@@ -6,10 +8,10 @@ module Emails
   class Email
     include Mongoid::Document
     include HashPresenter
-    include EmailRender
+    include Emails::Render
 
     def to_hash
-      _to_hash [:to]
+      _to_hash [:to, { model: -> { model_name.name } }]
     end
   end
 end

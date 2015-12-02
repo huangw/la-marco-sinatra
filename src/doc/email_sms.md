@@ -21,13 +21,16 @@
 无法直接连接外部服务发送邮件，则`#deliver_later`就是唯一可以发送邮件的方法了，
 可以指定`seconds = 0`，则运行在防火墙外的服务器上的后台任务会尽快发送邮件）。
 
-spec:lib/email_render
+spec:lib/emails/render
 
 ### 邮件发送服务 MailSender
 
 发送服务是一种通用接口，可以接受各种header, html body, text body等参数并`#deliver!`。
 不同的发送服务的子类实现通过mailgun，sendcloud等不同第三方服务实现邮件发送。
 甚至不同邮件的可以选用不同的发送服务（如注册邮件采用送达率更高的服务）。
+
+spec:lib/emails/fake_sender
+spec:lib/emails/mailgun_sender
 
 ### 邮件开发和测试
 
