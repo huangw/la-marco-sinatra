@@ -100,7 +100,7 @@ module Emails
 
       # set email header with valid field checking
       def setup_header(dat)
-        @headers = {}
+        @headers = { to: to }
         dat.each do |key, val|
           key = key.to_s.downcase
           fail "invalid field #{key}" unless valid_fields.include?(key)
@@ -114,11 +114,12 @@ module Emails
       # nil if not defined in template file or by extra rendering data
       attr_writer :sender_type
       def sender_type
-        @sender_type ||= @headers['sender_type'] if @headers
-        @sender_type
+        hsender = @headers.delete(:sender_type) if @headers
+        @sender_type ||= hsender
       end
 
       def process!
+        parse unless @headers
         email_sender(sender_type).deliver!(@headers, @bodies)
       end
 

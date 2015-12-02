@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>render.rb</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>render.rb</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <p>[Class] EmailRender
+  (lib/email_render.rb)
+vi: foldlevel=1
+created at: 2015-11-27</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">require</span> <span class="hljs-string">'active_support/concern'</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">'background/job'</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">'liquid'</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>Find email template file for varies locales and formats,
+parse custom header and render email body</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">module</span> <span class="hljs-title">Emails</span></span>
+  <span class="hljs-class"><span class="hljs-keyword">module</span> <span class="hljs-title">Render</span></span>
+    extend <span class="hljs-constant">ActiveSupport::Concern</span>
+
+    included <span class="hljs-keyword">do</span>
+      <span class="hljs-keyword">include</span> <span class="hljs-constant">Background::Job</span>
+
+      <span class="hljs-keyword">include</span> <span class="hljs-constant">Mongoid::FieldCandy::EmailField</span>
+      email_field <span class="hljs-symbol">:to</span>, <span class="hljs-symbol">required:</span> <span class="hljs-keyword">true</span>
+
+      field <span class="hljs-symbol">:lc</span>, <span class="hljs-symbol">as:</span> <span class="hljs-symbol">:locale</span>, <span class="hljs-symbol">type:</span> <span class="hljs-constant">Symbol</span>, <span class="hljs-symbol">default:</span> -&gt; { default_locale }
+      field <span class="hljs-symbol">:o_at</span>, <span class="hljs-symbol">as:</span> <span class="hljs-symbol">:opened_at</span>, <span class="hljs-symbol">type:</span> <span class="hljs-constant">Time</span>
+
+      validate <span class="hljs-keyword">do</span>
+        errors.add <span class="hljs-symbol">:locale</span>,
+                   <span class="hljs-symbol">:inclusion</span> <span class="hljs-keyword">if</span> localized? &amp;&amp; !available_locales.<span class="hljs-keyword">include</span>?(lc)
+      <span class="hljs-keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <h2 id="override-those-methods-in-subclasses">Override those methods in subclasses</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">template_dir</span></span>
+        <span class="hljs-string">'app/views/'</span>
+      <span class="hljs-keyword">end</span>
+
+      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">template_basename</span></span>
+        <span class="hljs-keyword">self</span>.<span class="hljs-keyword">class</span>.to_s.underscore
+      <span class="hljs-keyword">end</span>
+
+      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">available_formats</span></span>
+        [<span class="hljs-symbol">:txt</span>, <span class="hljs-symbol">:html</span>]
+      <span class="hljs-keyword">end</span>
+
+      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">available_locales</span></span>
+        [<span class="hljs-symbol">:zh</span>, <span class="hljs-symbol">:ja</span>, <span class="hljs-symbol">:en</span>]
+      <span class="hljs-keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <h2 id="find-template">find template</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">localized?</span></span>
+        available_locales &amp;&amp; available_locales.size &gt; <span class="hljs-number">0</span>
+      <span class="hljs-keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>calculate locale from locales settings</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">default_locale</span></span>
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">nil</span> <span class="hljs-keyword">unless</span> localized?
+        u_lc = <span class="hljs-constant">I18n</span>.locale.to_sym
+        available_locales.<span class="hljs-keyword">include</span>?(u_lc) ? u_lc <span class="hljs-symbol">:</span> available_locales[<span class="hljs-number">0</span>]
+      <span class="hljs-keyword">end</span>
+
+      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">default_format</span></span>
+        available_formats.first
+      <span class="hljs-keyword">end</span>
+
+      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">template_file</span><span class="hljs-params">(format = <span class="hljs-keyword">nil</span>, locale = <span class="hljs-keyword">nil</span>)</span></span>
+        template_file = template_basename
+
+        locale ||= default_locale <span class="hljs-keyword">if</span> localized? <span class="hljs-comment"># may has a locale</span>
+        template_file += <span class="hljs-string">".<span class="hljs-subst">#{locale}</span>"</span> <span class="hljs-keyword">if</span> locale
+
+        format ||= default_format
+        template_file += <span class="hljs-string">".<span class="hljs-subst">#{format}</span>"</span> <span class="hljs-comment"># always has a format</span>
+
+        <span class="hljs-constant">File</span>.join(template_dir, template_file)
+      <span class="hljs-keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <h2 id="parse-the-template">parse the template</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+      <span class="hljs-keyword">attr_accessor</span> <span class="hljs-symbol">:headers</span>, <span class="hljs-symbol">:bodies</span>
+
+      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">valid_fields</span></span>
+        <span class="hljs-string">%w(to cc bcc subject from sender_type reply-to return-path inline)</span>
+      <span class="hljs-keyword">end</span>
+
+      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">parse</span><span class="hljs-params">(extra_headers = {}, loc = <span class="hljs-keyword">nil</span>)</span></span>
+        <span class="hljs-variable">@bodies</span> = {}
+        available_formats.each <span class="hljs-keyword">do</span> |fmt|
+          body = <span class="hljs-constant">Liquid::Template</span>.parse(
+            <span class="hljs-constant">File</span>.open(template_file(fmt, loc), <span class="hljs-string">'r:utf-8'</span>).read).render(to_hash)
+
+          <span class="hljs-keyword">if</span> <span class="hljs-variable">@headers</span>.<span class="hljs-keyword">nil</span>?
+            head, body = body.split(<span class="hljs-string">"\n\n"</span>, <span class="hljs-number">2</span>)
+            setup_header(<span class="hljs-constant">YAML</span>.load(head).merge(extra_headers.stringify_keys))
+          <span class="hljs-keyword">end</span>
+          <span class="hljs-variable">@bodies</span>[fmt] = body
+        <span class="hljs-keyword">end</span>
+      <span class="hljs-keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>set email header with valid field checking</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">setup_header</span><span class="hljs-params">(dat)</span></span>
+        <span class="hljs-variable">@headers</span> = { <span class="hljs-symbol">to:</span> to }
+        dat.each <span class="hljs-keyword">do</span> |key, val|
+          key = key.to_s.downcase
+          fail <span class="hljs-string">"invalid field <span class="hljs-subst">#{key}</span>"</span> <span class="hljs-keyword">unless</span> valid_fields.<span class="hljs-keyword">include</span>?(key)
+          <span class="hljs-variable">@headers</span>[key.to_sym] = val <span class="hljs-keyword">unless</span> val.<span class="hljs-keyword">nil</span>?
+        <span class="hljs-keyword">end</span>
+      <span class="hljs-keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <h2 id="delivery-the-email">delivery the email</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>nil if not defined in template file or by extra rendering data</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">attr_writer</span> <span class="hljs-symbol">:sender_type</span>
+      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sender_type</span></span>
+        hsender = <span class="hljs-variable">@headers</span>.delete(<span class="hljs-symbol">:sender_type</span>) <span class="hljs-keyword">if</span> <span class="hljs-variable">@headers</span>
+        <span class="hljs-variable">@sender_type</span> ||= hsender
+      <span class="hljs-keyword">end</span>
+
+      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">process!</span></span>
+        parse <span class="hljs-keyword">unless</span> <span class="hljs-variable">@headers</span>
+        email_sender(sender_type).deliver!(<span class="hljs-variable">@headers</span>, <span class="hljs-variable">@bodies</span>)
+      <span class="hljs-keyword">end</span>
+
+      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">deliver!</span></span>
+        perform_job! <span class="hljs-comment"># this will call process! in the right way</span>
+      <span class="hljs-keyword">end</span>
+
+      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">delivered?</span></span>
+        job_state == <span class="hljs-number">10</span>
+      <span class="hljs-keyword">end</span>
+
+      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">deliver_later</span><span class="hljs-params">(sec = <span class="hljs-number">0</span>)</span></span>
+        <span class="hljs-keyword">self</span>.not_before = <span class="hljs-constant">Time</span>.now + sec
+        save!
+      <span class="hljs-keyword">end</span>
+    <span class="hljs-keyword">end</span>
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span></pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

@@ -103,8 +103,8 @@ export :web do
 end
 
 export :email do
-  add_gem 'faraday'
   add_gem 'liquid'
+  add_gem 'mailgun-ruby'
 
   copy 'lib/emails/*.rb'
   copy 'app/models/email.rb', sync: false

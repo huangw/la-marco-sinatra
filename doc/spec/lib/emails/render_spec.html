@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>render_spec.rb</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>render_spec.rb</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">require</span> <span class="hljs-string">'spec_helper'</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">'emails/render'</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MockEmailLessLocale</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">Emails::MockEmail</span></span></span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">available_locales</span></span>
+    [<span class="hljs-symbol">:de</span>, <span class="hljs-symbol">:it</span>]
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MockEmailWithoutLocale</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">Emails::MockEmail</span></span></span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">available_locales</span></span>
+    []
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
+
+describe <span class="hljs-constant">Emails::Render</span> <span class="hljs-keyword">do</span>
+  subject(<span class="hljs-symbol">:email</span>) { <span class="hljs-constant">Emails::MockEmail</span>.new <span class="hljs-symbol">to:</span> <span class="hljs-string">'huangw@pe-po.com'</span> }
+  describe <span class="hljs-string">'#to'</span> <span class="hljs-keyword">do</span>
+    it <span class="hljs-string">'is required'</span> <span class="hljs-keyword">do</span>
+      expect(<span class="hljs-constant">Emails::MockEmail</span>.new).to have_validate_error(<span class="hljs-symbol">:blank</span>).on(<span class="hljs-symbol">:to</span>)
+    <span class="hljs-keyword">end</span>
+  <span class="hljs-keyword">end</span>
+
+  describe <span class="hljs-string">'#locale'</span> <span class="hljs-keyword">do</span>
+    it <span class="hljs-string">'equals to current locale by default'</span> <span class="hljs-keyword">do</span>
+      expect(email.locale).to eq(<span class="hljs-constant">I18n</span>.locale.to_sym)
+    <span class="hljs-keyword">end</span>
+
+    it <span class="hljs-string">'if current locale not supported, to the first available locale'</span> <span class="hljs-keyword">do</span>
+      expect(<span class="hljs-constant">MockEmailLessLocale</span>.new.locale).to eq(<span class="hljs-symbol">:de</span>)
+    <span class="hljs-keyword">end</span>
+
+    it <span class="hljs-string">'can not be set to unsupported locale'</span> <span class="hljs-keyword">do</span>
+      email.locale = <span class="hljs-symbol">:it</span>
+      expect(email).to have_validate_error(<span class="hljs-symbol">:inclusion</span>).on(<span class="hljs-symbol">:locale</span>)
+    <span class="hljs-keyword">end</span>
+  <span class="hljs-keyword">end</span>
+
+  describe <span class="hljs-string">'#template_file'</span> <span class="hljs-keyword">do</span>
+    it <span class="hljs-string">'return the template for render the email model'</span> <span class="hljs-keyword">do</span>
+      expect(email.template_file).to eq(<span class="hljs-string">'app/views/emails/mock_email.en.txt'</span>)
+      expect(email.template_file(<span class="hljs-symbol">:html</span>)).to eq(<span class="hljs-string">'app/views/emails/mock_email.en.html'</span>)
+      expect(email.template_file(<span class="hljs-symbol">:html</span>, <span class="hljs-symbol">:fr</span>)).to eq(<span class="hljs-string">'app/views/emails/mock_email.fr.html'</span>)
+    <span class="hljs-keyword">end</span>
+
+    it <span class="hljs-string">'return the first locale as the default locale'</span> <span class="hljs-keyword">do</span>
+      expect(<span class="hljs-constant">MockEmailLessLocale</span>.new.template_file).to eq(<span class="hljs-string">'app/views/mock_email_less_locale.de.txt'</span>)
+      expect(<span class="hljs-constant">MockEmailLessLocale</span>.new.template_file(<span class="hljs-symbol">:html</span>)).to eq(<span class="hljs-string">'app/views/mock_email_less_locale.de.html'</span>)
+    <span class="hljs-keyword">end</span>
+
+    it <span class="hljs-string">'supports template without locale'</span> <span class="hljs-keyword">do</span>
+      expect(<span class="hljs-constant">MockEmailWithoutLocale</span>.new.template_file).to eq(<span class="hljs-string">'app/views/mock_email_without_locale.txt'</span>)
+      expect(<span class="hljs-constant">MockEmailWithoutLocale</span>.new.template_file(<span class="hljs-symbol">:html</span>)).to eq(<span class="hljs-string">'app/views/mock_email_without_locale.html'</span>)
+    <span class="hljs-keyword">end</span>
+  <span class="hljs-keyword">end</span>
+
+  describe <span class="hljs-string">'#parse'</span> <span class="hljs-keyword">do</span>
+    it <span class="hljs-string">'render the template to #headers/#bodies for default locale'</span> <span class="hljs-keyword">do</span>
+      email.parse
+      expect(email.headers[<span class="hljs-symbol">:subject</span>]).to eq(<span class="hljs-string">'Email for Emails::MockEmail'</span>)
+      expect(email.headers[<span class="hljs-symbol">:from</span>]).to eq(<span class="hljs-string">'test@vikkr.com'</span>)
+      expect(email.bodies[<span class="hljs-symbol">:txt</span>]).to match(<span class="hljs-string">'Email for Emails::MockEmail, to huangw@pe-po.com'</span>)
+      expect(email.bodies[<span class="hljs-symbol">:html</span>]).to match(<span class="hljs-string">'Email for Emails::MockEmail'</span>)
+    <span class="hljs-keyword">end</span>
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span></pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

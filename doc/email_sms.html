@@ -35,7 +35,7 @@
 <p>邮件模块负责render不同语言、不同格式（txt或html）邮件body和header。</p>
 
 <p>各个模型需要通过<code>#available_formats</code>, <code>#available_locales</code>指定可用模板的种类。
-邮件发送时，<code>#delivery!</code>方法会根据当前的I18n环境和发送方法（<code>sender</code>）选择所采用的模板。</p>
+邮件发送时，<code>#deliver!</code>方法会根据当前的I18n环境和发送方法（<code>sender</code>）选择所采用的模板。</p>
 
 <p>邮件模板默认为<code>liquid</code>格式，<code>subject</code>等以yaml格式写在<code>#available_formats.first</code>
 模板的最前面几行（以空白与body部分区分开）。邮件header中还可以指定邮件发送的方式
@@ -43,13 +43,22 @@
 
 <p>虽然任何类都可以<code>include EmailRender</code>，但建议将邮件全部统一为某个模型的子类，便于管理。</p>
 
-<p>【SOURCE】<a href="./spec/lib/email_render.html"><code>lib/email_render.rb</code></a> (RSpec <a href="./spec/lib/email_render_spec.html">src</a> <a href="./spec/lib/email_render_spec_rslt.html">rslt</a>)</p>
+<p>邮件模型同时后台任务，只是controller可以在需要时直接执行<code>#deliver!</code>，该方法是<code>#process!</code>
+的同名方法，因此作为后台任务的邮件模型会直接以完成状态保存，不会被<code>background_worker</code>执行。
+否则可以选择<code>#deliver_later!(seconds)</code>，交由后台发送。（如果controller处于防火墙之后，
+无法直接连接外部服务发送邮件，则<code>#deliver_later</code>就是唯一可以发送邮件的方法了，
+可以指定<code>seconds = 0</code>，则运行在防火墙外的服务器上的后台任务会尽快发送邮件）。</p>
+
+<p>【SOURCE】<a href="./spec/lib/emails/render.html"><code>lib/emails/render.rb</code></a> (RSpec <a href="./spec/lib/emails/render_spec.html">src</a> <a href="./spec/lib/emails/render_spec_rslt.html">rslt</a>)</p>
 
 <h3 id="mailsender">邮件发送服务 MailSender</h3>
 
-<p>发送服务是一种通用接口，可以接受各种header, html body, text body等参数并<code>#delivery!</code>。
+<p>发送服务是一种通用接口，可以接受各种header, html body, text body等参数并<code>#deliver!</code>。
 不同的发送服务的子类实现通过mailgun，sendcloud等不同第三方服务实现邮件发送。
 甚至不同邮件的可以选用不同的发送服务（如注册邮件采用送达率更高的服务）。</p>
+
+<p>【SOURCE】<a href="./spec/lib/emails/fake_sender.html"><code>lib/emails/fake_sender.rb</code></a> (RSpec <a href="./spec/lib/emails/fake_sender_spec.html">src</a> <a href="./spec/lib/emails/fake_sender_spec_rslt.html">rslt</a>)
+【SOURCE】<a href="./spec/lib/emails/mailgun_sender.html"><code>lib/emails/mailgun_sender.rb</code></a> (RSpec <a href="./spec/lib/emails/mailgun_sender_spec.html">src</a> <a href="./spec/lib/emails/mailgun_sender_spec_rslt.html">rslt</a>)</p>
 
 <h3 id="section-2">邮件开发和测试</h3>
 

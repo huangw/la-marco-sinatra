@@ -178,6 +178,9 @@ add	lib/mongoid/ordered_list.rb	/^      def add(obj, opts = {})$/;"	f	class:Mong
 addClass	doc/spec/lib/asset_settings/environment_settings_spec_rslt.html	/^function addClass(element_id, classname) {$/;"	f
 addClass	doc/spec/lib/asset_settings_spec_rslt.html	/^function addClass(element_id, classname) {$/;"	f
 addClass	doc/spec/lib/email_render_spec_rslt.html	/^function addClass(element_id, classname) {$/;"	f
+addClass	doc/spec/lib/emails/fake_sender_spec_rslt.html	/^function addClass(element_id, classname) {$/;"	f
+addClass	doc/spec/lib/emails/mailgun_sender_spec_rslt.html	/^function addClass(element_id, classname) {$/;"	f
+addClass	doc/spec/lib/emails/render_spec_rslt.html	/^function addClass(element_id, classname) {$/;"	f
 addClass	doc/spec/lib/helpers/form_helper_spec_rslt.html	/^function addClass(element_id, classname) {$/;"	f
 addClass	doc/spec/lib/la_buffered_logger_spec_rslt.html	/^function addClass(element_id, classname) {$/;"	f
 addClass	doc/spec/lib/rack/json_response_spec_rslt.html	/^function addClass(element_id, classname) {$/;"	f
@@ -192,6 +195,9 @@ append	lib/la_buffered_logger.rb	/^  def append(dat)$/;"	f	class:LaBufferedLogge
 apply_filters	doc/spec/lib/asset_settings/environment_settings_spec_rslt.html	/^function apply_filters() {$/;"	f
 apply_filters	doc/spec/lib/asset_settings_spec_rslt.html	/^function apply_filters() {$/;"	f
 apply_filters	doc/spec/lib/email_render_spec_rslt.html	/^function apply_filters() {$/;"	f
+apply_filters	doc/spec/lib/emails/fake_sender_spec_rslt.html	/^function apply_filters() {$/;"	f
+apply_filters	doc/spec/lib/emails/mailgun_sender_spec_rslt.html	/^function apply_filters() {$/;"	f
+apply_filters	doc/spec/lib/emails/render_spec_rslt.html	/^function apply_filters() {$/;"	f
 apply_filters	doc/spec/lib/helpers/form_helper_spec_rslt.html	/^function apply_filters() {$/;"	f
 apply_filters	doc/spec/lib/la_buffered_logger_spec_rslt.html	/^function apply_filters() {$/;"	f
 apply_filters	doc/spec/lib/rack/json_response_spec_rslt.html	/^function apply_filters() {$/;"	f
@@ -200,6 +206,9 @@ assets_env	lib/asset_settings.rb	/^    def assets_env$/;"	f	class:AssetSettings
 assign_display_style	doc/spec/lib/asset_settings/environment_settings_spec_rslt.html	/^function assign_display_style(classname, display_flag) {$/;"	f
 assign_display_style	doc/spec/lib/asset_settings_spec_rslt.html	/^function assign_display_style(classname, display_flag) {$/;"	f
 assign_display_style	doc/spec/lib/email_render_spec_rslt.html	/^function assign_display_style(classname, display_flag) {$/;"	f
+assign_display_style	doc/spec/lib/emails/fake_sender_spec_rslt.html	/^function assign_display_style(classname, display_flag) {$/;"	f
+assign_display_style	doc/spec/lib/emails/mailgun_sender_spec_rslt.html	/^function assign_display_style(classname, display_flag) {$/;"	f
+assign_display_style	doc/spec/lib/emails/render_spec_rslt.html	/^function assign_display_style(classname, display_flag) {$/;"	f
 assign_display_style	doc/spec/lib/helpers/form_helper_spec_rslt.html	/^function assign_display_style(classname, display_flag) {$/;"	f
 assign_display_style	doc/spec/lib/la_buffered_logger_spec_rslt.html	/^function assign_display_style(classname, display_flag) {$/;"	f
 assign_display_style	doc/spec/lib/rack/json_response_spec_rslt.html	/^function assign_display_style(classname, display_flag) {$/;"	f
@@ -207,6 +216,9 @@ assign_display_style	doc/spec/lib/route_spec_rslt.html	/^function assign_display
 assign_display_style_for_group	doc/spec/lib/asset_settings/environment_settings_spec_rslt.html	/^function assign_display_style_for_group(classname, display_flag, subgroup_flag) {$/;"	f
 assign_display_style_for_group	doc/spec/lib/asset_settings_spec_rslt.html	/^function assign_display_style_for_group(classname, display_flag, subgroup_flag) {$/;"	f
 assign_display_style_for_group	doc/spec/lib/email_render_spec_rslt.html	/^function assign_display_style_for_group(classname, display_flag, subgroup_flag) {$/;"	f
+assign_display_style_for_group	doc/spec/lib/emails/fake_sender_spec_rslt.html	/^function assign_display_style_for_group(classname, display_flag, subgroup_flag) {$/;"	f
+assign_display_style_for_group	doc/spec/lib/emails/mailgun_sender_spec_rslt.html	/^function assign_display_style_for_group(classname, display_flag, subgroup_flag) {$/;"	f
+assign_display_style_for_group	doc/spec/lib/emails/render_spec_rslt.html	/^function assign_display_style_for_group(classname, display_flag, subgroup_flag) {$/;"	f
 assign_display_style_for_group	doc/spec/lib/helpers/form_helper_spec_rslt.html	/^function assign_display_style_for_group(classname, display_flag, subgroup_flag) {$/;"	f
 assign_display_style_for_group	doc/spec/lib/la_buffered_logger_spec_rslt.html	/^function assign_display_style_for_group(classname, display_flag, subgroup_flag) {$/;"	f
 assign_display_style_for_group	doc/spec/lib/rack/json_response_spec_rslt.html	/^function assign_display_style_for_group(classname, display_flag, subgroup_flag) {$/;"	f
@@ -270,7 +282,7 @@ default_radio_value	lib/helpers/form_helper.rb	/^    def default_radio_value(fie
 default_url	lib/route.rb	/^    def default_url(app_class)$/;"	f	class:Route
 default_value	lib/helpers/form_helper.rb	/^    def default_value(field, default)$/;"	f	class:FormHelper.FormBuilder
 deliver!	lib/emails/fake_sender.rb	/^    def deliver!(headers_, bodies_)$/;"	f	class:Emails.FakeSender
-deliver!	lib/emails/mailgun_sender.rb	/^    def deliver!(headers_, bodies_)$/;"	f	class:Emails.MailgunSender
+deliver!	lib/emails/mailgun_sender.rb	/^    def deliver!(headers, bodies)$/;"	f	class:Emails.MailgunSender
 deliver!	lib/emails/render.rb	/^      def deliver!$/;"	f	class:Emails.Render
 deliver_later	lib/emails/render.rb	/^      def deliver_later(sec = 0)$/;"	f	class:Emails.Render
 delivered?	lib/emails/render.rb	/^      def delivered?$/;"	f	class:Emails.Render
@@ -342,6 +354,9 @@ get_binding	spec/support/helpers/api_doc_helper.rb	/^    def get_binding$/;"	f	c
 get_display_style	doc/spec/lib/asset_settings/environment_settings_spec_rslt.html	/^function get_display_style(display_flag) {$/;"	f
 get_display_style	doc/spec/lib/asset_settings_spec_rslt.html	/^function get_display_style(display_flag) {$/;"	f
 get_display_style	doc/spec/lib/email_render_spec_rslt.html	/^function get_display_style(display_flag) {$/;"	f
+get_display_style	doc/spec/lib/emails/fake_sender_spec_rslt.html	/^function get_display_style(display_flag) {$/;"	f
+get_display_style	doc/spec/lib/emails/mailgun_sender_spec_rslt.html	/^function get_display_style(display_flag) {$/;"	f
+get_display_style	doc/spec/lib/emails/render_spec_rslt.html	/^function get_display_style(display_flag) {$/;"	f
 get_display_style	doc/spec/lib/helpers/form_helper_spec_rslt.html	/^function get_display_style(display_flag) {$/;"	f
 get_display_style	doc/spec/lib/la_buffered_logger_spec_rslt.html	/^function get_display_style(display_flag) {$/;"	f
 get_display_style	doc/spec/lib/rack/json_response_spec_rslt.html	/^function get_display_style(display_flag) {$/;"	f
@@ -381,7 +396,7 @@ initialize	lib/devtools/asset_mapper/vendor_file.rb	/^    def initialize(file_id
 initialize	lib/devtools/file_generator.rb	/^    def initialize(name, su = nil)$/;"	f	class:FileGenerator.RubyFile
 initialize	lib/devtools/i18n_utils.rb	/^    def initialize(file_name)$/;"	f	class:YamlFile
 initialize	lib/emails/fake_sender.rb	/^    def initialize(options_ = {})$/;"	f	class:Emails.FakeSender
-initialize	lib/emails/mailgun_sender.rb	/^    def initialize(options = {})$/;"	f	class:Emails.MailgunSender
+initialize	lib/emails/mailgun_sender.rb	/^    def initialize(api_key, domain, params = {})$/;"	f	class:Emails.MailgunSender
 initialize	lib/helpers/form_helper.rb	/^    def initialize(parent, object, name = nil)$/;"	f	class:FormHelper.FormBuilder
 initialize	lib/la_buffered_logger.rb	/^  def initialize(opts = {})$/;"	f	class:LaBufferedLogger
 initialize	lib/mongoid/ordered_list.rb	/^      def initialize(prt, fnm, cf)$/;"	f	class:Mongoid.OrderedList.Proxy
@@ -411,6 +426,9 @@ main_loop	lib/background/worker_pool.rb	/^    def main_loop$/;"	f	class:Backgrou
 makeRed	doc/spec/lib/asset_settings/environment_settings_spec_rslt.html	/^function makeRed(element_id) {$/;"	f
 makeRed	doc/spec/lib/asset_settings_spec_rslt.html	/^function makeRed(element_id) {$/;"	f
 makeRed	doc/spec/lib/email_render_spec_rslt.html	/^function makeRed(element_id) {$/;"	f
+makeRed	doc/spec/lib/emails/fake_sender_spec_rslt.html	/^function makeRed(element_id) {$/;"	f
+makeRed	doc/spec/lib/emails/mailgun_sender_spec_rslt.html	/^function makeRed(element_id) {$/;"	f
+makeRed	doc/spec/lib/emails/render_spec_rslt.html	/^function makeRed(element_id) {$/;"	f
 makeRed	doc/spec/lib/helpers/form_helper_spec_rslt.html	/^function makeRed(element_id) {$/;"	f
 makeRed	doc/spec/lib/la_buffered_logger_spec_rslt.html	/^function makeRed(element_id) {$/;"	f
 makeRed	doc/spec/lib/rack/json_response_spec_rslt.html	/^function makeRed(element_id) {$/;"	f
@@ -418,6 +436,9 @@ makeRed	doc/spec/lib/route_spec_rslt.html	/^function makeRed(element_id) {$/;"	f
 makeYellow	doc/spec/lib/asset_settings/environment_settings_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
 makeYellow	doc/spec/lib/asset_settings_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
 makeYellow	doc/spec/lib/email_render_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
+makeYellow	doc/spec/lib/emails/fake_sender_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
+makeYellow	doc/spec/lib/emails/mailgun_sender_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
+makeYellow	doc/spec/lib/emails/render_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
 makeYellow	doc/spec/lib/helpers/form_helper_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
 makeYellow	doc/spec/lib/la_buffered_logger_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
 makeYellow	doc/spec/lib/rack/json_response_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
@@ -425,6 +446,7 @@ makeYellow	doc/spec/lib/route_spec_rslt.html	/^function makeYellow(element_id) {
 matt	lib/helpers/i18n_helper.rb	/^  def matt(msg, opts = {})$/;"	f	class:I18nHelper
 max_retry	lib/background/job.rb	/^      def max_retry$/;"	f	class:Background.Job
 merge_default	lib/confu.rb	/^    def merge_default(dat)$/;"	f	class:Confu.Data
+merge_parameters!	lib/emails/mailgun_sender.rb	/^    def merge_parameters!(hsh)$/;"	f	class:Emails.MailgunSender
 method_missing	lib/confu.rb	/^    def method_missing(met, val = nil, &prc)$/;"	f	class:Confu.Data
 method_missing	lib/helpers/form_helper.rb	/^    def method_missing(met, field = '', options = {})$/;"	f	class:FormHelper.FormBuilder
 min_abs_path	lib/devtools/asset_mapper/tfile.rb	/^    def min_abs_path$/;"	f	class:AssetMapper.Tfile
@@ -439,6 +461,9 @@ move	lib/mongoid/ordered_list.rb	/^      def move(tid, opts = {})$/;"	f	class:Mo
 moveProgressBar	doc/spec/lib/asset_settings/environment_settings_spec_rslt.html	/^function moveProgressBar(percentDone) {$/;"	f
 moveProgressBar	doc/spec/lib/asset_settings_spec_rslt.html	/^function moveProgressBar(percentDone) {$/;"	f
 moveProgressBar	doc/spec/lib/email_render_spec_rslt.html	/^function moveProgressBar(percentDone) {$/;"	f
+moveProgressBar	doc/spec/lib/emails/fake_sender_spec_rslt.html	/^function moveProgressBar(percentDone) {$/;"	f
+moveProgressBar	doc/spec/lib/emails/mailgun_sender_spec_rslt.html	/^function moveProgressBar(percentDone) {$/;"	f
+moveProgressBar	doc/spec/lib/emails/render_spec_rslt.html	/^function moveProgressBar(percentDone) {$/;"	f
 moveProgressBar	doc/spec/lib/helpers/form_helper_spec_rslt.html	/^function moveProgressBar(percentDone) {$/;"	f
 moveProgressBar	doc/spec/lib/la_buffered_logger_spec_rslt.html	/^function moveProgressBar(percentDone) {$/;"	f
 moveProgressBar	doc/spec/lib/rack/json_response_spec_rslt.html	/^function moveProgressBar(percentDone) {$/;"	f
@@ -501,6 +526,9 @@ remove	lib/mongoid/ordered_list.rb	/^      def remove(tid)$/;"	f	class:Mongoid.O
 removeClass	doc/spec/lib/asset_settings/environment_settings_spec_rslt.html	/^function removeClass(element_id, classname) {$/;"	f
 removeClass	doc/spec/lib/asset_settings_spec_rslt.html	/^function removeClass(element_id, classname) {$/;"	f
 removeClass	doc/spec/lib/email_render_spec_rslt.html	/^function removeClass(element_id, classname) {$/;"	f
+removeClass	doc/spec/lib/emails/fake_sender_spec_rslt.html	/^function removeClass(element_id, classname) {$/;"	f
+removeClass	doc/spec/lib/emails/mailgun_sender_spec_rslt.html	/^function removeClass(element_id, classname) {$/;"	f
+removeClass	doc/spec/lib/emails/render_spec_rslt.html	/^function removeClass(element_id, classname) {$/;"	f
 removeClass	doc/spec/lib/helpers/form_helper_spec_rslt.html	/^function removeClass(element_id, classname) {$/;"	f
 removeClass	doc/spec/lib/la_buffered_logger_spec_rslt.html	/^function removeClass(element_id, classname) {$/;"	f
 removeClass	doc/spec/lib/rack/json_response_spec_rslt.html	/^function removeClass(element_id, classname) {$/;"	f
