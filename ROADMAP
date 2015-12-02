@@ -30,7 +30,7 @@ year: 2015
 
 [+] logger: logstash-logger sinatra logger 07/18 @huangw:07/19
 
-[+] release_v0_0_2: release with built in mongodb/email support 12/05 @huangw;songcy:99
+[+] release_v0_0_2: release with built in mongodb/email support 12/05 @huangw;songcy:12/02
   [++] rcih: rewrite rack route, cucumber, i18n and api controllers 11/23-11/25 @huangw:11/24
   [++] monse: mongodb based session store 11/25-11/26 @huangw:11/24
   [++] asset_r: revise asset pipeline, lint and BDD for css and js 11/25-11/26 @huangw:11/25
