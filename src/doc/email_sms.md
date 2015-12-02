@@ -21,7 +21,7 @@
 无法直接连接外部服务发送邮件，则`#deliver_later`就是唯一可以发送邮件的方法了，
 可以指定`seconds = 0`，则运行在防火墙外的服务器上的后台任务会尽快发送邮件）。
 
-spec:lib/email_render
+spec:lib/emails/render
 
 ### 邮件发送服务 MailSender
 
@@ -29,12 +29,15 @@ spec:lib/email_render
 不同的发送服务的子类实现通过mailgun，sendcloud等不同第三方服务实现邮件发送。
 甚至不同邮件的可以选用不同的发送服务（如注册邮件采用送达率更高的服务）。
 
+spec:lib/emails/fake_sender
+spec:lib/emails/mailgun_sender
+
 ### 邮件开发和测试
 
 使用`rake gen:email`可以自动创建邮件模型和相应的模板（两种格式和三种语言，
 但可通过`ENV['locales']`和`ENV['formats']`指定）。
 
-测试邮件是否发送成功应该通过验证数据库模型的方法进行。`la-marco-sinatra`还提供了一套
+TODO: 测试邮件是否发送成功应该通过验证数据库模型的方法进行。`la-marco-sinatra`还提供了一套
 `email_controller`，可在开发环境下挂载到rack以便于确认render后的邮件效果。
 
 ## 短信 SMS

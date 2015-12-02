@@ -28,6 +28,7 @@ module Emails
   # Email for <%= class_name %>
   class <%= class_string %> < Email
     def to_hash
+      super
     end
   end
 end
@@ -47,12 +48,12 @@ end
   <title><%= class_name %></title>
 </head>
 <body>
-  <div style='color: red'>Email for <%= class_name %></div>
+  <div style='color: red'>Email for {{ model }}</div>
 </body>
 </html>
 
 @@ template_txt
-Subject: Email for <%= class_name %>
+Subject: Email for {{ model }}
 From: test@vikkr.com
 
-TODO: Email for <%= class_name %>
+TODO: Email for {{ model }}, to {{ to }}

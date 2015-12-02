@@ -39,9 +39,9 @@ gem "sanitize"
     
 gem "http_accept_language"
     
-gem "faraday"
-    
 gem "liquid"
+    
+gem "mailgun-ruby"
     
   
 

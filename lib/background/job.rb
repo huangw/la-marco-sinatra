@@ -48,37 +48,40 @@ module Background
         retried >= max_retry
       end
 
-      # rubocop:disable MethodLength
       def self.perform(worker = 'anonymous worker', logger = nil)
-        logger ||= global_logger
         job = waiting.asc(:not_before)
               .any_of({ :not_before.lte => Time.now }, not_before: nil)
               .find_one_and_update({ '$set' => { _j_s: 100 } },
                                    return_document: :after)
 
         return nil unless job # No job is waiting
-        warn "JOB STATUS ------------> #{job.job_state}"
+        job.perform_job!(worker, logger)
+      end
+
+      # rubocop:disable MethodLength
+      def perform_job!(worker = 'anonymous worker', logger = nil)
+        logger ||= global_logger
         begin
-          logger.info "[BJ #{worker}] (#{job.class}: #{job._id})"
-          job.process!
-          job.job_state = 10
+          logger.info "[BJ #{worker}] (#{self.class}: #{_id})"
+          process!
+          self.job_state = 10
         rescue => e
           logger.error "[BJ #{worker}] [#{e.class}] #{e.message}"\
-                       " (#{job.class}: #{job._id})"
+                       " (#{self.class}: #{_id})"
 
-          job.tryouts << "[#{e.class}] #{e.message}"
+          tryouts << "[#{e.class}] #{e.message}"
 
-          if job.no_more_retry?
-            job.job_state = 1 # indicate an error, stop retry
+          if no_more_retry?
+            self.job_state = 1 # indicate an error, stop retry
           else
-            job.job_state = 300
-            job.not_before ||= Time.now
-            job.not_before = job.not_before + job.retry_delay
+            self.job_state = 300
+            self.not_before ||= Time.now
+            self.not_before = not_before + retry_delay
           end
         end
 
-        job.save && job
+        save && self
       end
     end # included
-  end # SimpleJob
+  end # Job
 end # Background
