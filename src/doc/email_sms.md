@@ -37,7 +37,7 @@ spec:lib/emails/mailgun_sender
 使用`rake gen:email`可以自动创建邮件模型和相应的模板（两种格式和三种语言，
 但可通过`ENV['locales']`和`ENV['formats']`指定）。
 
-测试邮件是否发送成功应该通过验证数据库模型的方法进行。`la-marco-sinatra`还提供了一套
+TODO: 测试邮件是否发送成功应该通过验证数据库模型的方法进行。`la-marco-sinatra`还提供了一套
 `email_controller`，可在开发环境下挂载到rack以便于确认render后的邮件效果。
 
 ## 短信 SMS
