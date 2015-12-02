@@ -286,6 +286,7 @@ deliver!	lib/emails/mailgun_sender.rb	/^    def deliver!(headers, bodies)$/;"	f	
 deliver!	lib/emails/render.rb	/^      def deliver!$/;"	f	class:Emails.Render
 deliver_later	lib/emails/render.rb	/^      def deliver_later(sec = 0)$/;"	f	class:Emails.Render
 delivered?	lib/emails/render.rb	/^      def delivered?$/;"	f	class:Emails.Render
+delivered_at	lib/emails/render.rb	/^      def delivered_at$/;"	f	class:Emails.Render
 demongoize	lib/utils/hash_struct.rb	/^      def demongoize(args)$/;"	f	class:HashStruct
 destroy_session	lib/rack/session/mongoid.rb	/^      def destroy_session(env, session_id, options)$/;"	f	class:Rack.Session.Mongoid
 development?	lib/asset_settings.rb	/^    def development?$/;"	f	class:AssetSettings

@@ -110,6 +110,7 @@ module Emails
 
       # delivery the email
       # ---------------------
+      field :_d_at, type: Time
 
       # nil if not defined in template file or by extra rendering data
       attr_writer :sender_type
@@ -121,6 +122,7 @@ module Emails
       def process!
         parse unless @headers
         email_sender(sender_type).deliver!(@headers, @bodies)
+        self._d_at = Time.now
       end
 
       def deliver!
@@ -129,6 +131,10 @@ module Emails
 
       def delivered?
         job_state == 10
+      end
+
+      def delivered_at
+        delivered? && _d_at
       end
 
       def deliver_later(sec = 0)
