@@ -6,17 +6,12 @@ attrs application_code: 'la_marco_sinatra',
 
 pull :'la-marco', vikkr: 'vikkr/la-marco.git', branch: :develop
 pull :'la-marco-mongoid', vikkr: 'vikkr/la-marco-mongoid.git', branch: :develop
-pull :'la-marco-queue', vikkr: 'vikkr/la-marco-queue.git', branch: :develop
 
 from :'la-marco' do
   import :full
 end
 
 from :'la-marco-mongoid' do
-  import :full
-end
-
-from :'la-marco-queue' do
   import :full
 end
 
@@ -128,6 +123,5 @@ from('.') do
 
   # import :assets_mapper
   import :web
-
   import :email
 end
