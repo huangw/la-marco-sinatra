@@ -23,26 +23,29 @@ module Background
 
       scope :waiting, -> { where(job_state: 300) }
 
-      # rubocop:disable MethodLength
       def self.perform(worker = 'anonymous worker', logger = nil)
-        logger ||= global_logger
         job = waiting.asc(:c_at)
               .find_one_and_update({ '$set' => { _j_s: 100 } },
                                    return_document: :after)
 
         return nil unless job # No job is waiting
+        job.perform_job!(worker, logger)
+      end
 
+      # rubocop:disable MethodLength
+      def perform_job!(worker = 'anonymous worker', logger = nil)
+        logger ||= global_logger
         begin
-          logger.info "[BJ #{worker}] #{job.class} (#{job._id})"
-          job.process!
-          job.job_state = 10
+          logger.info "[BJ #{worker}] #{self.class} (#{_id})"
+          process!
+          self.job_state = 10
         rescue => e
           logger.error "[BJ #{worker}] [#{e.class}] #{e.message}"\
-                       " (#{job._id})"
-          job.job_state = 1
+                       " (#{self.class}: #{_id})"
+          self.job_state = 1
         end
 
-        job.save && job
+        save && self
       end
     end # included
   end # SimpleJob

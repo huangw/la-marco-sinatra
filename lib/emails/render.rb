@@ -13,8 +13,6 @@ module Emails
     extend ActiveSupport::Concern
 
     included do
-      attr_accessor :headers, :bodies
-
       include Background::Job
 
       include Mongoid::FieldCandy::EmailField
@@ -80,6 +78,8 @@ module Emails
       # parse the template
       # ---------------------
 
+      attr_accessor :headers, :bodies
+
       def valid_fields
         %w(to cc bcc subject from sender_type reply-to return-path inline)
       end
@@ -112,14 +112,23 @@ module Emails
       # ---------------------
 
       # nil if not defined in template file or by extra rendering data
+      attr_writer :sender_type
       def sender_type
-        @headers['sender_type'] if @headers
+        @sender_type ||= @headers['sender_type'] if @headers
+        @sender_type
       end
 
       def process!
         email_sender(sender_type).deliver!(@headers, @bodies)
       end
-      alias_method :deliver!, :process!
+
+      def deliver!
+        perform_job! # this will call process! in the right way
+      end
+
+      def delivered?
+        job_state == 10
+      end
 
       def deliver_later(sec = 0)
         self.not_before = Time.now + sec
