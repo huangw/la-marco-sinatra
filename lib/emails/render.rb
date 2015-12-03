@@ -63,10 +63,8 @@ module Emails
         available_formats.first
       end
 
-      def template_file(format = nil, locale = nil)
+      def template_file(format = nil)
         template_file = template_basename
-
-        locale ||= default_locale if localized? # may has a locale
         template_file += ".#{locale}" if locale
 
         format ||= default_format
@@ -84,11 +82,11 @@ module Emails
         %w(to cc bcc subject from sender_type reply-to return-path inline)
       end
 
-      def parse(extra_headers = {}, loc = nil)
+      def parse(extra_headers = {})
         @bodies = {}
         available_formats.each do |fmt|
           body = Liquid::Template.parse(
-            File.open(template_file(fmt, loc), 'r:utf-8').read).render(to_hash)
+            File.open(template_file(fmt), 'r:utf-8').read).render(to_hash)
 
           if @headers.nil?
             head, body = body.split("\n\n", 2)
@@ -126,7 +124,8 @@ module Emails
       end
 
       def deliver!
-        perform_job! # this will call process! in the right way
+        # this will call process! in the right way
+        perform_job!('front-sender')
       end
 
       def delivered?
