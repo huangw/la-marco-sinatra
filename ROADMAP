@@ -37,4 +37,4 @@ year: 2015
   [++] web_form: web controller, slim and form helpers 11/26-11/30 @huangw:11/26
   [++] mailgun: mailgun support revised 12/01-12/03 @huangw;gaoyh:12/02
 
-[+] liver: add live-reload guard configuration 12/03 @huangw:30
+[+] liver: add live-reload guard configuration 2016/10/10 @huangw:30

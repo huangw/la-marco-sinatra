@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="./css/jsgantt.css" />
+    <script language="javascript" src="./js/jsgantt.js"></script>
+    <title>Gantt Chart | la_marco_sinatra</title>
+</head>
+<body>
+  <h2>la_marco_sinatra
+      
+  </h2>
+
+<div style="position:relative" class="gantt" id="GanttChartDIV"></div>
+<script>
+    var g = new JSGantt.GanttChart('g',document.getElementById('GanttChartDIV'), 'day');
+    g.setShowRes(1); // Show/Hide Responsible (0/1)
+    g.setShowDur(1); // Show/Hide Duration (0/1)
+    g.setShowComp(0); //
+    g.setCaptionType('Caption');  // Set to Show Caption
+    g.setShowStartDate(0); // Show/Hide Start Date(0/1)
+    g.setShowEndDate(0); // Show/Hide End Date(0/1)
+    //g.setDateDisplayFormat('yyyy-mm-dd') // Set format to display dates ('mm/dd/yyyy', 'dd/mm/yyyy', 'yyyy-mm-dd')
+    g.setFormatArr("day","week","month") // Set format options (up to 4 : "minute","hour","day","week","month","quarter")
+
+    if( g ) {
+          g.AddTaskItem(new JSGantt.TaskItem(15,'create packing list for development','01/21/2015','01/21/2015','008000','',0,'黄巍',100,0,0,1,'','黄巍2015-01-21'));
+
+          g.AddTaskItem(new JSGantt.TaskItem(16,'implement all features','01/21/2015','01/23/2015','008000','',0,'黄巍',100,1,0,1,'',''));
+
+          g.AddTaskItem(new JSGantt.TaskItem(17,'sinatra with debug, map and route','01/21/2015','01/21/2015','008000','',0,'黄巍',100,0,16,1,'','黄巍2015-01-22'));
+
+          g.AddTaskItem(new JSGantt.TaskItem(18,'cucumber test environment with server control','01/22/2015','01/22/2015','008000','',0,'黄巍',100,0,16,1,'','黄巍2015-01-22'));
+
+          g.AddTaskItem(new JSGantt.TaskItem(19,'i18n initialization and setup','01/22/2015','01/22/2015','008000','',0,'黄巍',100,0,16,1,'','黄巍2015-01-23'));
+
+          g.AddTaskItem(new JSGantt.TaskItem(20,'slim, form and table helpers','01/22/2015','01/23/2015','008000','',0,'黄巍',100,0,16,1,'','黄巍2015-01-23'));
+
+          g.AddTaskItem(new JSGantt.TaskItem(21,'assets pipeline and helpers based on stackupper','01/23/2015','01/24/2015','008000','',0,'黄巍',100,0,16,1,'','黄巍2015-01-27'));
+
+          g.AddTaskItem(new JSGantt.TaskItem(22,'release the first alpha version','01/30/2015','01/30/2015','008000','',1,'黄巍',100,0,0,1,'','黄巍2015-01-28'));
+
+          g.AddTaskItem(new JSGantt.TaskItem(24,'implement API feature','01/30/2015','02/24/2015','008000','',0,'黄巍',100,1,0,1,'',''));
+
+          g.AddTaskItem(new JSGantt.TaskItem(25,'rack middleware rewised','01/30/2015','01/30/2015','008000','',0,'黄巍',100,0,24,1,'','黄巍2015-01-31'));
+
+          g.AddTaskItem(new JSGantt.TaskItem(26,'api test with rack test and helper','01/30/2015','01/30/2015','008000','',0,'黄巍',100,0,24,1,'','黄巍2015-01-31'));
+
+          g.AddTaskItem(new JSGantt.TaskItem(27,'api document with rspec rack test','02/20/2015','02/24/2015','008000','',0,'黄巍',100,0,24,1,'','黄巍2015-02-07'));
+
+          g.AddTaskItem(new JSGantt.TaskItem(29,'modify the text field format methods','06/19/2015','06/19/2015','008000','',0,'宋春月',100,0,0,1,'','宋春月2015-06-19'));
+
+          g.AddTaskItem(new JSGantt.TaskItem(31,'logstash-logger sinatra logger','07/18/2015','07/18/2015','008000','',0,'黄巍',100,0,0,1,'','黄巍2015-07-19'));
+
+          g.AddTaskItem(new JSGantt.TaskItem(33,'release with built in mongodb/email support','12/05/2015','12/05/2015','008000','',1,'黄巍,宋春月',100,1,0,1,'',''));
+
+          g.AddTaskItem(new JSGantt.TaskItem(34,'rewrite rack route, cucumber, i18n and api controllers','11/23/2015','11/25/2015','008000','',0,'黄巍',100,0,33,1,'','黄巍2015-11-24'));
+
+          g.AddTaskItem(new JSGantt.TaskItem(35,'mongodb based session store','11/25/2015','11/26/2015','008000','',0,'黄巍',100,0,33,1,'','黄巍2015-11-24'));
+
+          g.AddTaskItem(new JSGantt.TaskItem(36,'revise asset pipeline, lint and BDD for css and js','11/25/2015','11/26/2015','008000','',0,'黄巍',100,0,33,1,'','黄巍2015-11-25'));
+
+          g.AddTaskItem(new JSGantt.TaskItem(37,'web controller, slim and form helpers','11/26/2015','11/30/2015','008000','',0,'黄巍',100,0,33,1,'','黄巍2015-11-26'));
+
+          g.AddTaskItem(new JSGantt.TaskItem(38,'mailgun support revised','12/01/2015','12/03/2015','008000','',0,'黄巍,高云鹤',100,0,33,1,'','黄巍,高云鹤2015-12-02'));
+
+          g.AddTaskItem(new JSGantt.TaskItem(40,'add live-reload guard configuration','10/10/2016','10/10/2016','FFFF00','',0,'黄巍',30,0,0,1,'','黄巍:30\%'));
+
+        g.Draw();
+        g.DrawDependencies();
+    }
+    else
+    {
+        alert("not defined");
+    }
+</script>
+
+
+<h3>Recent Git Log</h3> 
+<pre><code>
+* <em style='color:grey'>7c05410d99e75d825ae437599ec90e56b5ee66ad</em>
+| <strong>2015-12-03 09:47</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | <strong style='color:green'>update progress of task liver to 30</strong>
+| 
+|  
+* <em style='color:grey'>45098339c421b0b7977e0526b12b9df2e9d6a6a8</em>
+| <strong>2015-12-03 07:17</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | <strong style='color:green'>update progress of task liver to 20</strong>
+| 
+|  
+* <em style='color:grey'>ba985c0272d78c1834c1690f75cf66510bd420b8</em>
+| <strong>2015-12-03 07:14</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | <strong style='color:green'>update progress of task liver to 10</strong>
+| 
+|  
+* <em style='color:grey'>715f949d8944a2dec16bff8cadf36da2f9ea5b0c</em>
+| <strong>2015-12-03 07:13</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | <strong style='color:green'>update roadmap</strong>
+| 
+|  
+* <em style='color:grey'>463d85a273f28ec703b61b3bc129ffe975e73989</em>
+| <strong>2015-12-02 15:54</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | <strong style='color:green'>update email model</strong>
+| 
+|  
+* <em style='color:grey'>b7968f16c14247f906e7e00d9816256f5de18566</em>
+| <strong>2015-12-02 15:01</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | <strong style='color:green'>add sent at time stamp</strong>
+| 
+|  
+* <em style='color:grey'>6de44784364e2764daf4e0daa3dce23b8b35224f</em>
+| <strong>2015-12-02 14:21</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | <strong style='color:green'>update progress of task release_v0_0_2 to 100</strong>
+| 
+|  
+* <em style='color:grey'>cf1f43a540f937b1b2e3aaf0c420c1d2fd930133</em>
+| <strong>2015-12-02 14:20</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | <strong style='color:green'>update progress of task release_v0_0_2 to 99</strong>
+| 
+|  
+* <em style='color:grey'>dd92ac040b58bb8719564e975835ade846aba647</em>
+| <strong>2015-12-02 14:19</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | <strong style='color:green'>update progress of task release_v0_0_2 to 10</strong>
+| 
+|  
+* <em style='color:grey'>764a172c08e6244eec33fe97656f6344459cfb0a</em>
+| <strong>2015-12-02 14:18</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | <strong style='color:green'>update progress of task mailgun to 100</strong>
+| 
+|    
+*   <em style='color:grey'>116c96e41e62eb04416746ac6e9ce6590bd8494a</em>
+|\  <strong>2015-12-02 14:18</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>Merge branch 'mailgun' into develop</strong>
+| | 
+| |   
+| * <em style='color:grey'>2520559c762b377c9bced2c6ae1b1ac1269f7f7f</em>
+| | <strong>2015-12-02 14:18</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>[close] close the branch by set progress to 100.</strong>
+| | 
+| |     
+| *   <em style='color:grey'>e393ace1ad3bac25c75112f797fdbbf8dfcd3b0d</em>
+| |\  <strong>2015-12-02 14:15</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| |/  |/|   <strong style='color:green'>Merge branch 'develop' into mailgun</strong>
+| |   
+| |   
+* | <em style='color:grey'>3d395294b5fe134344c275506078c5ea69edf372</em>
+| | <strong>2015-12-02 13:39</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>update progress of task mailgun to 99</strong>
+| | 
+| |   
+| * <em style='color:grey'>aaf9455eb2c486ef5b2de6e324bd655d6ec17048</em>
+| | <strong>2015-12-02 13:39</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>[complete] complete the branch by set progress to 99.</strong>
+| | 
+| |     
+| *   <em style='color:grey'>20765ac39d5425f392037fe4fa81463326972ac1</em>
+| |\  <strong>2015-12-02 11:49</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| |/  |/|   <strong style='color:green'>Merge branch 'develop' into mailgun</strong>
+| |   
+| |   
+* | <em style='color:grey'>fbe95a2da2b552bc79da3fbfeeb23ce43b5f5f26</em>
+| | <strong>2015-12-02 11:49</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>update progress of task mailgun to 60</strong>
+| | 
+| |   
+| * <em style='color:grey'>6653d1b3faad9b7d68d410bfc83cb071240a7c86</em>
+| | <strong>2015-12-02 11:48</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>[progress] update progress to 60</strong>
+| | 
+| |     
+| *   <em style='color:grey'>af8b201ea61636c350a7f960ffeb4bdad2e95d36</em>
+| |\  <strong>2015-12-02 11:04</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| |/  |/|   <strong style='color:green'>Merge branch 'develop' into mailgun</strong>
+| |   
+| |   
+* | <em style='color:grey'>3f2bd2a7c3d9e34e4ee6d3cb2d98163d86592f37</em>
+| | <strong>2015-12-02 11:04</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>update progress of task mailgun to 50</strong>
+| | 
+| |   
+| * <em style='color:grey'>7c1bcdd3bd90718d51238b69815b3ad63ed9d4fd</em>
+|/  <strong>2015-12-02 11:03</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+|   |   <strong style='color:green'>[progress] update progress to 50</strong>
+|   
+|  
+* <em style='color:grey'>bdc0f3a0c04ce640866f3409aea79e05de7cdc97</em>
+| <strong>2015-12-02 10:18</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | <strong style='color:green'>update stack</strong>
+| 
+|  
+* <em style='color:grey'>e307ac09274d905fb04fc16422956c3326aba30a</em>
+| <strong>2015-12-01 11:08</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | <strong style='color:green'>update stack</strong>
+| 
+|  
+* <em style='color:grey'>a2631ce7a3c694c14ba4eee7a88a28e01f8692b6</em>
+| <strong>2015-12-01 11:08</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | <strong style='color:green'>update stackup</strong>
+| 
+|  
+* <em style='color:grey'>4ace0d7e30246c04a64046190b5023bc40861e02</em>
+| <strong>2015-11-29 11:54</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | <strong style='color:green'>[progress] update progress to 35</strong>
+| 
+|  
+* <em style='color:grey'>8bcec7500e7f01ebcffe0c2316bca9d9f4b28cde</em>
+| <strong>2015-11-29 11:30</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | <strong style='color:green'>[progress] update progress to 35</strong>
+| 
+|    
+*   <em style='color:grey'>f219680bf73c82012c1d4647030d55e41ef080d2</em>
+|\  <strong>2015-11-28 22:13</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>Merge branch 'develop' into mailgun</strong>
+| | 
+| |   
+| * <em style='color:grey'>1c1d59c1665296ccdac36fd8d4febbd94d3d87c6</em>
+| | <strong>2015-11-28 22:13</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>update progress of task mailgun to 35</strong>
+| | 
+| |   
+* | <em style='color:grey'>c7d9f61f92aa4f5d1034ca55bee9a6bed7ca52dd</em>
+| | <strong>2015-11-28 22:13</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>[progress] update progress to 35</strong>
+| | 
+| |     
+* |   <em style='color:grey'>270a0a0b459fced0f9b91a869a127dac716d5845</em>
+|\ \  <strong>2015-11-28 21:07</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| |/  | |   <strong style='color:green'>Merge branch 'develop' into mailgun</strong>
+| |   
+| |   
+| * <em style='color:grey'>ae6e31d4dd352f5df82514b72986d951352c1307</em>
+| | <strong>2015-11-28 21:07</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>update progress of task mailgun to 30</strong>
+| | 
+| |   
+* | <em style='color:grey'>dbc0d18e78ddfae68e58294036b9a514a2d46a7e</em>
+| | <strong>2015-11-28 21:06</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>[progress] update progress to 30</strong>
+| | 
+| |   
+* | <em style='color:grey'>7be00bb45bdc331b394505227c909f387517c4aa</em>
+| | <strong>2015-11-28 12:40</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>[progress] update progress to 25</strong>
+| | 
+| |     
+* |   <em style='color:grey'>ca0758f77704416833dc7865c140f94bd05b8025</em>
+|\ \  <strong>2015-11-27 17:22</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| |/  | |   <strong style='color:green'>Merge branch 'develop' into mailgun</strong>
+| |   
+| |   
+| * <em style='color:grey'>0cbb2f36da17c12ae0eb78e5cff28d29f8d683b9</em>
+| | <strong>2015-11-27 17:22</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>update progress of task mailgun to 25</strong>
+| | 
+| |   
+* | <em style='color:grey'>e76bcfeb7b059f4fa9e339cb01c7abb320d6f803</em>
+| | <strong>2015-11-27 17:03</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>[progress] update progress to 25</strong>
+| | 
+| |     
+* |   <em style='color:grey'>99910166767dccc4a6bbf528fa2feef5b5f03b05</em>
+|\ \  <strong>2015-11-26 15:21</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| |/  | |   <strong style='color:green'>Merge branch 'develop' into mailgun</strong>
+| |   
+| |   
+| * <em style='color:grey'>61b09741d8e67388e1f1dd1e4658465e324023c4</em>
+| | <strong>2015-11-26 15:21</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>update progress of task mailgun to 20</strong>
+| | 
+| |   
+* | <em style='color:grey'>54e41467ba0636b079ad802815209843415a0b09</em>
+|/  <strong>2015-11-26 15:21</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+|   |   <strong style='color:green'>[progress] update progress to 20</strong>
+|   
+|  
+* <em style='color:grey'>d250226315bd635a5bc6046077c432d59b7b1219</em>
+| <strong>2015-11-26 12:16</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | <strong style='color:green'>update progress of task mailgun to 10</strong>
+| 
+|  
+* <em style='color:grey'>891f4f9eaec8d6659615bb83872f5c01b2ca003e</em>
+| <strong>2015-11-26 12:14</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | <strong style='color:green'>update progress of task web_form to 100</strong>
+| 
+|    
+*   <em style='color:grey'>f916b3c0f346e233ff80da759c10c7a86ddf5589</em>
+|\  <strong>2015-11-26 12:14</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>Merge branch 'web_form' into develop</strong>
+| | 
+| |   
+| * <em style='color:grey'>63dcfd812525b7ce08801fd31749e19fdf7123fe</em>
+| | <strong>2015-11-26 12:14</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>[close] close the branch by set progress to 100.</strong>
+| | 
+| |     
+| *   <em style='color:grey'>53fec410ed7379ff1befd11cd842a2ee34fb4112</em>
+| |\  <strong>2015-11-26 11:52</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| |/  |/|   <strong style='color:green'>Merge branch 'develop' into web_form</strong>
+| |   
+| |   
+* | <em style='color:grey'>a3791047d63d2b2116af05818767937267d61c23</em>
+| | <strong>2015-11-26 11:52</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>update progress of task web_form to 70</strong>
+| | 
+| |   
+| * <em style='color:grey'>312a44c1600f052c60a625ca667f75d32cc21b67</em>
+| | <strong>2015-11-26 11:51</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>[progress] update progress to 70</strong>
+| | 
+| |     
+| *   <em style='color:grey'>62b4b2c7087fa29dab7d45c1f6821634d0e7725e</em>
+| |\  <strong>2015-11-26 10:17</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| |/  |/|   <strong style='color:green'>Merge branch 'develop' into web_form</strong>
+| |   
+| |   
+* | <em style='color:grey'>f2f7fba74a45cd85b89a3e6b4fc7b5ede1b0be1b</em>
+| | <strong>2015-11-26 10:17</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>update progress of task web_form to 65</strong>
+| | 
+| |   
+| * <em style='color:grey'>1170837bf3e649082d880d1593304839dd806558</em>
+| | <strong>2015-11-26 10:17</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>before debug gen page rake task.</strong>
+| | 
+| |   
+| * <em style='color:grey'>a8e669147d044bb9469794b8de5c5971764e36b1</em>
+| | <strong>2015-11-25 20:43</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>[progress] rename rack session model</strong>
+| | 
+
+</code></pre>
+
+</body>
+</html>
