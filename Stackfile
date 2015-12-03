@@ -30,6 +30,7 @@ export :route do
   add_gem 'guard-rake', group: :development # for puma restart
   copy 'lib/tasks/puma.rake'
   copy 'Guardfile', sync: false
+  copy 'Procfile', sync: false
 end
 
 export :cucumber do
@@ -114,13 +115,13 @@ export :email do
 end
 
 from('.') do
-  # import :route
+  import :route
   import :cucumber
   import :logger
 
   import :restul_api
 
-  # import :assets_mapper
+  import :assets_mapper
   import :web
   import :email
 end
