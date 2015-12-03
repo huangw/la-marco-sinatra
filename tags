@@ -15,6 +15,7 @@ AccountPage	spec/lib/route_spec.rb	/^  class AccountPage; Route << self end$/;"	
 AccountPage	spec/lib/route_spec.rb	/^class AccountPage; Route << self end$/;"	c
 AccountSettingPage	spec/lib/route_spec.rb	/^class AccountSettingPage; Route << self end$/;"	c
 Admin	spec/lib/route_spec.rb	/^module Admin$/;"	m
+AllFiles	doc/coverage/index.html	/^  <a name="AllFiles"><\/a>$/;"	a
 AssetMapper	lib/devtools/asset_mapper.rb	/^module AssetMapper$/;"	m
 AssetMapper	lib/devtools/asset_mapper/cloud_file.rb	/^module AssetMapper$/;"	m
 AssetMapper	lib/devtools/asset_mapper/loader.rb	/^module AssetMapper$/;"	m
@@ -174,6 +175,16 @@ access	lib/la_buffered_logger.rb	/^  def access(status, opts = {})$/;"	f	class:L
 access_recorded?	lib/la_buffered_logger.rb	/^  def access_recorded?$/;"	f	class:LaBufferedLogger
 add	lib/mongoid/field_candy/text_area.rb	/^      def add(blk, opts = {})$/;"	f	class:Mongoid.OrderedList.TextProxy
 add	lib/mongoid/ordered_list.rb	/^      def add(obj, opts = {})$/;"	f	class:Mongoid.OrderedList.Proxy
+addClass	doc/spec/lib/asset_settings/environment_settings_spec_rslt.html	/^function addClass(element_id, classname) {$/;"	f
+addClass	doc/spec/lib/asset_settings_spec_rslt.html	/^function addClass(element_id, classname) {$/;"	f
+addClass	doc/spec/lib/email_render_spec_rslt.html	/^function addClass(element_id, classname) {$/;"	f
+addClass	doc/spec/lib/emails/fake_sender_spec_rslt.html	/^function addClass(element_id, classname) {$/;"	f
+addClass	doc/spec/lib/emails/mailgun_sender_spec_rslt.html	/^function addClass(element_id, classname) {$/;"	f
+addClass	doc/spec/lib/emails/render_spec_rslt.html	/^function addClass(element_id, classname) {$/;"	f
+addClass	doc/spec/lib/helpers/form_helper_spec_rslt.html	/^function addClass(element_id, classname) {$/;"	f
+addClass	doc/spec/lib/la_buffered_logger_spec_rslt.html	/^function addClass(element_id, classname) {$/;"	f
+addClass	doc/spec/lib/rack/json_response_spec_rslt.html	/^function addClass(element_id, classname) {$/;"	f
+addClass	doc/spec/lib/route_spec_rslt.html	/^function addClass(element_id, classname) {$/;"	f
 add_key	lib/devtools/i18n_utils.rb	/^    def add_key(key, value = nil)$/;"	f	class:YamlFile
 add_with_gt	lib/devtools/i18n_utils.rb	/^    def add_with_gt(key, trans_key = -1)$/;"	f	class:YamlFile
 all	lib/route.rb	/^    def all$/;"	f	class:Route
@@ -181,7 +192,37 @@ all_cookies	features/support/env.rb	/^  def all_cookies$/;"	f	class:FeatureWorld
 all_worker_stopped?	lib/background/worker_pool.rb	/^    def all_worker_stopped?$/;"	f	class:Background.WorkerPool
 app	spec/support/helpers/api_test_helper.rb	/^  def app$/;"	f	class:APITestHelper
 append	lib/la_buffered_logger.rb	/^  def append(dat)$/;"	f	class:LaBufferedLogger
+apply_filters	doc/spec/lib/asset_settings/environment_settings_spec_rslt.html	/^function apply_filters() {$/;"	f
+apply_filters	doc/spec/lib/asset_settings_spec_rslt.html	/^function apply_filters() {$/;"	f
+apply_filters	doc/spec/lib/email_render_spec_rslt.html	/^function apply_filters() {$/;"	f
+apply_filters	doc/spec/lib/emails/fake_sender_spec_rslt.html	/^function apply_filters() {$/;"	f
+apply_filters	doc/spec/lib/emails/mailgun_sender_spec_rslt.html	/^function apply_filters() {$/;"	f
+apply_filters	doc/spec/lib/emails/render_spec_rslt.html	/^function apply_filters() {$/;"	f
+apply_filters	doc/spec/lib/helpers/form_helper_spec_rslt.html	/^function apply_filters() {$/;"	f
+apply_filters	doc/spec/lib/la_buffered_logger_spec_rslt.html	/^function apply_filters() {$/;"	f
+apply_filters	doc/spec/lib/rack/json_response_spec_rslt.html	/^function apply_filters() {$/;"	f
+apply_filters	doc/spec/lib/route_spec_rslt.html	/^function apply_filters() {$/;"	f
 assets_env	lib/asset_settings.rb	/^    def assets_env$/;"	f	class:AssetSettings
+assign_display_style	doc/spec/lib/asset_settings/environment_settings_spec_rslt.html	/^function assign_display_style(classname, display_flag) {$/;"	f
+assign_display_style	doc/spec/lib/asset_settings_spec_rslt.html	/^function assign_display_style(classname, display_flag) {$/;"	f
+assign_display_style	doc/spec/lib/email_render_spec_rslt.html	/^function assign_display_style(classname, display_flag) {$/;"	f
+assign_display_style	doc/spec/lib/emails/fake_sender_spec_rslt.html	/^function assign_display_style(classname, display_flag) {$/;"	f
+assign_display_style	doc/spec/lib/emails/mailgun_sender_spec_rslt.html	/^function assign_display_style(classname, display_flag) {$/;"	f
+assign_display_style	doc/spec/lib/emails/render_spec_rslt.html	/^function assign_display_style(classname, display_flag) {$/;"	f
+assign_display_style	doc/spec/lib/helpers/form_helper_spec_rslt.html	/^function assign_display_style(classname, display_flag) {$/;"	f
+assign_display_style	doc/spec/lib/la_buffered_logger_spec_rslt.html	/^function assign_display_style(classname, display_flag) {$/;"	f
+assign_display_style	doc/spec/lib/rack/json_response_spec_rslt.html	/^function assign_display_style(classname, display_flag) {$/;"	f
+assign_display_style	doc/spec/lib/route_spec_rslt.html	/^function assign_display_style(classname, display_flag) {$/;"	f
+assign_display_style_for_group	doc/spec/lib/asset_settings/environment_settings_spec_rslt.html	/^function assign_display_style_for_group(classname, display_flag, subgroup_flag) {$/;"	f
+assign_display_style_for_group	doc/spec/lib/asset_settings_spec_rslt.html	/^function assign_display_style_for_group(classname, display_flag, subgroup_flag) {$/;"	f
+assign_display_style_for_group	doc/spec/lib/email_render_spec_rslt.html	/^function assign_display_style_for_group(classname, display_flag, subgroup_flag) {$/;"	f
+assign_display_style_for_group	doc/spec/lib/emails/fake_sender_spec_rslt.html	/^function assign_display_style_for_group(classname, display_flag, subgroup_flag) {$/;"	f
+assign_display_style_for_group	doc/spec/lib/emails/mailgun_sender_spec_rslt.html	/^function assign_display_style_for_group(classname, display_flag, subgroup_flag) {$/;"	f
+assign_display_style_for_group	doc/spec/lib/emails/render_spec_rslt.html	/^function assign_display_style_for_group(classname, display_flag, subgroup_flag) {$/;"	f
+assign_display_style_for_group	doc/spec/lib/helpers/form_helper_spec_rslt.html	/^function assign_display_style_for_group(classname, display_flag, subgroup_flag) {$/;"	f
+assign_display_style_for_group	doc/spec/lib/la_buffered_logger_spec_rslt.html	/^function assign_display_style_for_group(classname, display_flag, subgroup_flag) {$/;"	f
+assign_display_style_for_group	doc/spec/lib/rack/json_response_spec_rslt.html	/^function assign_display_style_for_group(classname, display_flag, subgroup_flag) {$/;"	f
+assign_display_style_for_group	doc/spec/lib/route_spec_rslt.html	/^function assign_display_style_for_group(classname, display_flag, subgroup_flag) {$/;"	f
 attr_with_default	lib/core_ext/attr_with_default.rb	/^  def attr_with_default(hsh)$/;"	f	class:Class
 available_formats	lib/emails/render.rb	/^      def available_formats$/;"	f	class:Emails.Render
 available_locales	lib/emails/render.rb	/^      def available_locales$/;"	f	class:Emails.Render
@@ -311,6 +352,16 @@ generate_sid	lib/rack/session/mongoid.rb	/^      def generate_sid$/;"	f	class:Ra
 generate_version	lib/devtools/asset_mapper/tfile.rb	/^    def generate_version$/;"	f	class:AssetMapper.Tfile
 get	lib/asset_settings.rb	/^    def get$/;"	f	class:AssetSettings
 get_binding	spec/support/helpers/api_doc_helper.rb	/^    def get_binding$/;"	f	class:RSpecApiDoc
+get_display_style	doc/spec/lib/asset_settings/environment_settings_spec_rslt.html	/^function get_display_style(display_flag) {$/;"	f
+get_display_style	doc/spec/lib/asset_settings_spec_rslt.html	/^function get_display_style(display_flag) {$/;"	f
+get_display_style	doc/spec/lib/email_render_spec_rslt.html	/^function get_display_style(display_flag) {$/;"	f
+get_display_style	doc/spec/lib/emails/fake_sender_spec_rslt.html	/^function get_display_style(display_flag) {$/;"	f
+get_display_style	doc/spec/lib/emails/mailgun_sender_spec_rslt.html	/^function get_display_style(display_flag) {$/;"	f
+get_display_style	doc/spec/lib/emails/render_spec_rslt.html	/^function get_display_style(display_flag) {$/;"	f
+get_display_style	doc/spec/lib/helpers/form_helper_spec_rslt.html	/^function get_display_style(display_flag) {$/;"	f
+get_display_style	doc/spec/lib/la_buffered_logger_spec_rslt.html	/^function get_display_style(display_flag) {$/;"	f
+get_display_style	doc/spec/lib/rack/json_response_spec_rslt.html	/^function get_display_style(display_flag) {$/;"	f
+get_display_style	doc/spec/lib/route_spec_rslt.html	/^function get_display_style(display_flag) {$/;"	f
 get_session	lib/rack/session/mongoid.rb	/^      def get_session(env, sid)$/;"	f	class:Rack.Session.Mongoid
 git_clone!	lib/devtools/asset_mapper/pull.rb	/^    def git_clone!$/;"	f	class:AssetMapper.Pull
 git_update	lib/devtools/asset_mapper/pull.rb	/^    def git_update$/;"	f	class:AssetMapper.Pull
@@ -373,6 +424,26 @@ local_url	lib/devtools/asset_mapper/tfile.rb	/^    def local_url$/;"	f	class:Ass
 localized?	lib/emails/render.rb	/^      def localized?$/;"	f	class:Emails.Render
 ltt	lib/helpers/i18n_helper.rb	/^  def ltt(msg, opts = {})$/;"	f	class:I18nHelper
 main_loop	lib/background/worker_pool.rb	/^    def main_loop$/;"	f	class:Background.WorkerPool
+makeRed	doc/spec/lib/asset_settings/environment_settings_spec_rslt.html	/^function makeRed(element_id) {$/;"	f
+makeRed	doc/spec/lib/asset_settings_spec_rslt.html	/^function makeRed(element_id) {$/;"	f
+makeRed	doc/spec/lib/email_render_spec_rslt.html	/^function makeRed(element_id) {$/;"	f
+makeRed	doc/spec/lib/emails/fake_sender_spec_rslt.html	/^function makeRed(element_id) {$/;"	f
+makeRed	doc/spec/lib/emails/mailgun_sender_spec_rslt.html	/^function makeRed(element_id) {$/;"	f
+makeRed	doc/spec/lib/emails/render_spec_rslt.html	/^function makeRed(element_id) {$/;"	f
+makeRed	doc/spec/lib/helpers/form_helper_spec_rslt.html	/^function makeRed(element_id) {$/;"	f
+makeRed	doc/spec/lib/la_buffered_logger_spec_rslt.html	/^function makeRed(element_id) {$/;"	f
+makeRed	doc/spec/lib/rack/json_response_spec_rslt.html	/^function makeRed(element_id) {$/;"	f
+makeRed	doc/spec/lib/route_spec_rslt.html	/^function makeRed(element_id) {$/;"	f
+makeYellow	doc/spec/lib/asset_settings/environment_settings_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
+makeYellow	doc/spec/lib/asset_settings_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
+makeYellow	doc/spec/lib/email_render_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
+makeYellow	doc/spec/lib/emails/fake_sender_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
+makeYellow	doc/spec/lib/emails/mailgun_sender_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
+makeYellow	doc/spec/lib/emails/render_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
+makeYellow	doc/spec/lib/helpers/form_helper_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
+makeYellow	doc/spec/lib/la_buffered_logger_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
+makeYellow	doc/spec/lib/rack/json_response_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
+makeYellow	doc/spec/lib/route_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
 matt	lib/helpers/i18n_helper.rb	/^  def matt(msg, opts = {})$/;"	f	class:I18nHelper
 max_retry	lib/background/job.rb	/^      def max_retry$/;"	f	class:Background.Job
 merge_default	lib/confu.rb	/^    def merge_default(dat)$/;"	f	class:Confu.Data
@@ -388,6 +459,33 @@ mongoize	lib/utils/hash_struct.rb	/^  def mongoize$/;"	f	class:HashStruct
 mop	config/initializers/development/mongoid_pry.rb	/^def mop(model)$/;"	f
 mount	lib/route.rb	/^    def mount(app_class, route = nil)$/;"	f	class:Route
 move	lib/mongoid/ordered_list.rb	/^      def move(tid, opts = {})$/;"	f	class:Mongoid.OrderedList.Proxy
+moveProgressBar	doc/spec/lib/asset_settings/environment_settings_spec_rslt.html	/^function moveProgressBar(percentDone) {$/;"	f
+moveProgressBar	doc/spec/lib/asset_settings_spec_rslt.html	/^function moveProgressBar(percentDone) {$/;"	f
+moveProgressBar	doc/spec/lib/email_render_spec_rslt.html	/^function moveProgressBar(percentDone) {$/;"	f
+moveProgressBar	doc/spec/lib/emails/fake_sender_spec_rslt.html	/^function moveProgressBar(percentDone) {$/;"	f
+moveProgressBar	doc/spec/lib/emails/mailgun_sender_spec_rslt.html	/^function moveProgressBar(percentDone) {$/;"	f
+moveProgressBar	doc/spec/lib/emails/render_spec_rslt.html	/^function moveProgressBar(percentDone) {$/;"	f
+moveProgressBar	doc/spec/lib/helpers/form_helper_spec_rslt.html	/^function moveProgressBar(percentDone) {$/;"	f
+moveProgressBar	doc/spec/lib/la_buffered_logger_spec_rslt.html	/^function moveProgressBar(percentDone) {$/;"	f
+moveProgressBar	doc/spec/lib/rack/json_response_spec_rslt.html	/^function moveProgressBar(percentDone) {$/;"	f
+moveProgressBar	doc/spec/lib/route_spec_rslt.html	/^function moveProgressBar(percentDone) {$/;"	f
+n1	doc/monkey_patch.html	/^  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1<\/a><\/span>&lt;li <span style="color:#080;font-weight:bold">class<\/span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;<\/span><span style="color:#D20">frame-info &lt;%= frame_class(frame) %&gt;<\/span><span style="color:#710">&quot;<\/span><\/span>&gt;$/;"	a
+n1	doc/monkey_patch.html	/^  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1<\/a><\/span>env[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;<\/span><span style="color:#D20">rack.errors<\/span><span style="color:#710">&quot;<\/span><\/span>] = errors$/;"	a
+n10	doc/monkey_patch.html	/^<span class="line-numbers"><strong><a href="#n10" name="n10">10<\/a><\/strong><\/span><span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#808">&lt;<\/span><span style="color:#404">\/<\/span><\/span>li&gt;$/;"	a
+n2	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n2" name="n2">2<\/a><\/span>  &lt;code&gt;$/;"	a
+n2	doc/monkey_patch.html	/^<span class="line-numbers"><a href="#n2" name="n2">2<\/a><\/span>body = [body] <span style="color:#080;font-weight:bold">if<\/span> body.is_a?(<span style="color:#036;font-weight:bold">String<\/span>)$/;"	a
+n3	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n3" name="n3">3<\/a><\/span>    &lt;<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">% <\/span><span style="color:#D20">if<\/span><span style="color:#710"> <\/span><\/span>frame.filename.match(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">\/<\/span><span style="color:#808">gems<\/span><span style="color:#404">\/<\/span><\/span>) %&gt;$/;"	a
+n3	doc/monkey_patch.html	/^<span class="line-numbers"><a href="#n3" name="n3">3<\/a><\/span>$/;"	a
+n4	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n4" name="n4">4<\/a><\/span>      &lt;<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%=<\/span><span style="color:#D20">h frame.filename %&gt;<\/span><\/span>$/;"	a
+n4	doc/monkey_patch.html	/^<span class="line-numbers"><a href="#n4" name="n4">4<\/a><\/span>[<span style="color:#00D">500<\/span>,$/;"	a
+n5	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n5" name="n5">5<\/a><\/span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">    &lt;% else %&gt;<\/span><\/span>$/;"	a
+n5	doc/monkey_patch.html	/^<span class="line-numbers"><a href="#n5" name="n5">5<\/a><\/span> {<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;<\/span><span style="color:#D20">Content-Type<\/span><span style="color:#710">&quot;<\/span><\/span> =&gt; content_type,$/;"	a
+n6	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n6" name="n6">6<\/a><\/span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">      &lt;b style<\/span><span style="color:#710">=<\/span><\/span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;<\/span><span style="color:#D20">color: red<\/span><span style="color:#710">&quot;<\/span><\/span>&gt;&lt;<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%=<\/span><span style="color:#D20">h frame.filename %&gt;&lt;\/b&gt;<\/span><\/span>$/;"	a
+n6	doc/monkey_patch.html	/^<span class="line-numbers"><a href="#n6" name="n6">6<\/a><\/span>  <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;<\/span><span style="color:#D20">Content-Length<\/span><span style="color:#710">&quot;<\/span><\/span> =&gt; <span style="color:#036;font-weight:bold">Rack<\/span>::<span style="color:#036;font-weight:bold">Utils<\/span>.bytesize(body.join).to_s},$/;"	a
+n7	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n7" name="n7">7<\/a><\/span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">    &lt;% end %&gt;<\/span><\/span>$/;"	a
+n7	doc/monkey_patch.html	/^<span class="line-numbers"><a href="#n7" name="n7">7<\/a><\/span> body]$/;"	a
+n8	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n8" name="n8">8<\/a><\/span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">  &lt;\/code&gt; in<\/span><\/span>$/;"	a
+n9	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n9" name="n9">9<\/a><\/span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">    &lt;code&gt;&lt;strong&gt;&lt;%<\/span><span style="color:#710">=<\/span><\/span>h frame.function <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%&gt;<\/span><span style="color:#D20">&lt;\/strong<\/span><span style="color:#710">&gt;<\/span><\/span>&lt;<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">\/<\/span><span style="color:#808">code&gt;<\/span><\/span>$/;"	a
 need_compile?	lib/devtools/asset_mapper/sfile.rb	/^    def need_compile?$/;"	f	class:AssetMapper.Sfile
 new_tid	lib/mongoid/ordered_list.rb	/^      def new_tid$/;"	f	class:Mongoid.OrderedList.Proxy
 no_more_retry?	lib/background/job.rb	/^      def no_more_retry?$/;"	f	class:Background.Job
@@ -398,7 +496,7 @@ page	lib/mongoid/paginator.rb	/^    def page(pg = 1, opts = {})$/;"	f	class:Mong
 paginate	lib/mongoid/paginator.rb	/^    def paginate(pg = 1, opts = {})$/;"	f	class:Mongoid.Criteria
 paginate_block	lib/helpers/slim_helper.rb	/^  def paginate_block(opg, dat = {})$/;"	f	class:SlimHelper
 params	spec/lib/helpers/form_helper_spec.rb	/^  def params$/;"	f	class:FormMock
-parse	lib/emails/render.rb	/^      def parse(extra_headers = {}, loc = nil)$/;"	f	class:Emails.Render
+parse	lib/emails/render.rb	/^      def parse(extra_headers = {})$/;"	f	class:Emails.Render
 partial	lib/helpers/slim_helper.rb	/^  def partial(pname, lcls = {})$/;"	f	class:SlimHelper
 partial_block	lib/helpers/slim_helper.rb	/^  def partial_block(bname, locals_ = {})$/;"	f	class:SlimHelper
 password	lib/helpers/form_helper.rb	/^  def password(field, options = {})$/;"	f	class:FormHelper
@@ -426,6 +524,16 @@ radio_field	lib/mongoid/field_candy/radio_field.rb	/^        def self.radio_fiel
 refresh_cache!	lib/mongoid/ordered_list.rb	/^      def refresh_cache!$/;"	f	class:Mongoid.OrderedList.Proxy
 reload!	config/initializers/development/awesome_print.rb	/^def reload!$/;"	f
 remove	lib/mongoid/ordered_list.rb	/^      def remove(tid)$/;"	f	class:Mongoid.OrderedList.Proxy
+removeClass	doc/spec/lib/asset_settings/environment_settings_spec_rslt.html	/^function removeClass(element_id, classname) {$/;"	f
+removeClass	doc/spec/lib/asset_settings_spec_rslt.html	/^function removeClass(element_id, classname) {$/;"	f
+removeClass	doc/spec/lib/email_render_spec_rslt.html	/^function removeClass(element_id, classname) {$/;"	f
+removeClass	doc/spec/lib/emails/fake_sender_spec_rslt.html	/^function removeClass(element_id, classname) {$/;"	f
+removeClass	doc/spec/lib/emails/mailgun_sender_spec_rslt.html	/^function removeClass(element_id, classname) {$/;"	f
+removeClass	doc/spec/lib/emails/render_spec_rslt.html	/^function removeClass(element_id, classname) {$/;"	f
+removeClass	doc/spec/lib/helpers/form_helper_spec_rslt.html	/^function removeClass(element_id, classname) {$/;"	f
+removeClass	doc/spec/lib/la_buffered_logger_spec_rslt.html	/^function removeClass(element_id, classname) {$/;"	f
+removeClass	doc/spec/lib/rack/json_response_spec_rslt.html	/^function removeClass(element_id, classname) {$/;"	f
+removeClass	doc/spec/lib/route_spec_rslt.html	/^function removeClass(element_id, classname) {$/;"	f
 render!	lib/devtools/file_generator.rb	/^    def render!(hsh)$/;"	f	class:FileGenerator.RubyFile
 renest	lib/devtools/i18n_utils.rb	/^    def renest$/;"	f	class:YamlFile
 repo_path	lib/devtools/asset_mapper/vendor_file.rb	/^    def repo_path(from)$/;"	f	class:AssetMapper.VendorFile
@@ -490,7 +598,7 @@ tag	lib/helpers/form_helper.rb	/^  def tag(name, content = nil, options = {})$/;
 template_basename	lib/emails/render.rb	/^      def template_basename$/;"	f	class:Emails.Render
 template_dir	lib/emails/render.rb	/^      def template_dir$/;"	f	class:Emails.Render
 template_dir	lib/helpers/slim_helper.rb	/^  def template_dir$/;"	f	class:SlimHelper
-template_file	lib/emails/render.rb	/^      def template_file(format = nil, locale = nil)$/;"	f	class:Emails.Render
+template_file	lib/emails/render.rb	/^      def template_file(format = nil)$/;"	f	class:Emails.Render
 template_id	lib/helpers/slim_helper.rb	/^  def template_id(tpl = nil, locales = nil)$/;"	f	class:SlimHelper
 terminated?	lib/background/worker.rb	/^    def terminated?$/;"	f	class:Background.Worker
 text	lib/helpers/form_helper.rb	/^  def text(field, options = {})$/;"	f	class:FormHelper

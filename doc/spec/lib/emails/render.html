@@ -165,10 +165,8 @@ parse custom header and render email body</p>
         available_formats.first
       <span class="hljs-keyword">end</span>
 
-      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">template_file</span><span class="hljs-params">(format = <span class="hljs-keyword">nil</span>, locale = <span class="hljs-keyword">nil</span>)</span></span>
+      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">template_file</span><span class="hljs-params">(format = <span class="hljs-keyword">nil</span>)</span></span>
         template_file = template_basename
-
-        locale ||= default_locale <span class="hljs-keyword">if</span> localized? <span class="hljs-comment"># may has a locale</span>
         template_file += <span class="hljs-string">".<span class="hljs-subst">#{locale}</span>"</span> <span class="hljs-keyword">if</span> locale
 
         format ||= default_format
@@ -209,11 +207,11 @@ parse custom header and render email body</p>
         <span class="hljs-string">%w(to cc bcc subject from sender_type reply-to return-path inline)</span>
       <span class="hljs-keyword">end</span>
 
-      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">parse</span><span class="hljs-params">(extra_headers = {}, loc = <span class="hljs-keyword">nil</span>)</span></span>
+      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">parse</span><span class="hljs-params">(extra_headers = {})</span></span>
         <span class="hljs-variable">@bodies</span> = {}
         available_formats.each <span class="hljs-keyword">do</span> |fmt|
           body = <span class="hljs-constant">Liquid::Template</span>.parse(
-            <span class="hljs-constant">File</span>.open(template_file(fmt, loc), <span class="hljs-string">'r:utf-8'</span>).read).render(to_hash)
+            <span class="hljs-constant">File</span>.open(template_file(fmt), <span class="hljs-string">'r:utf-8'</span>).read).render(to_hash)
 
           <span class="hljs-keyword">if</span> <span class="hljs-variable">@headers</span>.<span class="hljs-keyword">nil</span>?
             head, body = body.split(<span class="hljs-string">"\n\n"</span>, <span class="hljs-number">2</span>)
@@ -270,6 +268,8 @@ parse custom header and render email body</p>
               
             </div>
             
+            <div class="content"><div class='highlight'><pre>      field <span class="hljs-symbol">:_d_at</span>, <span class="hljs-symbol">type:</span> <span class="hljs-constant">Time</span></pre></div></div>
+            
         </li>
         
         
@@ -292,14 +292,33 @@ parse custom header and render email body</p>
       <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">process!</span></span>
         parse <span class="hljs-keyword">unless</span> <span class="hljs-variable">@headers</span>
         email_sender(sender_type).deliver!(<span class="hljs-variable">@headers</span>, <span class="hljs-variable">@bodies</span>)
+        <span class="hljs-keyword">self</span>._d_at = <span class="hljs-constant">Time</span>.now
       <span class="hljs-keyword">end</span>
 
-      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">deliver!</span></span>
-        perform_job! <span class="hljs-comment"># this will call process! in the right way</span>
+      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">deliver!</span></span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>this will call process! in the right way</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        perform_job!(<span class="hljs-string">'front-sender'</span>)
       <span class="hljs-keyword">end</span>
 
       <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">delivered?</span></span>
         job_state == <span class="hljs-number">10</span>
+      <span class="hljs-keyword">end</span>
+
+      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">delivered_at</span></span>
+        delivered? &amp;&amp; _d_at
       <span class="hljs-keyword">end</span>
 
       <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">deliver_later</span><span class="hljs-params">(sec = <span class="hljs-number">0</span>)</span></span>
