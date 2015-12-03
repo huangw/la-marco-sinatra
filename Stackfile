@@ -84,9 +84,6 @@ export :assets_mapper do
 end
 
 export :web do
-  import :route
-  import :assets_mapper
-
   add_gem 'sinatra-flash'
   add_gem 'sinatra-redirect-with-flash'
   add_gem 'slim'
@@ -114,7 +111,7 @@ export :email do
   # copy 'lib/tasks/email_test.rake'
 end
 
-from('.') do
+export :full do
   import :route
   import :cucumber
   import :logger
@@ -124,4 +121,8 @@ from('.') do
   import :assets_mapper
   import :web
   import :email
+end
+
+from('.') do
+  import :full
 end
