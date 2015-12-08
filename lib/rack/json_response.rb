@@ -29,9 +29,9 @@ module Rack
         if e.is_a?(RequestError) || e.is_a?(ServerError)
           body = { error: e.class.name.underscore, message: e.message }
         elsif status < 500 && status >= 400
-          body = { error: e.class.name.underscore, message: I18n.t('exceptions.ajax_options_error') }
+          body = { error: e.class.name.underscore, message: I18n.t('exceptions.ajax.options_error') }
         else
-          body = { error: e.class.name.underscore, message: I18n.t('exceptions.server_error') }
+          body = { error: e.class.name.underscore, message: I18n.t('exceptions.ajax.server_error') }
         end
 
         i18n_msg = e.i18n_message if e.respond_to?(:i18n_message)
