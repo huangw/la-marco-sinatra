@@ -1,6 +1,7 @@
 # [Class] TextBlock (lib/struct/text_block.rb)
 # vim: foldlevel=1
 # created at: 2015-01-30
+require 'sanitize'
 
 # Class for a paragraph of plain text with `type` (style)
 class TextBlock
@@ -19,5 +20,9 @@ class TextBlock
 
   def header?
     %w(H2 H3 H4 H5).include?(_type)
+  end
+
+  def convert_text=(str)
+    Sanitize.fragment(str, Sanitize::Config::BASIC)
   end
 end

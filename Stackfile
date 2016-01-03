@@ -103,6 +103,7 @@ end
 export :email do
   add_gem 'liquid'
   add_gem 'mailgun-ruby'
+  add_gem 'mail'
 
   copy 'lib/emails/*.rb'
   copy 'app/models/email.rb', sync: false

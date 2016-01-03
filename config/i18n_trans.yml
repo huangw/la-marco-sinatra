@@ -1,0 +1,30 @@
+en:
+  id: ID
+  tid: Token ID
+  sid: Sequence ID
+  created_at: Created at
+  c_at: Created at
+  updated_at: Updated at
+  u_at: Updated at
+  state: Status
+  desc: Description
+zh:
+  id: ID
+  tid: 标准ID
+  sid: 序号ID
+  created_at: 创建于
+  c_at: 创建于
+  updated_at: 更新于
+  u_at: 更新于
+  state: 状态
+  desc: 描述
+ja:
+  id: ID
+  tid: 整理ID
+  sid: 番号
+  created_at: 作成日時
+  c_at: 作成日時
+  updated_at: 更新日時
+  u_at: 更新日時
+  state: 状態
+  desc: 説明

@@ -4,7 +4,8 @@
 
 # Generate a hash from any object based on predefined keys
 module HashPresenter
-  DEFAULT_TYPE_H = { Time => :to_f, DateTime => :to_f, Date => :to_i }
+  DEFAULT_TYPE_H = { Time => :to_f, DateTime => :to_f,
+                     Date => :to_i, BSON::ObjectId => :to_s }
   DEFAULT_OPTS = { include_nil: false, default_converter: :to_hash,
                    convert_keys: :string }
   # `keys` defines which keys to exposed to the present hash

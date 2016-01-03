@@ -1,24 +1,28 @@
 require 'yaml'
-require 'google_translate'
 require 'utils/hash_flatter'
 require 'devtools/file_generator'
 
 # For i18n yaml files management
+# rubocop:disable LineLength
 module I18nUtils
   class << self
     def google_t(key, lang)
       puts "retrieve translation for #{key} from google ..."
-      trans = GoogleTranslate.new.translate(:en, lang, to_human(key))
-      trans && trans[0] && trans[0][0] ? trans[0][0].first : nil
+      EasyTranslate.translate(to_human(key), to: lang)
     end
 
     def to_human(key)
       key.to_s.titleize
     end
 
+    def local_trans
+      @local_trans ||= YAML.load(File.read(root_join('config/i18n_trans.yml')))
+    end
+
     def trans(key, lang)
       return to_human(key) if lang.to_sym == :en
-      google_t(key, lang)
+      local_t = local_trans && local_trans[lang.to_s] && local_trans[lang.to_s][key.underscore.to_s]
+      local_t ? local_t : google_t(key, lang)
     end
 
     # find tt keys in file contents
@@ -43,7 +47,6 @@ module I18nUtils
   end
 
   # handle an single yaml file with OOP
-  # rubocop:disable LineLength
   class YamlFile
     include HashFlatter
     attr_reader :filename, :locale, :flat_hash, :added_keys
