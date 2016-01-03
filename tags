@@ -15,6 +15,7 @@ AccountPage	spec/lib/route_spec.rb	/^  class AccountPage; Route << self end$/;"	
 AccountPage	spec/lib/route_spec.rb	/^class AccountPage; Route << self end$/;"	c
 AccountSettingPage	spec/lib/route_spec.rb	/^class AccountSettingPage; Route << self end$/;"	c
 Admin	spec/lib/route_spec.rb	/^module Admin$/;"	m
+AliyunSender	lib/emails/aliyun_sender.rb	/^  class AliyunSender$/;"	c	class:Emails
 AllFiles	doc/coverage/index.html	/^  <a name="AllFiles"><\/a>$/;"	a
 AssetMapper	lib/devtools/asset_mapper.rb	/^module AssetMapper$/;"	m
 AssetMapper	lib/devtools/asset_mapper/cloud_file.rb	/^module AssetMapper$/;"	m
@@ -54,6 +55,7 @@ EmailField	lib/mongoid/field_candy/email_field.rb	/^    module EmailField$/;"	m	
 EmailValidator	lib/mongoid/validators/email_validator.rb	/^class EmailValidator < ActiveModel::EachValidator$/;"	c
 Emails	app/models/email.rb	/^module Emails$/;"	m
 Emails	app/models/emails/mock_email.rb	/^module Emails$/;"	m
+Emails	lib/emails/aliyun_sender.rb	/^module Emails$/;"	m
 Emails	lib/emails/fake_sender.rb	/^module Emails$/;"	m
 Emails	lib/emails/mailgun_sender.rb	/^module Emails$/;"	m
 Emails	lib/emails/render.rb	/^module Emails$/;"	m
@@ -255,6 +257,7 @@ compile!	lib/devtools/asset_mapper/tfile.rb	/^    def compile!$/;"	f	class:Asset
 compile?	lib/devtools/asset_mapper.rb	/^    def compile?$/;"	f	class:AssetMapper
 compile_css!	lib/devtools/asset_mapper/tfile.rb	/^    def compile_css!(new_path)$/;"	f	class:AssetMapper.Tfile
 compile_js!	lib/devtools/asset_mapper/tfile.rb	/^    def compile_js!(new_path)$/;"	f	class:AssetMapper.Tfile
+convert_text=	lib/struct/text_block.rb	/^  def convert_text=(str)$/;"	f	class:TextBlock
 cookie	features/support/env.rb	/^  def cookie(name)$/;"	f	class:FeatureWorld
 copy!	lib/devtools/asset_mapper/vendor_file.rb	/^    def copy!$/;"	f	class:AssetMapper.VendorFile
 copy_file!	lib/devtools/asset_mapper/vendor_file.rb	/^    def copy_file!(sfile, tfile, diff = nil)$/;"	f	class:AssetMapper.VendorFile
@@ -281,6 +284,7 @@ default_path	lib/route.rb	/^    def default_path(app_class)$/;"	f	class:Route
 default_radio_value	lib/helpers/form_helper.rb	/^    def default_radio_value(field, key, default)$/;"	f	class:FormHelper.FormBuilder
 default_url	lib/route.rb	/^    def default_url(app_class)$/;"	f	class:Route
 default_value	lib/helpers/form_helper.rb	/^    def default_value(field, default)$/;"	f	class:FormHelper.FormBuilder
+deliver!	lib/emails/aliyun_sender.rb	/^    def deliver!(headers, bodies)$/;"	f	class:Emails.AliyunSender
 deliver!	lib/emails/fake_sender.rb	/^    def deliver!(headers_, bodies_)$/;"	f	class:Emails.FakeSender
 deliver!	lib/emails/mailgun_sender.rb	/^    def deliver!(headers, bodies)$/;"	f	class:Emails.MailgunSender
 deliver!	lib/emails/render.rb	/^      def deliver!$/;"	f	class:Emails.Render
@@ -396,6 +400,7 @@ initialize	lib/devtools/asset_mapper/tfile.rb	/^    def initialize(file_id)$/;"	
 initialize	lib/devtools/asset_mapper/vendor_file.rb	/^    def initialize(file_id, opts = {})$/;"	f	class:AssetMapper.VendorFile
 initialize	lib/devtools/file_generator.rb	/^    def initialize(name, su = nil)$/;"	f	class:FileGenerator.RubyFile
 initialize	lib/devtools/i18n_utils.rb	/^    def initialize(file_name)$/;"	f	class:YamlFile
+initialize	lib/emails/aliyun_sender.rb	/^    def initialize(url, account, passwd)$/;"	f	class:Emails.AliyunSender
 initialize	lib/emails/fake_sender.rb	/^    def initialize(options_ = {})$/;"	f	class:Emails.FakeSender
 initialize	lib/emails/mailgun_sender.rb	/^    def initialize(api_key, domain, params = {})$/;"	f	class:Emails.MailgunSender
 initialize	lib/helpers/form_helper.rb	/^    def initialize(parent, object, name = nil)$/;"	f	class:FormHelper.FormBuilder
@@ -419,6 +424,7 @@ lmets	config/initializers/development/mongoid_pry.rb	/^def lmets(model)$/;"	f
 load_yaml	lib/asset_settings.rb	/^    def load_yaml(file = nil)$/;"	f	class:AssetSettings
 load_yaml!	lib/asset_settings.rb	/^    def load_yaml!(file = nil)$/;"	f	class:AssetSettings
 local_assets?	lib/asset_settings.rb	/^    def local_assets?$/;"	f	class:AssetSettings
+local_trans	lib/devtools/i18n_utils.rb	/^    def local_trans$/;"	f	class:I18nUtils
 local_url	lib/devtools/asset_mapper/sfile.rb	/^    def local_url$/;"	f	class:AssetMapper.Sfile
 local_url	lib/devtools/asset_mapper/tfile.rb	/^    def local_url$/;"	f	class:AssetMapper.Tfile
 localized?	lib/emails/render.rb	/^      def localized?$/;"	f	class:Emails.Render
