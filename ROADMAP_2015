@@ -1,0 +1,45 @@
+la_marco_sinatra: Sinatra Based Web Framework
+==============================================
+Version: 0.0.1
+
+% ----
+title: la_marco_sinatra
+description: Sinatra Based Web Framework
+supervisor: huangw
+leader: huangw
+moderator: songcy
+team: [huangw, songcy, gaoyh]
+year: 2015
+% ----
+
+[+] concept: create packing list for development 01/21 @huangw:01/21
+[+] alpha: implement all features 01/21-01/23 @huangw:01/30
+  [++] rack_route: sinatra with debug, map and route 01/21 @huangw:01/22
+  [++] cucumber: cucumber test environment with server control 01/22 @huangw:01/22
+  [++] i18n: i18n initialization and setup 01/22 @huangw:01/23
+  [++] helpers: slim, form and table helpers 01/22-01/23 @huangw:01/23
+  [++] assets: assets pipeline and helpers based on stackupper 01/23-01/24 @huangw:01/27
+[+] release_v0_0_1: release the first alpha version 01/30 @huangw:01/28
+
+[+] api: implement API feature 01/30-02/24 @huangw:07/17
+  [++] rackapi: rack middleware rewised 01/30 @huangw:01/31
+  [++] apitest: api test with rack test and helper 01/30 @huangw:01/31
+  [++] apidoc: api document with rspec rack test 02/20-02/24 @huangw:02/07
+
+[+] text_format: modify the text field format methods 06/19 @songcy:06/19
+
+[+] logger: logstash-logger sinatra logger 07/18 @huangw:07/19
+
+[+] release_v0_0_2: release with built in mongodb/email support 12/05 @huangw;songcy:12/02
+  [++] rcih: rewrite rack route, cucumber, i18n and api controllers 11/23-11/25 @huangw:11/24
+  [++] monse: mongodb based session store 11/25-11/26 @huangw:11/24
+  [++] asset_r: revise asset pipeline, lint and BDD for css and js 11/25-11/26 @huangw:11/25
+  [++] web_form: web controller, slim and form helpers 11/26-11/30 @huangw:11/26
+  [++] mailgun: mailgun support revised 12/01-12/03 @huangw;gaoyh:12/02
+
+[+] liver: add live-reload guard configuration 2016/10/10 @huangw:P
+
+[+] arev: assets revised with shorter local path 12/04 @huangw:P
+[+] aup: assets upload to oss account 12/05 @huangw:P
+[+] alimail: use aliyun email sender 12/21-12/28 @huangw;xuf:35
+
