@@ -24,9 +24,11 @@
     g.setFormatArr("day","week","month") // Set format options (up to 4 : "minute","hour","day","week","month","quarter")
 
     if( g ) {
-          g.AddTaskItem(new JSGantt.TaskItem(15,'use aliyun email sender','12/21/2015','01/28/2016','FFFF00','',0,'黄巍,徐飞',35,0,0,1,'','黄巍,徐飞:35\%'));
+          g.AddTaskItem(new JSGantt.TaskItem(15,'use aliyun email sender','12/21/2015','01/28/2016','FFFF00','',0,'黄巍,徐飞',40,0,0,1,'','黄巍,徐飞:40\%'));
 
-          g.AddTaskItem(new JSGantt.TaskItem(16,'rewrite document tool for api controllers','01/12/2016','01/30/2016','B0C4DE','',0,'黄巍',0,0,0,1,'','黄巍'));
+          g.AddTaskItem(new JSGantt.TaskItem(16,'rewrite log flush methods','01/19/2016','01/20/2016','FFD700','',0,'黄巍',0,0,0,1,'','黄巍'));
+
+          g.AddTaskItem(new JSGantt.TaskItem(17,'rewrite document tool for api controllers','01/12/2016','01/30/2016','FF0000','',0,'黄巍',0,0,0,1,'','黄巍'));
 
         g.Draw();
         g.DrawDependencies();
@@ -40,6 +42,16 @@
 
 <h3>Recent Git Log</h3> 
 <pre><code>
+* <em style='color:grey'>0e0c0ce3a01eda2fe2f23328f3c0de7e6c00543a</em>
+| <strong>2016-01-19 14:00</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | <strong style='color:green'>update progress of task alimail to 40</strong>
+| 
+|  
+* <em style='color:grey'>339810fb92fe143604adff6d005f2d7836b38177</em>
+| <strong>2016-01-11 15:01</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | <strong style='color:green'>update Gantt chart</strong>
+| 
+|  
 * <em style='color:grey'>59b5611e2b625529dc21c65765d210d3ee2f8cdb</em>
 | <strong>2016-01-03 12:57</strong> By Huang Wei &lt;huangw@7lime.com&gt;
 | | <strong style='color:green'>update progress of task alimail to 35</strong>
@@ -279,16 +291,6 @@
 *   <em style='color:grey'>f219680bf73c82012c1d4647030d55e41ef080d2</em>
 |\  <strong>2015-11-28 22:13</strong> By Huang Wei &lt;huangw@7lime.com&gt;
 | | | | <strong style='color:green'>Merge branch 'develop' into mailgun</strong>
-| | 
-| |   
-| * <em style='color:grey'>1c1d59c1665296ccdac36fd8d4febbd94d3d87c6</em>
-| | <strong>2015-11-28 22:13</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | | <strong style='color:green'>update progress of task mailgun to 35</strong>
-| | 
-| |   
-* | <em style='color:grey'>c7d9f61f92aa4f5d1034ca55bee9a6bed7ca52dd</em>
-| | <strong>2015-11-28 22:13</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | | <strong style='color:green'>[progress] update progress to 35</strong>
 | | 
 
 </code></pre>
