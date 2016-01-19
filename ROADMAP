@@ -12,5 +12,5 @@ team: [huangw, songcy, gaoyh]
 year: 2016
 % ----
 
-[+] alimail: use aliyun email sender 2015/12/21-01/28 @huangw;xuf:35
+[+] alimail: use aliyun email sender 2015/12/21-01/28 @huangw;xuf:40
 [+] api_doc: rewrite document tool for api controllers 01/12-01/30 @huangw
