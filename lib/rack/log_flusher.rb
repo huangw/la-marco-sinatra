@@ -28,7 +28,7 @@ module Rack
         @logger.fatal(e)
       end
 
-      @logger.access(status, tm: Time.now - t1)
+      @logger.access
       # Thread.new { @logger.flush! }
       @logger.flush!
       [status, headers, body]
