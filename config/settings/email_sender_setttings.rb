@@ -10,7 +10,7 @@ def email_sender(type = nil)
                               'sandbox2d1e98c084ad4393831175520a81b3c5.'\
                               'mailgun.org'
   when :aliyun
-    Emails::AliyunSender.new # TODO: smtp account and password
+    Emails::AliyunSender.new 'vikkr@em.vikkr.com','flzx3kca123'
     # API: 'ACS6DrOgIFfVILhG', 'rDUYHtB5YI', 'xuf@md.vikkr.com'
   end
 end
