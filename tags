@@ -89,6 +89,8 @@ LaBacktraceCleaner	lib/utils/la_backtrace_cleaner.rb	/^module LaBacktraceCleaner
 LaBufferedLogger	lib/la_buffered_logger.rb	/^class LaBufferedLogger$/;"	c
 Loader	lib/devtools/asset_mapper/loader.rb	/^  class Loader$/;"	c	class:AssetMapper
 LogFlusher	lib/rack/log_flusher.rb	/^  class LogFlusher$/;"	c	class:Rack
+LoggerPage	app/pages/logger_page.rb	/^class LoggerPage < WebController$/;"	c
+LoggingHelper	app/pages/logger_page.rb	/^module LoggingHelper$/;"	m
 MailgunSender	lib/emails/mailgun_sender.rb	/^  class MailgunSender$/;"	c	class:Emails
 MockEmail	app/models/emails/mock_email.rb	/^  class MockEmail < Email$/;"	c	class:Emails
 MockEmailLessLocale	spec/lib/emails/render_spec.rb	/^class MockEmailLessLocale < Emails::MockEmail$/;"	c
@@ -173,7 +175,7 @@ _put	lib/rack/session/mongoid.rb	/^      def _put(sid, session)$/;"	f	class:Rack
 _to_hash	lib/utils/hash_presenter.rb	/^  def _to_hash(keys, type_h = {}, opts = {})$/;"	f	class:HashPresenter
 abs_path	lib/devtools/asset_mapper/sfile.rb	/^    def abs_path$/;"	f	class:AssetMapper.Sfile
 abs_path	lib/devtools/asset_mapper/tfile.rb	/^    def abs_path(version)$/;"	f	class:AssetMapper.Tfile
-access	lib/la_buffered_logger.rb	/^  def access(status, opts = {})$/;"	f	class:LaBufferedLogger
+access	lib/la_buffered_logger.rb	/^  def access$/;"	f	class:LaBufferedLogger
 access_recorded?	lib/la_buffered_logger.rb	/^  def access_recorded?$/;"	f	class:LaBufferedLogger
 add	lib/mongoid/field_candy/text_area.rb	/^      def add(blk, opts = {})$/;"	f	class:Mongoid.OrderedList.TextProxy
 add	lib/mongoid/ordered_list.rb	/^      def add(obj, opts = {})$/;"	f	class:Mongoid.OrderedList.Proxy
@@ -498,6 +500,7 @@ no_more_retry?	lib/background/job.rb	/^      def no_more_retry?$/;"	f	class:Back
 not_changed?	lib/devtools/asset_mapper/tfile.rb	/^    def not_changed?(nfile, ofile)$/;"	f	class:AssetMapper.Tfile
 offset_after	lib/mongoid/ordered_list.rb	/^      def offset_after(tid = nil)$/;"	f	class:Mongoid.OrderedList.Proxy
 ordered_list	lib/mongoid/ordered_list.rb	/^      def self.ordered_list(field_name, opts = {})$/;"	F	class:Mongoid.OrderedList
+output	app/pages/logger_page.rb	/^  def output(msg)$/;"	f	class:LoggingHelper
 page	lib/mongoid/paginator.rb	/^    def page(pg = 1, opts = {})$/;"	f	class:Mongoid.Criteria
 paginate	lib/mongoid/paginator.rb	/^    def paginate(pg = 1, opts = {})$/;"	f	class:Mongoid.Criteria
 paginate_block	lib/helpers/slim_helper.rb	/^  def paginate_block(opg, dat = {})$/;"	f	class:SlimHelper

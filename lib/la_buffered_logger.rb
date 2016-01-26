@@ -67,8 +67,8 @@ class LaBufferedLogger
     end
   end
 
-  def access(status, opts = {})
-    info opts.merge(status: status)
+  def access
+    info '-'
     @access_recorded = true
   end
 end
