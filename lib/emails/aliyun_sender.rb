@@ -12,6 +12,7 @@ module Emails
       @from_addr = from_addr
     end
 
+    # rubocop:disable MethodLength
     def deliver!(headers, bodies)
       from_addr = @from_addr
       Mail.deliver(from_addr) do
