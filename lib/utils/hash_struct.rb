@@ -5,7 +5,7 @@ require 'active_support/concern'
 
 # A basic module that can convert between hash and objects
 # require user class implements an `struct()` method
-# rubocop:disable MethodLength
+# rubocop:disable CyclomaticComplexity, MethodLength
 module HashStruct
   extend ActiveSupport::Concern
 
@@ -37,7 +37,9 @@ module HashStruct
         # recursively de-serialize by .from_hash method
         v = klass.demongoize(v) if klass.respond_to?(:demongoize)
       end
-      send("#{k}=".to_sym, v)
+
+      v = send(:"convert_#{k}", v) if respond_to?(:"convert_#{k}") && !v.nil?
+      send(:"#{k}=", v)
     end
     self
   end
@@ -46,7 +48,6 @@ module HashStruct
     struct.keys.map(&:to_sym)
   end
 
-  # rubocop:disable CyclomaticComplexity
   def to_hash(keys = nil)
     keys = to_hash_keys if keys.nil? || keys.is_a?(Symbol) # :default, ...
     hsh = {}

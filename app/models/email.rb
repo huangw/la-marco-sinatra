@@ -1,6 +1,7 @@
 require 'emails/render'
 require 'emails/fake_sender'
 require 'emails/mailgun_sender'
+require 'emails/aliyun_sender'
 
 # Email name space
 module Emails

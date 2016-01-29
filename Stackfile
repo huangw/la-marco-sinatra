@@ -103,11 +103,12 @@ end
 export :email do
   add_gem 'liquid'
   add_gem 'mailgun-ruby'
+  add_gem 'mail'
 
   copy 'lib/emails/*.rb'
   copy 'app/models/email.rb', sync: false
-  # copy 'lib/controllers/email_controller.rb'
   copy 'lib/tasks/gen_email.rake'
+  # copy 'lib/controllers/email_controller.rb'
   # copy 'lib/tasks/email_test.rake'
 end
 

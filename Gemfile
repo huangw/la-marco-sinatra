@@ -1,5 +1,5 @@
-source "https://rubygems.org"
-# source 'http://ruby.taobao.org/'
+#source "https://rubygems.org"
+ source 'https://ruby.taobao.org/'
 
   
     
@@ -9,7 +9,11 @@ gem "dotenv"
     
 gem "logstash-logger"
     
+gem "sanitize"
+    
 gem "i18n"
+    
+gem "easy_translate"
     
 gem "mongoid"
     
@@ -17,17 +21,17 @@ gem "daemon-spawn"
     
 gem "foreman"
     
-gem "oj"
-    
-gem "multi_json"
-    
-gem "recursive-open-struct"
-    
 gem "sinatra"
     
 gem "sinatra-contrib"
     
 gem "puma"
+    
+gem "oj"
+    
+gem "multi_json"
+    
+gem "recursive-open-struct"
     
 gem "sinatra-flash"
     
@@ -35,13 +39,13 @@ gem "sinatra-redirect-with-flash"
     
 gem "slim"
     
-gem "sanitize"
-    
 gem "http_accept_language"
     
 gem "liquid"
     
 gem "mailgun-ruby"
+    
+gem "mail"
     
   
 
@@ -70,8 +74,6 @@ group :development do
     
   gem "iye"
     
-  gem "google-translate"
-    
   gem "mdoc"
     
   gem "factory_girl"
@@ -79,6 +81,8 @@ group :development do
   gem "faker"
     
   gem "table_print"
+    
+  gem "guard-rake"
     
   gem "guard-cucumber"
     
@@ -89,8 +93,6 @@ group :development do
   gem "poltergeist"
     
   gem "selenium-webdriver"
-    
-  gem "guard-rake"
     
   gem "git"
     

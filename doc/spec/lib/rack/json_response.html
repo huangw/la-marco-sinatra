@@ -123,9 +123,9 @@ created at: 2015-01-31</p>
         <span class="hljs-keyword">if</span> e.is_a?(<span class="hljs-constant">RequestError</span>) || e.is_a?(<span class="hljs-constant">ServerError</span>)
           body = { <span class="hljs-symbol">error:</span> e.<span class="hljs-keyword">class</span>.name.underscore, <span class="hljs-symbol">message:</span> e.message }
         <span class="hljs-keyword">elsif</span> status &lt; <span class="hljs-number">500</span> &amp;&amp; status &gt;= <span class="hljs-number">400</span>
-          body = { <span class="hljs-symbol">error:</span> e.<span class="hljs-keyword">class</span>.name.underscore, <span class="hljs-symbol">message:</span> <span class="hljs-constant">I18n</span>.t(<span class="hljs-string">'exceptions.ajax_options_error'</span>) }
+          body = { <span class="hljs-symbol">error:</span> e.<span class="hljs-keyword">class</span>.name.underscore, <span class="hljs-symbol">message:</span> <span class="hljs-constant">I18n</span>.t(<span class="hljs-string">'exceptions.ajax.options_error'</span>) }
         <span class="hljs-keyword">else</span>
-          body = { <span class="hljs-symbol">error:</span> e.<span class="hljs-keyword">class</span>.name.underscore, <span class="hljs-symbol">message:</span> <span class="hljs-constant">I18n</span>.t(<span class="hljs-string">'exceptions.server_error'</span>) }
+          body = { <span class="hljs-symbol">error:</span> e.<span class="hljs-keyword">class</span>.name.underscore, <span class="hljs-symbol">message:</span> <span class="hljs-constant">I18n</span>.t(<span class="hljs-string">'exceptions.ajax.server_error'</span>) }
         <span class="hljs-keyword">end</span>
 
         i18n_msg = e.i18n_message <span class="hljs-keyword">if</span> e.respond_to?(<span class="hljs-symbol">:i18n_message</span>)

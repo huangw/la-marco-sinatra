@@ -14,8 +14,8 @@ namespace :db do
   task :drop do
     fail 'add confirm to confirm delete' unless ENV['CONFIRM']
     puts 'drop default mongoid session in 5 secounds (Ctrl-C to cancel): '
-    p Mongoid.default_session.inspect
+    p ::Mongoid::Clients.default.database.name
     sleep 5
-    Mongoid.default_session.drop
+    ::Mongoid::Clients.default.database.drop
   end
 end

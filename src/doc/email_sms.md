@@ -31,6 +31,7 @@ spec:lib/emails/render
 
 spec:lib/emails/fake_sender
 spec:lib/emails/mailgun_sender
+spec:lib/emails/aliyun_sender
 
 ### 邮件开发和测试
 
