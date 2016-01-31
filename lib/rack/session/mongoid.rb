@@ -1,6 +1,6 @@
 require 'rack/session/mongoid/version'
 require 'rack/session/abstract/id'
-require 'awesome_print'
+# require 'awesome_print'
 
 # A mongoid document model for storing session data
 class RackSession
