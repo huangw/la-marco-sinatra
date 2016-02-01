@@ -12,6 +12,7 @@ Dotenv.load
 
 ENV['RACK_ENV'] ||= 'development'
 ENV['APP_ROOT'] = File.expand_path('../..', __FILE__)
+ENV['BUNDLE_GEMFILE'] ||= File.join(ENV['APP_ROOT'], 'Gemfile')
 
 # A shortcut to find local file's absolute path
 def root_join(*path)

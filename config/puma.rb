@@ -37,7 +37,7 @@ environment 'production' if ENV['RACK_ENV'] == 'production'
 # The default is "false".
 #
 # daemonize false
-daemonize if ENV['RACK_ENV'] == 'production'
+daemonize if ENV['RACK_ENV'] == 'production' && ENV['ALIYUN']
 
 # Store the pid of the server in the file at "path".
 #
