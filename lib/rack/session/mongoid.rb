@@ -9,7 +9,7 @@ class RackSession
   field :sid, type: String
   field :data, type: Hash, default: {}
 
-  index({ sid: 1 }, unique: true)
+  index(sid: 1)
 end
 
 module Rack
