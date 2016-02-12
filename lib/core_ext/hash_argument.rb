@@ -24,7 +24,7 @@ class Hash
   # raise error if undefined keys contains in `hsh`.
   def extract_args!(expects)
     vars = extract_args(expects)
-    fail "Unknown arguments: #{keys.join ','}" if keys.size > 0
+    raise "Unknown arguments: #{keys.join ','}" unless keys.empty?
     vars
   end
 end

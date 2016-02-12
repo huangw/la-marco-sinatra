@@ -5,7 +5,7 @@ Slim::Engine.set_options pretty: (ENV['RACK_ENV'] == 'development')
 module SlimHelper
   # slim output with mapping to default template files
   def rsp(tpl = nil, opts = {})
-    fail 'template id must be a symbol' if tpl && !tpl.is_a?(Symbol)
+    raise 'template id must be a symbol' if tpl && !tpl.is_a?(Symbol)
     env['template_id'] = template_id(tpl, opts.delete(:locales))
 
     use_layout(opts[:layout]) if opts[:layout] # so user can pass false
@@ -35,7 +35,7 @@ module SlimHelper
     locales = dat.extract_args(locales: nil)
     dat[:obj] = obj unless dat[:obj]
 
-    tmpl = File.join('presenters', obj.class.to_s.underscore, "#{type}")
+    tmpl = File.join('presenters', obj.class.to_s.underscore, type.to_s)
 
     if locales
       locale = locales[0]

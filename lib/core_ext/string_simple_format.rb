@@ -15,7 +15,7 @@ class String
   end
 
   def to_text_field
-    sub!(/\A\s*/, '').sub!(/\s*\Z/, '').gsub!(/\r/, '')
+    sub!(/\A\s*/, '').sub!(/\s*\Z/, '').delete!("\r")
   end
 
   def filter_tag

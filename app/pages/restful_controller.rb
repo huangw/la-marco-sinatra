@@ -9,7 +9,7 @@ module API
       set :raise_errors, true # let exceptions pass through (to responser)
     end # configure
 
-    not_found { fail RouteError, :not_found }
+    not_found { raise RouteError, :not_found }
 
     helpers do
       # this hash will merged into JsonResponse

@@ -16,7 +16,7 @@ class Confu
     def method_missing(met, val = nil, &prc)
       met = met.to_s.sub(/=\Z/, '').to_sym
       return finalized_accessor(met) if finalized?
-      fail 'can not set value with configuration block' if val && prc
+      raise 'can not set value with configuration block' if val && prc
       return handle_block(met, prc) if prc
 
       return self[met] = self.class.new(val) if val && val.is_a?(Hash)
@@ -58,16 +58,16 @@ class Confu
     private
 
     def finalized_accessor(met)
-      fail ConfuMissing, "#{met} not set" unless self[met]
+      raise ConfuMissing, "#{met} not set" unless self[met]
       if self[met] && self[met].is_a?(self.class)
-        return nil if self[met].keys.size == 0 # nothing inside
+        return nil if self[met].keys.empty? # nothing inside
       end
       self[met]
     end
 
     def handle_block(met, prc)
-      self[met] = self.class.new unless self.key?(met)
-      fail "`#{met} (#{self[met].class})` can not "\
+      self[met] = self.class.new unless key?(met)
+      raise "`#{met} (#{self[met].class})` can not "\
            'handle configuration block' unless self[met].is_a?(self.class)
       self[met].instance_eval(&prc)
     end
@@ -76,18 +76,18 @@ class Confu
   class << self # directly let into the Eigenclass
     # Return the receiver
     def for_environment(environment, &prc)
-      fail 'Confu is finalized, can not configure anymore.' if finalized?
+      raise 'Confu is finalized, can not configure anymore.' if finalized?
       @data ||= { default: Confu::Data.new }
       @data[environment.to_sym] ||= Confu::Data.new
       @data[environment.to_sym].instance_eval(&prc) if prc
       @data[environment.to_sym]
     end
-    alias_method :'[]', :for_environment
+    alias [] for_environment
 
     # Recursively convert `Data` instance into hash format,
     # ensure symbolic keys
     def to_hash
-      fail 'Can not convert to hash unless finalized' unless finalized?
+      raise 'Can not convert to hash unless finalized' unless finalized?
       @data[@finalized].to_hash
     end
 

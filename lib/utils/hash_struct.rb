@@ -29,11 +29,11 @@ module HashStruct
     return self unless h
     h.each do |k, v|
       if v.is_a?(Hash) && v['_type']
-        if TextBlock::TYPES.include?(v['_type'].to_s)
-          klass = TextBlock
-        else
-          klass = Object.const_get(v['_type'].to_s.classify)
-        end
+        klass = if TextBlock::TYPES.include?(v['_type'].to_s)
+                  TextBlock
+                else
+                  Object.const_get(v['_type'].to_s.classify)
+                end
         # recursively de-serialize by .from_hash method
         v = klass.demongoize(v) if klass.respond_to?(:demongoize)
       end
@@ -63,8 +63,8 @@ module HashStruct
     yield hsh if block_given?
     hsh
   end
-  alias_method :to_cache, :to_hash
-  alias_method :to_embed, :to_hash
+  alias to_cache to_hash
+  alias to_embed to_hash
 
   def mongoize
     hsh = to_hash

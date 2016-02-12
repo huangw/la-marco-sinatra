@@ -21,7 +21,7 @@ module Rack
         body = body.to_hash unless body.is_a?(Hash) # and !body.respond_to?(:to_hash)
 
         # merge the common response hash
-        jbody = MultiJson.encode(env['response_hash'].merge body)
+        jbody = MultiJson.encode(env['response_hash'].merge(body))
       rescue => e
         status = e.respond_to?(:status) ? e.status : 500
         headers ||= {}
@@ -36,7 +36,7 @@ module Rack
 
         i18n_msg = e.i18n_message if e.respond_to?(:i18n_message)
         if i18n_msg
-          body['i18n_message'] = i18n_msg unless i18n_msg.match(/\Atranslation missing:/)
+          body['i18n_message'] = i18n_msg unless i18n_msg.start_with?('translation missing:')
         end
 
         # Do not include back trace for production or documentation

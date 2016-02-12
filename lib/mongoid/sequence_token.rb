@@ -40,7 +40,7 @@ module Mongoid
       end
 
       def self.s_find(str)
-        where(sid: str).last || fail('not_found')
+        where(sid: str).last || raise('not_found')
       end
     end # included
   end

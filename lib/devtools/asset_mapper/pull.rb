@@ -15,7 +15,7 @@ module AssetMapper
       @remote, @branch = (opts.extract_args git: @remote,
                                             branch: 'master').map(&:to_s)
       @update = opts.extract_args! update: true
-      fail 'no remote server defined' unless @remote
+      raise 'no remote server defined' unless @remote
     end
 
     def update?

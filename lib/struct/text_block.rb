@@ -7,7 +7,7 @@ require 'sanitize'
 class TextBlock
   include HashStruct
 
-  TYPES = %w(P CP RP H3 H4 H5 UL OL CL HR)
+  TYPES = %w(P CP RP H3 H4 H5 UL OL CL HR).freeze
 
   def self.types_hash
     TYPES.each_with_object({}) { |a, rslt| rslt[a] = self }

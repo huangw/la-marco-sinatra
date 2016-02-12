@@ -39,7 +39,7 @@ class FileGenerator
     def find_caller
       caller.each do |str|
         str = str.split(':')[0]
-        return str if str.match(/(\.rake|_spec.rb)\Z/)
+        return str if str =~ /(\.rake|_spec.rb)\Z/
       end
     end
 
@@ -51,12 +51,12 @@ class FileGenerator
       File.open(find_caller).each do |line|
         if data_reached
           if started
-            started = false if line.match(/\A\s*@@\W?/)
+            started = false if line =~ /\A\s*@@\W?/
             contents << line if started
           end
-          started = true if line.match(/\A\s*@@\s*#{id}/)
+          started = true if line =~ /\A\s*@@\s*#{id}/
         end
-        data_reached = true if line.match(/__END__/)
+        data_reached = true if line =~ /__END__/
       end
       contents.sub(/\A\n*/, '').sub(/\n*\Z/, '') # return
     end

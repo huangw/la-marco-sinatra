@@ -49,7 +49,7 @@ module Emails
       # ---------------
 
       def localized?
-        available_locales && available_locales.size > 0
+        available_locales && !available_locales.empty?
       end
 
       # calculate locale from locales settings
@@ -101,7 +101,7 @@ module Emails
         @headers = { to: to }
         dat.each do |key, val|
           key = key.to_s.downcase
-          fail "invalid field #{key}" unless valid_fields.include?(key)
+          raise "invalid field #{key}" unless valid_fields.include?(key)
           @headers[key.to_sym] = val unless val.nil?
         end
       end

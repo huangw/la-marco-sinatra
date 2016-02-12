@@ -33,7 +33,7 @@ module Mongoid
       def text_size
         blist.inject(0) { |a, e| a + e['text'].size if e['text'] }
       end
-      alias_method :length, :text_size
+      alias length text_size
     end
   end
 

@@ -25,7 +25,7 @@ class ImageController < Sinatra::Base
 
   # load assets controllers
   a_url = AssetSettings.get.img_url_prefix
-  Route.mount(self, a_url) if a_url.match(/\A\//)
+  Route.mount(self, a_url) if a_url =~ /\A\//
 end
 
 __END__

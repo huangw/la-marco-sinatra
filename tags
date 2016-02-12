@@ -269,7 +269,7 @@ copy!	lib/devtools/asset_mapper/vendor_file.rb	/^    def copy!$/;"	f	class:Asset
 copy_file!	lib/devtools/asset_mapper/vendor_file.rb	/^    def copy_file!(sfile, tfile, diff = nil)$/;"	f	class:AssetMapper.VendorFile
 css?	lib/devtools/asset_mapper/sfile.rb	/^    def css?$/;"	f	class:AssetMapper.Sfile
 css?	lib/devtools/asset_mapper/tfile.rb	/^    def css?$/;"	f	class:AssetMapper.Tfile
-css_id	lib/helpers/form_helper.rb	/^  def css_id(*things)$/;"	f	class:FormHelper.radio.checkbox.select
+css_id	lib/helpers/form_helper.rb	/^  def css_id(*things)$/;"	f	class:FormHelper.radio.checkbox
 css_tag	lib/helpers/assets_helper.rb	/^  def css_tag(file_id)$/;"	f	class:AssetsHelper
 current_abs_path	lib/devtools/asset_mapper/tfile.rb	/^    def current_abs_path$/;"	f	class:AssetMapper.Tfile
 current_file_path	lib/devtools/asset_mapper/tfile.rb	/^    def current_file_path$/;"	f	class:AssetMapper.Tfile
@@ -297,7 +297,7 @@ deliver!	lib/emails/render.rb	/^      def deliver!$/;"	f	class:Emails.Render
 deliver_later	lib/emails/render.rb	/^      def deliver_later(sec = 0)$/;"	f	class:Emails.Render
 delivered?	lib/emails/render.rb	/^      def delivered?$/;"	f	class:Emails.Render
 delivered_at	lib/emails/render.rb	/^      def delivered_at$/;"	f	class:Emails.Render
-demongoize	lib/utils/hash_struct.rb	/^      def demongoize(args)$/;"	f	class:HashStruct
+demongoize	lib/utils/hash_struct.rb	/^      def demongoize(args)$/;"	f
 destroy_session	lib/rack/session/mongoid.rb	/^      def destroy_session(env, session_id, options)$/;"	f	class:Rack.Session.Mongoid
 development?	lib/asset_settings.rb	/^    def development?$/;"	f	class:AssetSettings
 diff_file	lib/devtools/asset_mapper/vendor_file.rb	/^    def diff_file(sfile, tfile)$/;"	f	class:AssetMapper.VendorFile
@@ -311,7 +311,7 @@ email_valid?	lib/mongoid/validators/email_validator.rb	/^  def email_valid?(emai
 encode	lib/mongoid/ordered_list.rb	/^      def encode(obj, tid = nil)$/;"	f	class:Mongoid.OrderedList.Proxy
 environments	lib/asset_settings.rb	/^    def environments$/;"	f	class:AssetSettings
 event	lib/la_buffered_logger.rb	/^  def event(type, dat = {})$/;"	f	class:LaBufferedLogger
-evolve	lib/utils/hash_struct.rb	/^      def evolve(object)$/;"	f	class:HashStruct
+evolve	lib/utils/hash_struct.rb	/^      def evolve(object)$/;"	f
 example_file	spec/support/helpers/example_helper.rb	/^def example_file(arg)$/;"	f
 example_for	spec/support/helpers/api_doc_helper.rb	/^    def example_for(key)$/;"	f	class:RSpecApiDoc
 examples	spec/support/helpers/api_doc_helper.rb	/^    def examples(key = nil)$/;"	f	class:RSpecApiDoc
@@ -469,8 +469,8 @@ min_abs_path	lib/devtools/asset_mapper/tfile.rb	/^    def min_abs_path$/;"	f	cla
 min_file_path	lib/devtools/asset_mapper/tfile.rb	/^    def min_file_path$/;"	f	class:AssetMapper.Tfile
 model	spec/support/helpers/api_doc_helper.rb	/^    def model(*args)$/;"	f	class:RSpecApiDoc
 models	config/initializers/development/mongoid_pry.rb	/^def models$/;"	f
-mongoize	lib/utils/hash_struct.rb	/^      def mongoize(object)$/;"	f	class:HashStruct
-mongoize	lib/utils/hash_struct.rb	/^  def mongoize$/;"	f	class:HashStruct
+mongoize	lib/utils/hash_struct.rb	/^      def mongoize(object)$/;"	f
+mongoize	lib/utils/hash_struct.rb	/^  def mongoize$/;"	f
 mop	config/initializers/development/mongoid_pry.rb	/^def mop(model)$/;"	f
 mount	lib/route.rb	/^    def mount(app_class, route = nil)$/;"	f	class:Route
 move	lib/mongoid/ordered_list.rb	/^      def move(tid, opts = {})$/;"	f	class:Mongoid.OrderedList.Proxy
@@ -635,8 +635,8 @@ to_hash	lib/asset_settings/environment_settings.rb	/^    def to_hash$/;"	f	class
 to_hash	lib/confu.rb	/^    def to_hash$/;"	f	class:Confu
 to_hash	lib/confu.rb	/^    def to_hash$/;"	f	class:Confu.Data
 to_hash	lib/mongoid/ordered_list.rb	/^      def to_hash$/;"	f	class:Mongoid.OrderedList.Proxy
-to_hash	lib/utils/hash_struct.rb	/^  def to_hash(keys = nil)$/;"	f	class:HashStruct
-to_hash_keys	lib/utils/hash_struct.rb	/^  def to_hash_keys$/;"	f	class:HashStruct
+to_hash	lib/utils/hash_struct.rb	/^  def to_hash(keys = nil)$/;"	f
+to_hash_keys	lib/utils/hash_struct.rb	/^  def to_hash_keys$/;"	f
 to_human	lib/devtools/i18n_utils.rb	/^    def to_human(key)$/;"	f	class:I18nUtils
 to_simple_format	lib/core_ext/string_simple_format.rb	/^  def to_simple_format$/;"	f	class:String
 to_splits	lib/mongoid/token_id.rb	/^    def to_splits$/;"	f	class:BSON.ObjectId

@@ -21,7 +21,7 @@ module Mongoid
           class_name = opts.delete(:class_name)
           callback = opts.delete(:callback)
 
-          fail 'must specify :as' unless met
+          raise 'must specify :as' unless met
 
           field_name = field_name.to_sym
           field field_name, opts.merge(type: Hash)
@@ -42,7 +42,7 @@ module Mongoid
             if class_name
               klass = Object.const_get(class_name.to_s.classify)
               obj_class = obj.is_a?(Hash) ? Object.const_get(obj['_type']) : obj.class
-              fail "must be a '#{class_name}'" unless obj_class <= klass
+              raise "must be a '#{class_name}'" unless obj_class <= klass
             end
 
             hsh = obj.is_a?(Hash) ? obj : obj.to_cache

@@ -109,7 +109,7 @@ module I18nUtils
 
     def scope_join(*args)
       if @common_scope
-        args.unshift @common_scope unless args[0].match(/\A#{@common_scope}/)
+        args.unshift @common_scope unless args[0] =~ /\A#{@common_scope}/
       end
 
       args.map { |k| k.to_s.sub(/\A\./, '').sub(/\.\Z/, '') }.join('.')
