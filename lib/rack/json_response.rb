@@ -18,7 +18,7 @@ module Rack
 
       begin
         status, headers, body = @app.call(env)
-        body = body.to_hash unless body.is_a?(Hash) # and !body.respond_to?(:to_hash)
+        body = body.to_hash if !body.is_a?(Hash) && body.respond_to?(:to_hash)
 
         # merge the common response hash
         jbody = MultiJson.encode(env['response_hash'].merge(body))
