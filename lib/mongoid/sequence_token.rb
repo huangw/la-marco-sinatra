@@ -29,7 +29,7 @@ module Mongoid
       # initialize the sequence field
       Sequence.find_or_create_by(name: seq_field)
 
-      set_callback :save, :before, :set_sequence_token, unless: :persisted?
+      set_callback :initialize, :after, :set_sequence_token, unless: :persisted?
       def set_sequence_token
         nseq = Sequence.where(name: self.class.seq_field).find_one_and_update(
           { '$inc' => { seq: 1 } }, return_document: :after)
