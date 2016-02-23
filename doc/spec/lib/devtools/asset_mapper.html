@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>asset_mapper.rb</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>asset_mapper.rb</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">require</span> <span class="hljs-string">'asset_settings'</span>
+<span class="hljs-string">%w(pull sfile vendor_file cloud_file tfile producer loader)</span>.each <span class="hljs-keyword">do</span> |f|
+  require_relative <span class="hljs-string">"asset_mapper/<span class="hljs-subst">#{f}</span>"</span>
+<span class="hljs-keyword">end</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>Used by rake tasks, update <code>config.yml</code> file, update local js/css files, or
+compile minimized version of assets for production use.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">module</span> <span class="hljs-title">AssetMapper</span></span>
+  <span class="hljs-constant">DEFAULTS</span> = {
+    <span class="hljs-symbol">pull_dir:</span> <span class="hljs-constant">File</span>.join(<span class="hljs-constant">Dir</span>.home, <span class="hljs-string">'.assets_mapper'</span>),
+    <span class="hljs-symbol">assets_dir:</span> <span class="hljs-string">'app/assets'</span>, <span class="hljs-comment"># directory for source js files</span>
+    <span class="hljs-symbol">vendor_dir:</span> <span class="hljs-string">'app/assets/vendor'</span>,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>js/css files copied from 3rd party repository</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-symbol">cloud_dir:</span> <span class="hljs-string">'app/assets/cloud'</span>,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>local file cache for cloud js/css files</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-symbol">min_dir:</span> <span class="hljs-string">'app/assets/min'</span> <span class="hljs-comment"># directory for minimized js/css files</span>
+  }.freeze
+
+  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-inheritance">&lt;</span><span class="hljs-inheritance">&lt; <span class="hljs-parent">self</span></span></span>
+    <span class="hljs-keyword">attr_accessor</span> <span class="hljs-symbol">:compile</span>
+
+    <span class="hljs-constant">DEFAULTS</span>.each <span class="hljs-keyword">do</span> |met, default_value|
+      define_method met <span class="hljs-keyword">do</span> |val = <span class="hljs-keyword">nil</span>|
+        instance_variable_set(<span class="hljs-string">"@<span class="hljs-subst">#{met}</span>"</span>, val) <span class="hljs-keyword">unless</span> val.<span class="hljs-keyword">nil</span>?
+        instance_variable_get(<span class="hljs-string">"@<span class="hljs-subst">#{met}</span>"</span>) || default_value
+      <span class="hljs-keyword">end</span>
+    <span class="hljs-keyword">end</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">root</span></span>
+      <span class="hljs-constant">ENV</span>[<span class="hljs-string">'APP_ROOT'</span>]
+    <span class="hljs-keyword">end</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">compile?</span></span>
+      <span class="hljs-variable">@compile</span> ? <span class="hljs-keyword">true</span> <span class="hljs-symbol">:</span> <span class="hljs-keyword">false</span>
+    <span class="hljs-keyword">end</span>
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span></pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

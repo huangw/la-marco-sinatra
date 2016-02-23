@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>la_buffered_logger_spec.rb</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>la_buffered_logger_spec.rb</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">require</span> <span class="hljs-string">'spec_helper'</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">'la_buffered_logger'</span>
+
+describe <span class="hljs-constant">LaBufferedLogger</span> <span class="hljs-keyword">do</span>
+  subject(<span class="hljs-symbol">:logger</span>) { <span class="hljs-constant">LaBufferedLogger</span>.new }
+
+  describe <span class="hljs-string">'#level'</span> <span class="hljs-keyword">do</span>
+    it <span class="hljs-string">'default to :debug'</span> <span class="hljs-keyword">do</span>
+      expect(logger.level).to eq(<span class="hljs-symbol">:debug</span>)
+    <span class="hljs-keyword">end</span>
+  <span class="hljs-keyword">end</span>
+
+  describe <span class="hljs-string">'#level='</span> <span class="hljs-keyword">do</span>
+    it <span class="hljs-string">'accepts Logger::CONSTANT'</span> <span class="hljs-keyword">do</span>
+      logger.level = <span class="hljs-constant">Logger::ERROR</span>
+      expect(logger.level).to eq(<span class="hljs-symbol">:error</span>)
+    <span class="hljs-keyword">end</span>
+
+    it <span class="hljs-string">'accepts :symbol'</span> <span class="hljs-keyword">do</span>
+      logger.level = <span class="hljs-symbol">:error</span>
+      expect(logger.level).to eq(<span class="hljs-symbol">:error</span>)
+    <span class="hljs-keyword">end</span>
+
+    it <span class="hljs-string">'accepts string'</span> <span class="hljs-keyword">do</span>
+      logger.level = <span class="hljs-string">'Error'</span>
+      expect(logger.level).to eq(<span class="hljs-symbol">:error</span>)
+    <span class="hljs-keyword">end</span>
+  <span class="hljs-keyword">end</span>
+
+  describe <span class="hljs-string">'#&lt;severity&gt;'</span> <span class="hljs-keyword">do</span>
+    it <span class="hljs-string">'returns nil if higher severity level set'</span> <span class="hljs-keyword">do</span>
+      logger.level = <span class="hljs-symbol">:error</span>
+      expect(logger.info(<span class="hljs-string">'some thing'</span>)).to be_nil
+      expect(logger.msgs).to be_empty
+    <span class="hljs-keyword">end</span>
+
+    it <span class="hljs-string">'returns non-nil if lower or equal severitylevel set'</span> <span class="hljs-keyword">do</span>
+      logger.level = <span class="hljs-symbol">:info</span>
+      expect(logger.info(<span class="hljs-string">'some thing'</span>)).to_not be_nil
+      expect(logger.msgs.last[<span class="hljs-string">'message'</span>]).to eq(<span class="hljs-string">'some thing'</span>)
+      expect(logger.msgs.last[<span class="hljs-string">'severity'</span>]).to eq(<span class="hljs-string">'info'</span>)
+    <span class="hljs-keyword">end</span>
+  <span class="hljs-keyword">end</span>
+
+  describe <span class="hljs-string">'#flush!'</span> <span class="hljs-keyword">do</span>
+    it <span class="hljs-string">'save messages only if flush!'</span> <span class="hljs-keyword">do</span>
+      <span class="hljs-number">3</span>.times { logger.error(<span class="hljs-string">'a message'</span>) }
+      expect(logger.msgs.count).to eq(<span class="hljs-number">3</span>)
+      logger.flush!
+      expect(logger.msgs.count).to eq(<span class="hljs-number">0</span>)
+
+      <span class="hljs-number">5</span>.times { logger.info(<span class="hljs-string">'an info message'</span>) }
+      expect(logger.msgs.count).to eq(<span class="hljs-number">5</span>)
+      logger.flush!
+      expect(logger.msgs.count).to eq(<span class="hljs-number">0</span>)
+    <span class="hljs-keyword">end</span>
+
+    it <span class="hljs-string">'flash message every time if flush threshold equals 0'</span> <span class="hljs-keyword">do</span>
+      logger.flush_threshold = <span class="hljs-number">0</span>
+      logger.error(<span class="hljs-string">'a message'</span>)
+      expect(logger.msgs.count).to eq(<span class="hljs-number">0</span>)
+
+      logger.error(<span class="hljs-string">'a message 2'</span>)
+      expect(logger.msgs.count).to eq(<span class="hljs-number">0</span>)
+    <span class="hljs-keyword">end</span>
+
+    it <span class="hljs-string">'saves every time threshold reaches'</span> <span class="hljs-keyword">do</span>
+      logger.flush_threshold = <span class="hljs-number">3</span>
+
+      <span class="hljs-number">6</span>.times { logger.error(<span class="hljs-string">'a message'</span>) }
+      expect(logger.msgs.count).to eq(<span class="hljs-number">2</span>)
+    <span class="hljs-keyword">end</span>
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span></pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
