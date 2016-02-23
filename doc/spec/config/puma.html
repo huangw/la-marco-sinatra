@@ -94,9 +94,10 @@ end</p>
               <p>Set the environment in which the rack’s app will run.
 The value must be a string.</p>
 <p>The default is “development”.</p>
-<p>environment ‘production’</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre>environment <span class="hljs-string">'production'</span> <span class="hljs-keyword">if</span> <span class="hljs-constant">ENV</span>[<span class="hljs-string">'RACK_ENV'</span>] == <span class="hljs-string">'production'</span></pre></div></div>
             
         </li>
         
@@ -110,10 +111,11 @@ The value must be a string.</p>
               <p>Daemonize the server into the background. Highly suggest that
 this be combined with “pidfile” and “stdout_redirect”.</p>
 <p>The default is “false”.</p>
-<p>daemonize
-daemonize false</p>
+<p>daemonize false</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre>daemonize <span class="hljs-keyword">if</span> <span class="hljs-constant">ENV</span>[<span class="hljs-string">'RACK_ENV'</span>] == <span class="hljs-string">'production'</span> &amp;&amp; <span class="hljs-constant">ENV</span>[<span class="hljs-string">'ALIYUN'</span>]</pre></div></div>
             
         </li>
         
@@ -300,9 +302,10 @@ to puma, as those are the same as the original process.</p>
               </div>
               <p>How many worker processes to run.</p>
 <p>The default is “0”.</p>
-<p>workers 2</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre>workers <span class="hljs-number">4</span> <span class="hljs-keyword">if</span> <span class="hljs-constant">ENV</span>[<span class="hljs-string">'RACK_ENV'</span>] == <span class="hljs-string">'production'</span></pre></div></div>
             
         </li>
         

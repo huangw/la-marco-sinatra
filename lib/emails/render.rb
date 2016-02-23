@@ -49,7 +49,7 @@ module Emails
       # ---------------
 
       def localized?
-        available_locales && available_locales.size > 0
+        available_locales && !available_locales.empty?
       end
 
       # calculate locale from locales settings
@@ -63,10 +63,8 @@ module Emails
         available_formats.first
       end
 
-      def template_file(format = nil, locale = nil)
+      def template_file(format = nil)
         template_file = template_basename
-
-        locale ||= default_locale if localized? # may has a locale
         template_file += ".#{locale}" if locale
 
         format ||= default_format
@@ -84,11 +82,11 @@ module Emails
         %w(to cc bcc subject from sender_type reply-to return-path inline)
       end
 
-      def parse(extra_headers = {}, loc = nil)
+      def parse(extra_headers = {})
         @bodies = {}
         available_formats.each do |fmt|
           body = Liquid::Template.parse(
-            File.open(template_file(fmt, loc), 'r:utf-8').read).render(to_hash)
+            File.open(template_file(fmt), 'r:utf-8').read).render(to_hash)
 
           if @headers.nil?
             head, body = body.split("\n\n", 2)
@@ -103,13 +101,14 @@ module Emails
         @headers = { to: to }
         dat.each do |key, val|
           key = key.to_s.downcase
-          fail "invalid field #{key}" unless valid_fields.include?(key)
+          raise "invalid field #{key}" unless valid_fields.include?(key)
           @headers[key.to_sym] = val unless val.nil?
         end
       end
 
       # delivery the email
       # ---------------------
+      field :_d_at, type: Time
 
       # nil if not defined in template file or by extra rendering data
       attr_writer :sender_type
@@ -121,14 +120,20 @@ module Emails
       def process!
         parse unless @headers
         email_sender(sender_type).deliver!(@headers, @bodies)
+        self._d_at = Time.now
       end
 
       def deliver!
-        perform_job! # this will call process! in the right way
+        # this will call process! in the right way
+        perform_job!('front-sender')
       end
 
       def delivered?
         job_state == 10
+      end
+
+      def delivered_at
+        delivered? && _d_at
       end
 
       def deliver_later(sec = 0)

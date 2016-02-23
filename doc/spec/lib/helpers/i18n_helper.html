@@ -64,7 +64,7 @@
             
             <div class="content"><div class='highlight'><pre>    hal.user_preferred_languages.unshift current_user.loc.to_s <span class="hljs-keyword">if</span> respond_to?(<span class="hljs-string">'current_user'</span>) &amp;&amp; current_user
     hal.user_preferred_languages.unshift params[<span class="hljs-symbol">:locale</span>] <span class="hljs-keyword">if</span> params[<span class="hljs-symbol">:locale</span>]
-    hal.user_preferred_languages = hal.user_preferred_languages.map { |loc| loc.match(<span class="hljs-regexp">/zh/</span>) ? <span class="hljs-string">'zh'</span> <span class="hljs-symbol">:</span> loc }
+    hal.user_preferred_languages = hal.user_preferred_languages.map { |loc| loc =~ <span class="hljs-regexp">/zh/</span> ? <span class="hljs-string">'zh'</span> <span class="hljs-symbol">:</span> loc }
     hal.preferred_language_from(avails) || <span class="hljs-string">'zh'</span>
   <span class="hljs-keyword">end</span></pre></div></div>
             

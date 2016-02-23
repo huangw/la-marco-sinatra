@@ -25,8 +25,8 @@ module Background
 
       def self.perform(worker = 'anonymous worker', logger = nil)
         job = waiting.asc(:c_at)
-              .find_one_and_update({ '$set' => { _j_s: 100 } },
-                                   return_document: :after)
+                     .find_one_and_update({ '$set' => { _j_s: 100 } },
+                                          return_document: :after)
 
         return nil unless job # No job is waiting
         job.perform_job!(worker, logger)

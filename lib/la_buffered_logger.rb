@@ -9,7 +9,7 @@ require 'utils/la_backtrace_cleaner'
 class LaBufferedLogger
   include ::Logger::Severity
 
-  LEVELS = [:debug, :info, :warn, :error, :fatal, :unknown] # 0 .. 5
+  LEVELS = [:debug, :info, :warn, :error, :fatal, :unknown].freeze # 0 .. 5
 
   attr_accessor :flush_threshold, :request_info
   attr_reader :level, :msgs
@@ -35,7 +35,7 @@ class LaBufferedLogger
   # symbols like :warn, :error, ...
   def level=(lvl)
     @level = lvl.is_a?(Integer) ? LEVELS[lvl] : lvl.to_s.downcase.to_sym
-    fail "Unknown level #{lvl}" unless LEVELS.include?(@level)
+    raise "Unknown level #{lvl}" unless LEVELS.include?(@level)
     @level
   end
 
@@ -67,8 +67,8 @@ class LaBufferedLogger
     end
   end
 
-  def access(status, opts = {})
-    info opts.merge(status: status)
+  def access
+    info '-'
     @access_recorded = true
   end
 end

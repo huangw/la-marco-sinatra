@@ -9,7 +9,7 @@ module Emails
     attr_accessor :api_key, :domain, :params
 
     FIELDS = %w(app_key password url to cc bcc subject from sender reply-to
-                return-path inline)
+                return-path inline).freeze
 
     def initialize(api_key, domain, params = {})
       @api_key = api_key
@@ -26,7 +26,7 @@ module Emails
     def merge_parameters!(hsh)
       hsh.each do |k, v|
         k = k.to_s.downcase
-        fail "unknown field #{k}" unless FIELDS.include?(k)
+        raise "unknown field #{k}" unless FIELDS.include?(k)
         @params[k.to_sym] = v
       end
     end

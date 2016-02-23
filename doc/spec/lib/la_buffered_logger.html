@@ -53,7 +53,7 @@ method explicitly called.</p>
             <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LaBufferedLogger</span></span>
   <span class="hljs-keyword">include</span> <span class="hljs-constant">::Logger::Severity</span>
 
-  <span class="hljs-constant">LEVELS</span> = [<span class="hljs-symbol">:debug</span>, <span class="hljs-symbol">:info</span>, <span class="hljs-symbol">:warn</span>, <span class="hljs-symbol">:error</span>, <span class="hljs-symbol">:fatal</span>, <span class="hljs-symbol">:unknown</span>] <span class="hljs-comment"># 0 .. 5</span>
+  <span class="hljs-constant">LEVELS</span> = [<span class="hljs-symbol">:debug</span>, <span class="hljs-symbol">:info</span>, <span class="hljs-symbol">:warn</span>, <span class="hljs-symbol">:error</span>, <span class="hljs-symbol">:fatal</span>, <span class="hljs-symbol">:unknown</span>].freeze <span class="hljs-comment"># 0 .. 5</span>
 
   <span class="hljs-keyword">attr_accessor</span> <span class="hljs-symbol">:flush_threshold</span>, <span class="hljs-symbol">:request_info</span>
   <span class="hljs-keyword">attr_reader</span> <span class="hljs-symbol">:level</span>, <span class="hljs-symbol">:msgs</span>
@@ -91,7 +91,7 @@ symbols like :warn, :error, …</p>
             
             <div class="content"><div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">level=</span><span class="hljs-params">(lvl)</span></span>
     <span class="hljs-variable">@level</span> = lvl.is_a?(<span class="hljs-constant">Integer</span>) ? <span class="hljs-constant">LEVELS</span>[lvl] <span class="hljs-symbol">:</span> lvl.to_s.downcase.to_sym
-    fail <span class="hljs-string">"Unknown level <span class="hljs-subst">#{lvl}</span>"</span> <span class="hljs-keyword">unless</span> <span class="hljs-constant">LEVELS</span>.<span class="hljs-keyword">include</span>?(<span class="hljs-variable">@level</span>)
+    raise <span class="hljs-string">"Unknown level <span class="hljs-subst">#{lvl}</span>"</span> <span class="hljs-keyword">unless</span> <span class="hljs-constant">LEVELS</span>.<span class="hljs-keyword">include</span>?(<span class="hljs-variable">@level</span>)
     <span class="hljs-variable">@level</span>
   <span class="hljs-keyword">end</span>
 
@@ -123,8 +123,8 @@ symbols like :warn, :error, …</p>
     <span class="hljs-keyword">end</span>
   <span class="hljs-keyword">end</span>
 
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">access</span><span class="hljs-params">(status, opts = {})</span></span>
-    info opts.merge(<span class="hljs-symbol">status:</span> status)
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">access</span></span>
+    info <span class="hljs-string">'-'</span>
     <span class="hljs-variable">@access_recorded</span> = <span class="hljs-keyword">true</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span></pre></div></div>

@@ -105,7 +105,7 @@
             </div>
             
             <div class="content"><div class='highlight'><pre>  a_url = <span class="hljs-constant">AssetSettings</span>.get.img_url_prefix
-  <span class="hljs-constant">Route</span>.mount(<span class="hljs-keyword">self</span>, a_url) <span class="hljs-keyword">if</span> a_url.match(<span class="hljs-regexp">/\A\//</span>)
+  <span class="hljs-constant">Route</span>.mount(<span class="hljs-keyword">self</span>, a_url) <span class="hljs-keyword">if</span> a_url =~ <span class="hljs-regexp">/\A\//</span>
 <span class="hljs-keyword">end</span>
 
 <span class="hljs-comment">__END__

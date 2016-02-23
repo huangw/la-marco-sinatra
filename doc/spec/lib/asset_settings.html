@@ -47,7 +47,7 @@ update based on configurations</p>
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AssetSettings</span></span>
-  <span class="hljs-constant">CONFIG_YAML</span> = <span class="hljs-string">'config/assets.yml'</span>
+  <span class="hljs-constant">CONFIG_YAML</span> = <span class="hljs-string">'config/assets.yml'</span>.freeze
   <span class="hljs-constant">APP_ROOT</span> = <span class="hljs-constant">ENV</span>[<span class="hljs-string">'APP_ROOT'</span>]
 
   <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-inheritance">&lt;</span><span class="hljs-inheritance">&lt; <span class="hljs-parent">self</span></span></span>
@@ -87,7 +87,7 @@ runtime environment (one of the three from environments)</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">[]</span><span class="hljs-params">(env)</span></span>
-      fail <span class="hljs-string">"Unsupported environment <span class="hljs-subst">#{env}</span>"</span> <span class="hljs-keyword">unless</span> environments.<span class="hljs-keyword">include</span>?(env)
+      raise <span class="hljs-string">"Unsupported environment <span class="hljs-subst">#{env}</span>"</span> <span class="hljs-keyword">unless</span> environments.<span class="hljs-keyword">include</span>?(env)
       <span class="hljs-variable">@settings</span> ||= {}
       <span class="hljs-variable">@settings</span>[env.to_sym] ||= <span class="hljs-constant">EnvironmentSettings</span>.new(env.to_sym)
     <span class="hljs-keyword">end</span></pre></div></div>
@@ -195,7 +195,7 @@ runtime environment (one of the three from environments)</p>
     <span class="hljs-keyword">end</span>
 
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">load_yaml!</span><span class="hljs-params">(file = <span class="hljs-keyword">nil</span>)</span></span>
-      fail <span class="hljs-string">'file not exists'</span> <span class="hljs-keyword">unless</span> load_yaml(file)
+      raise <span class="hljs-string">'file not exists'</span> <span class="hljs-keyword">unless</span> load_yaml(file)
     <span class="hljs-keyword">end</span>
 
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update_yaml!</span><span class="hljs-params">(file = <span class="hljs-keyword">nil</span>)</span></span>

@@ -6,7 +6,7 @@ module AssetMapper
 
     def initialize(filename)
       warn "[WARN] file type unkown: #{filename}, "\
-           'need to be js or css' unless filename.match(/\.(js|css)\Z/)
+           'need to be js or css' unless filename =~ /\.(js|css)\Z/
       @filename = filename
     end
 
@@ -17,7 +17,7 @@ module AssetMapper
     # File type
     # ------------
     def file_type
-      filename.match(/\.js\Z/) ? 'js' : 'css'
+      filename =~ /\.js\Z/ ? 'js' : 'css'
     end
 
     def js?

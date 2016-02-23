@@ -1,89 +1,55 @@
-# [Class] HashStruct (lib/utils/hash_struct.rb)
-# vim: foldlevel=1
-# created at: 2015-01-29
+# [Class] HashStruct
+#   (lib/mongoid/hash_struct.rb)
+# vi: foldlevel=1
+# created at: 2016-02-22
 require 'active_support/concern'
+require 'utils/hash_serialize'
 
-# A basic module that can convert between hash and objects
-# require user class implements an `struct()` method
-# rubocop:disable MethodLength
+# Implement a simple embeddable mongoid document with hash serialize interface.
 module HashStruct
   extend ActiveSupport::Concern
 
   def initialize(h = {})
-    struct.keys.each { |k| self.class.class_eval { attr_accessor k.to_sym } }
-    hsh = struct.merge(h).stringify_keys
-    hsh['_type'] ||= self.class.to_s if to_hash_keys.include?(:_type)
-    from_hash(hsh)
+    _struct.merge(h.symbolize_keys).each { |met, v| send("#{met}=", v) }
   end
 
+  # Raw getter and setters
   def [](key)
-    send(key.to_sym)
+    instance_variable_get("@#{key}")
   end
 
   def []=(key, value)
-    send("#{key}=".to_sym, value)
-  end
-
-  # Use hash to build object recursively
-  def from_hash(h)
-    return self unless h
-    h.each do |k, v|
-      if v.is_a?(Hash) && v['_type']
-        if TextBlock::TYPES.include?(v['_type'].to_s)
-          klass = TextBlock
-        else
-          klass = Object.const_get(v['_type'].to_s.classify)
-        end
-        # recursively de-serialize by .from_hash method
-        v = klass.demongoize(v) if klass.respond_to?(:demongoize)
-      end
-      send("#{k}=".to_sym, v)
-    end
-    self
+    instance_variable_set("@#{key}", value)
   end
 
   def to_hash_keys
-    struct.keys.map(&:to_sym)
+    _struct.keys.map(&:to_sym)
   end
 
-  # rubocop:disable CyclomaticComplexity
-  def to_hash(keys = nil)
-    keys = to_hash_keys if keys.nil? || keys.is_a?(Symbol) # :default, ...
-    hsh = {}
-    keys.each do |k|
-      value = send(k.to_sym)
-      next if value.nil?
-      if value.is_a?(Hash)
-        hsh[k.to_s] = value
-      else
-        hsh[k.to_s] = value.respond_to?(:mongoize) ? value.mongoize : value
-      end
-    end
+  def _type
+    self.class.to_s
+  end
+
+  def _type=(_)
+  end
+
+  def to_hash
+    hsh = _to_hash to_hash_keys
     yield hsh if block_given?
+    hsh['_type'] ||= _type
     hsh
-  end
-  alias_method :to_cache, :to_hash
-  alias_method :to_embed, :to_hash
-
-  def mongoize
-    hsh = to_hash
-    hsh.keys.empty? ? nil : hsh
   end
 
   included do
+    include HashSerialize
     class << self
-      def demongoize(args)
-        new.from_hash(args)
-      end
-      alias_method :from_cache, :demongoize
-      alias_method :from_hash, :demongoize
-
-      def mongoize(object)
-        object.is_a?(Hash) ? object : object.to_hash
+      def struct(hsh)
+        send(:define_method, :_struct) { hsh.symbolize_keys }
+        hsh.keys.each { |k| attr_accessor k }
       end
 
-      def evolve(object)
-        object.mongoize
+      def from_hash(hsh)
+        new._from_hash(hsh)
       end
     end
   end

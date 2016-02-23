@@ -6,7 +6,11 @@ FactoryGirl.find_definitions
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.after(:suite) do
-    puts ' ------------ cleanup test database ------------ '
-    ::Mongoid::Clients.default.database.drop
+    if ENV['RACK_ENV'] == 'production'
+      puts 'No fixture cleanup for production environment'
+    else
+      puts ' ------------ cleanup test database ------------ '
+      ::Mongoid::Clients.default.database.drop
+    end
   end
 end

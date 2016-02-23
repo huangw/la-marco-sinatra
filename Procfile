@@ -1,1 +1,1 @@
-puma: bundle exec puma -C config/puma.rb
+puma: bundle exec puma -p 8080 -e development

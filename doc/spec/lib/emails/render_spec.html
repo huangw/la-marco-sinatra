@@ -72,7 +72,8 @@ describe <span class="hljs-constant">Emails::Render</span> <span class="hljs-key
     it <span class="hljs-string">'return the template for render the email model'</span> <span class="hljs-keyword">do</span>
       expect(email.template_file).to eq(<span class="hljs-string">'app/views/emails/mock_email.en.txt'</span>)
       expect(email.template_file(<span class="hljs-symbol">:html</span>)).to eq(<span class="hljs-string">'app/views/emails/mock_email.en.html'</span>)
-      expect(email.template_file(<span class="hljs-symbol">:html</span>, <span class="hljs-symbol">:fr</span>)).to eq(<span class="hljs-string">'app/views/emails/mock_email.fr.html'</span>)
+      email.locale = <span class="hljs-symbol">:fr</span>
+      expect(email.template_file(<span class="hljs-symbol">:html</span>)).to eq(<span class="hljs-string">'app/views/emails/mock_email.fr.html'</span>)
     <span class="hljs-keyword">end</span>
 
     it <span class="hljs-string">'return the first locale as the default locale'</span> <span class="hljs-keyword">do</span>

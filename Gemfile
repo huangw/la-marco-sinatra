@@ -1,4 +1,4 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 # source 'http://ruby.taobao.org/'
 
   
@@ -7,21 +7,19 @@ gem "activesupport"
     
 gem "dotenv"
     
-gem "logstash-logger"
-    
 gem "i18n"
+    
+gem "easy_translate"
+    
+gem "logstash-logger"
     
 gem "mongoid"
     
-gem "daemon-spawn"
+gem "sanitize"
+    
+gem "nokogiri"
     
 gem "foreman"
-    
-gem "oj"
-    
-gem "multi_json"
-    
-gem "recursive-open-struct"
     
 gem "sinatra"
     
@@ -35,13 +33,19 @@ gem "sinatra-redirect-with-flash"
     
 gem "slim"
     
-gem "sanitize"
-    
 gem "http_accept_language"
     
 gem "liquid"
     
 gem "mailgun-ruby"
+    
+gem "mail"
+    
+gem "oj"
+    
+gem "multi_json"
+    
+gem "recursive-open-struct"
     
   
 
@@ -52,9 +56,9 @@ group :development do
     
   gem "rake"
     
-  gem "guard-ctags-bundler"
+  gem "pry"
     
-  gem "guard-rubocop"
+  gem "awesome_print"
     
   gem "rspec"
     
@@ -64,21 +68,21 @@ group :development do
     
   gem "guard-rspec"
     
-  gem "awesome_print"
+  gem "guard-ctags-bundler"
     
-  gem "pry-byebug"
-    
-  gem "iye"
-    
-  gem "google-translate"
+  gem "guard-rubocop"
     
   gem "mdoc"
+    
+  gem "iye"
     
   gem "factory_girl"
     
   gem "faker"
     
   gem "table_print"
+    
+  gem "guard-rake"
     
   gem "guard-cucumber"
     
@@ -89,8 +93,6 @@ group :development do
   gem "poltergeist"
     
   gem "selenium-webdriver"
-    
-  gem "guard-rake"
     
   gem "git"
     

@@ -22,7 +22,7 @@ module AssetMapper
     def execute!(compile = false)
       AssetMapper.compile = compile
 
-      fail 'assets mapping file '\
+      raise 'assets mapping file '\
            "#{@mapping_file} not exist" unless File.exist?(@mapping_file)
 
       instance_eval File.read(@mapping_file), @mapping_file
@@ -50,7 +50,7 @@ module AssetMapper
     end
 
     def img_url_prefix(hsh)
-      fail "invalid value #{hsh.inspect}" unless hsh.is_a?(Hash)
+      raise "invalid value #{hsh.inspect}" unless hsh.is_a?(Hash)
       prod, local = hsh.extract_args!(production: AssetSettings[:production].img_url_prefix,
                                       local: AssetSettings[:local].img_url_prefix)
       AssetSettings[:production].img_url_prefix = prod

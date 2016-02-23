@@ -6,7 +6,7 @@ module AssetMapper
     def initialize(file_id, opts = {})
       @file_id = file_id
       @from, @to, @upd = opts.extract_args! from: nil, to: nil, update: true
-      fail 'use `from` to specify repository to copy from' unless @from
+      raise 'use `from` to specify repository to copy from' unless @from
       @filename = File.basename(@file_id)
       @to ||= File.join(AssetMapper.vendor_dir, @from.to_s)
     end
@@ -22,8 +22,8 @@ module AssetMapper
     # rubocop:disable CyclomaticComplexity, MethodLength
     def copy!
       sfile = File.join(repo_path(@from), @file_id)
-      fail "file '#{sfile}' not exists" unless File.exist?(sfile)
-      fail "'#{sfile}' is a directory" if File.directory?(sfile)
+      raise "file '#{sfile}' not exists" unless File.exist?(sfile)
+      raise "'#{sfile}' is a directory" if File.directory?(sfile)
 
       return copy_file!(sfile, abs_path) unless File.exist?(abs_path)
       return puts("Skip '#{sfile}', as update == false") unless update?
@@ -32,7 +32,7 @@ module AssetMapper
 
       diff = diff_file(sfile, abs_path)
       return puts("Skip, '#{sfile}' and the target file have same "\
-                  'contents') unless diff && diff.to_s.chomp.size > 0
+                  'contents') if diff && diff.to_s.chomp.empty?
 
       copy_file!(sfile, abs_path, diff)
     end
@@ -42,7 +42,7 @@ module AssetMapper
     def copy_file!(sfile, tfile, diff = nil)
       puts "copy '#{sfile}'\n"\
            "  -> '#{file_path}'"
-      if diff && diff.to_s.chomp.size > 0
+      if diff && !diff.to_s.chomp.empty?
         puts '-----------------------------------'
         puts diff.to_s(:color)
         puts '-----------------------------------'

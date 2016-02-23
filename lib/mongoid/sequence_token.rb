@@ -14,6 +14,7 @@ end
 
 # Mixin Mongoid
 module Mongoid
+  # Sequential id token support
   module SequenceToken
     extend ActiveSupport::Concern
 
@@ -26,7 +27,7 @@ module Mongoid
       end
 
       # initialize the sequence field
-      Sequence.where(name: seq_field).last || Sequence.create(name: seq_field)
+      Sequence.find_or_create_by(name: seq_field)
 
       set_callback :save, :before, :set_sequence_token, unless: :persisted?
       def set_sequence_token
@@ -40,7 +41,7 @@ module Mongoid
       end
 
       def self.s_find(str)
-        where(sid: str).last || fail('not_found')
+        where(sid: str).last || raise('not_found')
       end
     end # included
   end

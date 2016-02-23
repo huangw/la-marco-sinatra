@@ -5,7 +5,7 @@ namespace :gen do
   task :ruby do
     name = ENV['NAME'] || ENV['name']
     super_class = ENV['SUPER'] || ENV['super']
-    fail 'need specify NAME=...' unless name
+    raise 'need specify NAME=...' unless name
     rf = FileGenerator::RubyFile.new(name, super_class)
     rf.render! class_file: rf.filename, spec_file: rf.spec_filename
   end

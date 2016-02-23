@@ -122,7 +122,7 @@
       route ||= default_url(app_class)
       table[app_class] = route
     <span class="hljs-keyword">end</span>
-    alias_method <span class="hljs-symbol">:<span class="hljs-string">'&lt;&lt;'</span></span>, <span class="hljs-symbol">:mount</span></pre></div></div>
+    <span class="hljs-keyword">alias</span> &lt;&lt; mount</pre></div></div>
             
         </li>
         
@@ -139,8 +139,8 @@
             
             <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">to</span><span class="hljs-params">(app_class, *parts)</span></span>
       prefix = app_class.is_a?(<span class="hljs-constant">Class</span>) ? <span class="hljs-variable">@table</span>[app_class] <span class="hljs-symbol">:</span> app_class.to_s
-      fail <span class="hljs-string">"unknown controller <span class="hljs-subst">#{app_class}</span>"</span> <span class="hljs-keyword">if</span> prefix.<span class="hljs-keyword">nil</span>?
-      <span class="hljs-keyword">return</span> prefix <span class="hljs-keyword">unless</span> parts &amp;&amp; parts.size &gt; <span class="hljs-number">0</span>
+      raise <span class="hljs-string">"unknown controller <span class="hljs-subst">#{app_class}</span>"</span> <span class="hljs-keyword">if</span> prefix.<span class="hljs-keyword">nil</span>?
+      <span class="hljs-keyword">return</span> prefix <span class="hljs-keyword">if</span> parts.<span class="hljs-keyword">nil</span>? || parts.empty?
 
       <span class="hljs-keyword">if</span> parts.last.is_a?(<span class="hljs-constant">Hash</span>)
         pam = <span class="hljs-string">'?'</span> + parts.pop.map { |k, v| k.to_s + <span class="hljs-string">'='</span> + v.to_s }.join(<span class="hljs-string">'&amp;'</span>)
@@ -153,7 +153,7 @@
 
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">default_path</span><span class="hljs-params">(app_class)</span></span>
       app_class.to_s.underscore.sub(<span class="hljs-regexp">/_(api|page|controller)\Z/</span>, <span class="hljs-string">''</span>)
-        .sub(<span class="hljs-regexp">/^\/*/</span>, <span class="hljs-string">'/'</span>).pluralize
+               .sub(<span class="hljs-regexp">/^\/*/</span>, <span class="hljs-string">'/'</span>).pluralize
     <span class="hljs-keyword">end</span>
 
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">default_url</span><span class="hljs-params">(app_class)</span></span>

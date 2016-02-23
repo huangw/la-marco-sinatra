@@ -40,7 +40,8 @@ describe Emails::Render do
     it 'return the template for render the email model' do
       expect(email.template_file).to eq('app/views/emails/mock_email.en.txt')
       expect(email.template_file(:html)).to eq('app/views/emails/mock_email.en.html')
-      expect(email.template_file(:html, :fr)).to eq('app/views/emails/mock_email.fr.html')
+      email.locale = :fr
+      expect(email.template_file(:html)).to eq('app/views/emails/mock_email.fr.html')
     end
 
     it 'return the first locale as the default locale' do

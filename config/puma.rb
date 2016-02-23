@@ -29,15 +29,15 @@
 #
 # The default is "development".
 #
-# environment 'production'
+environment 'production' if ENV['RACK_ENV'] == 'production'
 
 # Daemonize the server into the background. Highly suggest that
 # this be combined with "pidfile" and "stdout_redirect".
 #
 # The default is "false".
 #
-# daemonize
 # daemonize false
+daemonize if ENV['RACK_ENV'] == 'production' && ENV['ALIYUN']
 
 # Store the pid of the server in the file at "path".
 #
@@ -105,7 +105,7 @@ bind 'tcp://0.0.0.0:8080'
 #
 # The default is "0".
 #
-# workers 2
+workers 4 if ENV['RACK_ENV'] == 'production'
 
 # Code to run when a worker boots to setup the process before booting
 # the app.

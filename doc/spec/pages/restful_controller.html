@@ -54,7 +54,7 @@
       set <span class="hljs-symbol">:raise_errors</span>, <span class="hljs-keyword">true</span> <span class="hljs-comment"># let exceptions pass through (to responser)</span>
     <span class="hljs-keyword">end</span> <span class="hljs-comment"># configure</span>
 
-    not_found { fail <span class="hljs-constant">RouteError</span>, <span class="hljs-symbol">:not_found</span> }
+    not_found { raise <span class="hljs-constant">RouteError</span>, <span class="hljs-symbol">:not_found</span> }
 
     helpers <span class="hljs-keyword">do</span></pre></div></div>
             

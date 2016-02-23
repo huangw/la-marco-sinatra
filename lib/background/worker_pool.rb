@@ -78,9 +78,9 @@ module Background
         sleep @restore_interval
         # revert jobs processed for too long time (worker dead?)
         @workers.keys.each do |klass|
-          klass.where(job_state: 100)
-            .lt(u_at: Time.now - @restore_interval).each do |job|
-            job.update_attribute state: 10 # switch back to waiting
+          klass.where(_j_s: 100)
+               .lt(u_at: Time.now - @restore_interval).each do |job|
+            job.update_attributes _j_s: 10 # switch back to waiting
           end
         end # each work class
       end # loop

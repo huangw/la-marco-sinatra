@@ -1,13 +1,14 @@
 require 'emails/render'
 require 'emails/fake_sender'
 require 'emails/mailgun_sender'
+require 'emails/aliyun_sender'
 
 # Email name space
 module Emails
   # email base model
   class Email
     include Mongoid::Document
-    include HashPresenter
+    include HashSerialize
     include Emails::Render
 
     def to_hash

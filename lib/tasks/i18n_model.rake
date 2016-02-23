@@ -4,22 +4,28 @@ namespace :i18n do
     task :models do
       Mongoid.models.each do |model|
         # on directory for on model:
-        dir, keys = model.to_s.underscore, {}
+        dir = model.to_s.underscore
+        keys = {}
         keys["models.#{model.to_s.underscore}"] = model.to_s
         model.fields.each do |f, fo|
-          next if f.match(/\A\_/)
+          next if f.start_with?('_')
           fname = fo.options[:as] || f
-          keys["attributes.#{model.to_s.underscore}.#{fname.to_s.underscore}"] = fname.to_s
+          key = "attributes.#{model.to_s.underscore}.#{fname.to_s.underscore}"
+          keys[key] = fname.to_s
         end
 
         # for all models inherit from the model
         model.descendants.each do |child|
           keys["models.#{child.to_s.underscore}"] = child.to_s
           child.fields.each do |f, fo|
-            next if f.match(/\A\_/)
-            next unless fo.options[:klass] == child # only hold keys defined inside the child class
+            next if f.start_with?('_')
+
+            # only hold keys defined inside the child class
+            next unless fo.options[:klass] == child
+
             fname = fo.options[:as] || f
-            keys["attributes.#{child.to_s.underscore}.#{fname.to_s.underscore}"] = fname.to_s
+            key = "attributes.#{child.to_s.underscore}.#{fname.to_s.underscore}"
+            keys[key] = fname.to_s
           end
         end
 
