@@ -80,21 +80,19 @@ rubocop:disable LineLength, MethodLength, CyclomaticComplexity, ModuleLength</p>
       e_msg = [options.delete(<span class="hljs-symbol">:e_msg1</span>)] <span class="hljs-keyword">if</span> options[<span class="hljs-symbol">:e_msg1</span>]
       e_msg ||= <span class="hljs-variable">@object</span>.errors.messages[field] <span class="hljs-keyword">if</span> <span class="hljs-variable">@object</span>.respond_to?(<span class="hljs-symbol">:errors</span>)
 
-      cls &lt;&lt; <span class="hljs-string">' has-error'</span> <span class="hljs-keyword">if</span> e_msg &amp;&amp; e_msg.size &gt; <span class="hljs-number">0</span> &amp;&amp; options.delete(<span class="hljs-symbol">:add_error_class</span>)
+      cls &lt;&lt; <span class="hljs-string">' has-error'</span> <span class="hljs-keyword">if</span> e_msg &amp;&amp; !e_msg.empty? &amp;&amp; options.delete(<span class="hljs-symbol">:add_error_class</span>)
 
       options[<span class="hljs-string">'placeholder'</span>] ||= <span class="hljs-variable">@object</span>.<span class="hljs-keyword">class</span>.human_attribute_name(field) <span class="hljs-keyword">if</span> <span class="hljs-variable">@object</span>.<span class="hljs-keyword">class</span>.respond_to?(<span class="hljs-symbol">:human_attribute_name</span>)
       out = options[<span class="hljs-symbol">:label</span>] ? (label field, options.delete(<span class="hljs-symbol">:label</span>), <span class="hljs-class"><span class="hljs-keyword">class</span>: '<span class="hljs-title">control</span>-<span class="hljs-title">label</span>') : ''</span>
 
       <span class="hljs-keyword">if</span> block_given?
         out &lt;&lt; <span class="hljs-keyword">yield</span>
+      <span class="hljs-keyword">elsif</span> type.to_sym == <span class="hljs-symbol">:textarea</span>
+        out &lt;&lt; textarea(field, options.delete(<span class="hljs-symbol">:value</span>),
+                        options.merge(<span class="hljs-class"><span class="hljs-keyword">class</span>: '<span class="hljs-title">form</span>-<span class="hljs-title">control</span>'))</span>
       <span class="hljs-keyword">else</span>
-        <span class="hljs-keyword">if</span> type.to_sym == <span class="hljs-symbol">:textarea</span>
-          out &lt;&lt; textarea(field, options.delete(<span class="hljs-symbol">:value</span>),
-                          options.merge(<span class="hljs-class"><span class="hljs-keyword">class</span>: '<span class="hljs-title">form</span>-<span class="hljs-title">control</span>'))</span>
-        <span class="hljs-keyword">else</span>
-          value = options.delete(<span class="hljs-symbol">:value</span>) || default_value(field, <span class="hljs-string">''</span>)
-          out &lt;&lt; send(type, field, options.merge(<span class="hljs-class"><span class="hljs-keyword">class</span>: '<span class="hljs-title">form</span>-<span class="hljs-title">control</span>', <span class="hljs-title">value</span>: <span class="hljs-title">value</span>))</span>
-        <span class="hljs-keyword">end</span>
+        value = options.delete(<span class="hljs-symbol">:value</span>) || default_value(field, <span class="hljs-string">''</span>)
+        out &lt;&lt; send(type, field, options.merge(<span class="hljs-class"><span class="hljs-keyword">class</span>: '<span class="hljs-title">form</span>-<span class="hljs-title">control</span>', <span class="hljs-title">value</span>: <span class="hljs-title">value</span>))</span>
       <span class="hljs-keyword">end</span>
 
       <span class="hljs-keyword">if</span> (icon_text = options.delete(<span class="hljs-symbol">:icon</span>)) &amp;&amp; (icon_type = options.delete(<span class="hljs-symbol">:icon_type</span>))
@@ -102,7 +100,7 @@ rubocop:disable LineLength, MethodLength, CyclomaticComplexity, ModuleLength</p>
       <span class="hljs-keyword">end</span>
 
       out &lt;&lt; <span class="hljs-variable">@parent</span>.tag(<span class="hljs-symbol">:p</span>, e_msg.join(<span class="hljs-string">'; '</span>),
-                         <span class="hljs-class"><span class="hljs-keyword">class</span>: '<span class="hljs-title">help</span>-<span class="hljs-title">block</span>') <span class="hljs-title">if</span> <span class="hljs-title">e_msg</span> &amp;&amp; <span class="hljs-title">e_msg</span>.<span class="hljs-title">size</span> &gt; 0</span>
+                         <span class="hljs-class"><span class="hljs-keyword">class</span>: '<span class="hljs-title">help</span>-<span class="hljs-title">block</span>') <span class="hljs-title">if</span> <span class="hljs-title">e_msg</span> &amp;&amp; !<span class="hljs-title">e_msg</span>.<span class="hljs-title">empty?</span></span>
 
       <span class="hljs-variable">@parent</span>.tag <span class="hljs-symbol">:div</span>, out, <span class="hljs-class"><span class="hljs-keyword">class</span>: <span class="hljs-title">cls</span></span>
     <span class="hljs-keyword">end</span>
@@ -256,7 +254,7 @@ end</p>
   <span class="hljs-keyword">end</span>
 
   <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">form_for</span><span class="hljs-params">(object, action = <span class="hljs-symbol">:self</span>, options = {})</span></span>
-    fail <span class="hljs-constant">ArgumentError</span>, <span class="hljs-string">'Missing block to form_for()'</span> <span class="hljs-keyword">unless</span> block_given?
+    raise <span class="hljs-constant">ArgumentError</span>, <span class="hljs-string">'Missing block to form_for()'</span> <span class="hljs-keyword">unless</span> block_given?
 
     err_msg = <span class="hljs-string">''</span>
     add_err_msg = options.delete(<span class="hljs-symbol">:add_err_msg</span>)
@@ -281,7 +279,7 @@ end</p>
   <span class="hljs-keyword">end</span>
 
   <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fieldset_for</span><span class="hljs-params">(object, name = <span class="hljs-keyword">nil</span>, legend = <span class="hljs-keyword">nil</span>)</span></span>
-    fail <span class="hljs-constant">ArgumentError</span>, <span class="hljs-string">'Missing block to fieldset()'</span> <span class="hljs-keyword">unless</span> block_given?
+    raise <span class="hljs-constant">ArgumentError</span>, <span class="hljs-string">'Missing block to fieldset()'</span> <span class="hljs-keyword">unless</span> block_given?
     legend ||= object.respond_to?(<span class="hljs-symbol">:model_name</span>) ? object.model_name.human <span class="hljs-symbol">:</span> object.<span class="hljs-keyword">class</span>.to_s
     out = <span class="hljs-keyword">yield</span>(<span class="hljs-constant">FormBuilder</span>.new(<span class="hljs-keyword">self</span>, object, name)) || <span class="hljs-string">''</span>
     fieldset(legend) &lt;&lt; out &lt;&lt; close_fieldset
@@ -469,7 +467,7 @@ EX : tag :h1, “shizam”, :title =&gt; “shizam”
             
             <div class="content"><div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">tag</span><span class="hljs-params">(name, content = <span class="hljs-keyword">nil</span>, options = {})</span></span>
     <span class="hljs-string">"&lt;<span class="hljs-subst">#{name}</span>"</span> +
-      (options.length &gt; <span class="hljs-number">0</span> ? <span class="hljs-string">" <span class="hljs-subst">#{hash_to_html_attrs(options)}</span>"</span> <span class="hljs-symbol">:</span> <span class="hljs-string">''</span>) +
+      (!options.empty? ? <span class="hljs-string">" <span class="hljs-subst">#{hash_to_html_attrs(options)}</span>"</span> <span class="hljs-symbol">:</span> <span class="hljs-string">''</span>) +
       (content.<span class="hljs-keyword">nil</span>? ? <span class="hljs-string">'&gt;'</span> <span class="hljs-symbol">:</span> <span class="hljs-string">"&gt;<span class="hljs-subst">#{content}</span>&lt;/<span class="hljs-subst">#{name}</span>&gt;"</span>)
   <span class="hljs-keyword">end</span></pre></div></div>
             
@@ -489,10 +487,10 @@ single_tag :img, :src =&gt; “images/google.jpg”
             </div>
             
             <div class="content"><div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">single_tag</span><span class="hljs-params">(name, options = {})</span></span>
-    <span class="hljs-keyword">if</span> options.length &gt; <span class="hljs-number">0</span>
-      <span class="hljs-string">"&lt;<span class="hljs-subst">#{name}</span> <span class="hljs-subst">#{hash_to_html_attrs(options)}</span> /&gt;"</span>
-    <span class="hljs-keyword">else</span>
+    <span class="hljs-keyword">if</span> options.empty?
       <span class="hljs-string">"&lt;<span class="hljs-subst">#{name}</span> /&gt;"</span>
+    <span class="hljs-keyword">else</span>
+      <span class="hljs-string">"&lt;<span class="hljs-subst">#{name}</span> <span class="hljs-subst">#{hash_to_html_attrs(options)}</span> /&gt;"</span>
     <span class="hljs-keyword">end</span>
   <span class="hljs-keyword">end</span>
 
@@ -515,18 +513,18 @@ single_tag :img, :src =&gt; “images/google.jpg”
             
             <div class="content"><div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fast_escape_html</span><span class="hljs-params">(text)</span></span>
     text.to_s.gsub(<span class="hljs-regexp">/\&amp;/</span>, <span class="hljs-string">'&amp;amp;'</span>).gsub(<span class="hljs-regexp">/\"/</span>, <span class="hljs-string">'&amp;quot;'</span>)
-      .gsub(<span class="hljs-regexp">/&gt;/</span>, <span class="hljs-string">'&amp;gt;'</span>).gsub(<span class="hljs-regexp">/&lt;/</span>, <span class="hljs-string">'&amp;lt;'</span>)
+        .gsub(<span class="hljs-regexp">/&gt;/</span>, <span class="hljs-string">'&amp;gt;'</span>).gsub(<span class="hljs-regexp">/&lt;/</span>, <span class="hljs-string">'&amp;lt;'</span>)
   <span class="hljs-keyword">end</span>
 
   <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hash_to_html_attrs</span><span class="hljs-params">(options = {})</span></span>
     html_attrs = []
     options.keys.each <span class="hljs-keyword">do</span> |key|
       <span class="hljs-keyword">next</span> <span class="hljs-keyword">if</span> options[key].<span class="hljs-keyword">nil</span>? <span class="hljs-comment"># do not include empty attributes</span>
-      <span class="hljs-keyword">if</span> options[key].is_a?(<span class="hljs-constant">Symbol</span>) &amp;&amp; options[key] == <span class="hljs-symbol">:empty</span>
-        html_attrs &lt;&lt; key.to_s
-      <span class="hljs-keyword">else</span>
-        html_attrs &lt;&lt; <span class="hljs-string">%(<span class="hljs-subst">#{key}</span>="<span class="hljs-subst">#{fast_escape_html(options[key])}</span>")</span>
-      <span class="hljs-keyword">end</span>
+      html_attrs &lt;&lt; <span class="hljs-keyword">if</span> options[key].is_a?(<span class="hljs-constant">Symbol</span>) &amp;&amp; options[key] == <span class="hljs-symbol">:empty</span>
+                      key.to_s
+                    <span class="hljs-keyword">else</span>
+                      <span class="hljs-string">%(<span class="hljs-subst">#{key}</span>="<span class="hljs-subst">#{fast_escape_html(options[key])}</span>")</span>
+                    <span class="hljs-keyword">end</span>
     <span class="hljs-keyword">end</span>
     html_attrs.join <span class="hljs-string">' '</span>
   <span class="hljs-keyword">end</span>

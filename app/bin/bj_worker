@@ -5,24 +5,4 @@ ENV['RACK_ENV'] ||= 'development'
 require_relative '../../config/boot'
 require 'background/worker_pool'
 
-if ARGV[0]
-  require 'daemon_spawn'
-  class BjWorker < DaemonSpawn::Base
-    attr_accessor :pool
-    def start(_args = nil)
-      @pool = Background::WorkerPool.new(BackgroundJobSettings.pool_option)
-      @pool.start!
-    end
-
-    def stop
-      @pool.stop!
-    end
-  end
-
-  BjWorker.spawn!(log_file: root_join('tmp/bj_worker.log'),
-                  pid_file: root_join('tmp/bj_worker.pid'),
-                  sync_log: true,
-                  working_dir: root_join('.'))
-else
-  Background::WorkerPool.new(BackgroundJobSettings.pool_option).start!
-end
+Background::WorkerPool.new(BackgroundJobSettings.pool_option).start!

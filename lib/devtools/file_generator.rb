@@ -13,7 +13,7 @@ class FileGenerator
 
     def spec_filename
       File.join('spec',
-                @filename.sub(/\A(app\/)?/, '').sub(/\.rb\Z/, '_spec.rb'))
+                @filename.sub(%r{\A(app/)?}, '').sub(/\.rb\Z/, '_spec.rb'))
     end
 
     def spec_name
@@ -29,7 +29,7 @@ class FileGenerator
     end
 
     def require_name
-      filename.sub(/\Aapp\//, '').sub(/\Alib\//, '').sub(/\.rb\Z/, '')
+      filename.sub(%r{\Aapp/}, '').sub(%r{\Alib/}, '').sub(/\.rb\Z/, '')
     end
 
     def class_string

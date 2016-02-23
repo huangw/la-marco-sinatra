@@ -8,7 +8,7 @@ module Emails
   # email base model
   class Email
     include Mongoid::Document
-    include HashPresenter
+    include HashSerialize
     include Emails::Render
 
     def to_hash

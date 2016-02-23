@@ -21,7 +21,7 @@ module I18nUtils
 
     def trans(key, lang)
       return to_human(key) if lang.to_sym == :en
-      local_t = local_trans && local_trans[lang.to_s] && local_trans[lang.to_s][key.underscore.to_s]
+      local_t = local_trans && local_trans[lang.to_sym] && local_trans[lang.to_sym][key.to_sym]
       local_t ? local_t : google_t(key, lang)
     end
 

@@ -12,12 +12,11 @@ module Mongoid
     # implement save/retrieve methods
     class Proxy
       include Enumerable
-      attr_reader :parent, :field_name, :cache_for
+      attr_reader :parent, :field_name
 
-      def initialize(prt, fnm, cf)
+      def initialize(prt, fnm)
         @parent = prt
         @field_name = fnm
-        @cache_for = cf
       end
 
       # The raw array of hashes saved into the parent mongoid document
@@ -122,21 +121,19 @@ module Mongoid
 
       # Method for overloading by child class
       # --------------------------------------
+      # Restore from hash to object
       def decode(hsh)
         # if symbol, get from relationship, then call from_hash
         klass = hsh['_type'] || raise('unknown data type')
-        Object.const_get(klass.to_s).from_cache(hsh)
+        Object.const_get(klass.to_s).from_hash(hsh)
       end
 
+      # Encode object to hash
       def encode(obj, tid = nil)
         obj.parent = parent if obj.respond_to?(:'parent=')
-        hsh = obj.is_a?(Hash) ? obj.dup : obj.to_cache
-        hsh['tid'] ||= tid || new_tid
+        hsh = obj.is_a?(Hash) ? obj.dup : obj.to_hash
+        hsh['tid'] = unique_tid(hsh['tid'] || tid)
         obj.tid = hsh['tid'] if obj.respond_to?(:'tid=')
-        hsh
-      end
-
-      def retrieve(hsh)
         hsh
       end
 
@@ -144,51 +141,16 @@ module Mongoid
         3
       end
 
-      # Hash serialize/de-serialize methods
-      # ------------------------------------
-      # from blist hash to object.to_hash list (in order)
-      def to_hash
-        blist.map { |h| decode(h).to_hash }
-      end
-
-      def to_cache
-        refresh_cache! if cache_expired?
-        blist
-      end
-      alias to_embed to_cache
-
-      # use append to restore object to the blist
-      def from_array(ary)
-        ary.each { |h| append h }
-      end
-      alias from_cache from_array
-      alias from_hash from_array
-
-      # Caching handling methods
-      # ------------------------
-      def cache_expired?
-        return nil unless cache_for
-        u_at = parent.send("#{field_name}_u_at".to_sym)
-        !(u_at && u_at >= Time.now - cache_for)
-      end
-
-      # decode each object, then save the new converted cache
-      def refresh_cache!
-        blist.each { |hsh| update(hsh['tid'], retrieve(hsh)) }
-        parent.send("#{field_name}_u_at=".to_sym, Time.now)
-
-        parent.save!
-      end
-
-      private
-
-      def new_tid
-        id_ = SecureRandom.hex(tid_length)
+      def unique_tid(tid = nil)
+        id_ = tid || SecureRandom.hex(tid_length)
         while blist.map { |h| h['tid'] }.include?(id_)
-          id_ = SecureRandom.hex(tid_length)
+          srhex = SecureRandom.hex(tid_length)
+          id_ = tid.blank? ? srhex : tid + '-' + srhex
         end
         id_
       end
+
+      private
 
       # find the next offset after tid, 0 if tid not exits
       def offset_after(tid = nil)
@@ -204,27 +166,20 @@ module Mongoid
       # set a proxy method `name` as the ordered list
       # rubocop:disable MethodLength,LineLength
       def self.ordered_list(field_name, opts = {})
-        opts = opts.dup
         proxy_name = opts.delete(:as)
         proxy_klass = opts.delete(:proxy) || Proxy
         raise 'you should define :as for proxy name' unless proxy_name
-        raise 'field name muster differ to :as' if proxy_name == field_name
-
-        cache_for = opts.delete(:cache_for)
-        if cache_for
-          raise ':cache_for must be an integer' unless cache_for.is_a?(Integer)
-          field("#{field_name}_u_at".to_sym, type: Time)
-        end
+        raise 'field name must differ to :as' if proxy_name == field_name
 
         field field_name, opts.merge(type: Array)
 
         # Return the proxy object to handle ordered list operations
         send(:define_method, proxy_name.to_sym) do
-          instance_variable_get("@#{proxy_name}".to_sym) || instance_variable_set("@#{proxy_name}".to_sym, proxy_klass.new(self, field_name.to_sym, cache_for))
+          instance_variable_get("@#{proxy_name}".to_sym) || instance_variable_set("@#{proxy_name}".to_sym, proxy_klass.new(self, field_name.to_sym))
         end
 
         send(:define_method, "#{proxy_name}=".to_sym) do |arry|
-          send("#{field_name}=".to_sym, nil)
+          self[field_name.to_sym] = nil
           arry.each { |e| send(proxy_name.to_sym).append(e) }
         end
       end

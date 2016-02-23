@@ -9,7 +9,8 @@ RSpec::Matchers.define :have_validate_error do |expected|
   end
 
   failure_message do |actual|
-    "expected validate error of '#{expected}' on :#{@field}, but the errors are:\n" + actual.errors.messages[@field].inspect
+    "expected validate error of '#{expected}' on :#{@field}, "\
+    "but the errors are:\n" + actual.errors.messages[@field].inspect
   end
 
   chain :on do |field|

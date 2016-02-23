@@ -9,13 +9,8 @@ Mongo::Logger.logger.level = Logger::WARN
 Mongoid.load!(root_join('config/mongoid.yml'), ENV['RACK_ENV'])
 
 # Load mixin function and custom modules into Mongoid
-require 'utils/hash_struct'
-require 'utils/hash_presenter'
-deep_require root_join('lib/struct')
 deep_require root_join('lib/mongoid')
-deep_require root_join('lib/models')
-
-deep_require root_join('app/lib')
+deep_require root_join('app/lib/mongoid')
 deep_require root_join('app/models')
 
 # Ensure index each restart

@@ -139,7 +139,7 @@ parse custom header and render email body</p>
             
             <div class="content"><div class='highlight'><pre>
       <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">localized?</span></span>
-        available_locales &amp;&amp; available_locales.size &gt; <span class="hljs-number">0</span>
+        available_locales &amp;&amp; !available_locales.empty?
       <span class="hljs-keyword">end</span></pre></div></div>
             
         </li>
@@ -238,7 +238,7 @@ parse custom header and render email body</p>
         <span class="hljs-variable">@headers</span> = { <span class="hljs-symbol">to:</span> to }
         dat.each <span class="hljs-keyword">do</span> |key, val|
           key = key.to_s.downcase
-          fail <span class="hljs-string">"invalid field <span class="hljs-subst">#{key}</span>"</span> <span class="hljs-keyword">unless</span> valid_fields.<span class="hljs-keyword">include</span>?(key)
+          raise <span class="hljs-string">"invalid field <span class="hljs-subst">#{key}</span>"</span> <span class="hljs-keyword">unless</span> valid_fields.<span class="hljs-keyword">include</span>?(key)
           <span class="hljs-variable">@headers</span>[key.to_sym] = val <span class="hljs-keyword">unless</span> val.<span class="hljs-keyword">nil</span>?
         <span class="hljs-keyword">end</span>
       <span class="hljs-keyword">end</span></pre></div></div>

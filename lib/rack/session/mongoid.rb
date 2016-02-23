@@ -1,6 +1,7 @@
 require 'rack/session/mongoid/version'
 require 'rack/session/abstract/id'
 # require 'awesome_print'
+require 'securerandom'
 
 # A mongoid document model for storing session data
 class RackSession
@@ -26,7 +27,7 @@ module Rack
 
       def generate_sid
         loop do
-          sid = super
+          sid = SecureRandom.uuid # super
           break sid unless RackSession.where(sid: sid).asc(:_id).first
         end
       end

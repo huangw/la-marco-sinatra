@@ -104,10 +104,6 @@ module Mongoid
             end
           end # each bit
         end # method
-
-        class << self;
-          alias_method :checkbox_field, :checkbox_field
-        end
       end # included
     end # CheckboxField
   end

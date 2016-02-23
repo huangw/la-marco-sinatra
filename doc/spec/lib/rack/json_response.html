@@ -100,7 +100,7 @@ created at: 2015-01-31</p>
 
       <span class="hljs-keyword">begin</span>
         status, headers, body = <span class="hljs-variable">@app</span>.call(env)
-        body = body.to_hash <span class="hljs-keyword">unless</span> body.is_a?(<span class="hljs-constant">Hash</span>) <span class="hljs-comment"># and !body.respond_to?(:to_hash)</span></pre></div></div>
+        body = body.to_hash <span class="hljs-keyword">if</span> !body.is_a?(<span class="hljs-constant">Hash</span>) &amp;&amp; body.respond_to?(<span class="hljs-symbol">:to_hash</span>)</pre></div></div>
             
         </li>
         
@@ -115,7 +115,7 @@ created at: 2015-01-31</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        jbody = <span class="hljs-constant">MultiJson</span>.encode(env[<span class="hljs-string">'response_hash'</span>].merge body)
+            <div class="content"><div class='highlight'><pre>        jbody = <span class="hljs-constant">MultiJson</span>.encode(env[<span class="hljs-string">'response_hash'</span>].merge(body))
       <span class="hljs-keyword">rescue</span> =&gt; e
         status = e.respond_to?(<span class="hljs-symbol">:status</span>) ? e.status <span class="hljs-symbol">:</span> <span class="hljs-number">500</span>
         headers ||= {}
@@ -130,7 +130,7 @@ created at: 2015-01-31</p>
 
         i18n_msg = e.i18n_message <span class="hljs-keyword">if</span> e.respond_to?(<span class="hljs-symbol">:i18n_message</span>)
         <span class="hljs-keyword">if</span> i18n_msg
-          body[<span class="hljs-string">'i18n_message'</span>] = i18n_msg <span class="hljs-keyword">unless</span> i18n_msg.match(<span class="hljs-regexp">/\Atranslation missing:/</span>)
+          body[<span class="hljs-string">'i18n_message'</span>] = i18n_msg <span class="hljs-keyword">unless</span> i18n_msg.start_with?(<span class="hljs-string">'translation missing:'</span>)
         <span class="hljs-keyword">end</span></pre></div></div>
             
         </li>

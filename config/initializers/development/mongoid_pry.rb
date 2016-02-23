@@ -1,14 +1,15 @@
 require 'faker'
-I18n.reload!
-require 'factory_girl'
+I18n.reload! # faker add new entries into the i18n table
+
 require 'table_print'
+
+require 'factory_girl'
 include FactoryGirl::Syntax::Methods
 
 require_all root_join('spec/support/factories/*_factory.rb')
 FactoryGirl.find_definitions
 
 # rubocop:disable MethodLength
-
 def indexes
   indexes = []
   Mongoid.models.each do |model|

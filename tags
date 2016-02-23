@@ -31,16 +31,13 @@ AssetsController	lib/controllers/assets_controller.rb	/^class AssetsController <
 AssetsHelper	lib/helpers/assets_helper.rb	/^module AssetsHelper$/;"	m
 AuthenticationError	config/initializers/web_exceptions.rb	/^class AuthenticationError < RequestError$/;"	c
 AuthorizationError	config/initializers/web_exceptions.rb	/^class AuthorizationError < RequestError$/;"	c
-BSON	lib/mongoid/token_id.rb	/^module BSON$/;"	m
 Background	lib/background/cron_job.rb	/^module Background$/;"	m
 Background	lib/background/job.rb	/^module Background$/;"	m
 Background	lib/background/simple_job.rb	/^module Background$/;"	m
 Background	lib/background/worker.rb	/^module Background$/;"	m
 Background	lib/background/worker_pool.rb	/^module Background$/;"	m
 BackgroundJobSettings	config/settings/background_job_settings.rb	/^class BackgroundJobSettings$/;"	c
-BjWorker	app/bin/bj_worker	/^  class BjWorker < DaemonSpawn::Base$/;"	c
 BoolField	lib/mongoid/field_candy/bool_field.rb	/^    module BoolField$/;"	m	class:Mongoid.FieldCandy
-CacheField	lib/mongoid/field_candy/cache_field.rb	/^    module CacheField$/;"	m	class:Mongoid.FieldCandy
 CheckboxField	lib/mongoid/field_candy/checkbox_field.rb	/^    module CheckboxField$/;"	m	class:Mongoid.FieldCandy
 Class	lib/core_ext/attr_with_default.rb	/^class Class$/;"	c
 CloudFile	lib/devtools/asset_mapper/cloud_file.rb	/^  class CloudFile < Sfile$/;"	c	class:AssetMapper
@@ -50,6 +47,7 @@ CounterPage	app/pages/counter_page.rb	/^class CounterPage < WebController$/;"	c
 Criteria	lib/mongoid/paginator.rb	/^  class Criteria$/;"	c	class:Mongoid
 CronJob	lib/background/cron_job.rb	/^  module CronJob$/;"	m	class:Background
 Data	lib/confu.rb	/^  class Data < Hash$/;"	c	class:Confu
+Date	lib/core_ext/date.rb	/^class Date$/;"	c
 Email	app/models/email.rb	/^  class Email$/;"	c	class:Emails
 EmailField	lib/mongoid/field_candy/email_field.rb	/^    module EmailField$/;"	m	class:Mongoid.FieldCandy
 EmailValidator	lib/mongoid/validators/email_validator.rb	/^class EmailValidator < ActiveModel::EachValidator$/;"	c
@@ -64,10 +62,10 @@ Exception	lib/core_ext/exception_i18n_message.rb	/^class Exception$/;"	c
 FakeSender	lib/emails/fake_sender.rb	/^  class FakeSender$/;"	c	class:Emails
 FeatureWorld	features/support/env.rb	/^class FeatureWorld$/;"	c
 FieldCandy	lib/mongoid/field_candy/bool_field.rb	/^  module FieldCandy$/;"	m	class:Mongoid
-FieldCandy	lib/mongoid/field_candy/cache_field.rb	/^  module FieldCandy$/;"	m	class:Mongoid
 FieldCandy	lib/mongoid/field_candy/checkbox_field.rb	/^  module FieldCandy$/;"	m	class:Mongoid
 FieldCandy	lib/mongoid/field_candy/email_field.rb	/^  module FieldCandy$/;"	m	class:Mongoid
 FieldCandy	lib/mongoid/field_candy/radio_field.rb	/^  module FieldCandy$/;"	m	class:Mongoid
+FieldCandy	lib/mongoid/field_candy/struct_field.rb	/^  module FieldCandy$/;"	m	class:Mongoid
 FieldCandy	lib/mongoid/field_candy/text_area.rb	/^  module FieldCandy$/;"	m	class:Mongoid
 FieldCandy	lib/mongoid/field_candy/text_field.rb	/^  module FieldCandy$/;"	m	class:Mongoid
 FieldCandy	lib/mongoid/field_candy/url_field.rb	/^  module FieldCandy$/;"	m	class:Mongoid
@@ -75,9 +73,9 @@ FileGenerator	lib/devtools/file_generator.rb	/^class FileGenerator$/;"	c
 FormBuilder	lib/helpers/form_helper.rb	/^  class FormBuilder$/;"	c	class:FormHelper
 FormHelper	lib/helpers/form_helper.rb	/^module FormHelper$/;"	m
 FormMock	spec/lib/helpers/form_helper_spec.rb	/^class FormMock$/;"	c
-Hash	lib/core_ext/hash_argument.rb	/^class Hash$/;"	c
+Hash	lib/core_ext/hash_extract_args.rb	/^class Hash$/;"	c
 HashFlatter	lib/utils/hash_flatter.rb	/^module HashFlatter$/;"	m
-HashPresenter	lib/utils/hash_presenter.rb	/^module HashPresenter$/;"	m
+HashSerialize	lib/utils/hash_serialize.rb	/^module HashSerialize$/;"	m
 HashStruct	lib/utils/hash_struct.rb	/^module HashStruct$/;"	m
 HelloDocAPI	app/pages/api/hello_doc_api.rb	/^  class HelloDocAPI < RestfulController$/;"	c	class:API
 I18nHelper	lib/helpers/i18n_helper.rb	/^module I18nHelper$/;"	m
@@ -96,21 +94,18 @@ MockEmail	app/models/emails/mock_email.rb	/^  class MockEmail < Email$/;"	c	clas
 MockEmailLessLocale	spec/lib/emails/render_spec.rb	/^class MockEmailLessLocale < Emails::MockEmail$/;"	c
 MockEmailWithoutLocale	spec/lib/emails/render_spec.rb	/^class MockEmailWithoutLocale < Emails::MockEmail$/;"	c
 Mongoid	lib/mongoid/field_candy/bool_field.rb	/^module Mongoid$/;"	m
-Mongoid	lib/mongoid/field_candy/cache_field.rb	/^module Mongoid$/;"	m
 Mongoid	lib/mongoid/field_candy/checkbox_field.rb	/^module Mongoid$/;"	m
 Mongoid	lib/mongoid/field_candy/email_field.rb	/^module Mongoid$/;"	m
 Mongoid	lib/mongoid/field_candy/radio_field.rb	/^module Mongoid$/;"	m
+Mongoid	lib/mongoid/field_candy/struct_field.rb	/^module Mongoid$/;"	m
 Mongoid	lib/mongoid/field_candy/text_area.rb	/^module Mongoid$/;"	m
 Mongoid	lib/mongoid/field_candy/text_field.rb	/^module Mongoid$/;"	m
 Mongoid	lib/mongoid/field_candy/url_field.rb	/^module Mongoid$/;"	m
 Mongoid	lib/mongoid/ordered_list.rb	/^module Mongoid$/;"	m
 Mongoid	lib/mongoid/paginator.rb	/^module Mongoid$/;"	m
 Mongoid	lib/mongoid/sequence_token.rb	/^module Mongoid$/;"	m
-Mongoid	lib/mongoid/token_id.rb	/^module Mongoid$/;"	m
 Mongoid	lib/rack/session/mongoid.rb	/^    class Mongoid < Abstract::ID$/;"	c	class:Rack.Session
 Mongoid	lib/rack/session/mongoid/version.rb	/^    class Mongoid < Abstract::ID$/;"	c	class:Rack.Session
-ObjectId	lib/mongoid/token_id.rb	/^  class ObjectId$/;"	c	class:BSON
-OrderedList	lib/mongoid/field_candy/text_area.rb	/^  module OrderedList$/;"	m	class:Mongoid
 OrderedList	lib/mongoid/ordered_list.rb	/^  module OrderedList$/;"	m	class:Mongoid
 PersonPage	spec/lib/route_spec.rb	/^  class PersonPage; Route << self end$/;"	c	class:Admin
 Producer	lib/devtools/asset_mapper/producer.rb	/^  class Producer$/;"	c	class:AssetMapper
@@ -143,13 +138,12 @@ String	lib/core_ext/string_common_head.rb	/^class String$/;"	c
 String	lib/core_ext/string_short.rb	/^class String$/;"	c
 String	lib/core_ext/string_simple_format.rb	/^class String$/;"	c
 String	spec/support/helpers/api_doc_helper.rb	/^  class String$/;"	c
+StructField	lib/mongoid/field_candy/struct_field.rb	/^    module StructField$/;"	m	class:Mongoid.FieldCandy
 TextArea	lib/mongoid/field_candy/text_area.rb	/^    module TextArea$/;"	m	class:Mongoid.FieldCandy
-TextBlock	lib/struct/text_block.rb	/^class TextBlock$/;"	c
+TextBlock	lib/mongoid/struct/text_block.rb	/^class TextBlock$/;"	c
 TextField	lib/mongoid/field_candy/text_field.rb	/^    module TextField$/;"	m	class:Mongoid.FieldCandy
-TextProxy	lib/mongoid/field_candy/text_area.rb	/^    class TextProxy < Proxy$/;"	c	class:Mongoid.OrderedList
 Tfile	lib/devtools/asset_mapper/tfile.rb	/^  class Tfile$/;"	c	class:AssetMapper
 Time	lib/core_ext/time_short.rb	/^class Time$/;"	c
-TokenId	lib/mongoid/token_id.rb	/^  module TokenId$/;"	m	class:Mongoid
 URLField	lib/mongoid/field_candy/url_field.rb	/^    module URLField$/;"	m	class:Mongoid.FieldCandy
 UrlValidator	lib/mongoid/validators/url_validator.rb	/^class UrlValidator < ActiveModel::EachValidator$/;"	c
 UserMock	spec/lib/helpers/form_helper_spec.rb	/^class UserMock$/;"	c
@@ -169,19 +163,21 @@ YamlFile	lib/devtools/i18n_utils.rb	/^  class YamlFile$/;"	c
 []=	lib/utils/hash_struct.rb	/^  def []=(key, value)$/;"	f	class:HashStruct
 _delete	lib/rack/session/mongoid.rb	/^      def _delete(sid)$/;"	f	class:Rack.Session.Mongoid
 _exists?	lib/rack/session/mongoid.rb	/^      def _exists?(sid)$/;"	f	class:Rack.Session.Mongoid
+_from_hash	lib/utils/hash_serialize.rb	/^  def _from_hash(hsh)$/;"	f	class:HashSerialize
 _get	lib/rack/session/mongoid.rb	/^      def _get(sid)$/;"	f	class:Rack.Session.Mongoid
-_keys_to_hash	lib/utils/hash_presenter.rb	/^  def _keys_to_hash(keys)$/;"	f	class:HashPresenter
+_keys_to_hash	lib/utils/hash_serialize.rb	/^  def _keys_to_hash(keys)$/;"	f	class:HashSerialize
 _put	lib/rack/session/mongoid.rb	/^      def _put(sid, session)$/;"	f	class:Rack.Session.Mongoid
-_to_hash	lib/utils/hash_presenter.rb	/^  def _to_hash(keys, type_h = {}, opts = {})$/;"	f	class:HashPresenter
+_to_hash	lib/utils/hash_serialize.rb	/^  def _to_hash(keys, opts = {})$/;"	f	class:HashSerialize
+_to_html	lib/mongoid/struct/text_block.rb	/^  def _to_html(tag, klass = nil)$/;"	f
+_type	lib/utils/hash_struct.rb	/^  def _type$/;"	f	class:HashStruct
+_type=	lib/utils/hash_struct.rb	/^  def _type=(_)$/;"	f	class:HashStruct
 abs_path	lib/devtools/asset_mapper/sfile.rb	/^    def abs_path$/;"	f	class:AssetMapper.Sfile
 abs_path	lib/devtools/asset_mapper/tfile.rb	/^    def abs_path(version)$/;"	f	class:AssetMapper.Tfile
 access	lib/la_buffered_logger.rb	/^  def access$/;"	f	class:LaBufferedLogger
 access_recorded?	lib/la_buffered_logger.rb	/^  def access_recorded?$/;"	f	class:LaBufferedLogger
-add	lib/mongoid/field_candy/text_area.rb	/^      def add(blk, opts = {})$/;"	f	class:Mongoid.OrderedList.TextProxy
 add	lib/mongoid/ordered_list.rb	/^      def add(obj, opts = {})$/;"	f	class:Mongoid.OrderedList.Proxy
 addClass	doc/spec/lib/asset_settings/environment_settings_spec_rslt.html	/^function addClass(element_id, classname) {$/;"	f
 addClass	doc/spec/lib/asset_settings_spec_rslt.html	/^function addClass(element_id, classname) {$/;"	f
-addClass	doc/spec/lib/email_render_spec_rslt.html	/^function addClass(element_id, classname) {$/;"	f
 addClass	doc/spec/lib/emails/aliyun_sender_spec_rslt.html	/^function addClass(element_id, classname) {$/;"	f
 addClass	doc/spec/lib/emails/fake_sender_spec_rslt.html	/^function addClass(element_id, classname) {$/;"	f
 addClass	doc/spec/lib/emails/mailgun_sender_spec_rslt.html	/^function addClass(element_id, classname) {$/;"	f
@@ -199,7 +195,6 @@ app	spec/support/helpers/api_test_helper.rb	/^  def app$/;"	f	class:APITestHelpe
 append	lib/la_buffered_logger.rb	/^  def append(dat)$/;"	f	class:LaBufferedLogger
 apply_filters	doc/spec/lib/asset_settings/environment_settings_spec_rslt.html	/^function apply_filters() {$/;"	f
 apply_filters	doc/spec/lib/asset_settings_spec_rslt.html	/^function apply_filters() {$/;"	f
-apply_filters	doc/spec/lib/email_render_spec_rslt.html	/^function apply_filters() {$/;"	f
 apply_filters	doc/spec/lib/emails/aliyun_sender_spec_rslt.html	/^function apply_filters() {$/;"	f
 apply_filters	doc/spec/lib/emails/fake_sender_spec_rslt.html	/^function apply_filters() {$/;"	f
 apply_filters	doc/spec/lib/emails/mailgun_sender_spec_rslt.html	/^function apply_filters() {$/;"	f
@@ -211,7 +206,6 @@ apply_filters	doc/spec/lib/route_spec_rslt.html	/^function apply_filters() {$/;"
 assets_env	lib/asset_settings.rb	/^    def assets_env$/;"	f	class:AssetSettings
 assign_display_style	doc/spec/lib/asset_settings/environment_settings_spec_rslt.html	/^function assign_display_style(classname, display_flag) {$/;"	f
 assign_display_style	doc/spec/lib/asset_settings_spec_rslt.html	/^function assign_display_style(classname, display_flag) {$/;"	f
-assign_display_style	doc/spec/lib/email_render_spec_rslt.html	/^function assign_display_style(classname, display_flag) {$/;"	f
 assign_display_style	doc/spec/lib/emails/aliyun_sender_spec_rslt.html	/^function assign_display_style(classname, display_flag) {$/;"	f
 assign_display_style	doc/spec/lib/emails/fake_sender_spec_rslt.html	/^function assign_display_style(classname, display_flag) {$/;"	f
 assign_display_style	doc/spec/lib/emails/mailgun_sender_spec_rslt.html	/^function assign_display_style(classname, display_flag) {$/;"	f
@@ -222,7 +216,6 @@ assign_display_style	doc/spec/lib/rack/json_response_spec_rslt.html	/^function a
 assign_display_style	doc/spec/lib/route_spec_rslt.html	/^function assign_display_style(classname, display_flag) {$/;"	f
 assign_display_style_for_group	doc/spec/lib/asset_settings/environment_settings_spec_rslt.html	/^function assign_display_style_for_group(classname, display_flag, subgroup_flag) {$/;"	f
 assign_display_style_for_group	doc/spec/lib/asset_settings_spec_rslt.html	/^function assign_display_style_for_group(classname, display_flag, subgroup_flag) {$/;"	f
-assign_display_style_for_group	doc/spec/lib/email_render_spec_rslt.html	/^function assign_display_style_for_group(classname, display_flag, subgroup_flag) {$/;"	f
 assign_display_style_for_group	doc/spec/lib/emails/aliyun_sender_spec_rslt.html	/^function assign_display_style_for_group(classname, display_flag, subgroup_flag) {$/;"	f
 assign_display_style_for_group	doc/spec/lib/emails/fake_sender_spec_rslt.html	/^function assign_display_style_for_group(classname, display_flag, subgroup_flag) {$/;"	f
 assign_display_style_for_group	doc/spec/lib/emails/mailgun_sender_spec_rslt.html	/^function assign_display_style_for_group(classname, display_flag, subgroup_flag) {$/;"	f
@@ -241,9 +234,6 @@ blist_hash	lib/mongoid/ordered_list.rb	/^      def blist_hash$/;"	f	class:Mongoi
 block	lib/mongoid/ordered_list.rb	/^      def block(tid)$/;"	f	class:Mongoid.OrderedList.Proxy
 bool_field	lib/mongoid/field_candy/bool_field.rb	/^        def self.bool_field(met, hsh = {})$/;"	F	class:Mongoid.FieldCandy.BoolField
 button	lib/helpers/form_helper.rb	/^  def button(value = nil, options = {})$/;"	f	class:FormHelper
-by_tid	lib/mongoid/token_id.rb	/^      def self.by_tid(tid)$/;"	F	class:Mongoid.TokenId
-cache_expired?	lib/mongoid/ordered_list.rb	/^      def cache_expired?$/;"	f	class:Mongoid.OrderedList.Proxy
-cache_field	lib/mongoid/field_candy/cache_field.rb	/^        def self.cache_field(field_name, opts = {})$/;"	F	class:Mongoid.FieldCandy.CacheField
 call	lib/rack/json_response.rb	/^    def call(env)$/;"	f	class:Rack.JsonResponse
 call	lib/rack/log_flusher.rb	/^    def call(env)$/;"	f	class:Rack.LogFlusher
 change_order	lib/mongoid/ordered_list.rb	/^      def change_order(tids)$/;"	f	class:Mongoid.OrderedList.Proxy
@@ -263,7 +253,7 @@ compile!	lib/devtools/asset_mapper/tfile.rb	/^    def compile!$/;"	f	class:Asset
 compile?	lib/devtools/asset_mapper.rb	/^    def compile?$/;"	f	class:AssetMapper
 compile_css!	lib/devtools/asset_mapper/tfile.rb	/^    def compile_css!(new_path)$/;"	f	class:AssetMapper.Tfile
 compile_js!	lib/devtools/asset_mapper/tfile.rb	/^    def compile_js!(new_path)$/;"	f	class:AssetMapper.Tfile
-convert_text=	lib/struct/text_block.rb	/^  def convert_text=(str)$/;"	f	class:TextBlock
+convert_val	lib/utils/hash_serialize.rb	/^  def convert_val(v, type_h, dmet)$/;"	f	class:HashSerialize
 cookie	features/support/env.rb	/^  def cookie(name)$/;"	f	class:FeatureWorld
 copy!	lib/devtools/asset_mapper/vendor_file.rb	/^    def copy!$/;"	f	class:AssetMapper.VendorFile
 copy_file!	lib/devtools/asset_mapper/vendor_file.rb	/^    def copy_file!(sfile, tfile, diff = nil)$/;"	f	class:AssetMapper.VendorFile
@@ -276,7 +266,6 @@ current_file_path	lib/devtools/asset_mapper/tfile.rb	/^    def current_file_path
 current_file_timestamp	lib/devtools/asset_mapper/tfile.rb	/^    def current_file_timestamp$/;"	f	class:AssetMapper.Tfile
 current_file_version	lib/devtools/asset_mapper/tfile.rb	/^    def current_file_version$/;"	f	class:AssetMapper.Tfile
 data_tpl	lib/devtools/file_generator.rb	/^    def data_tpl(id)$/;"	f	class:FileGenerator.RubyFile
-decode	lib/mongoid/field_candy/text_area.rb	/^      def decode(hsh)$/;"	f	class:Mongoid.OrderedList.TextProxy
 decode	lib/mongoid/ordered_list.rb	/^      def decode(hsh)$/;"	f	class:Mongoid.OrderedList.Proxy
 deep_require	lib/core_ext/dynamic_require.rb	/^def deep_require(dir, deepth = 3)$/;"	f
 default_checkbox_value	lib/helpers/form_helper.rb	/^    def default_checkbox_value(field, default)$/;"	f	class:FormHelper.FormBuilder
@@ -297,7 +286,6 @@ deliver!	lib/emails/render.rb	/^      def deliver!$/;"	f	class:Emails.Render
 deliver_later	lib/emails/render.rb	/^      def deliver_later(sec = 0)$/;"	f	class:Emails.Render
 delivered?	lib/emails/render.rb	/^      def delivered?$/;"	f	class:Emails.Render
 delivered_at	lib/emails/render.rb	/^      def delivered_at$/;"	f	class:Emails.Render
-demongoize	lib/utils/hash_struct.rb	/^      def demongoize(args)$/;"	f
 destroy_session	lib/rack/session/mongoid.rb	/^      def destroy_session(env, session_id, options)$/;"	f	class:Rack.Session.Mongoid
 development?	lib/asset_settings.rb	/^    def development?$/;"	f	class:AssetSettings
 diff_file	lib/devtools/asset_mapper/vendor_file.rb	/^    def diff_file(sfile, tfile)$/;"	f	class:AssetMapper.VendorFile
@@ -311,14 +299,12 @@ email_valid?	lib/mongoid/validators/email_validator.rb	/^  def email_valid?(emai
 encode	lib/mongoid/ordered_list.rb	/^      def encode(obj, tid = nil)$/;"	f	class:Mongoid.OrderedList.Proxy
 environments	lib/asset_settings.rb	/^    def environments$/;"	f	class:AssetSettings
 event	lib/la_buffered_logger.rb	/^  def event(type, dat = {})$/;"	f	class:LaBufferedLogger
-evolve	lib/utils/hash_struct.rb	/^      def evolve(object)$/;"	f
 example_file	spec/support/helpers/example_helper.rb	/^def example_file(arg)$/;"	f
 example_for	spec/support/helpers/api_doc_helper.rb	/^    def example_for(key)$/;"	f	class:RSpecApiDoc
 examples	spec/support/helpers/api_doc_helper.rb	/^    def examples(key = nil)$/;"	f	class:RSpecApiDoc
 execute!	lib/devtools/asset_mapper/loader.rb	/^    def execute!(compile = false)$/;"	f	class:AssetMapper.Loader
-extract_args	lib/core_ext/hash_argument.rb	/^  def extract_args(expects)$/;"	f	class:Hash
-extract_args!	lib/core_ext/hash_argument.rb	/^  def extract_args!(expects)$/;"	f	class:Hash
-fap	config/initializers/development/awesome_print.rb	/^def fap(*arg)$/;"	f
+extract_args	lib/core_ext/hash_extract_args.rb	/^  def extract_args(expects)$/;"	f	class:Hash
+extract_args!	lib/core_ext/hash_extract_args.rb	/^  def extract_args!(expects)$/;"	f	class:Hash
 fast_escape_html	lib/helpers/form_helper.rb	/^  def fast_escape_html(text)$/;"	f	class:FormHelper.radio.checkbox.select
 field_group	lib/helpers/form_helper.rb	/^    def field_group(field, options = {})$/;"	f	class:FormHelper.FormBuilder
 fieldset	lib/helpers/form_helper.rb	/^  def fieldset(legend = nil)$/;"	f	class:FormHelper
@@ -333,7 +319,6 @@ file_type	lib/devtools/asset_mapper/sfile.rb	/^    def file_type$/;"	f	class:Ass
 file_type	lib/devtools/asset_mapper/tfile.rb	/^    def file_type$/;"	f	class:AssetMapper.Tfile
 file_version	lib/devtools/asset_mapper/tfile.rb	/^    def file_version(fname)$/;"	f	class:AssetMapper.Tfile
 filename	lib/devtools/asset_mapper/tfile.rb	/^    def filename(version)$/;"	f	class:AssetMapper.Tfile
-filter_tag	lib/core_ext/string_simple_format.rb	/^  def filter_tag$/;"	f	class:String
 finalize!	lib/confu.rb	/^    def finalize!$/;"	f	class:Confu.Data
 finalize!	lib/confu.rb	/^    def finalize!(ev = ENV['RACK_ENV'])$/;"	f	class:Confu
 finalized?	lib/confu.rb	/^    def finalized?$/;"	f	class:Confu
@@ -348,15 +333,12 @@ flush!	lib/la_buffered_logger.rb	/^  def flush!$/;"	f	class:LaBufferedLogger
 for_environment	lib/confu.rb	/^    def for_environment(environment, &prc)$/;"	f	class:Confu
 form	lib/helpers/form_helper.rb	/^  def form(action = :self, options = {})$/;"	f	class:FormHelper
 form_for	lib/helpers/form_helper.rb	/^  def form_for(object, action = :self, options = {})$/;"	f	class:FormHelper
-from_array	lib/mongoid/ordered_list.rb	/^      def from_array(ary)$/;"	f	class:Mongoid.OrderedList.Proxy
 from_hash	lib/asset_settings.rb	/^    def from_hash(hsh)$/;"	f	class:AssetSettings
 from_hash	lib/asset_settings/environment_settings.rb	/^    def from_hash(hsh)$/;"	f	class:AssetSettings
-from_hash	lib/mongoid/field_candy/text_area.rb	/^      def from_hash(hsh)$/;"	f	class:Mongoid.OrderedList.TextProxy
-from_hash	lib/utils/hash_struct.rb	/^  def from_hash(h)$/;"	f	class:HashStruct
+from_hash	lib/utils/hash_struct.rb	/^      def from_hash(hsh)$/;"	f	class:HashStruct
 from_hex	lib/core_ext/time_short.rb	/^  def self.from_hex(hstr)$/;"	F	class:Time
+from_html	lib/mongoid/struct/text_block.rb	/^  def self.from_html(node)$/;"	F	class:TextBlock
 from_short	lib/core_ext/time_short.rb	/^  def self.from_short(sstr)$/;"	F	class:Time
-from_splits	lib/mongoid/token_id.rb	/^    def self.from_splits(tm, mp, remain)$/;"	F	class:BSON.ObjectId
-from_token_id	lib/mongoid/token_id.rb	/^    def self.from_token_id(str)$/;"	F	class:BSON.ObjectId
 ftt	lib/helpers/i18n_helper.rb	/^  def ftt(msg, opts = {})$/;"	f	class:I18nHelper
 generate_sid	lib/rack/session/mongoid.rb	/^      def generate_sid$/;"	f	class:Rack.Session.Mongoid
 generate_version	lib/devtools/asset_mapper/tfile.rb	/^    def generate_version$/;"	f	class:AssetMapper.Tfile
@@ -364,7 +346,6 @@ get	lib/asset_settings.rb	/^    def get$/;"	f	class:AssetSettings
 get_binding	spec/support/helpers/api_doc_helper.rb	/^    def get_binding$/;"	f	class:RSpecApiDoc
 get_display_style	doc/spec/lib/asset_settings/environment_settings_spec_rslt.html	/^function get_display_style(display_flag) {$/;"	f
 get_display_style	doc/spec/lib/asset_settings_spec_rslt.html	/^function get_display_style(display_flag) {$/;"	f
-get_display_style	doc/spec/lib/email_render_spec_rslt.html	/^function get_display_style(display_flag) {$/;"	f
 get_display_style	doc/spec/lib/emails/aliyun_sender_spec_rslt.html	/^function get_display_style(display_flag) {$/;"	f
 get_display_style	doc/spec/lib/emails/fake_sender_spec_rslt.html	/^function get_display_style(display_flag) {$/;"	f
 get_display_style	doc/spec/lib/emails/mailgun_sender_spec_rslt.html	/^function get_display_style(display_flag) {$/;"	f
@@ -384,7 +365,6 @@ hash_join	lib/utils/hash_flatter.rb	/^  def hash_join(hsh, g = '.')$/;"	f	class:
 hash_keys	lib/asset_settings/environment_settings.rb	/^    def hash_keys$/;"	f	class:AssetSettings
 hash_nest	lib/utils/hash_flatter.rb	/^  def hash_nest(keys, value)$/;"	f	class:HashFlatter
 hash_to_html_attrs	lib/helpers/form_helper.rb	/^  def hash_to_html_attrs(options = {})$/;"	f	class:FormHelper.radio.checkbox.select
-header?	lib/struct/text_block.rb	/^  def header?$/;"	f	class:TextBlock
 hex	lib/core_ext/time_short.rb	/^  def hex$/;"	f	class:Time
 hidden	lib/helpers/form_helper.rb	/^  def hidden(field, options = {})$/;"	f	class:FormHelper
 i18n_message	lib/core_ext/exception_i18n_message.rb	/^  def i18n_message$/;"	f	class:Exception
@@ -412,7 +392,7 @@ initialize	lib/emails/fake_sender.rb	/^    def initialize(options_ = {})$/;"	f	c
 initialize	lib/emails/mailgun_sender.rb	/^    def initialize(api_key, domain, params = {})$/;"	f	class:Emails.MailgunSender
 initialize	lib/helpers/form_helper.rb	/^    def initialize(parent, object, name = nil)$/;"	f	class:FormHelper.FormBuilder
 initialize	lib/la_buffered_logger.rb	/^  def initialize(opts = {})$/;"	f	class:LaBufferedLogger
-initialize	lib/mongoid/ordered_list.rb	/^      def initialize(prt, fnm, cf)$/;"	f	class:Mongoid.OrderedList.Proxy
+initialize	lib/mongoid/ordered_list.rb	/^      def initialize(prt, fnm)$/;"	f	class:Mongoid.OrderedList.Proxy
 initialize	lib/rack/json_response.rb	/^    def initialize(app)$/;"	f	class:Rack.JsonResponse
 initialize	lib/rack/log_flusher.rb	/^    def initialize(app, opts = {})$/;"	f	class:Rack.LogFlusher
 initialize	lib/rack/session/mongoid.rb	/^      def initialize(app, options = {})$/;"	f	class:Rack.Session.Mongoid
@@ -439,7 +419,6 @@ ltt	lib/helpers/i18n_helper.rb	/^  def ltt(msg, opts = {})$/;"	f	class:I18nHelpe
 main_loop	lib/background/worker_pool.rb	/^    def main_loop$/;"	f	class:Background.WorkerPool
 makeRed	doc/spec/lib/asset_settings/environment_settings_spec_rslt.html	/^function makeRed(element_id) {$/;"	f
 makeRed	doc/spec/lib/asset_settings_spec_rslt.html	/^function makeRed(element_id) {$/;"	f
-makeRed	doc/spec/lib/email_render_spec_rslt.html	/^function makeRed(element_id) {$/;"	f
 makeRed	doc/spec/lib/emails/aliyun_sender_spec_rslt.html	/^function makeRed(element_id) {$/;"	f
 makeRed	doc/spec/lib/emails/fake_sender_spec_rslt.html	/^function makeRed(element_id) {$/;"	f
 makeRed	doc/spec/lib/emails/mailgun_sender_spec_rslt.html	/^function makeRed(element_id) {$/;"	f
@@ -450,7 +429,6 @@ makeRed	doc/spec/lib/rack/json_response_spec_rslt.html	/^function makeRed(elemen
 makeRed	doc/spec/lib/route_spec_rslt.html	/^function makeRed(element_id) {$/;"	f
 makeYellow	doc/spec/lib/asset_settings/environment_settings_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
 makeYellow	doc/spec/lib/asset_settings_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
-makeYellow	doc/spec/lib/email_render_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
 makeYellow	doc/spec/lib/emails/aliyun_sender_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
 makeYellow	doc/spec/lib/emails/fake_sender_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
 makeYellow	doc/spec/lib/emails/mailgun_sender_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
@@ -469,14 +447,11 @@ min_abs_path	lib/devtools/asset_mapper/tfile.rb	/^    def min_abs_path$/;"	f	cla
 min_file_path	lib/devtools/asset_mapper/tfile.rb	/^    def min_file_path$/;"	f	class:AssetMapper.Tfile
 model	spec/support/helpers/api_doc_helper.rb	/^    def model(*args)$/;"	f	class:RSpecApiDoc
 models	config/initializers/development/mongoid_pry.rb	/^def models$/;"	f
-mongoize	lib/utils/hash_struct.rb	/^      def mongoize(object)$/;"	f
-mongoize	lib/utils/hash_struct.rb	/^  def mongoize$/;"	f
 mop	config/initializers/development/mongoid_pry.rb	/^def mop(model)$/;"	f
 mount	lib/route.rb	/^    def mount(app_class, route = nil)$/;"	f	class:Route
 move	lib/mongoid/ordered_list.rb	/^      def move(tid, opts = {})$/;"	f	class:Mongoid.OrderedList.Proxy
 moveProgressBar	doc/spec/lib/asset_settings/environment_settings_spec_rslt.html	/^function moveProgressBar(percentDone) {$/;"	f
 moveProgressBar	doc/spec/lib/asset_settings_spec_rslt.html	/^function moveProgressBar(percentDone) {$/;"	f
-moveProgressBar	doc/spec/lib/email_render_spec_rslt.html	/^function moveProgressBar(percentDone) {$/;"	f
 moveProgressBar	doc/spec/lib/emails/aliyun_sender_spec_rslt.html	/^function moveProgressBar(percentDone) {$/;"	f
 moveProgressBar	doc/spec/lib/emails/fake_sender_spec_rslt.html	/^function moveProgressBar(percentDone) {$/;"	f
 moveProgressBar	doc/spec/lib/emails/mailgun_sender_spec_rslt.html	/^function moveProgressBar(percentDone) {$/;"	f
@@ -503,7 +478,6 @@ n7	doc/monkey_patch.html	/^<span class="line-numbers"><a href="#n7" name="n7">7<
 n8	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n8" name="n8">8<\/a><\/span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">  &lt;\/code&gt; in<\/span><\/span>$/;"	a
 n9	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n9" name="n9">9<\/a><\/span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">    &lt;code&gt;&lt;strong&gt;&lt;%<\/span><span style="color:#710">=<\/span><\/span>h frame.function <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">%&gt;<\/span><span style="color:#D20">&lt;\/strong<\/span><span style="color:#710">&gt;<\/span><\/span>&lt;<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">\/<\/span><span style="color:#808">code&gt;<\/span><\/span>$/;"	a
 need_compile?	lib/devtools/asset_mapper/sfile.rb	/^    def need_compile?$/;"	f	class:AssetMapper.Sfile
-new_tid	lib/mongoid/ordered_list.rb	/^      def new_tid$/;"	f	class:Mongoid.OrderedList.Proxy
 no_more_retry?	lib/background/job.rb	/^      def no_more_retry?$/;"	f	class:Background.Job
 not_changed?	lib/devtools/asset_mapper/tfile.rb	/^    def not_changed?(nfile, ofile)$/;"	f	class:AssetMapper.Tfile
 offset_after	lib/mongoid/ordered_list.rb	/^      def offset_after(tid = nil)$/;"	f	class:Mongoid.OrderedList.Proxy
@@ -538,12 +512,9 @@ r	spec/support/helpers/api_test_helper.rb	/^  def r(req = nil, body = nil, heade
 radio	lib/helpers/form_helper.rb	/^    def radio(field, values, options = {})$/;"	f	class:FormHelper.FormBuilder
 radio	lib/helpers/form_helper.rb	/^  def radio(field, values, options = {})$/;"	f	class:FormHelper
 radio_field	lib/mongoid/field_candy/radio_field.rb	/^        def self.radio_field(field_name, choices, hsh = {})$/;"	F	class:Mongoid.FieldCandy.RadioField
-refresh_cache!	lib/mongoid/ordered_list.rb	/^      def refresh_cache!$/;"	f	class:Mongoid.OrderedList.Proxy
-reload!	config/initializers/development/awesome_print.rb	/^def reload!$/;"	f
 remove	lib/mongoid/ordered_list.rb	/^      def remove(tid)$/;"	f	class:Mongoid.OrderedList.Proxy
 removeClass	doc/spec/lib/asset_settings/environment_settings_spec_rslt.html	/^function removeClass(element_id, classname) {$/;"	f
 removeClass	doc/spec/lib/asset_settings_spec_rslt.html	/^function removeClass(element_id, classname) {$/;"	f
-removeClass	doc/spec/lib/email_render_spec_rslt.html	/^function removeClass(element_id, classname) {$/;"	f
 removeClass	doc/spec/lib/emails/aliyun_sender_spec_rslt.html	/^function removeClass(element_id, classname) {$/;"	f
 removeClass	doc/spec/lib/emails/fake_sender_spec_rslt.html	/^function removeClass(element_id, classname) {$/;"	f
 removeClass	doc/spec/lib/emails/mailgun_sender_spec_rslt.html	/^function removeClass(element_id, classname) {$/;"	f
@@ -562,7 +533,6 @@ require_name	lib/devtools/file_generator.rb	/^    def require_name$/;"	f	class:F
 reset	lib/helpers/form_helper.rb	/^  def reset(value = nil, options = {})$/;"	f	class:FormHelper
 resource_for	spec/support/helpers/api_doc_helper.rb	/^    def resource_for(key)$/;"	f	class:RSpecApiDoc
 retried	lib/background/job.rb	/^      def retried$/;"	f	class:Background.Job
-retrieve	lib/mongoid/ordered_list.rb	/^      def retrieve(hsh)$/;"	f	class:Mongoid.OrderedList.Proxy
 retry_delay	lib/background/job.rb	/^      def retry_delay$/;"	f	class:Background.Job
 rewrite!	lib/devtools/i18n_utils.rb	/^    def rewrite!(file = @filename)$/;"	f	class:YamlFile
 root	lib/devtools/asset_mapper.rb	/^    def root$/;"	f	class:AssetMapper
@@ -571,6 +541,7 @@ rsp	lib/helpers/slim_helper.rb	/^  def rsp(tpl = nil, opts = {})$/;"	f	class:Sli
 rsp!	lib/helpers/slim_helper.rb	/^  def rsp!(*args)$/;"	f	class:SlimHelper
 s	spec/support/helpers/api_test_helper.rb	/^  def s$/;"	f	class:APITestHelper
 s_find	lib/mongoid/sequence_token.rb	/^      def self.s_find(str)$/;"	F	class:Mongoid.SequenceToken
+safe_parse	lib/core_ext/date.rb	/^  def self.safe_parse(value, default = nil)$/;"	F	class:Date
 scope_join	lib/devtools/i18n_utils.rb	/^    def scope_join(*args)$/;"	f	class:YamlFile
 select	lib/helpers/form_helper.rb	/^    def select(field, values, options = {})$/;"	f	class:FormHelper.FormBuilder
 select	lib/helpers/form_helper.rb	/^  def select(field, values, options = {})$/;"	f	class:FormHelper.radio.checkbox
@@ -582,16 +553,17 @@ set_sequence_token	lib/mongoid/sequence_token.rb	/^      def set_sequence_token$
 set_session	lib/rack/session/mongoid.rb	/^      def set_session(env, session_id, new_session, _options)$/;"	f	class:Rack.Session.Mongoid
 set_trap	lib/background/worker_pool.rb	/^    def set_trap$/;"	f	class:Background.WorkerPool
 setup_header	lib/emails/render.rb	/^      def setup_header(dat)$/;"	f	class:Emails.Render
-short	lib/core_ext/string_short.rb	/^  def short(leng = 20)$/;"	f	class:String
+short	lib/core_ext/string_short.rb	/^  def short(leng = 20, sanitize: true)$/;"	f	class:String
 short	lib/core_ext/time_short.rb	/^  def short$/;"	f	class:Time
 simple_checkbox	lib/helpers/form_helper.rb	/^    def simple_checkbox(field, value, options = {})$/;"	f	class:FormHelper.FormBuilder
+simple_format	lib/core_ext/string_simple_format.rb	/^  def simple_format$/;"	f	class:String
 simple_radio	lib/helpers/form_helper.rb	/^    def simple_radio(field, value, options = {})$/;"	f	class:FormHelper.FormBuilder
 single_tag	lib/helpers/form_helper.rb	/^  def single_tag(name, options = {})$/;"	f	class:FormHelper.radio.checkbox.select
 size	lib/mongoid/ordered_list.rb	/^      def size$/;"	f	class:Mongoid.OrderedList.Proxy
 sp	spec/support/helpers/api_test_helper.rb	/^  def sp(expected_status = 200)$/;"	f	class:APITestHelper
 spec_filename	lib/devtools/file_generator.rb	/^    def spec_filename$/;"	f	class:FileGenerator.RubyFile
 spec_name	lib/devtools/file_generator.rb	/^    def spec_name$/;"	f	class:FileGenerator.RubyFile
-start	app/bin/bj_worker	/^    def start(_args = nil)$/;"	f	class:BjWorker
+split_paragraphs	lib/core_ext/string_simple_format.rb	/^  def split_paragraphs$/;"	f	class:String.simple_format
 start!	lib/background/worker_pool.rb	/^    def start!$/;"	f	class:Background.WorkerPool
 start_loop	lib/background/worker.rb	/^    def start_loop$/;"	f	class:Background.Worker
 start_workers	lib/background/worker_pool.rb	/^    def start_workers(klass, num)$/;"	f	class:Background.WorkerPool
@@ -601,16 +573,14 @@ status	config/initializers/web_exceptions.rb	/^  def status$/;"	f	class:Authoriz
 status	config/initializers/web_exceptions.rb	/^  def status$/;"	f	class:RequestError
 status	config/initializers/web_exceptions.rb	/^  def status$/;"	f	class:RouteError
 status	config/initializers/web_exceptions.rb	/^  def status$/;"	f	class:ServerError
-stop	app/bin/bj_worker	/^    def stop$/;"	f	class:BjWorker
 stop	lib/background/worker_pool.rb	/^    def stop$/;"	f	class:Background.WorkerPool
 stop!	lib/background/worker_pool.rb	/^    def stop!$/;"	f	class:Background.WorkerPool
 stop_loop!	lib/background/worker.rb	/^    def stop_loop!$/;"	f	class:Background.Worker
-struct	lib/struct/text_block.rb	/^  def struct$/;"	f	class:TextBlock
+struct	lib/utils/hash_struct.rb	/^      def struct(hsh)$/;"	f	class:HashStruct
+struct_field	lib/mongoid/field_candy/struct_field.rb	/^        def self.struct_field(field_name, opts = {})$/;"	F	class:Mongoid.FieldCandy.StructField
 submit	lib/helpers/form_helper.rb	/^  def submit(value = nil, options = {})$/;"	f	class:FormHelper
 super_classname	lib/devtools/file_generator.rb	/^    def super_classname$/;"	f	class:FileGenerator.RubyFile
 t	lib/helpers/i18n_helper.rb	/^  def t(msg, opts = {})$/;"	f	class:I18nHelper
-t2id	lib/mongoid/token_id.rb	/^      def self.t2id(str)$/;"	F	class:Mongoid.TokenId
-t_find	lib/mongoid/token_id.rb	/^      def self.t_find(tid)$/;"	F	class:Mongoid.TokenId
 table	lib/route.rb	/^    def table$/;"	f	class:Route
 tag	lib/helpers/form_helper.rb	/^  def tag(name, content = nil, options = {})$/;"	f	class:FormHelper.radio.checkbox.select
 template_basename	lib/emails/render.rb	/^      def template_basename$/;"	f	class:Emails.Render
@@ -620,34 +590,27 @@ template_file	lib/emails/render.rb	/^      def template_file(format = nil)$/;"	f
 template_id	lib/helpers/slim_helper.rb	/^  def template_id(tpl = nil, locales = nil)$/;"	f	class:SlimHelper
 terminated?	lib/background/worker.rb	/^    def terminated?$/;"	f	class:Background.Worker
 text	lib/helpers/form_helper.rb	/^  def text(field, options = {})$/;"	f	class:FormHelper
+text=	lib/mongoid/struct/text_block.rb	/^  def text=(str)$/;"	f	class:TextBlock
 text_area	lib/mongoid/field_candy/text_area.rb	/^        def self.text_area(field_name, opts = {})$/;"	F	class:Mongoid.FieldCandy.TextArea
 text_field	lib/mongoid/field_candy/text_field.rb	/^        def self.text_field(field_name, opts = {})$/;"	F	class:Mongoid.FieldCandy.TextField
-text_size	lib/mongoid/field_candy/text_area.rb	/^      def text_size$/;"	f	class:Mongoid.OrderedList.TextProxy
 textarea	lib/helpers/form_helper.rb	/^    def textarea(field, contents = nil, options = {})$/;"	f	class:FormHelper.FormBuilder
 textarea	lib/helpers/form_helper.rb	/^  def textarea(field, contents = '', options = {})$/;"	f	class:FormHelper
 tid_length	lib/mongoid/ordered_list.rb	/^      def tid_length$/;"	f	class:Mongoid.OrderedList.Proxy
 to	lib/route.rb	/^    def to(app_class, *parts)$/;"	f	class:Route
-to_cache	lib/mongoid/ordered_list.rb	/^      def to_cache$/;"	f	class:Mongoid.OrderedList.Proxy
 to_hash	app/models/email.rb	/^    def to_hash$/;"	f	class:Emails.Email
 to_hash	app/models/emails/mock_email.rb	/^    def to_hash$/;"	f	class:Emails.MockEmail
 to_hash	lib/asset_settings.rb	/^    def to_hash$/;"	f	class:AssetSettings
 to_hash	lib/asset_settings/environment_settings.rb	/^    def to_hash$/;"	f	class:AssetSettings
 to_hash	lib/confu.rb	/^    def to_hash$/;"	f	class:Confu
 to_hash	lib/confu.rb	/^    def to_hash$/;"	f	class:Confu.Data
-to_hash	lib/mongoid/ordered_list.rb	/^      def to_hash$/;"	f	class:Mongoid.OrderedList.Proxy
-to_hash	lib/utils/hash_struct.rb	/^  def to_hash(keys = nil)$/;"	f
-to_hash_keys	lib/utils/hash_struct.rb	/^  def to_hash_keys$/;"	f
+to_hash	lib/utils/hash_struct.rb	/^  def to_hash$/;"	f	class:HashStruct
+to_hash_keys	lib/utils/hash_struct.rb	/^  def to_hash_keys$/;"	f	class:HashStruct
+to_html	lib/mongoid/struct/text_block.rb	/^  def to_html$/;"	f	class:TextBlock
 to_human	lib/devtools/i18n_utils.rb	/^    def to_human(key)$/;"	f	class:I18nUtils
-to_simple_format	lib/core_ext/string_simple_format.rb	/^  def to_simple_format$/;"	f	class:String
-to_splits	lib/mongoid/token_id.rb	/^    def to_splits$/;"	f	class:BSON.ObjectId
-to_text_field	lib/core_ext/string_simple_format.rb	/^  def to_text_field$/;"	f	class:String
-to_token_id	lib/mongoid/token_id.rb	/^    def to_token_id$/;"	f	class:BSON.ObjectId
-token_id	lib/mongoid/token_id.rb	/^      def token_id$/;"	f	class:Mongoid.TokenId
-token_id=	lib/mongoid/token_id.rb	/^      def token_id=(str)$/;"	f	class:Mongoid.TokenId
 trans	lib/devtools/i18n_utils.rb	/^    def trans(key, lang)$/;"	f	class:I18nUtils
 try_require	lib/core_ext/dynamic_require.rb	/^def try_require(file)$/;"	f
 tt	lib/helpers/i18n_helper.rb	/^  def tt(msg, opts = {})$/;"	f	class:I18nHelper
-types_hash	lib/struct/text_block.rb	/^  def self.types_hash$/;"	F	class:TextBlock
+unique_tid	lib/mongoid/ordered_list.rb	/^      def unique_tid(tid = nil)$/;"	f	class:Mongoid.OrderedList.Proxy
 update	lib/mongoid/ordered_list.rb	/^      def update(tid, obj)$/;"	f	class:Mongoid.OrderedList.Proxy
 update!	lib/devtools/asset_mapper/pull.rb	/^    def update!$/;"	f	class:AssetMapper.Pull
 update?	lib/devtools/asset_mapper/cloud_file.rb	/^    def update?$/;"	f	class:AssetMapper.CloudFile

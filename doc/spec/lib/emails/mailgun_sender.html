@@ -54,7 +54,7 @@ created at: 2015-02-03</p>
     <span class="hljs-keyword">attr_accessor</span> <span class="hljs-symbol">:api_key</span>, <span class="hljs-symbol">:domain</span>, <span class="hljs-symbol">:params</span>
 
     <span class="hljs-constant">FIELDS</span> = <span class="hljs-string">%w(app_key password url to cc bcc subject from sender reply-to
-                return-path inline)</span>
+                return-path inline)</span>.freeze
 
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">initialize</span><span class="hljs-params">(api_key, domain, params = {})</span></span>
       <span class="hljs-variable">@api_key</span> = api_key
@@ -71,7 +71,7 @@ created at: 2015-02-03</p>
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">merge_parameters!</span><span class="hljs-params">(hsh)</span></span>
       hsh.each <span class="hljs-keyword">do</span> |k, v|
         k = k.to_s.downcase
-        fail <span class="hljs-string">"unknown field <span class="hljs-subst">#{k}</span>"</span> <span class="hljs-keyword">unless</span> <span class="hljs-constant">FIELDS</span>.<span class="hljs-keyword">include</span>?(k)
+        raise <span class="hljs-string">"unknown field <span class="hljs-subst">#{k}</span>"</span> <span class="hljs-keyword">unless</span> <span class="hljs-constant">FIELDS</span>.<span class="hljs-keyword">include</span>?(k)
         <span class="hljs-variable">@params</span>[k.to_sym] = v
       <span class="hljs-keyword">end</span>
     <span class="hljs-keyword">end</span>

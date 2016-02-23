@@ -2,7 +2,7 @@
 
 attrs application_code: 'la_marco_sinatra',
       application_name: 'Sinatra Based Web Framework',
-      application_version: '0.0.1'
+      application_version: '0.1.0'
 
 pull :'la-marco', vikkr: 'vikkr/la-marco.git', branch: :develop
 pull :'la-marco-mongoid', vikkr: 'vikkr/la-marco-mongoid.git', branch: :develop
@@ -31,38 +31,10 @@ export :route do
   copy 'lib/tasks/puma.rake'
   copy 'Guardfile', sync: false
   copy 'Procfile', sync: false
-end
 
-export :cucumber do
-  add_gem 'guard-cucumber', group: :development
-
-  add_gem 'cucumber', group: :development
-  add_gem 'capybara', group: :development
-  add_gem 'poltergeist', group: :development
-  add_gem 'selenium-webdriver', group: :development
-
-  copy 'features/step_definitions/*_steps.rb', sync: false
-  copy 'features/support/env.rb', sync: false
-  copy 'lib/tasks/cucumber.rake'
-end
-
-export :logger do
   copy 'lib/utils/la_backtrace_cleaner.rb'
   copy 'lib/la_buffered_logger.rb'
   copy 'lib/rack/log_flusher.rb'
-end
-
-export :restul_api do
-  add_gem 'oj'
-  add_gem 'multi_json'
-  add_gem 'recursive-open-struct'
-
-  copy 'lib/rack/json_response.rb'
-  copy 'app/pages/restful_controller.rb', sync: false
-  copy 'lib/tasks/gen_api.rake'
-  copy 'lib/tasks/doc_api.rake'
-  copy 'spec/support/helpers/api_test_helper.rb'
-  copy 'spec/support/helpers/api_doc_helper.rb'
 end
 
 export :assets_mapper do
@@ -112,16 +84,41 @@ export :email do
   # copy 'lib/tasks/email_test.rake'
 end
 
+export :cucumber do
+  add_gem 'guard-cucumber', group: :development
+
+  add_gem 'cucumber', group: :development
+  add_gem 'capybara', group: :development
+  add_gem 'poltergeist', group: :development
+  add_gem 'selenium-webdriver', group: :development
+
+  copy 'features/step_definitions/*_steps.rb', sync: false
+  copy 'features/support/env.rb', sync: false
+  copy 'lib/tasks/cucumber.rake'
+end
+
+export :restul_api do
+  add_gem 'oj'
+  add_gem 'multi_json'
+  add_gem 'recursive-open-struct'
+
+  copy 'lib/rack/json_response.rb'
+  copy 'app/pages/restful_controller.rb', sync: false
+  copy 'lib/tasks/gen_api.rake'
+  copy 'lib/tasks/doc_api.rake'
+  copy 'spec/support/helpers/api_test_helper.rb'
+  copy 'spec/support/helpers/api_doc_helper.rb'
+end
+
 export :full do
   import :route
   import :cucumber
-  import :logger
-
-  import :restul_api
 
   import :assets_mapper
   import :web
   import :email
+
+  import :restul_api
 end
 
 from('.') do
