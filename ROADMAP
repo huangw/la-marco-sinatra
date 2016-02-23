@@ -14,6 +14,6 @@ year: 2016
 
 [+] alimail: use aliyun email sender 2015/12/21-01/28 @huangw;xuf:01/29
 [+] rlog: rewrite log flush methods 01/19-01/20 @huangw:01/19
-[+] api_doc: rewrite document tool for api controllers 01/12-02/20 @huangw:10
 
+api_doc: rewrite document tool for api controllers 01/12-02/20 @huangw:10
 [+] release_v0_1_0: rewrite with new stack up 02/24 @huangw
