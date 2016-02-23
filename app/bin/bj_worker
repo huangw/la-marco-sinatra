@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+# vi: ft=ruby
+
+ENV['RACK_ENV'] ||= 'development'
+require_relative '../../config/boot'
+require 'background/worker_pool'
+
+Background::WorkerPool.new(BackgroundJobSettings.pool_option).start!
