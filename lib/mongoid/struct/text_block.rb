@@ -32,22 +32,18 @@ class TextBlock
   end
 
   def self.from_html(node)
-    node_tid = node.attributes['id'] && node.attributes['id'].value
-    node_tid = nil if node_tid.blank? # default is ''
-    bk = new(tid: node_tid, text: node.inner_html)
-    klasses = node.attributes['class']
-    klasses = klasses ? klasses.value.split(/\s+/) : []
-    label = node.name.upcase
-    if label == 'P'
-      bk.label = if klasses.include?('cp')
+    bk = new(tid: node.tid, text: node.inner_html)
+    node_name = node.name.upcase
+    if node_name == 'P'
+      bk.label = if node.class?('cp')
                    'CP'
-                 elsif klasses.include?('rp')
+                 elsif node.class?('rp')
                    'RP'
                  else
                    'P'
                  end
-    elsif %w(H3 H4 H5 HR).include?(label)
-      bk.label = label
+    elsif %w(H3 H4 H5 HR).include?(node_name)
+      bk.label = node_name
     else
       raise "unknown label #{label}"
     end

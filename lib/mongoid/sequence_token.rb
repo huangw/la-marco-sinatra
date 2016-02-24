@@ -20,7 +20,7 @@ module Mongoid
 
     included do
       field :sid, type: String
-      index({ sid: 1 }, unique: true)
+      index({ sid: 1 }, unique: true, sparse: true)
 
       def self.seq_field
         "#{collection.name}_sid"

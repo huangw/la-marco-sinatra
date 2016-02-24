@@ -44,6 +44,7 @@ module HashStruct
     include HashSerialize
     class << self
       def struct(hsh)
+        hsh = superclass.new._struct.merge(hsh) if superclass < HashStruct
         send(:define_method, :_struct) { hsh.symbolize_keys }
         hsh.keys.each { |k| attr_accessor k }
       end
