@@ -1,4 +1,0 @@
-Subject: Email for {{ model }}
-From: test@vikkr.com
-
-TODO: Email for {{ model }}, to {{ to }}

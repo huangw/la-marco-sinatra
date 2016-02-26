@@ -9,8 +9,8 @@ namespace :gen do
     rf = FileGenerator::RubyFile.new("app/models/emails/#{name}")
     rf.render! model_file: rf.filename, spec_file: rf.spec_filename
     %w(en ja zh).each do |lang|
-      rf.render! template_html: "app/presenters/emails/#{rf.basename}.#{lang}.html",
-                 template_txt: "app/presenters/emails/#{rf.basename}.#{lang}.txt"
+      rf.render! template_html: "app/emails/#{rf.basename}.#{lang}.html",
+                 template_txt: "app/emails/#{rf.basename}.#{lang}.txt"
     end
   end
 end

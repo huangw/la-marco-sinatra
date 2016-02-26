@@ -48,6 +48,7 @@ Criteria	lib/mongoid/paginator.rb	/^  class Criteria$/;"	c	class:Mongoid
 CronJob	lib/background/cron_job.rb	/^  module CronJob$/;"	m	class:Background
 Data	lib/confu.rb	/^  class Data < Hash$/;"	c	class:Confu
 Date	lib/core_ext/date.rb	/^class Date$/;"	c
+Element	lib/core_ext/nokogiri_html_element.rb	/^    class Element$/;"	c	class:Nokogiri.XML
 Email	app/models/email.rb	/^  class Email$/;"	c	class:Emails
 EmailField	lib/mongoid/field_candy/email_field.rb	/^    module EmailField$/;"	m	class:Mongoid.FieldCandy
 EmailValidator	lib/mongoid/validators/email_validator.rb	/^class EmailValidator < ActiveModel::EachValidator$/;"	c
@@ -106,6 +107,7 @@ Mongoid	lib/mongoid/paginator.rb	/^module Mongoid$/;"	m
 Mongoid	lib/mongoid/sequence_token.rb	/^module Mongoid$/;"	m
 Mongoid	lib/rack/session/mongoid.rb	/^    class Mongoid < Abstract::ID$/;"	c	class:Rack.Session
 Mongoid	lib/rack/session/mongoid/version.rb	/^    class Mongoid < Abstract::ID$/;"	c	class:Rack.Session
+Nokogiri	lib/core_ext/nokogiri_html_element.rb	/^module Nokogiri$/;"	m
 OrderedList	lib/mongoid/ordered_list.rb	/^  module OrderedList$/;"	m	class:Mongoid
 PersonPage	spec/lib/route_spec.rb	/^  class PersonPage; Route << self end$/;"	c	class:Admin
 Producer	lib/devtools/asset_mapper/producer.rb	/^  class Producer$/;"	c	class:AssetMapper
@@ -153,6 +155,7 @@ VendorFile	lib/devtools/asset_mapper/vendor_file.rb	/^  class VendorFile < Sfile
 WebController	app/pages/web_controller.rb	/^class WebController < Sinatra::Base$/;"	c
 Worker	lib/background/worker.rb	/^  class Worker$/;"	c	class:Background
 WorkerPool	lib/background/worker_pool.rb	/^  class WorkerPool$/;"	c	class:Background
+XML	lib/core_ext/nokogiri_html_element.rb	/^  module XML$/;"	m	class:Nokogiri
 YamlFile	lib/devtools/i18n_utils.rb	/^  class YamlFile$/;"	c
 []	lib/asset_settings.rb	/^    def [](env)$/;"	f	class:AssetSettings
 []	lib/asset_settings/environment_settings.rb	/^    def [](filename)$/;"	f	class:AssetSettings.EnvironmentSettings
@@ -240,6 +243,7 @@ change_order	lib/mongoid/ordered_list.rb	/^      def change_order(tids)$/;"	f	cl
 checkbox	lib/helpers/form_helper.rb	/^    def checkbox(field, values, options = {})$/;"	f	class:FormHelper.FormBuilder
 checkbox	lib/helpers/form_helper.rb	/^  def checkbox(field, values, options = {})$/;"	f	class:FormHelper.radio
 checkbox_field	lib/mongoid/field_candy/checkbox_field.rb	/^        def self.checkbox_field(field_name, keys, opts = {})$/;"	F	class:Mongoid.FieldCandy.CheckboxField
+class?	lib/core_ext/nokogiri_html_element.rb	/^      def class?(klass)$/;"	f	class:Nokogiri.XML.Element
 class_name	lib/devtools/file_generator.rb	/^    def class_name$/;"	f	class:FileGenerator.RubyFile
 class_string	lib/devtools/file_generator.rb	/^    def class_string$/;"	f	class:FileGenerator.RubyFile
 clean	lib/utils/la_backtrace_cleaner.rb	/^  def self.clean(e)$/;"	F	class:LaBacktraceCleaner
@@ -595,6 +599,7 @@ text_area	lib/mongoid/field_candy/text_area.rb	/^        def self.text_area(fiel
 text_field	lib/mongoid/field_candy/text_field.rb	/^        def self.text_field(field_name, opts = {})$/;"	F	class:Mongoid.FieldCandy.TextField
 textarea	lib/helpers/form_helper.rb	/^    def textarea(field, contents = nil, options = {})$/;"	f	class:FormHelper.FormBuilder
 textarea	lib/helpers/form_helper.rb	/^  def textarea(field, contents = '', options = {})$/;"	f	class:FormHelper
+tid	lib/core_ext/nokogiri_html_element.rb	/^      def tid$/;"	f	class:Nokogiri.XML.Element
 tid_length	lib/mongoid/ordered_list.rb	/^      def tid_length$/;"	f	class:Mongoid.OrderedList.Proxy
 to	lib/route.rb	/^    def to(app_class, *parts)$/;"	f	class:Route
 to_hash	app/models/email.rb	/^    def to_hash$/;"	f	class:Emails.Email

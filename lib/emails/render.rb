@@ -30,7 +30,7 @@ module Emails
       # ---------------------------------------
 
       def template_dir
-        'app/presenters/'
+        'app/views/'
       end
 
       def template_basename
