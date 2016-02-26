@@ -56,7 +56,7 @@ describe <span class="hljs-constant">Emails::FakeSender</span> <span class="hljs
       expect(memail.delivered?).to be_falsey
       memail.deliver_later(-<span class="hljs-number">1</span>)
       expect(memail.job_state).to eq(<span class="hljs-number">300</span>)
-      <span class="hljs-constant">Emails::Email</span>.perform
+      <span class="hljs-constant">Email</span>.perform
 
       expect(<span class="hljs-constant">Emails::MockEmail</span>.find(memail._id).delivered?).to be_truthy
     <span class="hljs-keyword">end</span>
