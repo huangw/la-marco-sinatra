@@ -49,10 +49,9 @@ CronJob	lib/background/cron_job.rb	/^  module CronJob$/;"	m	class:Background
 Data	lib/confu.rb	/^  class Data < Hash$/;"	c	class:Confu
 Date	lib/core_ext/date.rb	/^class Date$/;"	c
 Element	lib/core_ext/nokogiri_html_element.rb	/^    class Element$/;"	c	class:Nokogiri.XML
-Email	app/models/email.rb	/^  class Email$/;"	c	class:Emails
+Email	app/models/email.rb	/^class Email$/;"	c
 EmailField	lib/mongoid/field_candy/email_field.rb	/^    module EmailField$/;"	m	class:Mongoid.FieldCandy
 EmailValidator	lib/mongoid/validators/email_validator.rb	/^class EmailValidator < ActiveModel::EachValidator$/;"	c
-Emails	app/models/email.rb	/^module Emails$/;"	m
 Emails	app/models/emails/mock_email.rb	/^module Emails$/;"	m
 Emails	lib/emails/aliyun_sender.rb	/^module Emails$/;"	m
 Emails	lib/emails/fake_sender.rb	/^module Emails$/;"	m
@@ -91,7 +90,7 @@ LogFlusher	lib/rack/log_flusher.rb	/^  class LogFlusher$/;"	c	class:Rack
 LoggerPage	app/pages/logger_page.rb	/^class LoggerPage < WebController$/;"	c
 LoggingHelper	app/pages/logger_page.rb	/^module LoggingHelper$/;"	m
 MailgunSender	lib/emails/mailgun_sender.rb	/^  class MailgunSender$/;"	c	class:Emails
-MockEmail	app/models/emails/mock_email.rb	/^  class MockEmail < Email$/;"	c	class:Emails
+MockEmail	app/models/emails/mock_email.rb	/^  class MockEmail < ::Email$/;"	c	class:Emails
 MockEmailLessLocale	spec/lib/emails/render_spec.rb	/^class MockEmailLessLocale < Emails::MockEmail$/;"	c
 MockEmailWithoutLocale	spec/lib/emails/render_spec.rb	/^class MockEmailWithoutLocale < Emails::MockEmail$/;"	c
 Mongoid	lib/mongoid/field_candy/bool_field.rb	/^module Mongoid$/;"	m
@@ -602,7 +601,7 @@ textarea	lib/helpers/form_helper.rb	/^  def textarea(field, contents = '', optio
 tid	lib/core_ext/nokogiri_html_element.rb	/^      def tid$/;"	f	class:Nokogiri.XML.Element
 tid_length	lib/mongoid/ordered_list.rb	/^      def tid_length$/;"	f	class:Mongoid.OrderedList.Proxy
 to	lib/route.rb	/^    def to(app_class, *parts)$/;"	f	class:Route
-to_hash	app/models/email.rb	/^    def to_hash$/;"	f	class:Emails.Email
+to_hash	app/models/email.rb	/^  def to_hash$/;"	f	class:Email
 to_hash	app/models/emails/mock_email.rb	/^    def to_hash$/;"	f	class:Emails.MockEmail
 to_hash	lib/asset_settings.rb	/^    def to_hash$/;"	f	class:AssetSettings
 to_hash	lib/asset_settings/environment_settings.rb	/^    def to_hash$/;"	f	class:AssetSettings
