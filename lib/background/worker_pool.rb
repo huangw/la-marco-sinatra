@@ -79,7 +79,7 @@ module Background
         # revert jobs processed for too long time (worker dead?)
         @workers.keys.each do |klass|
           klass.where(_j_s: 100)
-            .lt(u_at: Time.now - @restore_interval).each do |job|
+               .lt(u_at: Time.now - @restore_interval).each do |job|
             job.update_attributes _j_s: 10 # switch back to waiting
           end
         end # each work class

@@ -30,13 +30,13 @@ class Route
       route ||= default_url(app_class)
       table[app_class] = route
     end
-    alias_method :'<<', :mount
+    alias << mount
 
     # To helper receive model as inputs:
     def to(app_class, *parts)
       prefix = app_class.is_a?(Class) ? @table[app_class] : app_class.to_s
-      fail "unknown controller #{app_class}" if prefix.nil?
-      return prefix unless parts && parts.size > 0
+      raise "unknown controller #{app_class}" if prefix.nil?
+      return prefix if parts.nil? || parts.empty?
 
       if parts.last.is_a?(Hash)
         pam = '?' + parts.pop.map { |k, v| k.to_s + '=' + v.to_s }.join('&')
@@ -49,7 +49,7 @@ class Route
 
     def default_path(app_class)
       app_class.to_s.underscore.sub(/_(api|page|controller)\Z/, '')
-        .sub(/^\/*/, '/').pluralize
+               .sub(/^\/*/, '/').pluralize
     end
 
     def default_url(app_class)

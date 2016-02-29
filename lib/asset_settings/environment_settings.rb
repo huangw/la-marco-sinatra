@@ -21,8 +21,8 @@ class AssetSettings
     # Convenient accessors
     # ----------------------
     def [](filename)
-      fail "Invalid filename #{filename}, "\
-           'must end with js or css' unless filename.match(/\.(js|css)\Z/)
+      raise "Invalid filename #{filename}, "\
+           'must end with js or css' unless filename =~ /\.(js|css)\Z/
       @files[filename] ||= [] # URL list
     end
 

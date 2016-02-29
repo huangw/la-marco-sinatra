@@ -64,7 +64,7 @@ unless AssetSettings.production?</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>  a_url = <span class="hljs-constant">AssetSettings</span>.get.assets_url_prefix
-  <span class="hljs-constant">Route</span>.mount(<span class="hljs-keyword">self</span>, a_url) <span class="hljs-keyword">if</span> a_url.match(<span class="hljs-regexp">/\A\//</span>)</pre></div></div>
+  <span class="hljs-constant">Route</span>.mount(<span class="hljs-keyword">self</span>, a_url) <span class="hljs-keyword">if</span> a_url =~ <span class="hljs-regexp">/\A\//</span></pre></div></div>
             
         </li>
         

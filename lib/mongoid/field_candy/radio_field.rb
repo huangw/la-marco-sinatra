@@ -58,7 +58,7 @@ module Mongoid
           key_type = nil
           key_type = Integer if non_nil_keys.all? { |k| k.is_a?(Integer) }
           key_type = Symbol if non_nil_keys.all? { |k| k.is_a?(Symbol) }
-          fail 'mixed key type for hash keys' if key_type.nil?
+          raise 'mixed key type for hash keys' if key_type.nil?
 
           # register field
           field field_name.to_sym, { type: key_type }.merge(hsh)
@@ -75,7 +75,7 @@ module Mongoid
             else
               val = choices.invert[val] unless choices.key?(val)
             end
-            fail "unknown option #{val}" unless choices.key?(val)
+            raise "unknown option #{val}" unless choices.key?(val)
             val
           end
 

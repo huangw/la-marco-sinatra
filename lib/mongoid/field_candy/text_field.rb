@@ -2,6 +2,7 @@
 # vim: foldlevel=1
 # created at: 2015-01-30
 require 'active_support/concern'
+require 'sanitize'
 
 # mixin mongoid
 module Mongoid
@@ -34,6 +35,10 @@ module Mongoid
           field_name = opts[:as] if opts[:as]
 
           validates field_name.to_sym, v_opts
+
+          send(:define_method, :"#{field_name}=") do |str|
+            self[field_name] = str.nil? ? nil : Sanitize.fragment(str, Sanitize::Config::RESTRICTED)
+          end
         end
       end
     end # class TextField

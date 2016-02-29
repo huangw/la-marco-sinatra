@@ -23,21 +23,19 @@ module FormHelper
       e_msg = [options.delete(:e_msg1)] if options[:e_msg1]
       e_msg ||= @object.errors.messages[field] if @object.respond_to?(:errors)
 
-      cls << ' has-error' if e_msg && e_msg.size > 0 && options.delete(:add_error_class)
+      cls << ' has-error' if e_msg && !e_msg.empty? && options.delete(:add_error_class)
 
       options['placeholder'] ||= @object.class.human_attribute_name(field) if @object.class.respond_to?(:human_attribute_name)
       out = options[:label] ? (label field, options.delete(:label), class: 'control-label') : ''
 
       if block_given?
         out << yield
+      elsif type.to_sym == :textarea
+        out << textarea(field, options.delete(:value),
+                        options.merge(class: 'form-control'))
       else
-        if type.to_sym == :textarea
-          out << textarea(field, options.delete(:value),
-                          options.merge(class: 'form-control'))
-        else
-          value = options.delete(:value) || default_value(field, '')
-          out << send(type, field, options.merge(class: 'form-control', value: value))
-        end
+        value = options.delete(:value) || default_value(field, '')
+        out << send(type, field, options.merge(class: 'form-control', value: value))
       end
 
       if (icon_text = options.delete(:icon)) && (icon_type = options.delete(:icon_type))
@@ -45,7 +43,7 @@ module FormHelper
       end
 
       out << @parent.tag(:p, e_msg.join('; '),
-                         class: 'help-block') if e_msg && e_msg.size > 0
+                         class: 'help-block') if e_msg && !e_msg.empty?
 
       @parent.tag :div, out, class: cls
     end
@@ -194,7 +192,7 @@ module FormHelper
   end
 
   def form_for(object, action = :self, options = {})
-    fail ArgumentError, 'Missing block to form_for()' unless block_given?
+    raise ArgumentError, 'Missing block to form_for()' unless block_given?
 
     err_msg = ''
     add_err_msg = options.delete(:add_err_msg)
@@ -219,7 +217,7 @@ module FormHelper
   end
 
   def fieldset_for(object, name = nil, legend = nil)
-    fail ArgumentError, 'Missing block to fieldset()' unless block_given?
+    raise ArgumentError, 'Missing block to fieldset()' unless block_given?
     legend ||= object.respond_to?(:model_name) ? object.model_name.human : object.class.to_s
     out = yield(FormBuilder.new(self, object, name)) || ''
     fieldset(legend) << out << close_fieldset
@@ -347,7 +345,7 @@ module FormHelper
   # => <h1 title="shizam">shizam</h1>
   def tag(name, content = nil, options = {})
     "<#{name}" +
-      (options.length > 0 ? " #{hash_to_html_attrs(options)}" : '') +
+      (!options.empty? ? " #{hash_to_html_attrs(options)}" : '') +
       (content.nil? ? '>' : ">#{content}</#{name}>")
   end
 
@@ -355,10 +353,10 @@ module FormHelper
   # single_tag :img, :src => "images/google.jpg"
   # => <img src="images/google.jpg" />
   def single_tag(name, options = {})
-    if options.length > 0
-      "<#{name} #{hash_to_html_attrs(options)} />"
-    else
+    if options.empty?
       "<#{name} />"
+    else
+      "<#{name} #{hash_to_html_attrs(options)} />"
     end
   end
 
@@ -369,18 +367,18 @@ module FormHelper
   # quasi private
   def fast_escape_html(text)
     text.to_s.gsub(/\&/, '&amp;').gsub(/\"/, '&quot;')
-      .gsub(/>/, '&gt;').gsub(/</, '&lt;')
+        .gsub(/>/, '&gt;').gsub(/</, '&lt;')
   end
 
   def hash_to_html_attrs(options = {})
     html_attrs = []
     options.keys.each do |key|
       next if options[key].nil? # do not include empty attributes
-      if options[key].is_a?(Symbol) && options[key] == :empty
-        html_attrs << key.to_s
-      else
-        html_attrs << %(#{key}="#{fast_escape_html(options[key])}")
-      end
+      html_attrs << if options[key].is_a?(Symbol) && options[key] == :empty
+                      key.to_s
+                    else
+                      %(#{key}="#{fast_escape_html(options[key])}")
+                    end
     end
     html_attrs.join ' '
   end

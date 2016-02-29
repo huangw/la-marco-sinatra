@@ -31,8 +31,7 @@
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">require</span> <span class="hljs-string">'rack/session/mongoid/version'</span>
-<span class="hljs-keyword">require</span> <span class="hljs-string">'rack/session/abstract/id'</span>
-<span class="hljs-keyword">require</span> <span class="hljs-string">'awesome_print'</span></pre></div></div>
+<span class="hljs-keyword">require</span> <span class="hljs-string">'rack/session/abstract/id'</span></pre></div></div>
             
         </li>
         
@@ -42,6 +41,21 @@
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>require ‘awesome_print’</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">require</span> <span class="hljs-string">'securerandom'</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
               <p>A mongoid document model for storing session data</p>
 
@@ -53,7 +67,7 @@
   field <span class="hljs-symbol">:sid</span>, <span class="hljs-symbol">type:</span> <span class="hljs-constant">String</span>
   field <span class="hljs-symbol">:data</span>, <span class="hljs-symbol">type:</span> <span class="hljs-constant">Hash</span>, <span class="hljs-symbol">default:</span> {}
 
-  index({ <span class="hljs-symbol">sid:</span> <span class="hljs-number">1</span> }, <span class="hljs-symbol">unique:</span> <span class="hljs-keyword">true</span>)
+  index(<span class="hljs-symbol">sid:</span> <span class="hljs-number">1</span>)
 <span class="hljs-keyword">end</span>
 
 <span class="hljs-class"><span class="hljs-keyword">module</span> <span class="hljs-title">Rack</span></span>
@@ -70,7 +84,7 @@
 
       <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">generate_sid</span></span>
         loop <span class="hljs-keyword">do</span>
-          sid = <span class="hljs-keyword">super</span>
+          sid = <span class="hljs-constant">SecureRandom</span>.uuid <span class="hljs-comment"># super</span>
           <span class="hljs-keyword">break</span> sid <span class="hljs-keyword">unless</span> <span class="hljs-constant">RackSession</span>.where(<span class="hljs-symbol">sid:</span> sid).asc(<span class="hljs-symbol">:_id</span>).first
         <span class="hljs-keyword">end</span>
       <span class="hljs-keyword">end</span>

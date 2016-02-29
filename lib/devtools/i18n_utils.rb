@@ -21,7 +21,7 @@ module I18nUtils
 
     def trans(key, lang)
       return to_human(key) if lang.to_sym == :en
-      local_t = local_trans && local_trans[lang.to_s] && local_trans[lang.to_s][key.underscore.to_s]
+      local_t = local_trans && local_trans[lang.to_sym] && local_trans[lang.to_sym][key.to_sym]
       local_t ? local_t : google_t(key, lang)
     end
 
@@ -109,7 +109,7 @@ module I18nUtils
 
     def scope_join(*args)
       if @common_scope
-        args.unshift @common_scope unless args[0].match(/\A#{@common_scope}/)
+        args.unshift @common_scope unless args[0] =~ /\A#{@common_scope}/
       end
 
       args.map { |k| k.to_s.sub(/\A\./, '').sub(/\.\Z/, '') }.join('.')

@@ -14,7 +14,7 @@ module AssetMapper
     cloud_dir: 'app/assets/cloud',
     # local file cache for cloud js/css files
     min_dir: 'app/assets/min' # directory for minimized js/css files
-  }
+  }.freeze
 
   class << self
     attr_accessor :compile

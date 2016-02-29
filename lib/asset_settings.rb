@@ -2,7 +2,7 @@ require 'asset_settings/environment_settings'
 # Bind to `config/assets.yml`, singleton parse it's contents or
 # update based on configurations
 class AssetSettings
-  CONFIG_YAML = 'config/assets.yml'
+  CONFIG_YAML = 'config/assets.yml'.freeze
   APP_ROOT = ENV['APP_ROOT']
 
   class << self
@@ -17,7 +17,7 @@ class AssetSettings
 
     # access for specific environment settings
     def [](env)
-      fail "Unsupported environment #{env}" unless environments.include?(env)
+      raise "Unsupported environment #{env}" unless environments.include?(env)
       @settings ||= {}
       @settings[env.to_sym] ||= EnvironmentSettings.new(env.to_sym)
     end
@@ -67,7 +67,7 @@ class AssetSettings
     end
 
     def load_yaml!(file = nil)
-      fail 'file not exists' unless load_yaml(file)
+      raise 'file not exists' unless load_yaml(file)
     end
 
     def update_yaml!(file = nil)

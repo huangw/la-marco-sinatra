@@ -14,12 +14,12 @@ module AssetMapper
       @file_id = file_id
       @min_dir = AssetMapper.min_dir
       warn "[WARN] file type unkown: #{file_id}, "\
-           'need to be js or css' unless file_id.match(/\.(js|css)\Z/)
+           'need to be js or css' unless file_id =~ /\.(js|css)\Z/
       @compile_files = [] # as absolute paths
     end
 
     def file_type
-      file_id.match(/\.js\Z/) ? 'js' : 'css'
+      file_id =~ /\.js\Z/ ? 'js' : 'css'
     end
 
     def js?

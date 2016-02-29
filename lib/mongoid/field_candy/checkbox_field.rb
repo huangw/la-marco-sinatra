@@ -26,7 +26,7 @@ module Mongoid
 
       included do
         def self.checkbox_field(field_name, keys, opts = {})
-          fail 'keys not defined' unless keys.is_a?(Array)
+          raise 'keys not defined' unless keys.is_a?(Array)
           default_on = opts.delete(:default_on)
           opts[:default] ||= 0
 
@@ -34,7 +34,7 @@ module Mongoid
             default_on = [default_on] if default_on.is_a?(Symbol)
             kmap = keys.map(&:to_sym).reverse
             default_on.each do |bit|
-              opts[:default] += 2**(kmap.index(bit.to_sym))
+              opts[:default] += 2**kmap.index(bit.to_sym)
             end
           end
 
@@ -54,7 +54,7 @@ module Mongoid
           end
 
           send(:define_method, "#{field_name}_offset".to_sym) do |bit|
-            fail "wrong key #{bit}, keys are #{keys.join ', '}" unless keys.map(&:to_s).include?(bit.to_s)
+            raise "wrong key #{bit}, keys are #{keys.join ', '}" unless keys.map(&:to_s).include?(bit.to_s)
             keys.map(&:to_sym).index(bit.to_sym)
           end
 
@@ -104,10 +104,6 @@ module Mongoid
             end
           end # each bit
         end # method
-
-        class << self;
-          alias_method :checkbox_field, :checkbox_field
-        end
       end # included
     end # CheckboxField
   end

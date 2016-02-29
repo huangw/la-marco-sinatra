@@ -29,7 +29,7 @@ module AssetMapper
 
     def file(filename)
       sfile = Sfile.new(filename)
-      fail "file #{sfile.file_path} "\
+      raise "file #{sfile.file_path} "\
            'does not exists' unless File.exist?(sfile.abs_path)
       @sfiles << sfile
       @tfile.compile_files << sfile.abs_path

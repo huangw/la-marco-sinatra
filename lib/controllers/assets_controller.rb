@@ -8,6 +8,6 @@ class AssetsController < Sinatra::Base
   # load assets controllers
   # unless AssetSettings.production?
   a_url = AssetSettings.get.assets_url_prefix
-  Route.mount(self, a_url) if a_url.match(/\A\//)
+  Route.mount(self, a_url) if a_url =~ /\A\//
   # end
 end

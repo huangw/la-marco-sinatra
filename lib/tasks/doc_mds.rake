@@ -7,9 +7,11 @@ class SpecDocument
   #  - mdoconly: skip all spec test document generation
   #  - force: force re-generate all spec document even the file is newer
   def initialize(src, out, opts = {})
-    @src, @mdoconly, @force = src, opts[:mdoconly], opts[:force]
+    @src = src
+    @mdoconly = opts[:mdoconly]
+    @force = opts[:force]
     @dir = File.join(out, 'spec')
-    fail "source file #{@src} not found" unless File.exist?(src)
+    raise "source file #{@src} not found" unless File.exist?(src)
   end
 
   def render
@@ -19,7 +21,7 @@ class SpecDocument
       if match = line.match(/spec:\s*(?<target>[\w\/]+)/)
         target = match[:target].gsub(/\.rb\Z/, '')
         $stderr.puts "  - (line #{ln}): #{target}"
-        fail "target file for #{target}.rb not found" unless File.exist?(target + '.rb')
+        raise "target file for #{target}.rb not found" unless File.exist?(target + '.rb')
         sstr = "【SOURCE】[`#{target}.rb`](./spec/#{src_file(target)}) "
         spec_rslt = test_file(target)
         spec_html = test_src(target)
@@ -33,19 +35,19 @@ class SpecDocument
       # H/L: high/low priority; C: completed; P: pending
       if m_dat = line.match(/(\s*\-\s*)\[(H|L|C|P)?(.+)?\](.+)/)
         date_str = ''
-        if m_dat[3]
-          date = Date.parse(m_dat[3].to_s)
-          date_str = "[#{date.strftime("%m-%d")}]"
+        date = Date.parse(m_dat[3].to_s) if m_dat[3]
+        if date
+          date_str = "[#{date.strftime('%m-%d')}]"
           unless m_dat[2] == 'C' || m_dat[2] == 'P'
-            if date < Date.today
-              date_str = "<b style='color: red'>#{date_str}</b>"
-            elsif date == Date.today
-              date_str = "<b style='color: #F7D358'>#{date_str}</b>"
-            elsif date < Date.today + 2
-              date_str = "<b style='color: #blue'>#{date_str}</b>"
-            else
-              date_str = "<b>#{date_str}</b>"
-            end
+            date_str = if date < Date.today
+                         "<b style='color: red'>#{date_str}</b>"
+                       elsif date == Date.today
+                         "<b style='color: #F7D358'>#{date_str}</b>"
+                       elsif date < Date.today + 2
+                         "<b style='color: #blue'>#{date_str}</b>"
+                       else
+                         "<b>#{date_str}</b>"
+                       end
           end
         end
 
@@ -70,7 +72,7 @@ class SpecDocument
 
   def newer?(src, tgt)
     return true if @force
-    fail 'source file not exists' unless File.exist?(src)
+    raise 'source file not exists' unless File.exist?(src)
     return true unless File.exist?(tgt)
     File.mtime(src) > File.mtime(tgt)
   end
@@ -119,6 +121,7 @@ namespace :doc do
   task :mds do
     mds_dir = ENV['MDS_DIR'] || 'src/doc'
     out_dir = ENV['OUT_DIR'] || 'doc'
+    FileUtils.mkdir(out_dir) unless File.directory?(out_dir)
     opts = {}
     opts[:force] = true if ENV['FORCE']
     opts[:mdoconly] = true if ENV['MDOCONLY']
@@ -132,8 +135,8 @@ namespace :doc do
     end
 
     Dir[mds_dir + '/*.md'].each do |md|
-      next if md.match(/\.render\./)
-      if md.match(/api\.md\Z/)
+      next if md =~ /\.render\./
+      if md =~ /api\.md\Z/
         puts "skip API documentation #{md}"
         next
       end
@@ -146,7 +149,7 @@ namespace :doc do
     end
 
     if File.exist?('README.md')
-      sh "mdoc README.md"
+      sh 'mdoc README.md'
       FileUtils.mv 'README.html', out_dir
     end
 

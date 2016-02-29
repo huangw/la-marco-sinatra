@@ -6,7 +6,7 @@
 # mixin Emails namespace
 module Emails
   # Email for MockEmail
-  class MockEmail < Email
+  class MockEmail < ::Email
     def to_hash
       super
     end

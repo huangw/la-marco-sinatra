@@ -1,14 +1,15 @@
 require 'faker'
-I18n.reload!
-require 'factory_girl'
+I18n.reload! # faker add new entries into the i18n table
+
 require 'table_print'
+
+require 'factory_girl'
 include FactoryGirl::Syntax::Methods
 
 require_all root_join('spec/support/factories/*_factory.rb')
 FactoryGirl.find_definitions
 
 # rubocop:disable MethodLength
-
 def indexes
   indexes = []
   Mongoid.models.each do |model|
@@ -30,7 +31,7 @@ def models
       while sk != model
         inh << sk.to_s
         sk = sk.superclass
-        fail '!' if sk == Object
+        raise '!' if sk == Object
       end
 
       children << '   ' + inh.reverse.join(' < ')
@@ -46,9 +47,9 @@ def mop(model)
   ap '-- |FIELDS| --------------------------------'
   mets = {}
   klass.fields.each do |f, fo|
-    next if f.to_s.match(/\A\_/)
+    next if f.to_s.start_with?('_')
     field_type = "#{fo.type} (< #{fo.options[:klass]})"
-    fdef = fo.options[:klass] == klass ? "#{fo.type}" : field_type
+    fdef = fo.options[:klass] == klass ? fo.type.to_s : field_type
     mets[f.to_s] = model.is_a?(Class) ? fdef : model.send(f)
   end
   ap mets.sort.to_h
@@ -77,7 +78,7 @@ def lmets(model)
 end
 
 def drop_db
-  fail 'can not drop production database' if ENV['RACK_ENV'] == 'production'
+  raise 'can not drop production database' if ENV['RACK_ENV'] == 'production'
   # Mongoid.default_session.drop
   ::Mongoid::Clients.default.database.drop
 end
