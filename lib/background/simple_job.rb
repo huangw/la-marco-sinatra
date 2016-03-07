@@ -35,8 +35,8 @@ module Background
       # rubocop:disable MethodLength
       def perform_job!(worker = 'anonymous worker', logger = nil)
         logger ||= global_logger
+        t1 = Time.now
         begin
-          logger.info "[BJ #{worker}] #{self.class} (#{_id})"
           process!
           self.job_state = 10
         rescue => e
@@ -44,6 +44,9 @@ module Background
                        " (#{self.class}: #{_id})"
           self.job_state = 1
         end
+
+        logger.info format('[BJ %s] %s:%s %.02f',
+                           worker, self.class, _id, Time.now - t1)
 
         save && self
       end

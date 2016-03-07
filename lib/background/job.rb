@@ -15,15 +15,15 @@ module Background
       # nil => not a background job; 1 => error; 10 => complete;
       # 100 => processing; 300 => waiting
       field :_j_s, as: :job_state, type: Integer,
-                   default: -> { default_job_state }
+                   default: -> { background? ? 300 : nil }
 
       # not perform until the specified time reached
       field :n_b, as: :not_before, type: Time
       field :tryouts, type: Array, default: []
       index _j_s: 1, n_b: -1
 
-      def default_job_state
-        300
+      def background?
+        true
       end
 
       scope :waiting, -> { where(job_state: 300) }
@@ -62,7 +62,7 @@ module Background
       def perform_job!(worker = 'anonymous worker', logger = nil)
         logger ||= global_logger
         begin
-          logger.info "[BJ #{worker}] (#{self.class}: #{_id})"
+          t1 = Time.now
           process!
           self.job_state = 10
         rescue => e
@@ -78,8 +78,10 @@ module Background
             self.not_before ||= Time.now
             self.not_before = not_before + retry_delay
           end
-        end
+        end # rescure
 
+        logger.info format('[BJ %s] %s:%s %.02f',
+                           worker, self.class, _id, Time.now - t1)
         save && self
       end
     end # included

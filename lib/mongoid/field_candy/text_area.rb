@@ -39,7 +39,7 @@ module Mongoid
           end
 
           send(:define_method, :"#{field_name}") do
-            self[field_name].nil? ? nil : self[field_name].simple_format
+            self[field_name].nil? ? '' : self[field_name]
           end
         end
       end

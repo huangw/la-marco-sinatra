@@ -25,12 +25,15 @@ module Background
         return nil unless job # No job is waiting
 
         begin
-          logger.info "[Cron #{worker}] #{job.class} (#{job._id})"
+          t1 = Time.now
           job.process!
         rescue => e
           logger.error "[Cron #{worker}] [#{e.class}] #{e.message}"\
                        " (#{job._id})"
         end
+
+        logger.info format('[Cron %s] %s %.02f',
+                           worker, self.class, Time.now - t1)
 
         job.not_before = job.next_time # to next round even process failed
         job._j_at = nil

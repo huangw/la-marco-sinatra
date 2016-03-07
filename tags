@@ -47,6 +47,8 @@ CounterPage	app/pages/counter_page.rb	/^class CounterPage < WebController$/;"	c
 Criteria	lib/mongoid/paginator.rb	/^  class Criteria$/;"	c	class:Mongoid
 CronJob	lib/background/cron_job.rb	/^  module CronJob$/;"	m	class:Background
 Data	lib/confu.rb	/^  class Data < Hash$/;"	c	class:Confu
+DataProxy	lib/mongoid/data_proxy.rb	/^module DataProxy$/;"	m
+DataProxySettings	config/settings/data_proxy_settings.rb	/^class DataProxySettings < Confu$/;"	c
 Date	lib/core_ext/date.rb	/^class Date$/;"	c
 Element	lib/core_ext/nokogiri_html_element.rb	/^    class Element$/;"	c	class:Nokogiri.XML
 Email	app/models/email.rb	/^class Email$/;"	c
@@ -103,6 +105,7 @@ Mongoid	lib/mongoid/field_candy/text_field.rb	/^module Mongoid$/;"	m
 Mongoid	lib/mongoid/field_candy/url_field.rb	/^module Mongoid$/;"	m
 Mongoid	lib/mongoid/ordered_list.rb	/^module Mongoid$/;"	m
 Mongoid	lib/mongoid/paginator.rb	/^module Mongoid$/;"	m
+Mongoid	lib/mongoid/proxy_one.rb	/^module Mongoid$/;"	m
 Mongoid	lib/mongoid/sequence_token.rb	/^module Mongoid$/;"	m
 Mongoid	lib/rack/session/mongoid.rb	/^    class Mongoid < Abstract::ID$/;"	c	class:Rack.Session
 Mongoid	lib/rack/session/mongoid/version.rb	/^    class Mongoid < Abstract::ID$/;"	c	class:Rack.Session
@@ -111,6 +114,7 @@ OrderedList	lib/mongoid/ordered_list.rb	/^  module OrderedList$/;"	m	class:Mongo
 PersonPage	spec/lib/route_spec.rb	/^  class PersonPage; Route << self end$/;"	c	class:Admin
 Producer	lib/devtools/asset_mapper/producer.rb	/^  class Producer$/;"	c	class:AssetMapper
 Proxy	lib/mongoid/ordered_list.rb	/^    class Proxy$/;"	c	class:Mongoid.OrderedList
+ProxyOne	lib/mongoid/proxy_one.rb	/^  module ProxyOne$/;"	m	class:Mongoid
 Pull	lib/devtools/asset_mapper/pull.rb	/^  class Pull$/;"	c	class:AssetMapper
 RSpecApiDoc	spec/support/helpers/api_doc_helper.rb	/^class RSpecApiDoc$/;"	c
 Rack	lib/rack/json_response.rb	/^module Rack$/;"	m
@@ -171,7 +175,9 @@ _keys_to_hash	lib/utils/hash_serialize.rb	/^  def _keys_to_hash(keys)$/;"	f	clas
 _put	lib/rack/session/mongoid.rb	/^      def _put(sid, session)$/;"	f	class:Rack.Session.Mongoid
 _to_hash	lib/utils/hash_serialize.rb	/^  def _to_hash(keys, opts = {})$/;"	f	class:HashSerialize
 _to_html	lib/mongoid/struct/text_block.rb	/^  def _to_html(tag, klass = nil)$/;"	f
+_type	lib/mongoid/data_proxy.rb	/^  def _type$/;"	f	class:DataProxy
 _type	lib/utils/hash_struct.rb	/^  def _type$/;"	f	class:HashStruct
+_type=	lib/mongoid/data_proxy.rb	/^  def _type=(_)$/;"	f	class:DataProxy
 _type=	lib/utils/hash_struct.rb	/^  def _type=(_)$/;"	f	class:HashStruct
 abs_path	lib/devtools/asset_mapper/sfile.rb	/^    def abs_path$/;"	f	class:AssetMapper.Sfile
 abs_path	lib/devtools/asset_mapper/tfile.rb	/^    def abs_path(version)$/;"	f	class:AssetMapper.Tfile
@@ -231,6 +237,7 @@ available_formats	lib/emails/render.rb	/^      def available_formats$/;"	f	class
 available_locales	lib/emails/render.rb	/^      def available_locales$/;"	f	class:Emails.Render
 available_locales	spec/lib/emails/render_spec.rb	/^  def available_locales$/;"	f	class:MockEmailLessLocale
 available_locales	spec/lib/emails/render_spec.rb	/^  def available_locales$/;"	f	class:MockEmailWithoutLocale
+background?	lib/background/job.rb	/^      def background?$/;"	f	class:Background.Job
 blist	lib/mongoid/ordered_list.rb	/^      def blist$/;"	f	class:Mongoid.OrderedList.Proxy
 blist_hash	lib/mongoid/ordered_list.rb	/^      def blist_hash$/;"	f	class:Mongoid.OrderedList.Proxy
 block	lib/mongoid/ordered_list.rb	/^      def block(tid)$/;"	f	class:Mongoid.OrderedList.Proxy
@@ -275,7 +282,6 @@ default_checkbox_value	lib/helpers/form_helper.rb	/^    def default_checkbox_val
 default_format	lib/emails/render.rb	/^      def default_format$/;"	f	class:Emails.Render
 default_img_alt	lib/helpers/assets_helper.rb	/^  def default_img_alt(obj)$/;"	f	class:AssetsHelper.css_tag.js_tag
 default_img_url	lib/helpers/assets_helper.rb	/^  def default_img_url(suffix = 'o', type = 'Image')$/;"	f	class:AssetsHelper.css_tag.js_tag
-default_job_state	lib/background/job.rb	/^      def default_job_state$/;"	f	class:Background.Job
 default_job_state	lib/background/simple_job.rb	/^      def default_job_state$/;"	f	class:Background.SimpleJob
 default_locale	lib/emails/render.rb	/^      def default_locale$/;"	f	class:Emails.Render
 default_path	lib/route.rb	/^    def default_path(app_class)$/;"	f	class:Route
@@ -306,6 +312,9 @@ example_file	spec/support/helpers/example_helper.rb	/^def example_file(arg)$/;"	
 example_for	spec/support/helpers/api_doc_helper.rb	/^    def example_for(key)$/;"	f	class:RSpecApiDoc
 examples	spec/support/helpers/api_doc_helper.rb	/^    def examples(key = nil)$/;"	f	class:RSpecApiDoc
 execute!	lib/devtools/asset_mapper/loader.rb	/^    def execute!(compile = false)$/;"	f	class:AssetMapper.Loader
+expire_at	lib/mongoid/data_proxy.rb	/^  def expire_at$/;"	f	class:DataProxy
+expire_for!	lib/mongoid/data_proxy.rb	/^  def expire_for!(e_for = nil)$/;"	f	class:DataProxy
+expired?	lib/mongoid/data_proxy.rb	/^  def expired?$/;"	f	class:DataProxy
 extract_args	lib/core_ext/hash_extract_args.rb	/^  def extract_args(expects)$/;"	f	class:Hash
 extract_args!	lib/core_ext/hash_extract_args.rb	/^  def extract_args!(expects)$/;"	f	class:Hash
 fast_escape_html	lib/helpers/form_helper.rb	/^  def fast_escape_html(text)$/;"	f	class:FormHelper.radio.checkbox.select
@@ -338,6 +347,7 @@ form	lib/helpers/form_helper.rb	/^  def form(action = :self, options = {})$/;"	f
 form_for	lib/helpers/form_helper.rb	/^  def form_for(object, action = :self, options = {})$/;"	f	class:FormHelper
 from_hash	lib/asset_settings.rb	/^    def from_hash(hsh)$/;"	f	class:AssetSettings
 from_hash	lib/asset_settings/environment_settings.rb	/^    def from_hash(hsh)$/;"	f	class:AssetSettings
+from_hash	lib/mongoid/data_proxy.rb	/^      def from_hash(hsh)$/;"	f	class:DataProxy.proxy
 from_hash	lib/utils/hash_struct.rb	/^      def from_hash(hsh)$/;"	f	class:HashStruct
 from_hex	lib/core_ext/time_short.rb	/^  def self.from_hex(hstr)$/;"	F	class:Time
 from_html	lib/mongoid/struct/text_block.rb	/^  def self.from_html(node)$/;"	F	class:TextBlock
@@ -395,6 +405,7 @@ initialize	lib/emails/fake_sender.rb	/^    def initialize(options_ = {})$/;"	f	c
 initialize	lib/emails/mailgun_sender.rb	/^    def initialize(api_key, domain, params = {})$/;"	f	class:Emails.MailgunSender
 initialize	lib/helpers/form_helper.rb	/^    def initialize(parent, object, name = nil)$/;"	f	class:FormHelper.FormBuilder
 initialize	lib/la_buffered_logger.rb	/^  def initialize(opts = {})$/;"	f	class:LaBufferedLogger
+initialize	lib/mongoid/data_proxy.rb	/^  def initialize(master_data = nil, e_for = nil)$/;"	f	class:DataProxy
 initialize	lib/mongoid/ordered_list.rb	/^      def initialize(prt, fnm)$/;"	f	class:Mongoid.OrderedList.Proxy
 initialize	lib/rack/json_response.rb	/^    def initialize(app)$/;"	f	class:Rack.JsonResponse
 initialize	lib/rack/log_flusher.rb	/^    def initialize(app, opts = {})$/;"	f	class:Rack.LogFlusher
@@ -440,8 +451,11 @@ makeYellow	doc/spec/lib/helpers/form_helper_spec_rslt.html	/^function makeYellow
 makeYellow	doc/spec/lib/la_buffered_logger_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
 makeYellow	doc/spec/lib/rack/json_response_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
 makeYellow	doc/spec/lib/route_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
+master!	lib/mongoid/data_proxy.rb	/^  def master!$/;"	f	class:DataProxy
+master_class	lib/mongoid/data_proxy.rb	/^  def master_class$/;"	f	class:DataProxy
 matt	lib/helpers/i18n_helper.rb	/^  def matt(msg, opts = {})$/;"	f	class:I18nHelper
 max_retry	lib/background/job.rb	/^      def max_retry$/;"	f	class:Background.Job
+merge	lib/mongoid/data_proxy.rb	/^  def merge(hsh, e_for = nil)$/;"	f	class:DataProxy
 merge_default	lib/confu.rb	/^    def merge_default(dat)$/;"	f	class:Confu.Data
 merge_parameters!	lib/emails/mailgun_sender.rb	/^    def merge_parameters!(hsh)$/;"	f	class:Emails.MailgunSender
 method_missing	lib/confu.rb	/^    def method_missing(met, val = nil, &prc)$/;"	f	class:Confu.Data
@@ -510,11 +524,14 @@ production?	lib/asset_settings/environment_settings.rb	/^    def production?$/;"
 production_url	lib/devtools/asset_mapper/cloud_file.rb	/^    def production_url$/;"	f	class:AssetMapper.CloudFile
 production_url	lib/devtools/asset_mapper/sfile.rb	/^    def production_url$/;"	f	class:AssetMapper.Sfile
 production_url	lib/devtools/asset_mapper/tfile.rb	/^    def production_url$/;"	f	class:AssetMapper.Tfile
+proxy	lib/mongoid/data_proxy.rb	/^      def proxy(hash_keys, opts = {})$/;"	f	class:DataProxy
+proxy_one	lib/mongoid/proxy_one.rb	/^      def self.proxy_one(met, opts = {})$/;"	F	class:Mongoid.ProxyOne
 pull	lib/devtools/asset_mapper/loader.rb	/^    def pull(app_name, opts = {})$/;"	f	class:AssetMapper.Loader
 r	spec/support/helpers/api_test_helper.rb	/^  def r(req = nil, body = nil, headers = {})$/;"	f	class:APITestHelper
 radio	lib/helpers/form_helper.rb	/^    def radio(field, values, options = {})$/;"	f	class:FormHelper.FormBuilder
 radio	lib/helpers/form_helper.rb	/^  def radio(field, values, options = {})$/;"	f	class:FormHelper
 radio_field	lib/mongoid/field_candy/radio_field.rb	/^        def self.radio_field(field_name, choices, hsh = {})$/;"	F	class:Mongoid.FieldCandy.RadioField
+refresh!	lib/mongoid/data_proxy.rb	/^  def refresh!(master_data = nil, e_for = nil)$/;"	f	class:DataProxy
 remove	lib/mongoid/ordered_list.rb	/^      def remove(tid)$/;"	f	class:Mongoid.OrderedList.Proxy
 removeClass	doc/spec/lib/asset_settings/environment_settings_spec_rslt.html	/^function removeClass(element_id, classname) {$/;"	f
 removeClass	doc/spec/lib/asset_settings_spec_rslt.html	/^function removeClass(element_id, classname) {$/;"	f
@@ -607,7 +624,9 @@ to_hash	lib/asset_settings.rb	/^    def to_hash$/;"	f	class:AssetSettings
 to_hash	lib/asset_settings/environment_settings.rb	/^    def to_hash$/;"	f	class:AssetSettings
 to_hash	lib/confu.rb	/^    def to_hash$/;"	f	class:Confu
 to_hash	lib/confu.rb	/^    def to_hash$/;"	f	class:Confu.Data
+to_hash	lib/mongoid/data_proxy.rb	/^  def to_hash$/;"	f	class:DataProxy
 to_hash	lib/utils/hash_struct.rb	/^  def to_hash$/;"	f	class:HashStruct
+to_hash_keys	lib/mongoid/data_proxy.rb	/^  def to_hash_keys$/;"	f	class:DataProxy
 to_hash_keys	lib/utils/hash_struct.rb	/^  def to_hash_keys$/;"	f	class:HashStruct
 to_html	lib/mongoid/struct/text_block.rb	/^  def to_html$/;"	f	class:TextBlock
 to_human	lib/devtools/i18n_utils.rb	/^    def to_human(key)$/;"	f	class:I18nUtils

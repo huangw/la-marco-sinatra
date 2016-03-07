@@ -35,7 +35,7 @@ module Mongoid
       extend ActiveSupport::Concern
 
       included do
-        # rubocop:disable MethodLength, CyclomaticComplexity
+        # rubocop:disable LineLength, MethodLength, CyclomaticComplexity
         def self.radio_field(field_name, choices, hsh = {})
           bare = hsh.delete(:bare)
 
@@ -64,10 +64,12 @@ module Mongoid
           field field_name.to_sym, { type: key_type }.merge(hsh)
 
           # return available choices as normalized key => value hash
-          send(:define_method, "#{field_name}_choices") { choices }
+          # send(:define_method, "#{field_name}_choices") { choices }
+          define_singleton_method("#{field_name}_choices") { choices }
 
           # return the field value from label
-          send(:define_method, "#{field_name}_value") do |value|
+          # send(:define_method, "#{field_name}_value") do |value|
+          define_singleton_method("#{field_name}_value") do |value|
             return nil if value.nil?
             val = value.is_a?(String) ? value.to_sym : value
             if key_type == Integer
@@ -85,7 +87,7 @@ module Mongoid
           end
 
           send(:define_method, "#{field_name}=") do |val|
-            self[field_name.to_sym] = send("#{field_name}_value", val)
+            self[field_name.to_sym] = self.class.send("#{field_name}_value", val)
           end
 
           # check and switch method for each methods, state as method name,
@@ -99,7 +101,7 @@ module Mongoid
             end
 
             send(:define_method, "#{met}!".to_sym) do
-              update_attributes field_name => send("#{field_name}_value", val)
+              update_attributes field_name => self.class.send("#{field_name}_value", val)
             end
           end
         end
