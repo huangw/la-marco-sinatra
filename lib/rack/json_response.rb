@@ -28,6 +28,8 @@ module Rack
 
         if e.is_a?(RequestError) || e.is_a?(ServerError)
           body = { error: e.class.name.underscore, message: e.message }
+        elsif e.is_a?(Mongoid::Errors::Validations)
+          body = { error: e.class.name.underscore, messages: e.document.errors.messages }
         elsif status < 500 && status >= 400
           body = { error: e.class.name.underscore, message: I18n.t('exceptions.ajax.options_error') }
         else
