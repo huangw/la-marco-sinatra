@@ -145,7 +145,7 @@ module Mongoid
         id_ = tid || SecureRandom.hex(tid_length)
         while blist.map { |h| h['tid'] }.include?(id_)
           srhex = SecureRandom.hex(tid_length)
-          id_ = tid.blank? ? srhex : tid + '-' + srhex
+          id_ = tid.blank? ? srhex : tid + '.' + srhex
         end
         id_
       end

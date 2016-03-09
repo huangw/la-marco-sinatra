@@ -40,7 +40,8 @@ module HashSerialize
     hsh = {}
     _keys_to_hash(keys).each do |k, v|
       v = send(v) if v.is_a?(Symbol)
-      v = v.call if v.is_a?(Proc)
+      # v = v.call if v.is_a?(Proc)
+      v = instance_eval { v.call } if v.is_a?(Proc)
 
       v = convert_val(v, opts[:type_conv], opts[:default_converter])
 

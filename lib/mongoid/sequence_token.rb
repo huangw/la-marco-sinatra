@@ -20,7 +20,7 @@ module Mongoid
 
     included do
       field :sid, type: String
-      index({ sid: 1 }, unique: true)
+      index({ sid: 1 }, unique: true, sparse: true)
 
       def self.seq_field
         "#{collection.name}_sid"
@@ -29,7 +29,7 @@ module Mongoid
       # initialize the sequence field
       Sequence.find_or_create_by(name: seq_field)
 
-      set_callback :save, :before, :set_sequence_token, unless: :persisted?
+      set_callback :initialize, :after, :set_sequence_token, unless: :persisted?
       def set_sequence_token
         nseq = Sequence.where(name: self.class.seq_field).find_one_and_update(
           { '$inc' => { seq: 1 } }, return_document: :after)
@@ -41,7 +41,9 @@ module Mongoid
       end
 
       def self.s_find(str)
-        where(sid: str).last || raise('not_found')
+        doc = where(sid: str).last
+        raise(Mongoid::Errors::DocumentNotFound.new(self.class, {})) unless doc
+        doc
       end
     end # included
   end

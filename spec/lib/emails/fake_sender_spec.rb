@@ -24,7 +24,7 @@ describe Emails::FakeSender do
       expect(memail.delivered?).to be_falsey
       memail.deliver_later(-1)
       expect(memail.job_state).to eq(300)
-      Emails::Email.perform
+      Email.perform
 
       expect(Emails::MockEmail.find(memail._id).delivered?).to be_truthy
     end
