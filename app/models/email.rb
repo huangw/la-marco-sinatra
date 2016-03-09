@@ -7,6 +7,7 @@ require 'emails/aliyun_sender'
 class Email
   include Mongoid::Document
   include HashSerialize
+  include Mongoid::SequenceToken
   include Emails::Render
 
   def to_hash

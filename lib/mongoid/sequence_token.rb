@@ -41,7 +41,9 @@ module Mongoid
       end
 
       def self.s_find(str)
-        where(sid: str).last || raise('not_found')
+        doc = where(sid: str).last
+        raise(Mongoid::Errors::DocumentNotFound.new(self.class, {})) unless doc
+        doc
       end
     end # included
   end

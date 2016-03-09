@@ -13,6 +13,7 @@ class WebController < Sinatra::Base
     set :views, root_join('/app/views')
     set :assets, AssetSettings.get
     set :protection, except: :remote_token
+    set :show_exceptions, :after_handler
   end
 
   use Rack::Session::Mongoid
@@ -27,4 +28,8 @@ class WebController < Sinatra::Base
   helpers AssetsHelper
 
   before { I18n.locale = preferred_locale }
+
+  error Mongoid::Errors::DocumentNotFound do
+    halt 404, 'DocumentNotFound'
+  end
 end

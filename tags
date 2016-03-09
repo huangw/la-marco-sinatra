@@ -109,6 +109,7 @@ Mongoid	lib/mongoid/proxy_one.rb	/^module Mongoid$/;"	m
 Mongoid	lib/mongoid/sequence_token.rb	/^module Mongoid$/;"	m
 Mongoid	lib/rack/session/mongoid.rb	/^    class Mongoid < Abstract::ID$/;"	c	class:Rack.Session
 Mongoid	lib/rack/session/mongoid/version.rb	/^    class Mongoid < Abstract::ID$/;"	c	class:Rack.Session
+NodocPage	app/pages/nodoc_page.rb	/^class NodocPage < WebController$/;"	c
 Nokogiri	lib/core_ext/nokogiri_html_element.rb	/^module Nokogiri$/;"	m
 OrderedList	lib/mongoid/ordered_list.rb	/^  module OrderedList$/;"	m	class:Mongoid
 PersonPage	spec/lib/route_spec.rb	/^  class PersonPage; Route << self end$/;"	c	class:Admin
