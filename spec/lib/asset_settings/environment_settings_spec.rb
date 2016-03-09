@@ -4,7 +4,7 @@ require 'asset_settings/environment_settings'
 describe AssetSettings::EnvironmentSettings do
   describe '#img_url_prefix' do
     it 'use different value for production and other environment' do
-      expect(AssetSettings::EnvironmentSettings.new(:production).img_url_prefix).to eq('http://assets.vikkr.com')
+      expect(AssetSettings::EnvironmentSettings.new(:production).img_url_prefix).to eq('http://assets.vikkr.com/img')
       expect(AssetSettings::EnvironmentSettings.new(:local_assets).img_url_prefix).to eq('/img')
       expect(AssetSettings::EnvironmentSettings.new(:development).img_url_prefix).to eq('/img')
     end
@@ -29,7 +29,7 @@ describe AssetSettings::EnvironmentSettings do
       ae['some_file.css'] << 'file_2.css'
       ae['some_file.css'] << 'file_3.css'
       ae['some_file.css'] << 'file_2.css'
-      ae2 = AssetSettings::EnvironmentSettings.new(:local_assets).from_hash(ae.to_hash)
+      AssetSettings::EnvironmentSettings.new(:local_assets).from_hash(ae.to_hash)
       expect(ae.to_hash[:files]['some_file.css'].size).to eq(3)
     end
   end

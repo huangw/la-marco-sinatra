@@ -252,6 +252,7 @@ checkbox_field	lib/mongoid/field_candy/checkbox_field.rb	/^        def self.chec
 class?	lib/core_ext/nokogiri_html_element.rb	/^      def class?(klass)$/;"	f	class:Nokogiri.XML.Element
 class_name	lib/devtools/file_generator.rb	/^    def class_name$/;"	f	class:FileGenerator.RubyFile
 class_string	lib/devtools/file_generator.rb	/^    def class_string$/;"	f	class:FileGenerator.RubyFile
+classes?	lib/core_ext/nokogiri_html_element.rb	/^      def classes?(klasses)$/;"	f	class:Nokogiri.XML.Element
 clean	lib/utils/la_backtrace_cleaner.rb	/^  def self.clean(e)$/;"	F	class:LaBacktraceCleaner
 cleandb	config/initializers/development/mongoid_pry.rb	/^def cleandb$/;"	f
 close_fieldset	lib/helpers/form_helper.rb	/^  def close_fieldset$/;"	f	class:FormHelper
@@ -280,7 +281,6 @@ decode	lib/mongoid/ordered_list.rb	/^      def decode(hsh)$/;"	f	class:Mongoid.O
 deep_require	lib/core_ext/dynamic_require.rb	/^def deep_require(dir, deepth = 3)$/;"	f
 default_checkbox_value	lib/helpers/form_helper.rb	/^    def default_checkbox_value(field, default)$/;"	f	class:FormHelper.FormBuilder
 default_format	lib/emails/render.rb	/^      def default_format$/;"	f	class:Emails.Render
-default_img_alt	lib/helpers/assets_helper.rb	/^  def default_img_alt(obj)$/;"	f	class:AssetsHelper.css_tag.js_tag
 default_img_url	lib/helpers/assets_helper.rb	/^  def default_img_url(suffix = 'o', type = 'Image')$/;"	f	class:AssetsHelper.css_tag.js_tag
 default_job_state	lib/background/simple_job.rb	/^      def default_job_state$/;"	f	class:Background.SimpleJob
 default_locale	lib/emails/render.rb	/^      def default_locale$/;"	f	class:Emails.Render

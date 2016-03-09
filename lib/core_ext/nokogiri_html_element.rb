@@ -20,6 +20,11 @@ module Nokogiri
         klasses = klasses ? klasses.value.split(/\s+/) : []
         klasses.map(&:downcase).include?(klass.downcase)
       end
+
+      def classes?(klasses)
+        klasses.each { |k| return k if class?(k) }
+        nil
+      end
     end
   end
 end
