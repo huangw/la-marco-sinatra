@@ -36,7 +36,7 @@
 describe <span class="hljs-constant">AssetSettings::EnvironmentSettings</span> <span class="hljs-keyword">do</span>
   describe <span class="hljs-string">'#img_url_prefix'</span> <span class="hljs-keyword">do</span>
     it <span class="hljs-string">'use different value for production and other environment'</span> <span class="hljs-keyword">do</span>
-      expect(<span class="hljs-constant">AssetSettings::EnvironmentSettings</span>.new(<span class="hljs-symbol">:production</span>).img_url_prefix).to eq(<span class="hljs-string">'http://assets.vikkr.com'</span>)
+      expect(<span class="hljs-constant">AssetSettings::EnvironmentSettings</span>.new(<span class="hljs-symbol">:production</span>).img_url_prefix).to eq(<span class="hljs-string">'http://assets.vikkr.com/img'</span>)
       expect(<span class="hljs-constant">AssetSettings::EnvironmentSettings</span>.new(<span class="hljs-symbol">:local_assets</span>).img_url_prefix).to eq(<span class="hljs-string">'/img'</span>)
       expect(<span class="hljs-constant">AssetSettings::EnvironmentSettings</span>.new(<span class="hljs-symbol">:development</span>).img_url_prefix).to eq(<span class="hljs-string">'/img'</span>)
     <span class="hljs-keyword">end</span>
@@ -61,7 +61,7 @@ describe <span class="hljs-constant">AssetSettings::EnvironmentSettings</span> <
       ae[<span class="hljs-string">'some_file.css'</span>] &lt;&lt; <span class="hljs-string">'file_2.css'</span>
       ae[<span class="hljs-string">'some_file.css'</span>] &lt;&lt; <span class="hljs-string">'file_3.css'</span>
       ae[<span class="hljs-string">'some_file.css'</span>] &lt;&lt; <span class="hljs-string">'file_2.css'</span>
-      ae2 = <span class="hljs-constant">AssetSettings::EnvironmentSettings</span>.new(<span class="hljs-symbol">:local_assets</span>).from_hash(ae.to_hash)
+      <span class="hljs-constant">AssetSettings::EnvironmentSettings</span>.new(<span class="hljs-symbol">:local_assets</span>).from_hash(ae.to_hash)
       expect(ae.to_hash[<span class="hljs-symbol">:files</span>][<span class="hljs-string">'some_file.css'</span>].size).to eq(<span class="hljs-number">3</span>)
     <span class="hljs-keyword">end</span>
   <span class="hljs-keyword">end</span>

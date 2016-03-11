@@ -44,38 +44,42 @@
     <span class="hljs-keyword">end</span>.join(<span class="hljs-string">''</span>)
   <span class="hljs-keyword">end</span>
 
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">img_url</span><span class="hljs-params">(obj, opts = {})</span></span>
+    <span class="hljs-keyword">return</span> obj.url <span class="hljs-keyword">unless</span> obj.is_a?(<span class="hljs-constant">String</span>)
+    obj =~ <span class="hljs-regexp">/^\//</span> ? obj <span class="hljs-symbol">:</span> <span class="hljs-constant">File</span>.join(<span class="hljs-constant">AssetSettings</span>.get.img_url_prefix, obj)
+  <span class="hljs-keyword">rescue</span>
+    default_img_url(opts[<span class="hljs-symbol">:suffix</span>], opts[<span class="hljs-symbol">:type</span>])
+  <span class="hljs-keyword">end</span>
+
   <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">default_img_url</span><span class="hljs-params">(suffix = <span class="hljs-string">'o'</span>, type = <span class="hljs-string">'Image'</span>)</span></span>
     <span class="hljs-constant">File</span>.join(<span class="hljs-constant">AssetSettings</span>.get.img_url_prefix,
               <span class="hljs-string">'defaults'</span>,
               <span class="hljs-string">"<span class="hljs-subst">#{type.to_s.underscore}</span>-<span class="hljs-subst">#{suffix}</span>.png"</span>)
   <span class="hljs-keyword">end</span>
 
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">default_img_alt</span><span class="hljs-params">(obj)</span></span>
-    <span class="hljs-keyword">if</span> obj.is_a? <span class="hljs-constant">Image</span>
-      obj.oname
-    <span class="hljs-keyword">elsif</span> obj.is_a? <span class="hljs-constant">String</span>
-      obj.split(<span class="hljs-regexp">/\//</span>).last
-    <span class="hljs-keyword">else</span>
-      ftt(<span class="hljs-symbol">:img_not_found</span>)
-    <span class="hljs-keyword">end</span>
-  <span class="hljs-keyword">end</span>
-
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">img_url</span><span class="hljs-params">(obj, opts = {})</span></span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">img_tag</span><span class="hljs-params">(obj, opts = {})</span></span>
     opts[<span class="hljs-symbol">:suffix</span>] ||= <span class="hljs-string">'o'</span>
     opts[<span class="hljs-symbol">:type</span>] ||= <span class="hljs-string">'Image'</span>
 
-    <span class="hljs-keyword">if</span> obj.is_a? <span class="hljs-constant">Image</span>
-      obj.url(opts[<span class="hljs-symbol">:suffix</span>])
-    <span class="hljs-keyword">elsif</span> obj.is_a? <span class="hljs-constant">String</span>
-      <span class="hljs-constant">File</span>.join(<span class="hljs-constant">AssetSettings</span>.get.img_url_prefix, obj)
-    <span class="hljs-keyword">else</span>
-      default_img_url(opts[<span class="hljs-symbol">:suffix</span>], opts[<span class="hljs-symbol">:type</span>])
-    <span class="hljs-keyword">end</span>
-  <span class="hljs-keyword">end</span>
+    opts[<span class="hljs-string">'src'</span>] = img_url(obj, opts)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>Set the default alt</p>
 
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">img_tag</span><span class="hljs-params">(obj, opts = {})</span></span>
-    opts[<span class="hljs-string">'src'</span>] = img_url(obj, opts)
-    opts[<span class="hljs-string">'alt'</span>] = default_img_alt(obj)
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    opts[<span class="hljs-string">'alt'</span>] ||= obj.split(<span class="hljs-regexp">/\//</span>).last <span class="hljs-keyword">if</span> obj.is_a?(<span class="hljs-constant">String</span>)
+    opts[<span class="hljs-string">'alt'</span>] ||= obj.alt <span class="hljs-keyword">if</span> obj.methods.<span class="hljs-keyword">include</span>?(<span class="hljs-symbol">:alt</span>)
+    opts[<span class="hljs-string">'alt'</span>] ||= ftt(<span class="hljs-symbol">:img_not_found</span>)
+
     attrs = opts.map { |k, v| format(<span class="hljs-string">'%s="%s"'</span>, k, v) }.join(<span class="hljs-string">' '</span>)
     format <span class="hljs-string">'&lt;image %s /&gt;'</span>, attrs
   <span class="hljs-keyword">end</span>

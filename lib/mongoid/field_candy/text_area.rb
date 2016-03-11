@@ -35,11 +35,11 @@ module Mongoid
           validates field_name.to_sym, v_opts
 
           send(:define_method, :"#{field_name}=") do |str|
-            self[field_name] = str.nil? ? nil : Sanitize.fragment(str, Sanitize::Config::BASIC)
+            self[field_name] = str.blank? ? nil : Sanitize.fragment(str, Sanitize::Config::BASIC)
           end
 
           send(:define_method, :"#{field_name}") do
-            self[field_name].nil? ? '' : self[field_name]
+            self[field_name].blank? ? nil : self[field_name]
           end
         end
       end

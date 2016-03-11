@@ -553,6 +553,7 @@ require_all	lib/core_ext/dynamic_require.rb	/^def require_all(pattern)$/;"	f
 require_name	lib/devtools/file_generator.rb	/^    def require_name$/;"	f	class:FileGenerator.RubyFile
 reset	lib/helpers/form_helper.rb	/^  def reset(value = nil, options = {})$/;"	f	class:FormHelper
 resource_for	spec/support/helpers/api_doc_helper.rb	/^    def resource_for(key)$/;"	f	class:RSpecApiDoc
+restore_hash	lib/utils/hash_serialize.rb	/^  def restore_hash(hsh)$/;"	f	class:HashSerialize
 retried	lib/background/job.rb	/^      def retried$/;"	f	class:Background.Job
 retry_delay	lib/background/job.rb	/^      def retry_delay$/;"	f	class:Background.Job
 rewrite!	lib/devtools/i18n_utils.rb	/^    def rewrite!(file = @filename)$/;"	f	class:YamlFile
@@ -626,6 +627,7 @@ to_hash	lib/asset_settings/environment_settings.rb	/^    def to_hash$/;"	f	class
 to_hash	lib/confu.rb	/^    def to_hash$/;"	f	class:Confu
 to_hash	lib/confu.rb	/^    def to_hash$/;"	f	class:Confu.Data
 to_hash	lib/mongoid/data_proxy.rb	/^  def to_hash$/;"	f	class:DataProxy
+to_hash	lib/mongoid/ordered_list.rb	/^      def to_hash$/;"	f	class:Mongoid.OrderedList.Proxy
 to_hash	lib/utils/hash_struct.rb	/^  def to_hash$/;"	f	class:HashStruct
 to_hash_keys	lib/mongoid/data_proxy.rb	/^  def to_hash_keys$/;"	f	class:DataProxy
 to_hash_keys	lib/utils/hash_struct.rb	/^  def to_hash_keys$/;"	f	class:HashStruct
