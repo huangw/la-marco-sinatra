@@ -42,6 +42,9 @@ module HashSerialize
       v = send(v) if v.is_a?(Symbol)
       # v = v.call if v.is_a?(Proc)
       v = instance_eval { v.call } if v.is_a?(Proc)
+      v = v.map do |iv|
+        convert_val(iv, opts[:type_conv], opts[:default_converter])
+      end if v.is_a?(Array)
 
       v = convert_val(v, opts[:type_conv], opts[:default_converter])
 
@@ -59,15 +62,18 @@ module HashSerialize
   # Define a empty `key=` method to discard unneeded value in `hsh`
   def _from_hash(hsh)
     hsh.each do |k, v|
-      if v.is_a?(Hash) && v['_type']
-        klass = Object.const_get(v['_type'].to_s.classify)
-        # recursively de-serialize by .from_hash method
-        v = klass.from_hash(v) if klass.respond_to?(:from_hash)
-      end
-
+      v = restore_hash(v)
+      v = v.map { |iv| restore_hash(iv) } if v.is_a?(Array)
       send(:"#{k}=", v)
     end
     self
+  end
+
+  def restore_hash(hsh)
+    return hsh unless hsh.is_a?(Hash) && hsh['_type']
+    klass = Object.const_get(hsh['_type'].to_s.classify)
+    # recursively de-serialize by .from_hash method
+    klass.respond_to?(:from_hash) ? klass.from_hash(hsh) : hsh
   end
 
   private
