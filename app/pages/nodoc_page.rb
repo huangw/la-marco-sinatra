@@ -8,4 +8,3 @@ class NodocPage < WebController
 
   Route.mount self, '/nodocs'
 end
-

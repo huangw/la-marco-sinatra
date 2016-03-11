@@ -119,6 +119,11 @@ module Mongoid
         parent.send "#{field_name}=".to_sym, tids.map { |id| bh[id] }
       end
 
+      # blist contains is map(&:to_hash)
+      def to_hash
+        blist
+      end
+
       # Method for overloading by child class
       # --------------------------------------
       # Restore from hash to object
