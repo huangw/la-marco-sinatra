@@ -452,7 +452,7 @@ makeYellow	doc/spec/lib/helpers/form_helper_spec_rslt.html	/^function makeYellow
 makeYellow	doc/spec/lib/la_buffered_logger_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
 makeYellow	doc/spec/lib/rack/json_response_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
 makeYellow	doc/spec/lib/route_spec_rslt.html	/^function makeYellow(element_id) {$/;"	f
-master!	lib/mongoid/data_proxy.rb	/^  def master!$/;"	f	class:DataProxy
+master!	lib/mongoid/data_proxy.rb	/^  def master! # cache in instance variable to reduce database access$/;"	f	class:DataProxy
 master_class	lib/mongoid/data_proxy.rb	/^  def master_class$/;"	f	class:DataProxy
 matt	lib/helpers/i18n_helper.rb	/^  def matt(msg, opts = {})$/;"	f	class:I18nHelper
 max_retry	lib/background/job.rb	/^      def max_retry$/;"	f	class:Background.Job

@@ -21,15 +21,9 @@ module DataProxy
     end
   end
 
-  # rubocop:disable MethodLength
   def refresh!(master_data = nil, e_for = nil)
     master_data ||= master!
-    if master_data.respond_to?(:to_proxy)
-      _from_hash master_data.to_proxy([_proxy])
-    else
-      master_data.extend(HashSerialize) unless master_data.is_a?(HashSerialize)
-      _from_hash master_data._to_hash([_proxy])
-    end
+    merge(master_data.to_hash)
 
     self._mt ||= master_data.class.to_s
     self.sid ||= master_data.sid
@@ -40,7 +34,12 @@ module DataProxy
   def expire_for!(e_for = nil)
     e_for ||= _cache_for
     # if no _cache_for, and no e_for specified, do not cache at all
-    self._e_at ||= (Time.now + e_for).short if e_for
+    self._e_at = (Time.now - Time::EPOCH + e_for).to_i if e_for
+  end
+
+  def expire_at
+    # if `_e_at` is not set, never expires
+    _e_at && Time.at(_e_at + Time::EPOCH)
   end
 
   def expired?
@@ -48,13 +47,8 @@ module DataProxy
     exp_at && exp_at < Time.now
   end
 
-  def expire_at
-    # if `_e_at` is not set, never expires
-    _e_at && Time.from_short(_e_at)
-  end
-
-  def master!
-    master_class.s_find(sid)
+  def master! # cache in instance variable to reduce database access
+    @master ||= master_class.s_find(sid)
   end
 
   def master_class
@@ -69,7 +63,7 @@ module DataProxy
   end
 
   def to_hash_keys
-    (_proxy.keys + _struct.keys + [:_mt, :sid, :_e_at]).uniq
+    @to_hash_keys ||= (_proxy.keys + _struct.keys + [:_mt, :sid, :_e_at]).uniq
   end
 
   def to_hash
@@ -95,7 +89,7 @@ module DataProxy
   included do
     include HashSerialize
     class << self
-      # rubocop:disable CyclomaticComplexity
+      # rubocop:disable MethodLength,CyclomaticComplexity
       def proxy(hash_keys, opts = {})
         # Set up proxy methods for the Master Data
         ksh = hash_keys.reduce({}) do |hsh, k|

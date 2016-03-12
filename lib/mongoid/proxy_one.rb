@@ -48,13 +48,18 @@ module Mongoid
           return self[field_name.to_sym] = nil if obj.nil?
 
           # Allow direct assign with hash
-          obj = Object.const_get(p_type.to_s.classify).new(obj) if p_type
-          hsh = obj.is_a?(Hash) ? obj.dup : obj.to_hash
+          unless obj.is_a?(DataProxy)
+            raise 'a data proxy or `:type` is required' unless p_type
+            obj = Object.const_get(p_type.to_s.classify).new(obj)
+          end
 
-          minstance = Object.const_get(hsh['_mt']).new
+          raise 'not a data proxy' unless obj.is_a?(DataProxy)
+
           mclass = Object.const_get(mclass.to_s.classify)
-          raise "not a proxy for #{mclass}" unless minstance.is_a?(mclass)
-          self[field_name.to_sym] = hsh
+          raise 'not a proxy for ' \
+                "#{obj.master_class}" unless obj.master_class <= mclass
+
+          self[field_name.to_sym] = obj.to_hash
           send(met.to_sym)
         end
 
