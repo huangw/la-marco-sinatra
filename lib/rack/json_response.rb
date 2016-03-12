@@ -30,6 +30,9 @@ module Rack
           body = { error: e.class.name.underscore, message: e.message }
         elsif e.is_a?(Mongoid::Errors::Validations)
           body = { error: e.class.name.underscore, messages: e.document.errors.messages }
+        elsif e.is_a?(Mongoid::Errors::DocumentNotFound)
+          status = 404
+          body = { error: e.class.name.underscore, message: I18n.t('exceptions.ajax.route_error') }
         elsif status < 500 && status >= 400
           body = { error: e.class.name.underscore, message: I18n.t('exceptions.ajax.options_error') }
         else
