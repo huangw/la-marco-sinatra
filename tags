@@ -50,6 +50,7 @@ Data	lib/confu.rb	/^  class Data < Hash$/;"	c	class:Confu
 DataProxy	lib/mongoid/data_proxy.rb	/^module DataProxy$/;"	m
 DataProxySettings	config/settings/data_proxy_settings.rb	/^class DataProxySettings < Confu$/;"	c
 Date	lib/core_ext/date.rb	/^class Date$/;"	c
+Document	lib/mongoid/field_keys.rb	/^  module Document$/;"	m	class:Mongoid
 Element	lib/core_ext/nokogiri_html_element.rb	/^    class Element$/;"	c	class:Nokogiri.XML
 Email	app/models/email.rb	/^class Email$/;"	c
 EmailField	lib/mongoid/field_candy/email_field.rb	/^    module EmailField$/;"	m	class:Mongoid.FieldCandy
@@ -103,6 +104,7 @@ Mongoid	lib/mongoid/field_candy/struct_field.rb	/^module Mongoid$/;"	m
 Mongoid	lib/mongoid/field_candy/text_area.rb	/^module Mongoid$/;"	m
 Mongoid	lib/mongoid/field_candy/text_field.rb	/^module Mongoid$/;"	m
 Mongoid	lib/mongoid/field_candy/url_field.rb	/^module Mongoid$/;"	m
+Mongoid	lib/mongoid/field_keys.rb	/^module Mongoid$/;"	m
 Mongoid	lib/mongoid/ordered_list.rb	/^module Mongoid$/;"	m
 Mongoid	lib/mongoid/paginator.rb	/^module Mongoid$/;"	m
 Mongoid	lib/mongoid/proxy_one.rb	/^module Mongoid$/;"	m
@@ -163,7 +165,6 @@ XML	lib/core_ext/nokogiri_html_element.rb	/^  module XML$/;"	m	class:Nokogiri
 YamlFile	lib/devtools/i18n_utils.rb	/^  class YamlFile$/;"	c
 []	lib/asset_settings.rb	/^    def [](env)$/;"	f	class:AssetSettings
 []	lib/asset_settings/environment_settings.rb	/^    def [](filename)$/;"	f	class:AssetSettings.EnvironmentSettings
-[]	lib/mongoid/ordered_list.rb	/^      def [](tid)$/;"	f	class:Mongoid.OrderedList.Proxy
 []	lib/route.rb	/^    def [](key)$/;"	f	class:Route
 []	lib/utils/hash_struct.rb	/^  def [](key)$/;"	f	class:HashStruct
 []=	lib/route.rb	/^    def []=(app_class, route)$/;"	f	class:Route
@@ -239,8 +240,6 @@ available_locales	lib/emails/render.rb	/^      def available_locales$/;"	f	class
 available_locales	spec/lib/emails/render_spec.rb	/^  def available_locales$/;"	f	class:MockEmailLessLocale
 available_locales	spec/lib/emails/render_spec.rb	/^  def available_locales$/;"	f	class:MockEmailWithoutLocale
 background?	lib/background/job.rb	/^      def background?$/;"	f	class:Background.Job
-blist	lib/mongoid/ordered_list.rb	/^      def blist$/;"	f	class:Mongoid.OrderedList.Proxy
-blist_hash	lib/mongoid/ordered_list.rb	/^      def blist_hash$/;"	f	class:Mongoid.OrderedList.Proxy
 block	lib/mongoid/ordered_list.rb	/^      def block(tid)$/;"	f	class:Mongoid.OrderedList.Proxy
 bool_field	lib/mongoid/field_candy/bool_field.rb	/^        def self.bool_field(met, hsh = {})$/;"	F	class:Mongoid.FieldCandy.BoolField
 button	lib/helpers/form_helper.rb	/^  def button(value = nil, options = {})$/;"	f	class:FormHelper
@@ -302,11 +301,10 @@ diff_file	lib/devtools/asset_mapper/vendor_file.rb	/^    def diff_file(sfile, tf
 dl_file!	lib/devtools/asset_mapper/cloud_file.rb	/^    def dl_file!(url, tfile)$/;"	f	class:AssetMapper.CloudFile
 download!	lib/devtools/asset_mapper/cloud_file.rb	/^    def download!$/;"	f	class:AssetMapper.CloudFile
 drop_db	config/initializers/development/mongoid_pry.rb	/^def drop_db$/;"	f
-each	lib/mongoid/ordered_list.rb	/^      def each$/;"	f	class:Mongoid.OrderedList.Proxy
 email_field	lib/mongoid/field_candy/email_field.rb	/^        def self.email_field(field_name, opts = {})$/;"	F	class:Mongoid.FieldCandy.EmailField
 email_sender	config/settings/email_sender_setttings.rb	/^def email_sender(type = nil)$/;"	f
 email_valid?	lib/mongoid/validators/email_validator.rb	/^  def email_valid?(email)$/;"	f	class:EmailValidator
-encode	lib/mongoid/ordered_list.rb	/^      def encode(obj, tid = nil)$/;"	f	class:Mongoid.OrderedList.Proxy
+encode	lib/mongoid/ordered_list.rb	/^      def encode(obj)$/;"	f	class:Mongoid.OrderedList.Proxy
 environments	lib/asset_settings.rb	/^    def environments$/;"	f	class:AssetSettings
 event	lib/la_buffered_logger.rb	/^  def event(type, dat = {})$/;"	f	class:LaBufferedLogger
 example_file	spec/support/helpers/example_helper.rb	/^def example_file(arg)$/;"	f
@@ -320,6 +318,7 @@ extract_args	lib/core_ext/hash_extract_args.rb	/^  def extract_args(expects)$/;"
 extract_args!	lib/core_ext/hash_extract_args.rb	/^  def extract_args!(expects)$/;"	f	class:Hash
 fast_escape_html	lib/helpers/form_helper.rb	/^  def fast_escape_html(text)$/;"	f	class:FormHelper.radio.checkbox.select
 field_group	lib/helpers/form_helper.rb	/^    def field_group(field, options = {})$/;"	f	class:FormHelper.FormBuilder
+field_keys	lib/mongoid/field_keys.rb	/^    def field_keys$/;"	f	class:Mongoid.Document
 fieldset	lib/helpers/form_helper.rb	/^  def fieldset(legend = nil)$/;"	f	class:FormHelper
 fieldset_for	lib/helpers/form_helper.rb	/^  def fieldset_for(object, name = nil, legend = nil)$/;"	f	class:FormHelper
 file	lib/devtools/asset_mapper/producer.rb	/^    def file(filename)$/;"	f	class:AssetMapper.Producer
@@ -342,6 +341,7 @@ find_common_scope	lib/devtools/i18n_utils.rb	/^    def find_common_scope(keys)$/
 find_fail_keys	lib/devtools/i18n_utils.rb	/^    def find_fail_keys(contents)$/;"	f	class:I18nUtils
 find_tt_keys	lib/devtools/i18n_utils.rb	/^    def find_tt_keys(contents)$/;"	f	class:I18nUtils
 flat_keys	lib/devtools/i18n_utils.rb	/^    def flat_keys$/;"	f	class:YamlFile
+flush	lib/mongoid/ordered_list.rb	/^      def flush$/;"	f	class:Mongoid.OrderedList.Proxy
 flush!	lib/la_buffered_logger.rb	/^  def flush!$/;"	f	class:LaBufferedLogger
 for_environment	lib/confu.rb	/^    def for_environment(environment, &prc)$/;"	f	class:Confu
 form	lib/helpers/form_helper.rb	/^  def form(action = :self, options = {})$/;"	f	class:FormHelper
@@ -349,6 +349,7 @@ form_for	lib/helpers/form_helper.rb	/^  def form_for(object, action = :self, opt
 from_hash	lib/asset_settings.rb	/^    def from_hash(hsh)$/;"	f	class:AssetSettings
 from_hash	lib/asset_settings/environment_settings.rb	/^    def from_hash(hsh)$/;"	f	class:AssetSettings
 from_hash	lib/mongoid/data_proxy.rb	/^      def from_hash(hsh)$/;"	f	class:DataProxy.proxy
+from_hash	lib/mongoid/ordered_list.rb	/^      def from_hash(ary)$/;"	f	class:Mongoid.OrderedList.Proxy
 from_hash	lib/utils/hash_struct.rb	/^      def from_hash(hsh)$/;"	f	class:HashStruct
 from_hex	lib/core_ext/time_short.rb	/^  def self.from_hex(hstr)$/;"	F	class:Time
 from_html	lib/mongoid/struct/text_block.rb	/^  def self.from_html(node)$/;"	F	class:TextBlock
@@ -420,7 +421,6 @@ js_tag	lib/helpers/assets_helper.rb	/^  def js_tag(file_id)$/;"	f	class:AssetsHe
 key?	lib/devtools/i18n_utils.rb	/^    def key?(key)$/;"	f	class:YamlFile
 label	lib/helpers/form_helper.rb	/^    def label(field, display = nil, options = {})$/;"	f	class:FormHelper.FormBuilder
 label	lib/helpers/form_helper.rb	/^  def label(field, display = '', options = {})$/;"	f	class:FormHelper
-last	lib/mongoid/ordered_list.rb	/^      def last$/;"	f	class:Mongoid.OrderedList.Proxy
 level=	lib/la_buffered_logger.rb	/^  def level=(lvl)$/;"	f	class:LaBufferedLogger
 lmets	config/initializers/development/mongoid_pry.rb	/^def lmets(model)$/;"	f
 load_yaml	lib/asset_settings.rb	/^    def load_yaml(file = nil)$/;"	f	class:AssetSettings
@@ -498,7 +498,11 @@ n9	doc/monkey_patch.html	/^<span class="line-numbers"> <a href="#n9" name="n9">9
 need_compile?	lib/devtools/asset_mapper/sfile.rb	/^    def need_compile?$/;"	f	class:AssetMapper.Sfile
 no_more_retry?	lib/background/job.rb	/^      def no_more_retry?$/;"	f	class:Background.Job
 not_changed?	lib/devtools/asset_mapper/tfile.rb	/^    def not_changed?(nfile, ofile)$/;"	f	class:AssetMapper.Tfile
+offset	lib/mongoid/ordered_list.rb	/^      def offset(tid)$/;"	f	class:Mongoid.OrderedList.Proxy
 offset_after	lib/mongoid/ordered_list.rb	/^      def offset_after(tid = nil)$/;"	f	class:Mongoid.OrderedList.Proxy
+olist	lib/mongoid/ordered_list.rb	/^      def olist$/;"	f	class:Mongoid.OrderedList.Proxy
+on_add	lib/mongoid/ordered_list.rb	/^      def on_add(obj, tid = nil)$/;"	f	class:Mongoid.OrderedList.Proxy
+on_remove	lib/mongoid/ordered_list.rb	/^      def on_remove(obj) # add cleanup method on child classes$/;"	f	class:Mongoid.OrderedList.Proxy
 ordered_list	lib/mongoid/ordered_list.rb	/^      def self.ordered_list(field_name, opts = {})$/;"	F	class:Mongoid.OrderedList
 output	app/pages/logger_page.rb	/^  def output(msg)$/;"	f	class:LoggingHelper
 page	lib/mongoid/paginator.rb	/^    def page(pg = 1, opts = {})$/;"	f	class:Mongoid.Criteria
@@ -532,6 +536,8 @@ r	spec/support/helpers/api_test_helper.rb	/^  def r(req = nil, body = nil, heade
 radio	lib/helpers/form_helper.rb	/^    def radio(field, values, options = {})$/;"	f	class:FormHelper.FormBuilder
 radio	lib/helpers/form_helper.rb	/^  def radio(field, values, options = {})$/;"	f	class:FormHelper
 radio_field	lib/mongoid/field_candy/radio_field.rb	/^        def self.radio_field(field_name, choices, hsh = {})$/;"	F	class:Mongoid.FieldCandy.RadioField
+raw_block	lib/mongoid/ordered_list.rb	/^      def raw_block(tid)$/;"	f	class:Mongoid.OrderedList.Proxy
+raw_field	lib/mongoid/ordered_list.rb	/^      def raw_field$/;"	f	class:Mongoid.OrderedList.Proxy
 refresh!	lib/mongoid/data_proxy.rb	/^  def refresh!(master_data = nil, e_for = nil)$/;"	f	class:DataProxy
 remove	lib/mongoid/ordered_list.rb	/^      def remove(tid)$/;"	f	class:Mongoid.OrderedList.Proxy
 removeClass	doc/spec/lib/asset_settings/environment_settings_spec_rslt.html	/^function removeClass(element_id, classname) {$/;"	f
@@ -581,7 +587,6 @@ simple_checkbox	lib/helpers/form_helper.rb	/^    def simple_checkbox(field, valu
 simple_format	lib/core_ext/string_simple_format.rb	/^  def simple_format$/;"	f	class:String
 simple_radio	lib/helpers/form_helper.rb	/^    def simple_radio(field, value, options = {})$/;"	f	class:FormHelper.FormBuilder
 single_tag	lib/helpers/form_helper.rb	/^  def single_tag(name, options = {})$/;"	f	class:FormHelper.radio.checkbox.select
-size	lib/mongoid/ordered_list.rb	/^      def size$/;"	f	class:Mongoid.OrderedList.Proxy
 sp	spec/support/helpers/api_test_helper.rb	/^  def sp(expected_status = 200)$/;"	f	class:APITestHelper
 spec_filename	lib/devtools/file_generator.rb	/^    def spec_filename$/;"	f	class:FileGenerator.RubyFile
 spec_name	lib/devtools/file_generator.rb	/^    def spec_name$/;"	f	class:FileGenerator.RubyFile
@@ -637,7 +642,6 @@ trans	lib/devtools/i18n_utils.rb	/^    def trans(key, lang)$/;"	f	class:I18nUtil
 try_require	lib/core_ext/dynamic_require.rb	/^def try_require(file)$/;"	f
 tt	lib/helpers/i18n_helper.rb	/^  def tt(msg, opts = {})$/;"	f	class:I18nHelper
 unique_tid	lib/mongoid/ordered_list.rb	/^      def unique_tid(tid = nil)$/;"	f	class:Mongoid.OrderedList.Proxy
-update	lib/mongoid/ordered_list.rb	/^      def update(tid, obj)$/;"	f	class:Mongoid.OrderedList.Proxy
 update!	lib/devtools/asset_mapper/pull.rb	/^    def update!$/;"	f	class:AssetMapper.Pull
 update?	lib/devtools/asset_mapper/cloud_file.rb	/^    def update?$/;"	f	class:AssetMapper.CloudFile
 update?	lib/devtools/asset_mapper/pull.rb	/^    def update?$/;"	f	class:AssetMapper.Pull
