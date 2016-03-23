@@ -38,11 +38,29 @@ module AssetsHelper
     format '<image %s />', attrs
   end
 
-  def img_obj_url(obj, opts)
-    if obj.is_a? String
-      obj =~ /^\// ? obj : File.join(AssetSettings.get.img_url_prefix, obj)
+  def settings_params(params = {})
+    if params.blank?
+      ''
+    elsif params.is_a? Hash
+      _params = '?'
+
+      params.each do |k, v|
+        _params += '&' + k.to_s + '=' + v.to_s
+      end
+
+      _params.gsub(/\?\&/, '?')
     else
-      obj.resized_url(opts[:suffix])
+      params.to_s
+    end
+  end
+
+  def img_obj_url(obj, opts)
+    params = settings_params opts[:params]
+
+    if obj.is_a? String
+      (obj =~ /^\// ? obj : File.join(AssetSettings.get.img_url_prefix, obj)) + params
+    else
+      obj.resized_url(opts[:suffix]) + params
     end
   end
 
