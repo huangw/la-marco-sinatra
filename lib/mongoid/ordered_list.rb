@@ -48,7 +48,8 @@ module Mongoid
 
       # Get a block from #olist with the given tid
       def block(tid)
-        olist[offset(tid)]
+        idx = tid.is_a?(Integer) ? tid : olist.find_index { |o| o.tid == tid }
+        olist[idx] if idx
       end
       alias [] block
 
@@ -134,11 +135,12 @@ module Mongoid
         olist.delete_if { |o| o.tid == tid }
         flush
         on_remove(obj)
+        obj
       end
 
       def change_order(tids)
         raise 'tids size not match blist size' unless tids.size == olist.size
-        nlist = tids.map { |tid| block(tid) }
+        nlist = tids.map { |tid| olist[offset(tid)] }
         @olist = nlist
         flush
       end

@@ -9,7 +9,7 @@ require 'utils/hash_serialize'
 # as the master data.
 module DataProxy
   extend ActiveSupport::Concern
-  attr_accessor :_mt, :sid, :_e_at # master class
+  attr_accessor :_mt, :sid, :_e_at, :lost # _mt is master class
 
   def initialize(master_data = nil, e_for = nil)
     _from_hash _struct # initialize default values of local struct
@@ -23,12 +23,22 @@ module DataProxy
 
   def refresh!(master_data = nil, e_for = nil)
     master_data ||= master!
-    merge(master_data.to_hash)
-
+    return cleanup! unless master_data
+    merge(master_data.to_hash([_proxy]))
     self._mt ||= master_data.class.to_s
     self.sid ||= master_data.sid
     expire_for! e_for
     self
+  end
+
+  def cleanup!
+    _proxy.keys.each { |k| send("#{k}=", nil) }
+    self.lost = true
+    self
+  end
+
+  def lost?
+    lost
   end
 
   def expire_for!(e_for = nil)
@@ -48,7 +58,9 @@ module DataProxy
   end
 
   def master! # cache in instance variable to reduce database access
-    @master ||= master_class.s_find(sid)
+    @master ||= master_class.unscoped do
+      master_class.where(sid: sid).asc(:_id).last
+    end
   end
 
   def master_class
@@ -63,7 +75,8 @@ module DataProxy
   end
 
   def to_hash_keys
-    @to_hash_keys ||= (_proxy.keys + _struct.keys + [:_mt, :sid, :_e_at]).uniq
+    @to_hash_keys ||= (_proxy.keys + _struct.keys + [:_mt,
+                                                     :sid, :_e_at, :lost]).uniq
   end
 
   def to_hash

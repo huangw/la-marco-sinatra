@@ -60,7 +60,7 @@ module Background
 
       # rubocop:disable MethodLength
       def perform_job!(worker = 'anonymous worker', logger = nil)
-        logger ||= global_logger
+        logger ||= GlobalLogger.instance
         begin
           t1 = Time.now
           process!

@@ -89,11 +89,14 @@ class SpecDocument
   end
 
   def test_src(target)
-    rspec_file = target.sub(/\Aapp\/?/, '')
-    rspec_file = File.join('spec', "#{rspec_file}_spec.rb")
+    rspec_file = File.join('spec', "#{target}_spec.rb")
+    unless File.exist?(rspec_file)
+      rspec_file = target.sub(/\Aapp\/?/, '')
+      rspec_file = File.join('spec', "#{rspec_file}_spec.rb")
+    end
     return false unless File.exist?(rspec_file)
 
-    output_file = File.join(@dir, target.gsub(/\Aapp/, '') + '_spec.html')
+    output_file = File.join(@dir, rspec_file.gsub(/\.rb\Z/, '.html'))
     if newer?(rspec_file, output_file)
       dir = File.dirname(output_file)
       FileUtils.mkdir_p dir unless File.directory?(dir)
@@ -103,10 +106,14 @@ class SpecDocument
   end
 
   def test_file(target)
-    rspec_file = target.sub(/\Aapp\/?/, '')
-    rspec_file = File.join('spec', "#{rspec_file}_spec.rb")
+    rspec_file = File.join('spec', "#{target}_spec.rb")
+    unless File.exist?(rspec_file)
+      rspec_file = target.sub(/\Aapp\/?/, '')
+      rspec_file = File.join('spec', "#{rspec_file}_spec.rb")
+    end
     return false unless File.exist?(rspec_file)
-    output_file = File.join(@dir, target.gsub(/\Aapp/, '') + '_spec_rslt.html')
+
+    output_file = File.join(@dir, rspec_file.gsub(/\.rb\Z/, '_rslt.html'))
     if !@mdoconly && newer?(rspec_file, output_file)
       dir = File.dirname(output_file)
       FileUtils.mkdir_p dir unless File.directory?(dir)

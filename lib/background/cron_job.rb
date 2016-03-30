@@ -17,7 +17,7 @@ module Background
 
       # rubocop:disable MethodLength, LineLength
       def self.perform(worker = 'anonymous worker', logger = nil)
-        logger ||= global_logger
+        logger ||= GlobalLogger.instance
         job = where(_j_at: nil).asc(:not_before)
                                .any_of({ :not_before.lte => Time.now }, not_before: nil)
                                .find_one_and_update({ '$set' => { _j_at: Time.now } }, return_document: :after)
