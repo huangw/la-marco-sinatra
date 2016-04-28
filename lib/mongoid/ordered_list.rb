@@ -194,7 +194,8 @@ module Mongoid
 
         send(:define_method, "#{proxy_name}=".to_sym) do |arry|
           self[field_name.to_sym] = nil
-          arry.each { |e| send(proxy_name.to_sym).append(e) }
+          instance_variable_set("@#{proxy_name}".to_sym, nil)
+          arry.each { |e| send(proxy_name.to_sym).append(e) } unless arry.nil?
         end
 
         # flush back in memory list back to hash raw list
