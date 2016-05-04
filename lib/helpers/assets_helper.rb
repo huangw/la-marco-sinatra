@@ -60,7 +60,7 @@ module AssetsHelper
 
     if obj.is_a? String
       obj = File.join(AssetSettings.get
-        .img_url_prefix, obj) unless obj[0] == '/'
+        .img_url_prefix, obj) unless obj[0] == '/' || obj.match('http')
       obj + params
     else
       obj.resized_url(opts[:suffix]) + params
