@@ -511,7 +511,7 @@ ordered_list	lib/mongoid/ordered_list.rb	/^      def self.ordered_list(field_nam
 output	app/pages/logger_page.rb	/^  def output(msg)$/;"	f	class:LoggingHelper
 page	lib/mongoid/paginator.rb	/^    def page(pg = 1, opts = {})$/;"	f	class:Mongoid.Criteria
 paginate	lib/mongoid/paginator.rb	/^    def paginate(pg = 1, opts = {})$/;"	f	class:Mongoid.Criteria
-paginate_block	lib/helpers/slim_helper.rb	/^  def paginate_block(opg, dat = {})$/;"	f	class:SlimHelper
+paginate_block	lib/helpers/slim_helper.rb	/^  def paginate_block(opg, dat = {})$/;"	f
 params	spec/lib/helpers/form_helper_spec.rb	/^  def params$/;"	f	class:FormMock
 parse	lib/emails/render.rb	/^      def parse(extra_headers = {})$/;"	f	class:Emails.Render
 partial	lib/helpers/slim_helper.rb	/^  def partial(pname, lcls = {})$/;"	f	class:SlimHelper
@@ -617,9 +617,9 @@ table	lib/route.rb	/^    def table$/;"	f	class:Route
 tag	lib/helpers/form_helper.rb	/^  def tag(name, content = nil, options = {})$/;"	f	class:FormHelper.radio.checkbox.select
 template_basename	lib/emails/render.rb	/^      def template_basename$/;"	f	class:Emails.Render
 template_dir	lib/emails/render.rb	/^      def template_dir$/;"	f	class:Emails.Render
-template_dir	lib/helpers/slim_helper.rb	/^  def template_dir$/;"	f	class:SlimHelper
+template_dir	lib/helpers/slim_helper.rb	/^  def template_dir$/;"	f
 template_file	lib/emails/render.rb	/^      def template_file(format = nil)$/;"	f	class:Emails.Render
-template_id	lib/helpers/slim_helper.rb	/^  def template_id(tpl = nil, locales = nil)$/;"	f	class:SlimHelper
+template_id	lib/helpers/slim_helper.rb	/^  def template_id(tpl = nil, locales = nil)$/;"	f
 terminated?	lib/background/worker.rb	/^    def terminated?$/;"	f	class:Background.Worker
 text	lib/helpers/form_helper.rb	/^  def text(field, options = {})$/;"	f	class:FormHelper
 text=	lib/mongoid/struct/text_block.rb	/^  def text=(str)$/;"	f	class:TextBlock
@@ -655,7 +655,7 @@ update_asset_settings!	lib/devtools/asset_mapper/producer.rb	/^    def update_as
 update_yaml!	lib/asset_settings.rb	/^    def update_yaml!(file = nil)$/;"	f	class:AssetSettings
 url_field	lib/mongoid/field_candy/url_field.rb	/^        def self.url_field(field_name, opts = {})$/;"	F	class:Mongoid.FieldCandy.URLField
 url_valid?	lib/mongoid/validators/url_validator.rb	/^  def url_valid?(url)$/;"	f	class:UrlValidator
-use_layout	lib/helpers/slim_helper.rb	/^  def use_layout(layout)$/;"	f	class:SlimHelper
+use_layout	lib/helpers/slim_helper.rb	/^  def use_layout(layout)$/;"	f
 valid_fields	lib/emails/render.rb	/^      def valid_fields$/;"	f	class:Emails.Render
 validate_each	lib/mongoid/validators/email_validator.rb	/^  def validate_each(record, attribute, value)$/;"	f	class:EmailValidator
 validate_each	lib/mongoid/validators/url_validator.rb	/^  def validate_each(record, attribute, value)$/;"	f	class:UrlValidator
