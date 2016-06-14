@@ -30,7 +30,9 @@
 
           g.AddTaskItem(new JSGantt.TaskItem(19,'rewrite with new stack up','02/24/2016','02/24/2016','008000','',1,'黄巍',100,0,0,1,'','黄巍2016-02-24'));
 
-          g.AddTaskItem(new JSGantt.TaskItem(20,'better error handling for record not found','03/09/2016','03/09/2016','FFA500','',1,'黄巍',0,0,0,1,'','黄巍'));
+          g.AddTaskItem(new JSGantt.TaskItem(20,'better error handling for record not found','03/09/2016','03/09/2016','008000','',1,'黄巍',100,0,0,1,'','黄巍2016-03-09'));
+
+          g.AddTaskItem(new JSGantt.TaskItem(21,'send error log to kibana','06/15/2016','06/15/2016','B0C4DE','',1,'黄巍',0,0,0,1,'','黄巍'));
 
         g.Draw();
         g.DrawDependencies();
@@ -44,258 +46,259 @@
 
 <h3>Recent Git Log</h3> 
 <pre><code>
-* <em style='color:grey'>72da511dcc67cd5635e09f41a14f1a2044b9fafe</em>
-| <strong>2016-03-09 09:54</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | <strong style='color:green'>update bug</strong>
+* <em style='color:grey'>05426f308be2862148522d2569127d92ff8041bd</em>
+| <strong>2016-04-28 14:58</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | <strong style='color:green'>update stack</strong>
+| 
+|  
+* <em style='color:grey'>3378a3c43ad289a3acb84650195a5dcb01af4121</em>
+| <strong>2016-04-26 14:17</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | <strong style='color:green'>update stack</strong>
+| 
+|  
+* <em style='color:grey'>68acbd4e06a12da1377dc6fdeb020caf8301c743</em>
+| <strong>2016-04-19 17:03</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | <strong style='color:green'>never deamonize self</strong>
 | 
 |    
-*   <em style='color:grey'>3b53f46af79f21b845be185d6f9fc8a7185c2aa5</em>
-|\  <strong>2016-03-07 14:50</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+*   <em style='color:grey'>672023ef340c94e804b74ce7f364ab964f0c6e93</em>
+|\  <strong>2016-03-30 17:09</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>update assets helper quality</strong>
+| | 
+| |   
+| * <em style='color:grey'>7f625da916ebed88cae84b428675954a7b1dcacc</em>
+| | <strong>2016-03-23 14:18</strong> By Songcy &lt;songcy@7lime.com&gt;
+| | | | <strong style='color:green'>modify the assets_helper image params</strong>
+| | 
+| |   
+| * <em style='color:grey'>a39d9a6799d5adbdc977112fc2135bb3706fcd20</em>
+| | <strong>2016-03-17 10:12</strong> By Songcy &lt;songcy@7lime.com&gt;
+| | | | <strong style='color:green'>modify the assets helper</strong>
+| | 
+| |   
+* | <em style='color:grey'>ab3a1b605f466bd990452a10656f87ad6334ced9</em>
+|/  <strong>2016-03-30 17:03</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+|   |   <strong style='color:green'>update log settings</strong>
+|   
+|  
+* <em style='color:grey'>e98a95741d2321e1591cd0f87b323dbc6c33fbb1</em>
+| <strong>2016-03-13 21:40</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | <strong style='color:green'>update stack</strong>
+| 
+|    
+*   <em style='color:grey'>f194c1d226f5b26fbbb4449e8310f795b5d0f1dc</em>
+|\  <strong>2016-03-12 13:54</strong> By Huang Wei &lt;huangw@7lime.com&gt;
 | | | | <strong style='color:green'>Merge branch 'develop' of g:vikkr/la-marco-sinatra into</strong>
 | |  develop
 | | 
-| |   
-| * <em style='color:grey'>b3fa1b11edd6fcd2612442c06e0eb419e6b3e830</em>
-| | <strong>2016-03-04 10:37</strong> By Songcy &lt;songcy@7lime.com&gt;
-| | | | <strong style='color:green'>modify the json response</strong>
-| | 
-| |   
-| * <em style='color:grey'>604fc488600c3551f61d3d642fcf45f66c9189f1</em>
-| | <strong>2016-03-02 11:11</strong> By Songcy &lt;songcy@7lime.com&gt;
-| | | | <strong style='color:green'>modify the assets helper</strong>
-| | 
 | |     
-| *   <em style='color:grey'>420dc555c446a487e48a380d0b7f5dd1bad2aa43</em>
-| |\  <strong>2016-02-29 13:32</strong> By Songcy &lt;songcy@7lime.com&gt;
+| *   <em style='color:grey'>993bcdc3db6fa6c9a3720dc59d0f8a7a0fa0f25b</em>
+| |\  <strong>2016-03-11 15:45</strong> By Songcy &lt;songcy@7lime.com&gt;
 | | | | | | <strong style='color:green'>Merge branch 'develop' of</strong>
 | | |  gitlab.7lime.com:vikkr/la-marco-sinatra into develop
 | | | 
 | | |    
-| * | <em style='color:grey'>8c2faefe1a06c21522b50dedfa355302c7183bcf</em>
-| | | <strong>2016-02-29 13:31</strong> By Songcy &lt;songcy@7lime.com&gt;
-| | | | | | <strong style='color:green'>modify the assets settings</strong>
+| * | <em style='color:grey'>3955f5a34c871950ce075ac30afffbb74d46825e</em>
+| | | <strong>2016-03-11 15:44</strong> By Songcy &lt;songcy@7lime.com&gt;
+| | | | | | <strong style='color:green'>add the ajax 404 errors</strong>
 | | | 
 | | |    
-* | | <em style='color:grey'>9fd3b602d10d98a5fe1834eec7653eb6a2fa5ce2</em>
-| | | <strong>2016-03-07 14:50</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+* | | <em style='color:grey'>c9caec0afa2bedd847fa4ab6f987ff72e68c34e7</em>
+| |/  <strong>2016-03-12 13:54</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+|/|   | |   <strong style='color:green'>update stack</strong>
+| |   
+| |   
+* | <em style='color:grey'>8e40d74c6ee7b4cbd58f07113ce92831088c3ff3</em>
+| | <strong>2016-03-11 15:30</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>stack up</strong>
+| | 
+| |   
+* | <em style='color:grey'>73c847f9fc46cb5261503b971054ce08c5769df1</em>
+| | <strong>2016-03-11 13:58</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>update stack</strong>
+| | 
+| |     
+* |   <em style='color:grey'>9d1f355dc5378ac3171b712aabd3997b9107a74a</em>
+|\ \  <strong>2016-03-09 10:22</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| |/  | |   <strong style='color:green'>Merge branch 'develop'</strong>
+| |   
+| |   
+| * <em style='color:grey'>a758a81d108724fdaaac04370de9abe39de73055</em>
+| | <strong>2016-03-09 10:21</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>update progress of task release_v0_1_1 to 100</strong>
+| | 
+| |     
+| *   <em style='color:grey'>d8e0a90caccad4f7df406fa06a8f21c277fad0b8</em>
+| |\  <strong>2016-03-09 10:21</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | | | <strong style='color:green'>Merge branch 'release_v0_1_1' into develop</strong>
+| | | 
+| | |      
+| | *   <em style='color:grey'>eea1c1bb157c1744b5f0372d0c1942200f6f62f0</em>
+| | |\  <strong>2016-03-09 10:20</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | |/  | |/|   <strong style='color:green'>Merge branch 'develop' into release_v0_1_1</strong>
+| | |   
+| | |    
+| * | <em style='color:grey'>00d951a069da4ac354c12a508a18f292d77dc520</em>
+| | | <strong>2016-03-09 10:19</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | | | <strong style='color:green'>update progress of task release_v0_1_1 to 99</strong>
+| | | 
+| | |    
+| | * <em style='color:grey'>205a0b25787ccb1b6ac22d7af2c75a44728a5ea2</em>
+| |/  <strong>2016-03-09 10:19</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| |   | |   <strong style='color:green'>[complete] complete the branch by set progress to 99.</strong>
+| |   
+| |   
+| * <em style='color:grey'>6fafbcd43f5dea8994336332dc2da80bcde403ad</em>
+| | <strong>2016-03-09 09:56</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>update progress of task release_v0_1_1 to 10</strong>
+| | 
+| |   
+| * <em style='color:grey'>6cd40ec42dff88707b2c5e2b2c481ac5056d7507</em>
+| | <strong>2016-03-09 09:55</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>update Gantt chart</strong>
+| | 
+| |   
+| * <em style='color:grey'>72da511dcc67cd5635e09f41a14f1a2044b9fafe</em>
+| | <strong>2016-03-09 09:54</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | <strong style='color:green'>update bug</strong>
+| | 
+| |     
+| *   <em style='color:grey'>3b53f46af79f21b845be185d6f9fc8a7185c2aa5</em>
+| |\  <strong>2016-03-07 14:50</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | | | <strong style='color:green'>Merge branch 'develop' of g:vikkr/la-marco-sinatra into</strong>
+| | |  develop
+| | | 
+| | |    
+| | * <em style='color:grey'>b3fa1b11edd6fcd2612442c06e0eb419e6b3e830</em>
+| | | <strong>2016-03-04 10:37</strong> By Songcy &lt;songcy@7lime.com&gt;
+| | | | | | <strong style='color:green'>modify the json response</strong>
+| | | 
+| | |    
+| | * <em style='color:grey'>604fc488600c3551f61d3d642fcf45f66c9189f1</em>
+| | | <strong>2016-03-02 11:11</strong> By Songcy &lt;songcy@7lime.com&gt;
+| | | | | | <strong style='color:green'>modify the assets helper</strong>
+| | | 
+| | |      
+| | *   <em style='color:grey'>420dc555c446a487e48a380d0b7f5dd1bad2aa43</em>
+| | |\  <strong>2016-02-29 13:32</strong> By Songcy &lt;songcy@7lime.com&gt;
+| | | | | | | | <strong style='color:green'>Merge branch 'develop' of</strong>
+| | | |  gitlab.7lime.com:vikkr/la-marco-sinatra into develop
+| | | | 
+| | | |     
+| | * | <em style='color:grey'>8c2faefe1a06c21522b50dedfa355302c7183bcf</em>
+| | | | <strong>2016-02-29 13:31</strong> By Songcy &lt;songcy@7lime.com&gt;
+| | | | | | | | <strong style='color:green'>modify the assets settings</strong>
+| | | | 
+| | | |     
+| * | | <em style='color:grey'>9fd3b602d10d98a5fe1834eec7653eb6a2fa5ce2</em>
+| | | | <strong>2016-03-07 14:50</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | | | | | <strong style='color:green'>update stack</strong>
+| | | | 
+| | | |     
+| * | | <em style='color:grey'>0bb8508301cfac4a09d6adc01bb325e6afda968c</em>
+| | |/  <strong>2016-03-07 14:50</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| |/|   | | |   <strong style='color:green'>stack up</strong>
+| | |   
+| | |    
+| * | <em style='color:grey'>d9d9b03d4aa5423cf52204386b4d7ca9e053d53b</em>
+| | | <strong>2016-02-26 21:01</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | | | <strong style='color:green'>update email settings</strong>
+| | | 
+| | |    
+| * | <em style='color:grey'>fa851310c66b3c671c799187d9083b2b6e335aec</em>
+| | | <strong>2016-02-26 21:00</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | | | <strong style='color:green'>change email collection from emails_emails to emails</strong>
+| | | 
+| | |    
+| * | <em style='color:grey'>7e2cd4573020058bd0aa9af1ec4e8834beaaa919</em>
+| | | <strong>2016-02-26 09:41</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | | | <strong style='color:green'>restore email presenter location</strong>
+| | | 
+| | |    
+| * | <em style='color:grey'>2efcfc9a21a95a7632e1fd97d6a826729ff273ba</em>
+| | | <strong>2016-02-24 20:29</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | | | <strong style='color:green'>move email template from views to presenters</strong>
+| | | 
+| | |    
+| * | <em style='color:grey'>416fcd906b68d64836e27579fffd7a4d06f4a85b</em>
+| | | <strong>2016-02-24 18:22</strong> By Huang Wei &lt;huangw@7lime.com&gt;
 | | | | | | <strong style='color:green'>update stack</strong>
 | | | 
 | | |    
-* | | <em style='color:grey'>0bb8508301cfac4a09d6adc01bb325e6afda968c</em>
-| |/  <strong>2016-03-07 14:50</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-|/|   | |   <strong style='color:green'>stack up</strong>
-| |   
-| |   
-* | <em style='color:grey'>d9d9b03d4aa5423cf52204386b4d7ca9e053d53b</em>
-| | <strong>2016-02-26 21:01</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | | <strong style='color:green'>update email settings</strong>
-| | 
-| |   
-* | <em style='color:grey'>fa851310c66b3c671c799187d9083b2b6e335aec</em>
-| | <strong>2016-02-26 21:00</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | | <strong style='color:green'>change email collection from emails_emails to emails</strong>
-| | 
-| |   
-* | <em style='color:grey'>7e2cd4573020058bd0aa9af1ec4e8834beaaa919</em>
-| | <strong>2016-02-26 09:41</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | | <strong style='color:green'>restore email presenter location</strong>
-| | 
-| |   
-* | <em style='color:grey'>2efcfc9a21a95a7632e1fd97d6a826729ff273ba</em>
-| | <strong>2016-02-24 20:29</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | | <strong style='color:green'>move email template from views to presenters</strong>
-| | 
-| |   
-* | <em style='color:grey'>416fcd906b68d64836e27579fffd7a4d06f4a85b</em>
-| | <strong>2016-02-24 18:22</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | | <strong style='color:green'>update stack</strong>
-| | 
-| |   
-* | <em style='color:grey'>0fc47acd919cc414fb4e588c246faa99d16241a0</em>
-| | <strong>2016-02-24 07:00</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | | <strong style='color:green'>stackup sequence token</strong>
-| | 
-| |   
-* | <em style='color:grey'>833837adcf06807c0908318185553d57c6749600</em>
-| | <strong>2016-02-24 05:43</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | | <strong style='color:green'>restore assets compiler</strong>
-| | 
-| |   
-* | <em style='color:grey'>f75a368e7cd7f412172eb248a10fe81300a4cd1f</em>
-| | <strong>2016-02-24 00:11</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | | <strong style='color:green'>update progress of task release_v0_1_0 to 100</strong>
-| | 
-| |     
-* |   <em style='color:grey'>2feb68dd0e3de9fb390bf4ddd3c9c14ddbc7df36</em>
-|\ \  <strong>2016-02-24 00:11</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | | | | <strong style='color:green'>Merge branch 'release_v0_1_0' into develop</strong>
+| * | <em style='color:grey'>0fc47acd919cc414fb4e588c246faa99d16241a0</em>
+| | | <strong>2016-02-24 07:00</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | | | <strong style='color:green'>stackup sequence token</strong>
 | | | 
 | | |    
-| * | <em style='color:grey'>1dcb92deebcd60438551a45056a0c80c4a080c42</em>
-| | | <strong>2016-02-24 00:11</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | | | | <strong style='color:green'>[close] close the branch by set progress to 100.</strong>
+| * | <em style='color:grey'>833837adcf06807c0908318185553d57c6749600</em>
+| | | <strong>2016-02-24 05:43</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | | | <strong style='color:green'>restore assets compiler</strong>
 | | | 
 | | |      
-| * |   <em style='color:grey'>3fcf3775119a18613862f445619fc4e27a5e4e68</em>
-| |\ \  <strong>2016-02-24 00:09</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| |/ /  |/| |   <strong style='color:green'>Merge branch 'develop' into release_v0_1_0</strong>
+* | |   <em style='color:grey'>2902926c618480159d1f0fd12d84d3049383fcef</em>
+|\ \ \  <strong>2016-02-24 00:11</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| |/ /  | | |   <strong style='color:green'>Merge branch 'develop'</strong>
 | | |   
 | | |    
-* | | <em style='color:grey'>4cf5dcaf50344f41eb9104193f9523392ec11840</em>
-| | | <strong>2016-02-24 00:09</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | | | | <strong style='color:green'>update progress of task release_v0_1_0 to 99</strong>
-| | | 
-| | |    
-| * | <em style='color:grey'>7161ff1e5897655e986e659405e12eb544d02fb9</em>
-| | | <strong>2016-02-24 00:09</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | | | | <strong style='color:green'>[complete] complete the branch by set progress to 99.</strong>
-| | | 
-| | |    
-| * | <em style='color:grey'>ff112bd30affb03800d8b24d33f97bdb71ead090</em>
-| | | <strong>2016-02-24 00:06</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | | | | <strong style='color:green'>use uuid for session id</strong>
-| | | 
-| | |    
-| * | <em style='color:grey'>748b867d4788aec31754b9b23a90c19dabcb3c05</em>
-|/ /  <strong>2016-02-23 23:33</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| |   | |   <strong style='color:green'>cleanup</strong>
-| |   
-| |   
-* | <em style='color:grey'>f0d989bafc08c6a7f143c48374991c749953f0fd</em>
-| | <strong>2016-02-23 23:32</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | | <strong style='color:green'>update progress of task release_v0_1_0 to 10</strong>
-| | 
-| |   
-* | <em style='color:grey'>f525605fb5d2b52030e57e2aa67c5ac78e2dc0a3</em>
-| | <strong>2016-02-23 23:32</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | | <strong style='color:green'>update Gantt chart</strong>
-| | 
-| |   
-* | <em style='color:grey'>6e8a82da0ec826b2bdc5515b4f28393ef6f37363</em>
-| | <strong>2016-02-23 23:31</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | | <strong style='color:green'>update Gantt chart</strong>
-| | 
-| |   
-* | <em style='color:grey'>7bdac3d990038a2ffbf7da922b9c463eafc885d5</em>
-| | <strong>2016-02-16 18:08</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | | <strong style='color:green'>check whether content support to hash before convert</strong>
-| | 
-| |   
-* | <em style='color:grey'>9224cf4cae8aa5b576d224e3affff986cf8f271f</em>
-| | <strong>2016-02-12 12:59</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | | <strong style='color:green'>udpate rubocop yaml</strong>
-| | 
-| |   
-* | <em style='color:grey'>c2f0ce74cfc02693f4d53148b1006fc032fdc8be</em>
-| | <strong>2016-02-12 12:46</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | | <strong style='color:green'>remove unique id requirement for sid</strong>
-| | 
-| |   
-* | <em style='color:grey'>5ede6e7f0337533a9cc10b78bb7d4419577f5e20</em>
-|/  <strong>2016-02-12 11:11</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-|   |   <strong style='color:green'>update code quality</strong>
-|   
-|  
-* <em style='color:grey'>f54dba042d68e91b8b2e1840c6e03bd9771b9a95</em>
-| <strong>2016-02-01 11:19</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | <strong style='color:green'>update local puma conf</strong>
-| 
-|  
-* <em style='color:grey'>a070911d6576847572499861a9c336d1eb472571</em>
-| <strong>2016-01-31 17:44</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | <strong style='color:green'>use puma.conf aware of production</strong>
-| 
-|  
-* <em style='color:grey'>036f6c8cf9f4604d77abfe612ed46f573a8fa110</em>
-| <strong>2016-01-29 09:49</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | <strong style='color:green'>update Gantt chart</strong>
-| 
-|  
-* <em style='color:grey'>353da595b867605cba49ac95fa128af7fe1a68b5</em>
-| <strong>2016-01-29 09:46</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | <strong style='color:green'>update progress of task alimail to 100</strong>
-| 
-|    
-*   <em style='color:grey'>85a4daed6ac3b979257e2b5af655ece2a5c8ace3</em>
-|\  <strong>2016-01-29 09:46</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | | <strong style='color:green'>Merge branch 'alimail' into develop</strong>
-| | 
-| |   
-| * <em style='color:grey'>6330ae4c3698ad36bd56917004ded73441730321</em>
-| | <strong>2016-01-29 09:46</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | | <strong style='color:green'>[close] close the branch by set progress to 100.</strong>
-| | 
-| |   
-| * <em style='color:grey'>5ce5a8d7a4f7fb230b8efac2d03bc951d7fe860c</em>
-| | <strong>2016-01-28 11:35</strong> By =?UTF-8?q?=E5=BE=90=20=E9=A3=9E?= &lt;xuf@pe-po.com&gt;
-| | | | <strong style='color:green'>modify aliyun_sender_spec.rb</strong>
-| | 
-| |     
-| *   <em style='color:grey'>8b3514edd5c5f6a6155553933ae0c8ed99511aa1</em>
-| |\  <strong>2016-01-28 11:26</strong> By =?UTF-8?q?=E5=BE=90=20=E9=A3=9E?= &lt;xuf@pe-po.com&gt;
-| |/  |/|   <strong style='color:green'>Merge branch 'develop' into alimail</strong>
-| |   
-| |   
-* | <em style='color:grey'>949e4c0cc433723e74fbeadd38750ba31933f963</em>
-| | <strong>2016-01-28 11:26</strong> By =?UTF-8?q?=E5=BE=90=20=E9=A3=9E?= &lt;xuf@pe-po.com&gt;
-| | | | <strong style='color:green'>update progress of task alimail to 70</strong>
-| | 
-| |     
-| *   <em style='color:grey'>a2b39b51321342406b846fe71ebd1e033ccfd5e6</em>
-| |\  <strong>2016-01-28 11:22</strong> By =?UTF-8?q?=E5=BE=90=20=E9=A3=9E?= &lt;xuf@pe-po.com&gt;
-| |/  |/|   <strong style='color:green'>Merge branch 'develop' into alimail</strong>
-| |   
-| |   
-* | <em style='color:grey'>2e2b1254239a59dde9d5fe695a0a1f00e5557fc6</em>
-| | <strong>2016-01-28 11:22</strong> By =?UTF-8?q?=E5=BE=90=20=E9=A3=9E?= &lt;xuf@pe-po.com&gt;
-| | | | <strong style='color:green'>update ROADMAP</strong>
-| | 
-| |   
-| * <em style='color:grey'>5513b421bca82f3e89ebb2fad3788c3cf1cecaa3</em>
-| | <strong>2016-01-28 11:14</strong> By =?UTF-8?q?=E5=BE=90=20=E9=A3=9E?= &lt;xuf@pe-po.com&gt;
-| | | | <strong style='color:green'>update aliyun email sender</strong>
-| | 
-| |   
-| * <em style='color:grey'>6b5aebe6f05d4a86b861a627e8407fc4aece4dd5</em>
-| | <strong>2016-01-26 16:37</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | | <strong style='color:green'>update mail settings</strong>
-| | 
-| |     
-| *   <em style='color:grey'>5b0662f9954bbdbfbab1948c4212fdf8859540b3</em>
-| |\  <strong>2016-01-26 16:24</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| |/  |/|   <strong style='color:green'>Merge branch 'develop' into alimail</strong>
-| |   
-| |     
-* |   <em style='color:grey'>a5085d90f0f9f205c5a4a96f624b218fb9bccdad</em>
-|\ \  <strong>2016-01-26 16:20</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | | | | <strong style='color:green'>Merge branch 'master' of g:vikkr/la-marco-sinatra into</strong>
-| | |  develop
+| * | <em style='color:grey'>f75a368e7cd7f412172eb248a10fe81300a4cd1f</em>
+| | | <strong>2016-02-24 00:11</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | | | <strong style='color:green'>update progress of task release_v0_1_0 to 100</strong>
 | | | 
 | | |      
-| * |   <em style='color:grey'>db602bdab9da6041e0d08bb9c4c9285b6e13ccc9</em>
-| |\ \  <strong>2015-12-02 14:22</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | | | | | | <strong style='color:green'>Merge branch 'develop'</strong>
+| * |   <em style='color:grey'>2feb68dd0e3de9fb390bf4ddd3c9c14ddbc7df36</em>
+| |\ \  <strong>2016-02-24 00:11</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | | | | | <strong style='color:green'>Merge branch 'release_v0_1_0' into develop</strong>
 | | | | 
 | | | |     
-* | | | <em style='color:grey'>7589119dec020089150dedc75016d9f2e95e029e</em>
-| | | | <strong>2016-01-19 14:53</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | | | | | | <strong style='color:green'>update progress of task api_doc to 10</strong>
-| | | | 
-| | | |     
-* | | | <em style='color:grey'>77a26b09b73adcc2e56d07effabf9492b50d2e6e</em>
-| | | | <strong>2016-01-19 14:47</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | | | | | | <strong style='color:green'>update progress of task rlog to 100</strong>
+| | * | <em style='color:grey'>1dcb92deebcd60438551a45056a0c80c4a080c42</em>
+| | | | <strong>2016-02-24 00:11</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | | | | | <strong style='color:green'>[close] close the branch by set progress to 100.</strong>
 | | | | 
 | | | |       
-* | | |   <em style='color:grey'>95cd704bd56cf114e88318a24512a02468ffbe1b</em>
-|\ \ \ \  <strong>2016-01-19 14:47</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | | | | | | | | <strong style='color:green'>Merge branch 'rlog' into develop</strong>
-| | | | | 
-| | | | |      
-| * | | | <em style='color:grey'>5e0771f1e1b8eddf186c48448900e04a7eacdb3d</em>
-|/ / / /  <strong>2016-01-19 14:47</strong> By Huang Wei &lt;huangw@7lime.com&gt;
-| | | |   | | | |   <strong style='color:green'>[close] close the branch by set progress to 100.</strong>
+| | * |   <em style='color:grey'>3fcf3775119a18613862f445619fc4e27a5e4e68</em>
+| | |\ \  <strong>2016-02-24 00:09</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | |/ /  | |/| |   <strong style='color:green'>Merge branch 'develop' into release_v0_1_0</strong>
 | | | |   
+| | | |     
+| * | | <em style='color:grey'>4cf5dcaf50344f41eb9104193f9523392ec11840</em>
+| | | | <strong>2016-02-24 00:09</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | | | | | <strong style='color:green'>update progress of task release_v0_1_0 to 99</strong>
+| | | | 
+| | | |     
+| | * | <em style='color:grey'>7161ff1e5897655e986e659405e12eb544d02fb9</em>
+| | | | <strong>2016-02-24 00:09</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | | | | | <strong style='color:green'>[complete] complete the branch by set progress to 99.</strong>
+| | | | 
+| | | |     
+| | * | <em style='color:grey'>ff112bd30affb03800d8b24d33f97bdb71ead090</em>
+| | | | <strong>2016-02-24 00:06</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | | | | | <strong style='color:green'>use uuid for session id</strong>
+| | | | 
+| | | |     
+| | * | <em style='color:grey'>748b867d4788aec31754b9b23a90c19dabcb3c05</em>
+| |/ /  <strong>2016-02-23 23:33</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | |   | | |   <strong style='color:green'>cleanup</strong>
+| | |   
+| | |    
+| * | <em style='color:grey'>f0d989bafc08c6a7f143c48374991c749953f0fd</em>
+| | | <strong>2016-02-23 23:32</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | | | <strong style='color:green'>update progress of task release_v0_1_0 to 10</strong>
+| | | 
+| | |    
+| * | <em style='color:grey'>f525605fb5d2b52030e57e2aa67c5ac78e2dc0a3</em>
+| | | <strong>2016-02-23 23:32</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | | | <strong style='color:green'>update Gantt chart</strong>
+| | | 
+| | |    
+| * | <em style='color:grey'>6e8a82da0ec826b2bdc5515b4f28393ef6f37363</em>
+| | | <strong>2016-02-23 23:31</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | | | <strong style='color:green'>update Gantt chart</strong>
+| | | 
+| | |    
+| * | <em style='color:grey'>7bdac3d990038a2ffbf7da922b9c463eafc885d5</em>
+| | | <strong>2016-02-16 18:08</strong> By Huang Wei &lt;huangw@7lime.com&gt;
+| | | | | | <strong style='color:green'>check whether content support to hash before convert</strong>
+| | | 
 
 </code></pre>
 
