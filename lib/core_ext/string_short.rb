@@ -5,9 +5,9 @@ require 'sanitize'
 
 # Mixin String class, add method for shorten
 class String
-  def short(leng = 20, sanitize: true)
+  def short(leng = 20, sanitize = true)
     # delete HTML tags
-    txt = Sanitize.fragment(self) if sanitize
+    txt = sanitize ? Sanitize.fragment(self) : self
     return txt[0..leng - 1] if leng <= 5
     length <= leng ? txt : txt[0..leng - 5] + ' ...'
   end

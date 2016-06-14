@@ -168,6 +168,7 @@ YamlFile	lib/devtools/i18n_utils.rb	/^  class YamlFile$/;"	c
 []	lib/asset_settings/environment_settings.rb	/^    def [](filename)$/;"	f	class:AssetSettings.EnvironmentSettings
 []	lib/route.rb	/^    def [](key)$/;"	f	class:Route
 []	lib/utils/hash_struct.rb	/^  def [](key)$/;"	f	class:HashStruct
+[]=	lib/mongoid/ordered_list.rb	/^      def []=(tid, obj)$/;"	f	class:Mongoid.OrderedList.Proxy
 []=	lib/route.rb	/^    def []=(app_class, route)$/;"	f	class:Route
 []=	lib/utils/hash_struct.rb	/^  def []=(key, value)$/;"	f	class:HashStruct
 _delete	lib/rack/session/mongoid.rb	/^      def _delete(sid)$/;"	f	class:Rack.Session.Mongoid
@@ -433,6 +434,7 @@ local_trans	lib/devtools/i18n_utils.rb	/^    def local_trans$/;"	f	class:I18nUti
 local_url	lib/devtools/asset_mapper/sfile.rb	/^    def local_url$/;"	f	class:AssetMapper.Sfile
 local_url	lib/devtools/asset_mapper/tfile.rb	/^    def local_url$/;"	f	class:AssetMapper.Tfile
 localized?	lib/emails/render.rb	/^      def localized?$/;"	f	class:Emails.Render
+lost!	lib/mongoid/data_proxy.rb	/^  def lost!$/;"	f	class:DataProxy
 lost?	lib/mongoid/data_proxy.rb	/^  def lost?$/;"	f	class:DataProxy
 ltt	lib/helpers/i18n_helper.rb	/^  def ltt(msg, opts = {})$/;"	f	class:I18nHelper
 main_loop	lib/background/worker_pool.rb	/^    def main_loop$/;"	f	class:Background.WorkerPool
@@ -542,6 +544,7 @@ radio	lib/helpers/form_helper.rb	/^  def radio(field, values, options = {})$/;"	
 radio_field	lib/mongoid/field_candy/radio_field.rb	/^        def self.radio_field(field_name, choices, hsh = {})$/;"	F	class:Mongoid.FieldCandy.RadioField
 raw_block	lib/mongoid/ordered_list.rb	/^      def raw_block(tid)$/;"	f	class:Mongoid.OrderedList.Proxy
 raw_field	lib/mongoid/ordered_list.rb	/^      def raw_field$/;"	f	class:Mongoid.OrderedList.Proxy
+read_template	lib/emails/render.rb	/^      def read_template(fmt)$/;"	f	class:Emails.Render
 refresh!	lib/mongoid/data_proxy.rb	/^  def refresh!(master_data = nil, e_for = nil)$/;"	f	class:DataProxy
 remove	lib/mongoid/ordered_list.rb	/^      def remove(tid)$/;"	f	class:Mongoid.OrderedList.Proxy
 removeClass	doc/spec/spec/lib/asset_settings/environment_settings_spec_rslt.html	/^function removeClass(element_id, classname) {$/;"	f
@@ -586,7 +589,7 @@ set_session	lib/rack/session/mongoid.rb	/^      def set_session(env, session_id,
 set_trap	lib/background/worker_pool.rb	/^    def set_trap$/;"	f	class:Background.WorkerPool
 settings_params	lib/helpers/assets_helper.rb	/^  def settings_params(params = {})$/;"	f	class:AssetsHelper.css_tag.js_tag
 setup_header	lib/emails/render.rb	/^      def setup_header(dat)$/;"	f	class:Emails.Render
-short	lib/core_ext/string_short.rb	/^  def short(leng = 20, sanitize: true)$/;"	f	class:String
+short	lib/core_ext/string_short.rb	/^  def short(leng = 20, sanitize = true)$/;"	f	class:String
 short	lib/core_ext/time_short.rb	/^  def short$/;"	f	class:Time
 simple_checkbox	lib/helpers/form_helper.rb	/^    def simple_checkbox(field, value, options = {})$/;"	f	class:FormHelper.FormBuilder
 simple_format	lib/core_ext/string_simple_format.rb	/^  def simple_format$/;"	f	class:String

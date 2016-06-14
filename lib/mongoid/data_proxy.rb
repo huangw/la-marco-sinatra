@@ -23,7 +23,7 @@ module DataProxy
 
   def refresh!(master_data = nil, e_for = nil)
     master_data ||= master!
-    return cleanup! unless master_data
+    return lost! unless master_data
     merge(master_data.to_hash([_proxy]))
     self._mt ||= master_data.class.to_s
     self.sid ||= master_data.sid
@@ -33,8 +33,12 @@ module DataProxy
 
   def cleanup!
     _proxy.keys.each { |k| send("#{k}=", nil) }
-    self.lost = true
+    lost!
     self
+  end
+
+  def lost!
+    self.lost = true
   end
 
   def lost?

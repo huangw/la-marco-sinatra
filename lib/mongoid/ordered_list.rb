@@ -53,6 +53,15 @@ module Mongoid
       end
       alias [] block
 
+      def []=(tid, obj)
+        idx = tid.is_a?(Integer) ? tid : olist.find_index { |o| o.tid == tid }
+        raise "no tid found for #{tid}" unless idx
+        obj = on_add(obj)
+        obj.tid = olist[idx].tid
+        olist[idx] = obj
+        flush && olist[idx]
+      end
+
       # Encode and Decode
       # --------------------------------------
       # These two methods are intended to be overloaded by child classes
@@ -127,6 +136,7 @@ module Mongoid
         offset = opts[:append] ? olist.size : offset_after(opts[:after])
         raise "invalid after tid: #{tid}" unless offset
         olist.insert(offset, keep)
+        flush
       end
 
       # Remove block from the list, but keep in the relationship

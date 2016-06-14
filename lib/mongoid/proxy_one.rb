@@ -38,7 +38,7 @@ module Mongoid
         end
 
         define_method "#{met}!".to_sym do
-          update_attributes met.to_sym => send(met.to_sym).send(:'master!')
+          update_attributes met.to_sym => send(met.to_sym).send(:'refresh!')
           send(met.to_sym)
         end
 

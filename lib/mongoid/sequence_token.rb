@@ -32,7 +32,8 @@ module Mongoid
       set_callback :initialize, :after, :set_sequence_token, unless: :persisted?
       def set_sequence_token
         nseq = Sequence.where(name: self.class.seq_field).find_one_and_update(
-          { '$inc' => { seq: 1 } }, return_document: :after)
+          { '$inc' => { seq: 1 } }, return_document: :after
+        )
         self.sid = nseq.seq.to_s(36).reverse
       end
 
