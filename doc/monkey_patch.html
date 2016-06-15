@@ -23,7 +23,7 @@
 
 <p>寻找报错的<code>show_exceptions.rb</code>文件（一般在<code>~/.rvm/.../gems/.../</code>下面），在报错的34行左右上方加上<code>body = [body] if body.is_a?(String)</code>一行，看上去像这样：</p>
 
-<div class="highlighter-coderay"><div class="CodeRay">
+<div class="language-ruby highlighter-coderay"><div class="CodeRay">
   <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>env[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">rack.errors</span><span style="color:#710">&quot;</span></span>] = errors
 <span class="line-numbers"><a href="#n2" name="n2">2</a></span>body = [body] <span style="color:#080;font-weight:bold">if</span> body.is_a?(<span style="color:#036;font-weight:bold">String</span>)
 <span class="line-numbers"><a href="#n3" name="n3">3</a></span>
@@ -37,7 +37,7 @@
 
 <p>可以顺便改一下下面ERB代码的部分，修改显示的错误信息backtrace中<code>filename</code>的部分，把不是来自<code>gems</code>的也就是本地代码高亮一下（218行左右）：</p>
 
-<div class="highlighter-coderay"><div class="CodeRay">
+<div class="language-ruby highlighter-coderay"><div class="CodeRay">
   <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>&lt;li <span style="color:#080;font-weight:bold">class</span>=<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">frame-info &lt;%= frame_class(frame) %&gt;</span><span style="color:#710">&quot;</span></span>&gt;
 <span class="line-numbers"> <a href="#n2" name="n2">2</a></span>  &lt;code&gt;
 <span class="line-numbers"> <a href="#n3" name="n3">3</a></span>    &lt;<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">% </span><span style="color:#D20">if</span><span style="color:#710"> </span></span>frame.filename.match(<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">gems</span><span style="color:#404">/</span></span>) %&gt;

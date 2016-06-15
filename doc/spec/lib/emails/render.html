@@ -207,11 +207,16 @@ parse custom header and render email body</p>
         <span class="hljs-string">%w(to cc bcc subject from sender_type reply-to return-path inline)</span>
       <span class="hljs-keyword">end</span>
 
+      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_template</span><span class="hljs-params">(fmt)</span></span>
+        <span class="hljs-constant">Liquid::Template</span>.parse(
+          <span class="hljs-constant">File</span>.open(template_file(fmt), <span class="hljs-string">'r:utf-8'</span>).read
+        )
+      <span class="hljs-keyword">end</span>
+
       <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">parse</span><span class="hljs-params">(extra_headers = {})</span></span>
         <span class="hljs-variable">@bodies</span> = {}
         available_formats.each <span class="hljs-keyword">do</span> |fmt|
-          body = <span class="hljs-constant">Liquid::Template</span>.parse(
-            <span class="hljs-constant">File</span>.open(template_file(fmt), <span class="hljs-string">'r:utf-8'</span>).read).render(to_hash)
+          body = read_template(fmt).render(to_hash)
 
           <span class="hljs-keyword">if</span> <span class="hljs-variable">@headers</span>.<span class="hljs-keyword">nil</span>?
             head, body = body.split(<span class="hljs-string">"\n\n"</span>, <span class="hljs-number">2</span>)

@@ -185,7 +185,7 @@ _type=	lib/mongoid/data_proxy.rb	/^  def _type=(_)$/;"	f	class:DataProxy
 _type=	lib/utils/hash_struct.rb	/^  def _type=(_)$/;"	f	class:HashStruct
 abs_path	lib/devtools/asset_mapper/sfile.rb	/^    def abs_path$/;"	f	class:AssetMapper.Sfile
 abs_path	lib/devtools/asset_mapper/tfile.rb	/^    def abs_path(version)$/;"	f	class:AssetMapper.Tfile
-access	lib/la_buffered_logger.rb	/^  def access$/;"	f	class:LaBufferedLogger
+access	lib/la_buffered_logger.rb	/^  def access(message = '-')$/;"	f	class:LaBufferedLogger
 access_recorded?	lib/la_buffered_logger.rb	/^  def access_recorded?$/;"	f	class:LaBufferedLogger
 add	lib/mongoid/ordered_list.rb	/^      def add(obj, opts = {})$/;"	f	class:Mongoid.OrderedList.Proxy
 addClass	doc/spec/spec/lib/asset_settings/environment_settings_spec_rslt.html	/^function addClass(element_id, classname) {$/;"	f

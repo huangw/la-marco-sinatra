@@ -27,8 +27,8 @@ module Rack
         status = e.respond_to?(:status) ? e.status : 500
         @logger.fatal(e)
       end
-
-      @logger.access
+      message = env['sinatra.error'].message if env['sinatra.error']
+      @logger.access(message)
       # Thread.new { @logger.flush! }
       @logger.flush!
       [status, headers, body]

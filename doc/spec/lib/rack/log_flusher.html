@@ -84,8 +84,8 @@
         status = e.respond_to?(<span class="hljs-symbol">:status</span>) ? e.status <span class="hljs-symbol">:</span> <span class="hljs-number">500</span>
         <span class="hljs-variable">@logger</span>.fatal(e)
       <span class="hljs-keyword">end</span>
-
-      <span class="hljs-variable">@logger</span>.access</pre></div></div>
+      message = env[<span class="hljs-string">'sinatra.error'</span>].message <span class="hljs-keyword">if</span> env[<span class="hljs-string">'sinatra.error'</span>]
+      <span class="hljs-variable">@logger</span>.access(message)</pre></div></div>
             
         </li>
         
