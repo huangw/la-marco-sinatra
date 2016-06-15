@@ -67,8 +67,8 @@ class LaBufferedLogger
     end
   end
 
-  def access
-    info '-'
+  def access(message = '-')
+    info message
     @access_recorded = true
   end
 end

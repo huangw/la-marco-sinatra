@@ -18,5 +18,9 @@ class LoggerPage < WebController
     'hello'
   end
 
+  get '/err' do
+    raise RequestError, 'raise an error anyway'
+  end
+
   Route << self
 end

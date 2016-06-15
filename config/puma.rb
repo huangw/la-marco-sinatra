@@ -53,7 +53,7 @@ state_path 'tmp/puma.state'
 # "false".
 #
 # stdout_redirect '/u/apps/lolcat/log/stdout', '/u/apps/lolcat/log/stderr'
-# stdout_redirect '/u/apps/lolcat/log/stdout', '/u/apps/lolcat/log/stderr', true
+stdout_redirect 'tmp/puma.log', 'tmp/puma_err.log', true
 
 # Disable request logging.
 #
