@@ -1,6 +1,7 @@
 require 'slim'
 Slim::Engine.set_options pretty: (ENV['RACK_ENV'] == 'development')
 
+# rubocop:disable MethodLength, CyclomaticComplexity
 # Response by render an liquid template
 module SlimHelper
   # slim output with mapping to default template files
@@ -35,7 +36,15 @@ module SlimHelper
     locales = dat.extract_args(locales: nil)
     dat[:obj] = obj unless dat[:obj]
 
-    tmpl = File.join('presenters', obj.class.to_s.underscore, type.to_s)
+    dat[:glass] = if dat[:glass]
+                    dat[:glass].to_s.underscore
+                  elsif obj.respond_to?('_mt') || obj.methods.include?('_mt')
+                    obj._mt.underscore
+                  else
+                    obj.class.to_s.underscore
+                  end
+
+    tmpl = File.join('presenters', dat[:glass], type.to_s)
 
     if locales
       locale = locales[0]

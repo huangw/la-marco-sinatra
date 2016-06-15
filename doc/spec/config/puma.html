@@ -111,11 +111,10 @@ The value must be a string.</p>
               <p>Daemonize the server into the background. Highly suggest that
 this be combined with “pidfile” and “stdout_redirect”.</p>
 <p>The default is “false”.</p>
-<p>daemonize false</p>
+<p>daemonize false
+daemonize if ENV[‘RACK_ENV’] == ‘production’ &amp;&amp; ENV[‘ALIYUN’]</p>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre>daemonize <span class="hljs-keyword">if</span> <span class="hljs-constant">ENV</span>[<span class="hljs-string">'RACK_ENV'</span>] == <span class="hljs-string">'production'</span> &amp;&amp; <span class="hljs-constant">ENV</span>[<span class="hljs-string">'ALIYUN'</span>]</pre></div></div>
             
         </li>
         
@@ -160,10 +159,11 @@ used by “pumactl” to query and control the server.</p>
               <p>Redirect STDOUT and STDERR to files specified. The 3rd parameter
 (“append”) specifies whether the output is appended, the default is
 “false”.</p>
-<p>stdout_redirect ‘/u/apps/lolcat/log/stdout’, ‘/u/apps/lolcat/log/stderr’
-stdout_redirect ‘/u/apps/lolcat/log/stdout’, ‘/u/apps/lolcat/log/stderr’, true</p>
+<p>stdout_redirect ‘/u/apps/lolcat/log/stdout’, ‘/u/apps/lolcat/log/stderr’</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre>stdout_redirect <span class="hljs-string">'tmp/puma.log'</span>, <span class="hljs-string">'tmp/puma_err.log'</span>, <span class="hljs-keyword">true</span></pre></div></div>
             
         </li>
         

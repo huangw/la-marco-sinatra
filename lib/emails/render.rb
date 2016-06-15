@@ -82,11 +82,16 @@ module Emails
         %w(to cc bcc subject from sender_type reply-to return-path inline)
       end
 
+      def read_template(fmt)
+        Liquid::Template.parse(
+          File.open(template_file(fmt), 'r:utf-8').read
+        )
+      end
+
       def parse(extra_headers = {})
         @bodies = {}
         available_formats.each do |fmt|
-          body = Liquid::Template.parse(
-            File.open(template_file(fmt), 'r:utf-8').read).render(to_hash)
+          body = read_template(fmt).render(to_hash)
 
           if @headers.nil?
             head, body = body.split("\n\n", 2)

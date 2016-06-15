@@ -11,7 +11,7 @@ module Background
     def initialize(klass, opts = {})
       @klass = klass
       @name = "#{opts[:name] || 'Worker'} (#{@klass})"
-      @logger = opts[:logger] || global_logger
+      @logger = opts[:logger] || GlobalLogger.instance
       @interval = opts[:interval] || 1 # sleep interval if no job waiting
       @start_at = nil
       @stopped_at = nil

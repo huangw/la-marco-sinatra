@@ -63,7 +63,7 @@ method explicitly called.</p>
     <span class="hljs-variable">@request_info</span> = {}
     <span class="hljs-variable">@msgs</span> = []
     <span class="hljs-variable">@access_recorded</span> = <span class="hljs-keyword">false</span>
-    <span class="hljs-variable">@logger</span> = global_logger
+    <span class="hljs-variable">@logger</span> = <span class="hljs-constant">GlobalLogger</span>.instance
   <span class="hljs-keyword">end</span>
 
   <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">flush!</span></span>
@@ -123,8 +123,8 @@ symbols like :warn, :error, …</p>
     <span class="hljs-keyword">end</span>
   <span class="hljs-keyword">end</span>
 
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">access</span></span>
-    info <span class="hljs-string">'-'</span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">access</span><span class="hljs-params">(message = <span class="hljs-string">'-'</span>)</span></span>
+    info message
     <span class="hljs-variable">@access_recorded</span> = <span class="hljs-keyword">true</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span></pre></div></div>

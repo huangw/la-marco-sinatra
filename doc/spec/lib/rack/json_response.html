@@ -124,6 +124,9 @@ created at: 2015-01-31</p>
           body = { <span class="hljs-symbol">error:</span> e.<span class="hljs-keyword">class</span>.name.underscore, <span class="hljs-symbol">message:</span> e.message }
         <span class="hljs-keyword">elsif</span> e.is_a?(<span class="hljs-constant">Mongoid::Errors::Validations</span>)
           body = { <span class="hljs-symbol">error:</span> e.<span class="hljs-keyword">class</span>.name.underscore, <span class="hljs-symbol">messages:</span> e.document.errors.messages }
+        <span class="hljs-keyword">elsif</span> e.is_a?(<span class="hljs-constant">Mongoid::Errors::DocumentNotFound</span>)
+          status = <span class="hljs-number">404</span>
+          body = { <span class="hljs-symbol">error:</span> e.<span class="hljs-keyword">class</span>.name.underscore, <span class="hljs-symbol">message:</span> <span class="hljs-constant">I18n</span>.t(<span class="hljs-string">'exceptions.ajax.route_error'</span>) }
         <span class="hljs-keyword">elsif</span> status &lt; <span class="hljs-number">500</span> &amp;&amp; status &gt;= <span class="hljs-number">400</span>
           body = { <span class="hljs-symbol">error:</span> e.<span class="hljs-keyword">class</span>.name.underscore, <span class="hljs-symbol">message:</span> <span class="hljs-constant">I18n</span>.t(<span class="hljs-string">'exceptions.ajax.options_error'</span>) }
         <span class="hljs-keyword">else</span>

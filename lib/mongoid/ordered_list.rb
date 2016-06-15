@@ -4,6 +4,7 @@
 # created at: 2015-09-22
 require 'active_support/concern'
 require 'securerandom'
+require 'forwardable'
 
 # Mix-in Mongoid namespace
 module Mongoid
@@ -19,44 +20,84 @@ module Mongoid
         @field_name = fnm
       end
 
+      # Array access
+      # ---------------
       # The raw array of hashes saved into the parent mongoid document
-      def blist
-        parent.send(@field_name) || []
+      def raw_field
+        parent.send(@field_name)
       end
 
-      # Reuturn { tid => block_hash } hash
-      def blist_hash
-        blist.each_with_object({}) { |a, rslt| rslt[a['tid']] = a }
+      # Load parent's field as a array of objects, nil field converts to
+      # empty array. Use `decode` to convert hash to object
+      def olist
+        @olist ||= raw_field.blank? ? [] : raw_field.map { |h| decode(h) }
       end
 
-      # Get the block (as hash) from tid
+      def flush
+        parent.send "#{@field_name}=".to_sym,
+                    olist.empty? ? nil : olist.map { |o| encode(o) }
+      end
+
+      # find the raw Hash block from the tid
+      def raw_block(tid)
+        return nil if raw_field.blank? # nil or empty
+        return raw_field[tid] if tid.is_a?(Integer)
+        # Array#find returns the first element meets the given condition
+        raw_field.find { |h| h['tid'] == tid }
+      end
+
+      # Get a block from #olist with the given tid
       def block(tid)
-        blist.find { |h| h['tid'] == tid }
+        idx = tid.is_a?(Integer) ? tid : olist.find_index { |o| o.tid == tid }
+        olist[idx] if idx
       end
-      alias :"tid_exists?" block
+      alias [] block
 
-      # Get a block from #block and convert into object use #decode
-      def [](tid)
-        tid = blist[tid]['tid'] if tid.is_a?(Integer)
-        blk = block(tid)
-        return nil unless blk
-        obj = decode(blk)
-        obj.parent = parent if obj.respond_to?(:'parent=')
+      def []=(tid, obj)
+        idx = tid.is_a?(Integer) ? tid : olist.find_index { |o| o.tid == tid }
+        raise "no tid found for #{tid}" unless idx
+        obj = on_add(obj)
+        obj.tid = olist[idx].tid
+        olist[idx] = obj
+        flush && olist[idx]
+      end
+
+      # Encode and Decode
+      # --------------------------------------
+      # These two methods are intended to be overloaded by child classes
+      # Restore from hash to object, used by first time `olist` is called
+      def decode(hsh)
+        klass = hsh['_type'] || raise('unknown data type')
+        Object.const_get(klass.to_s).from_hash(hsh)
+      end
+
+      # Encode object to hash. If object do not respond to tid, can assign
+      # the preferred id as the second parameter
+      def encode(obj)
+        obj.is_a?(Hash) ? obj : obj.to_hash
+      end
+
+      def on_add(obj, tid = nil)
+        obj.tid = unique_tid(tid || obj.tid) # determine the unique tid
         obj
       end
 
-      def each
-        blist.each { |blk| yield decode(blk) }
+      def on_remove(obj) # add cleanup method on child classes
       end
 
-      def last
-        decode blist.last
+      # Anchor id (tid) management
+      # ----------------------------
+      def tid_length
+        3
       end
 
-      def size
-        blist.size
+      def unique_tid(tid = nil)
+        tid = SecureRandom.hex(tid_length) if tid.blank?
+        while olist.map(&:tid).include?(tid)
+          tid = tid.sub(/\.\w+\Z/, '') + '.' + SecureRandom.hex(1)
+        end
+        tid
       end
-      alias count size
 
       # Modification mehtods
       # ----------------------
@@ -65,19 +106,15 @@ module Mongoid
       # - `append: true`: append to the list as the last block
       #
       # Note: do not use `append` option if you specified `after`
-      # rubocop:disable CyclomaticComplexity
       def add(obj, opts = {})
-        hsh = encode(obj) # encode object into Hash structure
-
         opts.symbolize_keys!
-        raise 'tid already exists' if hsh['tid'] && tid_exists?(hsh['tid'])
+        obj = on_add(obj, opts[:tid]) # encode object into Hash structure
         raise 'do not use append with after' if opts[:after] && opts[:append]
-        # initialize field with [] if it still nil
-        parent.send("#{@field_name}=", []) unless parent.send(@field_name)
+        # raise "tid #{hsh['tid']} already exists" # TODO: if exists?
 
-        offset = opts[:append] ? blist.size : offset_after(opts[:after])
-        blist.insert offset, hsh
-        hsh['tid']
+        offset = opts[:append] ? olist.size : offset_after(opts[:after])
+        olist.insert offset, obj
+        flush && obj.tid
       end
       alias insert add
 
@@ -93,71 +130,58 @@ module Mongoid
       def move(tid, opts = {})
         opts.symbolize_keys!
         raise 'do not use append with after' if opts[:after] && opts[:append]
-        keep = block(tid)
-        raise "invalid tid: #{tid}" unless keep
-        return false if tid == opts[:after]
-        remove(tid)
-        offset = offset_after(opts[:after])
-        opts[:append] ? append(keep) : blist.insert(offset, keep)
+
+        return if opts[:after] == tid
+        keep = olist.delete_at(offset(tid))
+        offset = opts[:append] ? olist.size : offset_after(opts[:after])
+        raise "invalid after tid: #{tid}" unless offset
+        olist.insert(offset, keep)
+        flush
       end
 
       # Remove block from the list, but keep in the relationship
       def remove(tid)
-        blist.delete_if { |b| b['tid'] == tid }
-      end
-
-      # Partially update the already existing block hash
-      def update(tid, obj)
-        hsh = obj.is_a?(Hash) ? obj.dup : encode(obj, tid)
-        blist[offset_after(tid) - 1].merge!(hsh)
+        obj = block(tid)
+        olist.delete_if { |o| o.tid == tid }
+        flush
+        on_remove(obj)
+        obj
       end
 
       def change_order(tids)
-        bh = blist_hash
-        raise 'tids size not match blist size' unless tids.size == bh.keys.size
-        tids.each { |tid| raise "invalid tid: #{tid}" unless bh[tid] }
-        parent.send "#{field_name}=".to_sym, tids.map { |id| bh[id] }
+        raise 'tids size not match blist size' unless tids.size == olist.size
+        nlist = tids.map { |tid| olist[offset(tid)] }
+        @olist = nlist
+        flush
       end
 
-      # Method for overloading by child class
-      # --------------------------------------
-      # Restore from hash to object
-      def decode(hsh)
-        # if symbol, get from relationship, then call from_hash
-        klass = hsh['_type'] || raise('unknown data type')
-        Object.const_get(klass.to_s).from_hash(hsh)
+      # blist contains is map(&:to_hash)
+      def to_hash
+        flush || {}
       end
 
-      # Encode object to hash
-      def encode(obj, tid = nil)
-        obj.parent = parent if obj.respond_to?(:'parent=')
-        hsh = obj.is_a?(Hash) ? obj.dup : obj.to_hash
-        hsh['tid'] = unique_tid(hsh['tid'] || tid)
-        obj.tid = hsh['tid'] if obj.respond_to?(:'tid=')
-        hsh
+      def from_hash(ary)
+        ary.each { |h| append(decode(h)) }
       end
 
-      def tid_length
-        3
-      end
-
-      def unique_tid(tid = nil)
-        id_ = tid || SecureRandom.hex(tid_length)
-        while blist.map { |h| h['tid'] }.include?(id_)
-          srhex = SecureRandom.hex(tid_length)
-          id_ = tid.blank? ? srhex : tid + '.' + srhex
-        end
-        id_
-      end
+      # Implements Enumerable methods
+      # ------------------------------
+      extend Forwardable
+      def_delegators :olist, :each, :first, :last, :size, :count
 
       private
 
       # find the next offset after tid, 0 if tid not exits
       def offset_after(tid = nil)
         return 0 unless tid
-        offset = nil
-        blist.each_with_index { |b, i| offset = i + 1 if b['tid'] == tid }
-        offset || raise("invalid tid: #{tid}")
+        offset(tid) + 1
+      end
+
+      def offset(tid)
+        idx = tid.is_a?(Integer) ? tid : olist.find_index { |o| o.tid == tid }
+        raise("invalid tid: #{tid}") unless idx
+        raise("invalid offset #{tid}") if idx >= olist.size
+        idx
       end
     end # class Proxy
 
@@ -167,7 +191,7 @@ module Mongoid
       # rubocop:disable MethodLength,LineLength
       def self.ordered_list(field_name, opts = {})
         proxy_name = opts.delete(:as)
-        proxy_klass = opts.delete(:proxy) || Proxy
+        proxy_klass = opts.delete(:proxy) || ::Mongoid::OrderedList::Proxy
         raise 'you should define :as for proxy name' unless proxy_name
         raise 'field name must differ to :as' if proxy_name == field_name
 
@@ -180,7 +204,13 @@ module Mongoid
 
         send(:define_method, "#{proxy_name}=".to_sym) do |arry|
           self[field_name.to_sym] = nil
-          arry.each { |e| send(proxy_name.to_sym).append(e) }
+          instance_variable_set("@#{proxy_name}".to_sym, nil)
+          arry.each { |e| send(proxy_name.to_sym).append(e) } unless arry.nil?
+        end
+
+        # flush back in memory list back to hash raw list
+        before_save do
+          send(proxy_name.to_sym).flush
         end
       end
     end # included

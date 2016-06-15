@@ -37,7 +37,7 @@ environment 'production' if ENV['RACK_ENV'] == 'production'
 # The default is "false".
 #
 # daemonize false
-daemonize if ENV['RACK_ENV'] == 'production' && ENV['ALIYUN']
+# daemonize if ENV['RACK_ENV'] == 'production' && ENV['ALIYUN']
 
 # Store the pid of the server in the file at "path".
 #
@@ -53,7 +53,7 @@ state_path 'tmp/puma.state'
 # "false".
 #
 # stdout_redirect '/u/apps/lolcat/log/stdout', '/u/apps/lolcat/log/stderr'
-# stdout_redirect '/u/apps/lolcat/log/stdout', '/u/apps/lolcat/log/stderr', true
+stdout_redirect 'tmp/puma.log', 'tmp/puma_err.log', true
 
 # Disable request logging.
 #

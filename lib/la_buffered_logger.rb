@@ -19,7 +19,7 @@ class LaBufferedLogger
     @request_info = {}
     @msgs = []
     @access_recorded = false
-    @logger = global_logger
+    @logger = GlobalLogger.instance
   end
 
   def flush!
@@ -67,8 +67,8 @@ class LaBufferedLogger
     end
   end
 
-  def access
-    info '-'
+  def access(message = '-')
+    info message
     @access_recorded = true
   end
 end

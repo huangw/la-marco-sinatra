@@ -282,32 +282,67 @@ a {
 <div class="results">
 <div id="div_group_1" class="example_group passed">
   <dl style="margin-left: 0px;">
-  <dt id="example_group_1" class="passed">Emails::FakeSender</dt>
-    <script type="text/javascript">moveProgressBar('33.3');</script>
-    <dd class="example passed"><span class="passed_spec_name">is the default sender for non-production environment</span><span class='duration'>0.00070s</span></dd>
+  <dt id="example_group_1" class="passed">Route</dt>
   </dl>
 </div>
 <div id="div_group_2" class="example_group passed">
   <dl style="margin-left: 15px;">
-  <dt id="example_group_2" class="passed">#deliver!</dt>
-{"message":"[BJ front-sender] (Emails::MockEmail: 56d04c7df363ad159384bac3)","@timestamp":"2016-02-26T21:00:45.994+08:00","@version":"1","severity":"INFO","host":"HuangdeMacBook-Pro.local"}
-    <script type="text/javascript">moveProgressBar('66.6');</script>
-    <dd class="example passed"><span class="passed_spec_name">always send email with success</span><span class='duration'>0.00938s</span></dd>
+  <dt id="example_group_2" class="passed">.to</dt>
   </dl>
 </div>
 <div id="div_group_3" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_3" class="passed">AccountPage</dt>
+    <script type="text/javascript">moveProgressBar('11.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">mount to /accounts</span><span class='duration'>0.00093s</span></dd>
+    <script type="text/javascript">moveProgressBar('22.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">can handle string instead of class</span><span class='duration'>0.00011s</span></dd>
+  </dl>
+</div>
+<div id="div_group_4" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_4" class="passed">Admin::AccountPage</dt>
+    <script type="text/javascript">moveProgressBar('33.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">mount to /admin/accounts</span><span class='duration'>0.00021s</span></dd>
+  </dl>
+</div>
+<div id="div_group_5" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_5" class="passed">Admin::PersonPage</dt>
+    <script type="text/javascript">moveProgressBar('44.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">mount to /admin/people</span><span class='duration'>0.00019s</span></dd>
+  </dl>
+</div>
+<div id="div_group_6" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_6" class="passed">API::AccountPage</dt>
+    <script type="text/javascript">moveProgressBar('55.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">mount to /api/accounts</span><span class='duration'>0.00027s</span></dd>
+    <script type="text/javascript">moveProgressBar('66.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">accept end points with extra parts</span><span class='duration'>0.00029s</span></dd>
+  </dl>
+</div>
+<div id="div_group_7" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_7" class="passed">.all</dt>
+    <script type="text/javascript">moveProgressBar('77.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should mount properly</span><span class='duration'>0.05046s</span></dd>
+  </dl>
+</div>
+<div id="div_group_8" class="example_group passed">
   <dl style="margin-left: 15px;">
-  <dt id="example_group_3" class="passed">#deliver_later</dt>
-{"message":"[BJ anonymous worker] (Emails::MockEmail: 56d04c7ef363ad159384bac4)","@timestamp":"2016-02-26T21:00:46.007+08:00","@version":"1","severity":"INFO","host":"HuangdeMacBook-Pro.local"}
+  <dt id="example_group_8" class="passed">[]</dt>
+    <script type="text/javascript">moveProgressBar('88.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">return application class for a string key</span><span class='duration'>0.01800s</span></dd>
     <script type="text/javascript">moveProgressBar('100.0');</script>
-    <dd class="example passed"><span class="passed_spec_name">use background job to send the email</span><span class='duration'>0.01071s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">return the string path for a class key</span><span class='duration'>0.00013s</span></dd>
  ------------ cleanup test database ------------ 
   </dl>
 </div>
-<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>0.07076 seconds</strong>";</script>
-<script type="text/javascript">document.getElementById('totals').innerHTML = "3 examples, 0 failures";</script>
+<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>0.14235 seconds</strong>";</script>
+<script type="text/javascript">document.getElementById('totals').innerHTML = "9 examples, 0 failures";</script>
 </div>
 </div>
 </body>
 </html>
-Coverage report generated for RSpec to /Users/huangw/working/vikkr/la-marco-sinatra/doc/coverage. 740 / 1563 LOC (47.34%) covered.
+Coverage report generated for RSpec to /Users/huangw/working/vikkr/la-marco-sinatra/doc/coverage. 738 / 1705 LOC (43.28%) covered.
