@@ -10,8 +10,8 @@ class AssetSettings
       # initialize with default values
       @img_dir = 'app/assets/img'
       @files = {}
-      @img_url_prefix = production? ? 'http://assets.vikkr.com/img' : '/img'
-      @assets_url_prefix = production? ? 'http://assets.vikkr.com' : '/assets'
+      @img_url_prefix = production? ? 'http://vikkr.com/img' : '/img'
+      @assets_url_prefix = production? ? 'http://vikkr.com' : '/assets'
     end
 
     def production?
